@@ -80,8 +80,8 @@ patch=1,EE,0043E39C,word,0C0399D4
 patch=1,EE,0043E6A0,word,29EF0005
 // mod: mode 2 icon player limit 1 -> 4
 patch=1,EE,0043E014,word,29EF0005
-// mod: MapMaker map-full flag (0x400000): set as the game does (the base patch never set it; restored in v5.34)
-patch=1,EE,0047F8B8,word,3C0E0040
+// mod: never set 0x400000 limit flag
+patch=1,EE,0047F8B8,word,3C0E0000
 // mod: MapMaker item limit 40 -> 255
 patch=1,EE,00481F68,word,241500FF
 // mod: MapMaker item limit 30 -> 255
@@ -13541,7 +13541,7 @@ patch=1,EE,000FCB08,word,6465636E
 patch=1,EE,000FCB0C,word,74655320
 patch=1,EE,000FCB10,word,676E6974
 patch=1,EE,000FCB14,word,76282073
-patch=1,EE,000FCB18,word,34332E35
+patch=1,EE,000FCB18,word,35332E35
 patch=1,EE,000FCB1C,word,00000029
 patch=1,EE,000FCB44,word,13000008
 patch=1,EE,000FCB48,word,00000000
