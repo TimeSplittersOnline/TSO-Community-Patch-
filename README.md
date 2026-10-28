@@ -11,7 +11,15 @@ You need your own copy of the game. This repository contains no game files.
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### Xbox (xemu or a modded console)
-The Xbox mod is shipped as a patch for your own game executable.
+The easiest way is the **TSO Community Patcher** (Windows). It makes the TSO Community Patch XBE from your own game, so the modded XBE itself is never shared.
+1. Download `TSO Community Patcher.exe` from the [latest release](https://github.com/TimeSplittersOnline/TSO-Community-Patch-/releases/latest).
+2. Close xemu and run the patcher.
+3. In step 1, pick your disc image (.iso), or a `default.xbe` file. Either works with or without the title update, USA or Europe: the disc's own `default.xbe`, or the title update's `TDATA\45410066\$u\default.xbe`.
+4. Press **PATCH DISC IMAGE** to put the patch into your disc image, or **SAVE TSO XBE AS...** to save the XBE as a file. **Put the original back** undoes a patched disc image.
+
+The patcher checks your file is a copy of the game it knows and that the result is byte for byte the current build; anything else is refused. Its source is in [`patcher`](patcher).
+
+Or by hand, with a BPS patcher:
 1. Take `default.xbe` from your copy of the game **with the title update** (the patch only applies to that exact file: size 6,344,704 bytes, MD5 `d2fc3bed99456864a96fff179d5336d1`).
 2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) with any BPS patcher (Floating IPS, beat, etc).
 3. Use the patched XBE in place of the original (keep a backup of the original).
