@@ -22,7 +22,6 @@ The Xbox mod is shipped as a patch for your own game executable.
 - [docs/versions](docs/versions/README.md): one page per version (v5.3 on) listing every change to the game's code and data compared with the build before it: what was there, what it became and why.
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, by feature, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
-- [docs/site](docs/site/index.html): the searchable change register as a web page (also published with GitHub Pages).
 
 The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and `TSO Community Patch.bps` for Xbox. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
@@ -54,4 +53,4 @@ The [`build`](build) folder always holds the current version's TSO Community Pat
 
 ## Undoing a change
 
-See the "How to undo" tab of the register page. In short: PS2 lines at address `00100000` and above change the game's own code; put back the original line. Xbox changes list the original bytes at each file offset; write them back and fix the XBE checksums (`tools/fix_xbe_checksums.py`).
+Each change in [docs/changes](docs/changes/README.md) lists the original next to the new. PS2 lines at address `00100000` and above change the game's own code; put back the original line. Xbox changes list the original bytes at each file offset; write them back and fix the XBE checksums (`tools/fix_xbe_checksums.py`).
