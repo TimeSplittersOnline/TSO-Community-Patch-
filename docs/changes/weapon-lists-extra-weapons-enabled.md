@@ -13,4 +13,4 @@ NTSC address first; the PAL address follows where it differs.
 | 00683E60 / PAL 00683F60 | 00000000 | 00000001 | nop | .word 0x00000001 | mod: weapon list - enable Time Grenade | v5.3 · 2026-10-16 |
 | 00683FC8 / PAL 006840C8 | 00000000 | 00000001 | nop | .word 0x00000001 | mod: weapon list - enable TNT | v5.3 · 2026-10-16 |
 | 00684040 / PAL 00684140 | 00000000 | 00000001 | nop | .word 0x00000001 | mod: weapon list - enable KSMG (starts in alt fire) | v5.3 · 2026-10-16 |
-| 006841E4 / PAL 006842E4 | 00000000 | 00000001 | nop | .word 0x00000001 | mod: weapon list - enable Temporal Uplink | v5.3 · 2026-10-16 |
+| 006841E4 / PAL 006842E4 | 00000000 | 00000000 | nop | nop | weapon list: the Temporal Uplink stays off, the game's own value (an earlier version switched it on here; written back for a reload) | v5.99 · 2026-10-28 |

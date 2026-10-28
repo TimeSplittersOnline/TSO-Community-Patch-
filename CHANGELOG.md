@@ -2,6 +2,20 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.99 · 2026-10-28 · Bug fixes: team rows, kicks, Showdown setting, score rows, Temporal Uplink
+
+*v5.99 · BugFixRound599* · Xbox, PS2 NTSC, PS2 PAL
+
+- Scores page, Team Elimination / Team Vampire with team lives: a team's row showed your own lives instead of the team's (and changed once you were out). It now shows the team's lives while it has any.
+- Team Elimination / Team Vampire: the team time no longer counts a player who isn't in the ranking (still choosing a team), or one who just joined and hasn't been placed on a team yet.
+- Manage Players: a kick still waiting at the end of the match (or when the host used Return to Lobby on Xbox) now happens then, instead of being dropped.
+- Manage Players: a kick confirmed less than half a second after the player's own weapon switch setting was sent back to them now also waits half a second, so that setting can still be resent before their connection closes.
+- Advanced Settings: applying the page for a mode without Showdown no longer forgets a Showdown setting you'd chosen for Elimination / Vampire.
+- Scores page, Thief / Team VIP with Teamplay: player rows show the mode's own score again, instead of a kills number. The kills number now only shows in the modes scored by kills.
+- Random Characters (Xbox): only the host's (or offline) game picks the characters. A LAN player's game no longer runs the pick on its own copy of the setup, as on PS2.
+- PS2 online: the Advanced Settings link no longer shows on the online search filter page.
+- Temporal Uplink: the game lists it twice in its weapon tables. Neither entry shows in the weapon lists any more, in any menu (offline or LAN); before, only the first was hidden, and only on LAN. A weapon set saved with the uplink in it (possible in earlier versions) has that slot emptied when the match starts (on consoles with the patch), and the PS2 weapon list flag an early version switched on is back to the game's own value. Gun Game and Random Weapon already never handed it out.
+
 ## v5.98 · 2026-10-28 · Team Elimination: late joiners and leavers no longer change team times; free cam faster with RT / R2
 
 *v5.98 · JoinerTimeFreecamBoost* · Xbox, PS2 NTSC, PS2 PAL

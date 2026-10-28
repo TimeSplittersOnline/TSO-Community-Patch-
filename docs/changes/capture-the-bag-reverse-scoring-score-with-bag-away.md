@@ -29,7 +29,7 @@
 |---|---|---|---|
 | 000FE8C0-000FE91F | 24 | for _i,_x in enumerate(_w): new[0xFE8C0+4*_i]=_x | v5.15 · 2026-10-16 |
 | 000FE920-000FE93F | 8 | the rest of the block written as zeros (no stale words) | v5.3 · 2026-10-16 (approx.) |
-| 000FFC70-000FFE97 | 136 | emit(a) | v5.89 · 2026-10-27 |
+| 000FFC20-000FFE97 | 156 | emit(a) | v5.89 · 2026-10-27 |
 | 000FFE98-000FFE9B | 1 | if new.get(w0+k)==jal(0x7777770): new[w0+k]=jal(SYM['BSYNC']) | v5.3 · 2026-10-16 (approx.) |
 | 000FFE9C-000FFEF7 | 23 | emit(a) | v5.3 · 2026-10-16 |
 | 000FFEF8-000FFEFB | 1 | if new.get(w0+k)==jal(0x7777770): new[w0+k]=jal(SYM['BSYNC']) | v5.3 · 2026-10-16 (approx.) |

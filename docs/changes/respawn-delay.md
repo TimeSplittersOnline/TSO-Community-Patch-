@@ -4,31 +4,31 @@
 
 | Address | File offset | Bytes | Original | New | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 000D6441 | 0C6441 | 7 | `66 89 a8 0a 15 00 00` | `e8 ab 04 81 00 90 90` | at a death (call at 0xd6441, was call 0x8e8663 (all.s XRT1); eax = player; keeps every register): the respawn delay. Also \| ---------------- respawn delay: at death (call at 0xd6441, eax=player), set delayed-spawn routine \| at a death (call at 0xd6441, was call 0x8e8663 (all.s XRT1); eax = player; keeps every register): the respawn delay. Also its end, as a gameframe (XRDDF), for the host's hold of other games' players (XRDH): set once per death (its deaths count, XRDDN), so the game timing the death again (its 3 second timer running out while the player still waits) doesn't move it | v5.3 · 2026-10-16 |
+| 000D6441 | 0C6441 | 7 | `66 89 a8 0a 15 00 00` | `e8 c7 04 81 00 90 90` | at a death (call at 0xd6441, was call 0x8e8663 (all.s XRT1); eax = player; keeps every register): the respawn delay. Also \| ---------------- respawn delay: at death (call at 0xd6441, eax=player), set delayed-spawn routine \| at a death (call at 0xd6441, was call 0x8e8663 (all.s XRT1); eax = player; keeps every register): the respawn delay. Also its end, as a gameframe (XRDDF), for the host's hold of other games' players (XRDH): set once per death (its deaths count, XRDDN), so the game timing the death again (its 3 second timer running out while the player still waits) doesn't move it | v5.3 · 2026-10-16 |
 | 000D64AA | 0C64AA | 5 | `e8 11 b3 ff ff` | `e8 20 22 81 00` | pad tick gate (call at 0xd64aa) \| pad tick gate (call at 0xd64aa) | v5.3 · 2026-10-16 |
 
 ## Xbox: added code
 
 | Address | Size | Where | Purpose | Since |
 |---|---|---|---|---|
-| 008E6534 | 147 bytes | xbreadfail_sp | the items (ebp = menu mode; keeps ebp, uses the others) | v5.3 · 2026-10-16 |
-| 008E65C7 | 156 bytes | xbreadfail_sp | refresh (esi = page): greyed out by the Teamplay setting; Teamplay's changefn (XRDCH) does it again as it is changed | v5.19 · 2026-10-17 |
-| 008E6663 | 52 bytes | xbreadfail_sp | Team VIP changefn (menu, item; cdecl): its options are Off (0) / On (1) | v5.3 · 2026-10-16 |
-| 008E6697 | 52 bytes | xbreadfail_sp | Teamplay changefn (menu, item; cdecl): its options are On (0) / Off (1) | v5.3 · 2026-10-16 |
-| 008E66CB | 187 bytes | xbreadfail_sp | (menu, 1 = Teamplay On; cdecl): Respawn Delay greyed out with Teamplay On; the team Respawn Delays, Team Spawns and the colours greyed out with it Off, and Spawn Rule's Near Teammates becomes Default; then the team items' own rules (XTGX) | v5.40 · 2026-10-19 |
-| 008E6786 | 230 bytes | xbreadfail_sp | colour item changefn (menu, item; cdecl): its own first, then the rules again (teams are on: the colours can be changed) | v5.19 · 2026-10-17 |
-| 008E686C | 54 bytes | xbreadfail_sp | colour item changefn (menu, item; cdecl): its own first, then the rules again (teams are on: the colours can be changed) | v5.19 · 2026-10-17 |
-| 008E68A2 | 38 bytes | xbreadfail_sp | Team Spawns changefn (menu, item; cdecl) | v5.89 · 2026-10-27 |
-| 008E68C8 | 16 bytes | xbreadfail_sp | the colours' own change routines | v5.3 · 2026-10-16 (approx.) |
-| 008E68D8 | 4 bytes | xbreadfail_sp | Team Spawns' own changefn | v5.3 · 2026-10-16 (approx.) |
-| 008E68DC | 21 bytes | xbreadfail_sp | eax = 1 when the menu's mode has no time limit (its match settings Time limit is None: the setting after Teamplay's, +8 in the mode's settings, 0); keeps the others | v5.19 · 2026-10-17 |
-| 008E68F1 | 83 bytes | xbreadfail_sp | at a death (call at 0xd6441, was call 0x8e8663 (all.s XRT1); eax = player; keeps every register): the respawn delay. Also its end, as a gameframe (XRDDF), for the host's hold of other games' players (XRDH): set once per death (its deaths count, XRDDN), so the game timing the death again (its 3 second timer running out while the player still waits) doesn't move it | v5.70 · 2026-10-23 |
-| 008E6944 | 120 bytes | xbreadfail_sp | eax = player -> edx = its respawn delay in frames (the team's or everyone's); keeps the others | v5.70 · 2026-10-23 |
-| 008E69BC | 122 bytes | xbreadfail_sp | eax = slot (0 everyone, 1-4 the team's), ecx = match mode -> edx = Respawn Delay option (0 Off, 1-5): offline / LAN host: this game's settings; LAN player: the host's, setup bytes 64 (0xE0 \| everyone), 65 (0x80 \| Red \| Blue << 3), 66 (Yellow / Green); from a host without the patch Off, as its own delay is; keeps the others | v5.89 · 2026-10-27 |
-| 008E6A36 | 98 bytes | xbreadfail_sp | the setup's bytes 64-66 for LAN players (from XGGSET): the menu mode's Respawn Delays, as XRDOPT reads them; keeps all | v5.8 · 2026-10-16 |
-| 008E6A98 | 20 bytes | xbreadfail_sp | ebx, edi = two options -> ebx = first \| second << 3 (each 0 when not 0-5); edi is changed | v5.8 · 2026-10-16 |
-| 008E6AAC | 4 bytes | xbreadfail_sp | Teamplay's own changefn | v5.3 · 2026-10-16 (approx.) |
-| 008E6AB0 | 4 bytes | xbreadfail_sp | Team VIP's own changefn | v5.3 · 2026-10-16 (approx.) |
+| 008E6550 | 147 bytes | xbreadfail_sp | the items (ebp = menu mode; keeps ebp, uses the others) | v5.3 · 2026-10-16 |
+| 008E65E3 | 156 bytes | xbreadfail_sp | refresh (esi = page): greyed out by the Teamplay setting; Teamplay's changefn (XRDCH) does it again as it is changed | v5.19 · 2026-10-17 |
+| 008E667F | 52 bytes | xbreadfail_sp | Team VIP changefn (menu, item; cdecl): its options are Off (0) / On (1) | v5.3 · 2026-10-16 |
+| 008E66B3 | 52 bytes | xbreadfail_sp | Teamplay changefn (menu, item; cdecl): its options are On (0) / Off (1) | v5.3 · 2026-10-16 |
+| 008E66E7 | 187 bytes | xbreadfail_sp | (menu, 1 = Teamplay On; cdecl): Respawn Delay greyed out with Teamplay On; the team Respawn Delays, Team Spawns and the colours greyed out with it Off, and Spawn Rule's Near Teammates becomes Default; then the team items' own rules (XTGX) | v5.40 · 2026-10-19 |
+| 008E67A2 | 230 bytes | xbreadfail_sp | colour item changefn (menu, item; cdecl): its own first, then the rules again (teams are on: the colours can be changed) | v5.19 · 2026-10-17 |
+| 008E6888 | 54 bytes | xbreadfail_sp | colour item changefn (menu, item; cdecl): its own first, then the rules again (teams are on: the colours can be changed) | v5.19 · 2026-10-17 |
+| 008E68BE | 38 bytes | xbreadfail_sp | Team Spawns changefn (menu, item; cdecl) | v5.89 · 2026-10-27 |
+| 008E68E4 | 16 bytes | xbreadfail_sp | the colours' own change routines | v5.3 · 2026-10-16 (approx.) |
+| 008E68F4 | 4 bytes | xbreadfail_sp | Team Spawns' own changefn | v5.3 · 2026-10-16 (approx.) |
+| 008E68F8 | 21 bytes | xbreadfail_sp | eax = 1 when the menu's mode has no time limit (its match settings Time limit is None: the setting after Teamplay's, +8 in the mode's settings, 0); keeps the others | v5.19 · 2026-10-17 |
+| 008E690D | 83 bytes | xbreadfail_sp | at a death (call at 0xd6441, was call 0x8e8663 (all.s XRT1); eax = player; keeps every register): the respawn delay. Also its end, as a gameframe (XRDDF), for the host's hold of other games' players (XRDH): set once per death (its deaths count, XRDDN), so the game timing the death again (its 3 second timer running out while the player still waits) doesn't move it | v5.70 · 2026-10-23 |
+| 008E6960 | 120 bytes | xbreadfail_sp | eax = player -> edx = its respawn delay in frames (the team's or everyone's); keeps the others | v5.70 · 2026-10-23 |
+| 008E69D8 | 122 bytes | xbreadfail_sp | eax = slot (0 everyone, 1-4 the team's), ecx = match mode -> edx = Respawn Delay option (0 Off, 1-5): offline / LAN host: this game's settings; LAN player: the host's, setup bytes 64 (0xE0 \| everyone), 65 (0x80 \| Red \| Blue << 3), 66 (Yellow / Green); from a host without the patch Off, as its own delay is; keeps the others | v5.89 · 2026-10-27 |
+| 008E6A52 | 98 bytes | xbreadfail_sp | the setup's bytes 64-66 for LAN players (from XGGSET): the menu mode's Respawn Delays, as XRDOPT reads them; keeps all | v5.8 · 2026-10-16 |
+| 008E6AB4 | 20 bytes | xbreadfail_sp | ebx, edi = two options -> ebx = first \| second << 3 (each 0 when not 0-5); edi is changed | v5.8 · 2026-10-16 |
+| 008E6AC8 | 4 bytes | xbreadfail_sp | Teamplay's own changefn | v5.3 · 2026-10-16 (approx.) |
+| 008E6ACC | 4 bytes | xbreadfail_sp | Team VIP's own changefn | v5.3 · 2026-10-16 (approx.) |
 | 008E8102 | 14 bytes | xbreadfail_sp | Menu / message text "Respawn Delay" | v5.3 · 2026-10-16 |
 | 008E8110 | 23 bytes | xbreadfail_sp | Menu / message text "Attacker Respawn Delay" | v5.3 · 2026-10-16 |
 | 008E8127 | 23 bytes | xbreadfail_sp | Menu / message text "Defender Respawn Delay" | v5.3 · 2026-10-16 |
@@ -48,9 +48,9 @@
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E79BC-000E7ACF | 69 | RDGR: a0 = page, a1 = 1 Teamplay On: Respawn Delay greyed out with it On; the team Respawn Delays, Team Spawns and the colours greyed out with it Off, and Spawn Rule's Near Teammates becomes Default; then the team items' own rules (TGX) | v5.40 · 2026-10-19 |
-| 000E8720-000E8817 | 62 | RDRA: a0 = page, a1 = 0 refresh / 1 apply: refresh greys the items out by the Teamplay setting, and makes Teamplay do it again as it is changed (RDCH) | v5.19 · 2026-10-17 |
-| 000E8A08-000E8AFB | 61 | PRDI: the items | v5.3 · 2026-10-16 |
-| 000EC04C-000EC0E3 | 38 | PRDT: at a death (jal at 0x1CC768 in place of 'sh zero,5038(t6)', was jal rd3.py's RT1; t6 = player; leaves t7 = 0x650000): the respawn delay (PRDF). Also its end, as a gameframe (RDDF), for the host's hold of other games' players (PRDH): | v5.70 · 2026-10-23 |
-| 000EF01C-000EF063 | 18 | RDCHV: Team VIP changefn (a0 = page, a1 = item): its options are Off (0) / On (1) | v5.3 · 2026-10-16 |
-| 000EF064-000EF0AB | 18 | RDCH: Teamplay changefn (a0 = page, a1 = item): its options are On (0) / Off (1) | v5.3 · 2026-10-16 |
+| 000E79F4-000E7B07 | 69 | RDGR: a0 = page, a1 = 1 Teamplay On: Respawn Delay greyed out with it On; the team Respawn Delays, Team Spawns and the colours greyed out with it Off, and Spawn Rule's Near Teammates becomes Default; then the team items' own rules (TGX) | v5.40 · 2026-10-19 |
+| 000E8758-000E884F | 62 | RDRA: a0 = page, a1 = 0 refresh / 1 apply: refresh greys the items out by the Teamplay setting, and makes Teamplay do it again as it is changed (RDCH) | v5.19 · 2026-10-17 |
+| 000E8A40-000E8B33 | 61 | PRDI: the items | v5.3 · 2026-10-16 |
+| 000EC0CC-000EC163 | 38 | PRDT: at a death (jal at 0x1CC768 in place of 'sh zero,5038(t6)', was jal rd3.py's RT1; t6 = player; leaves t7 = 0x650000): the respawn delay (PRDF). Also its end, as a gameframe (RDDF), for the host's hold of other games' players (PRDH): | v5.70 · 2026-10-23 |
+| 000EF170-000EF1B7 | 18 | RDCHV: Team VIP changefn (a0 = page, a1 = item): its options are Off (0) / On (1) | v5.3 · 2026-10-16 |
+| 000EF1B8-000EF1FF | 18 | RDCH: Teamplay changefn (a0 = page, a1 = item): its options are On (0) / Off (1) | v5.3 · 2026-10-16 |

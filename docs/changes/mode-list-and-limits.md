@@ -6,7 +6,7 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0043E39C / PAL 0043E3EC | 11CF0003 | 0C03B1EE | beq t6,t7,0x43e3ac | jal 0xec7b8 | mod: mode list context 13 (LAN lobby): LAN mode checks skipped, but Assault only when the selected map has it (LM13) | v5.3 · 2026-10-16 |
+| 0043E39C / PAL 0043E3EC | 11CF0003 | 0C03B230 | beq t6,t7,0x43e3ac | jal 0xec8c0 | mod: mode list context 13 (LAN lobby): LAN mode checks skipped, but Assault only when the selected map has it (LM13) | v5.3 · 2026-10-16 |
 | 0043E6A0 / PAL 0043E6F0 | 29EF0002 | 29EF0005 | slti t7,t7,2 | slti t7,t7,5 | mod: mode 2 player limit 1 -> 4 | v5.3 · 2026-10-16 |
 | 0043E014 / PAL 0043E064 | 29EF0002 | 29EF0005 | slti t7,t7,2 | slti t7,t7,5 | mod: mode 2 icon player limit 1 -> 4 | v5.3 · 2026-10-16 |
 | 0047F8B8 / PAL 0047F958 | 3C0E0040 | 3C0E0000 | lui t6,0x40 | lui t6,0x0 | mod: never set 0x400000 limit flag | v5.35 · 2026-10-18 |
@@ -21,5 +21,5 @@ NTSC address first; the PAL address follows where it differs.
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000EC7B8-000EC83F | 34 | LM13: jal at 0x43E39C in the mode list (an earlier change left a nop there; the original was beq t6,t7,0x43E3AC for context 13, the LAN lobby; delay slot addiu t7,zero,12 kept). Context 13 still skips the LAN mode checks (more | v5.3 · 2026-10-16 |
+| 000EC8C0-000EC947 | 34 | LM13: jal at 0x43E39C in the mode list (an earlier change left a nop there; the original was beq t6,t7,0x43E3AC for context 13, the LAN lobby; delay slot addiu t7,zero,12 kept). Context 13 still skips the LAN mode checks (more | v5.3 · 2026-10-16 |
 | 000FD5FC-000FD627 | 11 | MAPA: j at 0x43F020 in the map list (was lui t7,0x6b / lw t6,0x3E48(t7)), reached for a map not made for the mode: Assault only lists the maps made for it in Change Game Type (where the game otherwise lists every map; on LAN the | v5.13 · 2026-10-16 |
