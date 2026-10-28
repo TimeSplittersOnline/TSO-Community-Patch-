@@ -28,47 +28,29 @@ The [`build`](build) folder always holds the current version's TSO Community Pat
 
 ## Features
 
-- XBE header (checksums and sizes)
-- Advanced Settings menu & shared hooks (used by several features)
-- Team Settings: Team Spawns, Disable Team colours
-- Infinite Ammo, Disable Unarmed (No Punch)
-- Team Bag Tag
-- LAN: allowed modes, Xbox Live option removed, original-disc compatibility
-- Mercy Rule
-- Gun Game: Setbacks
-- Weapon Mode (Gun Game / Random Weapon), Player Drops Gun
-- Catch-Up
-- Team VIP
-- Virus: Spread By Kills
-- Showdown (Elimination, Vampire)
-- LAN: Manage Players (host: move a player to another team, kick a player)
-- Zones: Scoring Interval, last score at time up
-- Weapon Mode: weapon switch for players without the patch (experimental)
-- Flame Tag: Number of Flames, LAN play, scoring
-- Capture the Bag: Overtime
-- Capture the Bag: Switch Spawns
-- Spawn Rule
-- Gun Game and Showdown: no armouries, weapon pickups or ammo boxes
-- Thief: Gold Rush, Coin Drop
-- Player Health
-- Capture the Bag: Reverse Scoring, Score With Bag Away
-- 4 Teams, team play in more modes
-- Spectate (Elimination, Vampire)
-- Respawn Delay
-- King of the Hill
-- Assault: Auto-Complete Phase, Time Bonus After Phase
-- LAN: Return to Lobby (host)
-- Random Characters
-- LAN: everyone starts the match together
-- Team Elimination / Team Vampire, Team Lives
-- MapMaker limits and story maps
-- Flame Tag: Flame Pass
-- Multikill, Multikill Window
-- Advanced Settings on one page (scrolling list)
-- Venice: the gondolas in step on LAN, no water deaths on them
-- Mode list and limits
-- Weapon lists (extra weapons enabled)
-- Virus on Siberia
+- Advanced settings menu.
+- New host settings catch-up, random weapons, spawn behaviour, respawn delay, players drop gun, disable unarmed, mercy rules, and player health added.
+- Advanced team options like disabling specific teams, unique respawn delays for each team, team spawn options. 
+- Unique modifiers for all modes.
+- Teamplay available on Thief, Shrink, Gladiator, Elimination, Vampire, and Bagtag.
+- Four teams available on Thief, Zones, Shrink, Gladiator, Elimination, Vampire, Bagtag, Regeneration, and Leech.
+- Flame Tag has been restored and fixed.
+- Additional modes: Gun Game, Showdown, Gold Rush, Team VIP, and King of the Hill have been implemented.
+- Siberia available on Virus.
+- Modifiers available for all modes.
+- Fixes for players without the title update, including fixes for: loading into lobbies early when the host changed music settings, only hearing Scotland the brave for on-disc maps when "ban small characters is enabled.
+- All players wait for host before spawning (no more xbox one loading advantage).
+- The final 15 seconds of zones now count over LAN and online matches.
+- Unlimited Mapmaker memory.
+- no limit for previously limited mapmaker items like bags & zones.
+- Alternate versions of the: Scifi Handgun, KSMG, Minigun, Mag Charger that start in secondary fire.
+- Time Grenades & TNT are available.
+- Spectating and free-cam options for dead players on Elimination and Vampire.
+- Split-screen co-op mapmaker story.
+- Character select for mapmaker story levels.
+- player management tab in host pause menu that allows team changing and kicking for all players.
+- Yellow and green zones are coloured appropriately rather than being blue.
+-  Return to lobby feature (Xbox only)
 
 ## Undoing a change
 
