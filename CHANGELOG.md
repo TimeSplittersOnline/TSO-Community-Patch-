@@ -2,6 +2,13 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.101 · 2026-10-28 · Spectate on LAN players' consoles: a joiner placed out no longer counts as still in
+
+*v5.101 · SpectateJoinerLives* · Xbox, PS2 NTSC, PS2 PAL
+
+- Team Elimination / Team Vampire on LAN: a player who joined mid-match onto a team with nobody still in is placed out by the host with no lives (since v5.98), but the other consoles kept the lives that player joined with. On those consoles Spectate counted them as still in. With Teamplay their team-mates couldn't switch to watching the other teams (they were left on their own death view), and from v5.100 free cam stayed off for that team for the rest of the match.
+- Spectate on a LAN player's console now also goes by the lives the host sends every console (the number every game keeps a player dead by), so it agrees with the host. The host and offline play are unchanged.
+
 ## v5.100 · 2026-10-28 · Spectate: with Teamplay, free cam only once your team is out
 
 *v5.100 · FreecamTeamOut* · Xbox, PS2 NTSC, PS2 PAL

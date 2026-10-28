@@ -15,7 +15,7 @@
 | 008E33BB | 56 bytes | xbreadfail_sp | Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
 | 008E33F3 | 32 bytes | xbreadfail_sp | Code: XRCR (see the code shown) | v5.3 · 2026-10-16 |
 | 008E3413 | 30 bytes | xbreadfail_sp | ---------------- Player Health (Advanced Settings, every mode but Leech: Default / Low / Weakling / Pathetic = 75% / 50% / 25%), decided by the host (offline: | v5.3 · 2026-10-16 |
-| 008E79AB | 18 bytes | xbreadfail_sp | Menu / message text "Random Characters" | v5.3 · 2026-10-16 |
+| 008E79BB | 18 bytes | xbreadfail_sp | Menu / message text "Random Characters" | v5.3 · 2026-10-16 |
 
 ## PS2: changes to the game's own code and data
 
@@ -30,6 +30,6 @@ NTSC address first; the PAL address follows where it differs.
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000E7EE0-000E7FEB | 67 | RCEND: j at 0x44CBE4, the setup builder's return (was jr ra; its delay slot addiu sp,sp,240 done): every player and bot now has a character, so Random Characters can replace them; then return | v5.15 · 2026-10-16 |
-| 000EE1B4-000EE217 | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
-| 000EF17C-000EF1C7 | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
-| 000F0154-000F0167 | 5 | LRC: text | v5.3 · 2026-10-16 |
+| 000EE1E4-000EE247 | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
+| 000EF1AC-000EF1F7 | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
+| 000F0184-000F0197 | 5 | LRC: text | v5.3 · 2026-10-16 |

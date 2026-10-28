@@ -28,10 +28,10 @@
 | 008E2998 | 4 bytes | xbreadfail_sp | Data: HUGE | v5.3 · 2026-10-16 (approx.) |
 | 008E299C | 4 bytes | xbreadfail_sp | Data: NHUGE | v5.3 · 2026-10-16 (approx.) |
 | 008E29A0 | 4 bytes | xbreadfail_sp | ---------------- Flame Pass (Advanced Settings, Flame Tag, LAN only: Touch / Kill / Touch Or Kill), decided by the host | v5.3 · 2026-10-16 (approx.) |
-| 008E7929 | 11 bytes | xbreadfail_sp | Menu / message text "Spawn Rule" | v5.3 · 2026-10-16 |
-| 008E7958 | 8 bytes | xbreadfail_sp | Menu / message text "Default" | v5.3 · 2026-10-16 |
-| 008E7960 | 18 bytes | xbreadfail_sp | Menu / message text "Away From Enemies" | v5.3 · 2026-10-16 |
-| 008E7972 | 15 bytes | xbreadfail_sp | Menu / message text "Near Teammates" | v5.3 · 2026-10-16 |
+| 008E7939 | 11 bytes | xbreadfail_sp | Menu / message text "Spawn Rule" | v5.3 · 2026-10-16 |
+| 008E7968 | 8 bytes | xbreadfail_sp | Menu / message text "Default" | v5.3 · 2026-10-16 |
+| 008E7970 | 18 bytes | xbreadfail_sp | Menu / message text "Away From Enemies" | v5.3 · 2026-10-16 |
+| 008E7982 | 15 bytes | xbreadfail_sp | Menu / message text "Near Teammates" | v5.3 · 2026-10-16 |
 
 ## PS2: changes to the game's own code and data
 
@@ -40,8 +40,8 @@ NTSC address first; the PAL address follows where it differs.
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
 | 0014498C | 0C09DF90 | 0C0385C5 | jal 0x277e40 | jal 0xe1714 | Hook: spawn pick in spawn point picker: was jal 0x277E40 (rand); delay slot nop kept | v5.3 · 2026-10-16 |
-| 001C81EC | 0C13D554 | 0C03B010 | jal 0x4f5550 | jal 0xec040 | Hook: start spawn point routine: was jal 0x4F5550 (network game check): Spawn Rule (another game's player: its own pick) | v5.3 · 2026-10-16 |
-| 004FCAE0 / PAL 004FCB88 | 0C140370 | 0C03BE7F | jal 0x500dc0 | jal 0xef9fc | Hook: the host's 1.5 s resend to a dead LAN player: Spawn Rule picks again first | v5.64 · 2026-10-22 |
+| 001C81EC | 0C13D554 | 0C03B01C | jal 0x4f5550 | jal 0xec070 | Hook: start spawn point routine: was jal 0x4F5550 (network game check): Spawn Rule (another game's player: its own pick) | v5.3 · 2026-10-16 |
+| 004FCAE0 / PAL 004FCB88 | 0C140370 | 0C03BE8B | jal 0x500dc0 | jal 0xefa2c | Hook: the host's 1.5 s resend to a dead LAN player: Spawn Rule picks again first | v5.64 · 2026-10-22 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -49,17 +49,17 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|
 | 000E1714-000E1AB3 | 232 | SRN: spawn pick (jal at 0x14498C in spawn point picker, replaces jal rand; delay slot nop): with a Spawn Rule on, keeps the best quarter of the candidate spawn points (furthest from the nearest living enemy) or the best | v5.16 · 2026-10-17 |
 | 000E8704-000E87FB | 62 | SRLT: every frame (GGT), LAN host: its own players waiting to respawn get their spawn point picked again every 1.5 s (SRAG) | v5.64 · 2026-10-22 |
-| 000E8BD8-000E8CCB | 61 | SRRA: a0 = page, a1 = 0 refresh / 1 apply: Spawn Rule value for the menu's mode; refresh shows Near Teammates as Default where there are no teams or the Teamplay setting is Off (Gladiator: Team VIP Off), and sets its changefn | v5.3 · 2026-10-16 |
-| 000E9C8C-000E9D5B | 52 | SRAG: LAN host, a0 = a dead player: with a Spawn Rule on (not its first spawn), its spawn point picked again now, from where everyone is now (the game's own death pick 0x1CC2A0, which sends it to that player's game). v0 = 1 if that | v5.64 · 2026-10-22 |
-| 000EAE08-000EAEBB | 45 | SRV: leaf: v0 = Spawn Rule for the match being played: offline / LAN host: its setting for the mode; LAN player: the host's, from setup byte 72 (0xB0 \| rule), else 0; uses t5-t9 | v5.89 · 2026-10-27 |
-| 000EC040-000EC0D7 | 38 | SRP: jal at 0x1C81EC in start spawn point routine (was jal 0x4F5550 network game check; s0 = player): in a LAN match with a Spawn Rule on, every console's own player spawns at the host's pick (as a game without the patch does: the host picks again | v5.64 · 2026-10-22 |
-| 000ECE90-000ECF0F | 32 | SRTOFF: a0 = page: v0 = 1 when the menu's mode has a Teamplay item and the page's one is Off (Gladiator: its Team VIP item Off), else 0 | v5.3 · 2026-10-16 |
-| 000EE6E0-000EE73B | 23 | SRCH: Spawn Rule changefn (a0 = page, a1 = item): with the page's Teamplay item Off (Gladiator: Team VIP Off), Near Teammates is skipped (on to Default, or back to Away From Enemies) | v5.3 · 2026-10-16 |
-| 000EEC68-000EECBB | 21 | SRON: v0 = Spawn Rule when it applies to the match being played (SRV; not Assault / Escort; Near Teammates only in team games), else 0; uses t5-t9 | v5.3 · 2026-10-16 |
-| 000EF9FC-000EFA33 | 14 | SRRS: jal at 0x4FCAE0 (was jal spawn point message; a0 = the player, delay slot kept): the host's resend of a dead LAN player's spawn point every 1.5 seconds: picked again first (SRAG); then sent as before, unless that sent it | v5.64 · 2026-10-22 |
-| 000EFCAC-000EFCDB | 12 | SRTEAM: leaf: v0 = 1 if the menu's mode can have teams (mode table team game, or Gladiator: Team VIP); uses t6,t7 | v5.3 · 2026-10-16 |
-| 000F012C-000F013F | 5 | LSR1: text | v5.3 · 2026-10-16 |
-| 000F01A4-000F01B3 | 4 | SRITEM: Spawn Settings page tail (j at 0xFBDE4, frame open, ra at 0(sp); was j 0xFB180 = Respawn Delay items; not used now): Spawn Rule, then the Respawn Delay items | v5.3 · 2026-10-16 (approx.) |
-| 000F0244-000F0253 | 4 | LSR2: text | v5.3 · 2026-10-16 |
-| 000F0344-000F034F | 3 | LSR: text | v5.3 · 2026-10-16 |
-| 000F0454-000F045B | 2 | LSR0: text | v5.3 · 2026-10-16 (approx.) |
+| 000E8CD0-000E8DC3 | 61 | SRRA: a0 = page, a1 = 0 refresh / 1 apply: Spawn Rule value for the menu's mode; refresh shows Near Teammates as Default where there are no teams or the Teamplay setting is Off (Gladiator: Team VIP Off), and sets its changefn | v5.3 · 2026-10-16 |
+| 000E9D84-000E9E53 | 52 | SRAG: LAN host, a0 = a dead player: with a Spawn Rule on (not its first spawn), its spawn point picked again now, from where everyone is now (the game's own death pick 0x1CC2A0, which sends it to that player's game). v0 = 1 if that | v5.64 · 2026-10-22 |
+| 000EAE38-000EAEEB | 45 | SRV: leaf: v0 = Spawn Rule for the match being played: offline / LAN host: its setting for the mode; LAN player: the host's, from setup byte 72 (0xB0 \| rule), else 0; uses t5-t9 | v5.89 · 2026-10-27 |
+| 000EC070-000EC107 | 38 | SRP: jal at 0x1C81EC in start spawn point routine (was jal 0x4F5550 network game check; s0 = player): in a LAN match with a Spawn Rule on, every console's own player spawns at the host's pick (as a game without the patch does: the host picks again | v5.64 · 2026-10-22 |
+| 000ECEC0-000ECF3F | 32 | SRTOFF: a0 = page: v0 = 1 when the menu's mode has a Teamplay item and the page's one is Off (Gladiator: its Team VIP item Off), else 0 | v5.3 · 2026-10-16 |
+| 000EE710-000EE76B | 23 | SRCH: Spawn Rule changefn (a0 = page, a1 = item): with the page's Teamplay item Off (Gladiator: Team VIP Off), Near Teammates is skipped (on to Default, or back to Away From Enemies) | v5.3 · 2026-10-16 |
+| 000EEC98-000EECEB | 21 | SRON: v0 = Spawn Rule when it applies to the match being played (SRV; not Assault / Escort; Near Teammates only in team games), else 0; uses t5-t9 | v5.3 · 2026-10-16 |
+| 000EFA2C-000EFA63 | 14 | SRRS: jal at 0x4FCAE0 (was jal spawn point message; a0 = the player, delay slot kept): the host's resend of a dead LAN player's spawn point every 1.5 seconds: picked again first (SRAG); then sent as before, unless that sent it | v5.64 · 2026-10-22 |
+| 000EFCDC-000EFD0B | 12 | SRTEAM: leaf: v0 = 1 if the menu's mode can have teams (mode table team game, or Gladiator: Team VIP); uses t6,t7 | v5.3 · 2026-10-16 |
+| 000F015C-000F016F | 5 | LSR1: text | v5.3 · 2026-10-16 |
+| 000F01D4-000F01E3 | 4 | SRITEM: Spawn Settings page tail (j at 0xFBDE4, frame open, ra at 0(sp); was j 0xFB180 = Respawn Delay items; not used now): Spawn Rule, then the Respawn Delay items | v5.3 · 2026-10-16 (approx.) |
+| 000F0274-000F0283 | 4 | LSR2: text | v5.3 · 2026-10-16 |
+| 000F0374-000F037F | 3 | LSR: text | v5.3 · 2026-10-16 |
+| 000F0484-000F048B | 2 | LSR0: text | v5.3 · 2026-10-16 (approx.) |

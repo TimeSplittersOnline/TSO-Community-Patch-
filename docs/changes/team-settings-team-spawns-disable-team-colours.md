@@ -38,21 +38,21 @@
 | 000118F6 | 76 bytes | XBE header | Code: call (see the code shown) | v5.3 · 2026-10-16 |
 | 00011942 | 12 bytes | XBE header | Code: done (see the code shown) | v5.3 · 2026-10-16 |
 | 008E2181 | 59 bytes | xbreadfail_sp | match settings refresh (call at 0x2c711e, was call 0x72390 for Friendly Fire; cdecl (page, 4)): greyed out while the menu's mode has a Teamplay item and Teamplay is Off (the game greyed it by its own Teamplay item, which is not on this page any more) | v5.3 · 2026-10-16 |
-| 008E6AD0 | 37 bytes | xbreadfail_sp | ---------------- Team icons: the "Disable Red / Blue / Yellow / Green Team", "Red / Blue / Yellow / Green Respawn Delay" and Assault's "Attacker / Defender Respawn Delay" (red / blue) items (Advanced Settings) show the game's own figure icon (icon 22, the male figure of the bot / team display on the match settings page) in the team's colour, with the same shadow that display gives it, just after the text (one space after it), in the middle of the row. Only menu drawing on this game. Front end only: in a level (End of match > New game) the icon isn't there and it drew as a bar of the team's colour. team Respawn Delay items (from XRDI, in place of all.s's item adder 0x8e84b3 (eax label, edx id 0x29 + team, ecx options, ebx count; keeps all registers); esi = team 0-3): the item's draw is XTIC0-3 too | v5.3 · 2026-10-16 |
-| 008E6AF5 | 10 bytes | xbreadfail_sp | Assault's Attacker / Defender Respawn Delay items (from XRDI; edx id 0x29 / 0x2a): attackers are red, defenders blue | v5.3 · 2026-10-16 |
-| 008E6AFF | 13 bytes | xbreadfail_sp | colour items (call at 0x11176 in the builder, was call 0x7a7b0, menu add routine (label, id, flags, height, select, draw); ebx = | v5.3 · 2026-10-16 |
-| 008E6B0C | 16 bytes | xbreadfail_sp | colour items (call at 0x11176 in the builder, was call 0x7a7b0, menu add routine (label, id, flags, height, select, draw); ebx = colour 0-3): the item's draw is XTIC0-3 | v5.3 · 2026-10-16 |
-| 008E6B1C | 16 bytes | xbreadfail_sp | Data: XTICT | v5.3 · 2026-10-16 (approx.) |
-| 008E6B2C | 4 bytes | xbreadfail_sp | Code: XTIC0 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6B30 | 7 bytes | xbreadfail_sp | Code: XTIC1 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6B37 | 7 bytes | xbreadfail_sp | Code: XTIC2 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6B3E | 5 bytes | xbreadfail_sp | item draw (cdecl (menu, item, rect: left, top, right, bottom pixels), eax = colour 0-3): drawn before the item's text; | v5.3 · 2026-10-16 (approx.) |
-| 008E6B43 | 385 bytes | xbreadfail_sp | item draw (cdecl (menu, item, rect: left, top, right, bottom pixels), eax = colour 0-3): drawn before the item's text; nothing in a level | v5.18 · 2026-10-17 |
-| 008E6CC4 | 4 bytes | xbreadfail_sp | Code: XTHALF (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6CC8 | 4 bytes | xbreadfail_sp | Code: XT64 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6CCC | 4 bytes | xbreadfail_sp | Code: XT3 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6CD0 | 4 bytes | xbreadfail_sp | Code: XTONE (see the code shown) | v5.3 · 2026-10-16 (approx.) |
-| 008E6CD4 | 4 bytes | xbreadfail_sp | ---------------- Return to Lobby (LAN host, during a match or after it): every console goes back to the lobby, the session kept. | v5.3 · 2026-10-16 (approx.) |
+| 008E6AE0 | 37 bytes | xbreadfail_sp | ---------------- Team icons: the "Disable Red / Blue / Yellow / Green Team", "Red / Blue / Yellow / Green Respawn Delay" and Assault's "Attacker / Defender Respawn Delay" (red / blue) items (Advanced Settings) show the game's own figure icon (icon 22, the male figure of the bot / team display on the match settings page) in the team's colour, with the same shadow that display gives it, just after the text (one space after it), in the middle of the row. Only menu drawing on this game. Front end only: in a level (End of match > New game) the icon isn't there and it drew as a bar of the team's colour. team Respawn Delay items (from XRDI, in place of all.s's item adder 0x8e84b3 (eax label, edx id 0x29 + team, ecx options, ebx count; keeps all registers); esi = team 0-3): the item's draw is XTIC0-3 too | v5.3 · 2026-10-16 |
+| 008E6B05 | 10 bytes | xbreadfail_sp | Assault's Attacker / Defender Respawn Delay items (from XRDI; edx id 0x29 / 0x2a): attackers are red, defenders blue | v5.3 · 2026-10-16 |
+| 008E6B0F | 13 bytes | xbreadfail_sp | colour items (call at 0x11176 in the builder, was call 0x7a7b0, menu add routine (label, id, flags, height, select, draw); ebx = | v5.3 · 2026-10-16 |
+| 008E6B1C | 16 bytes | xbreadfail_sp | colour items (call at 0x11176 in the builder, was call 0x7a7b0, menu add routine (label, id, flags, height, select, draw); ebx = colour 0-3): the item's draw is XTIC0-3 | v5.3 · 2026-10-16 |
+| 008E6B2C | 16 bytes | xbreadfail_sp | Data: XTICT | v5.3 · 2026-10-16 (approx.) |
+| 008E6B3C | 4 bytes | xbreadfail_sp | Code: XTIC0 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6B40 | 7 bytes | xbreadfail_sp | Code: XTIC1 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6B47 | 7 bytes | xbreadfail_sp | Code: XTIC2 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6B4E | 5 bytes | xbreadfail_sp | item draw (cdecl (menu, item, rect: left, top, right, bottom pixels), eax = colour 0-3): drawn before the item's text; | v5.3 · 2026-10-16 (approx.) |
+| 008E6B53 | 385 bytes | xbreadfail_sp | item draw (cdecl (menu, item, rect: left, top, right, bottom pixels), eax = colour 0-3): drawn before the item's text; nothing in a level | v5.18 · 2026-10-17 |
+| 008E6CD4 | 4 bytes | xbreadfail_sp | Code: XTHALF (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6CD8 | 4 bytes | xbreadfail_sp | Code: XT64 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6CDC | 4 bytes | xbreadfail_sp | Code: XT3 (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6CE0 | 4 bytes | xbreadfail_sp | Code: XTONE (see the code shown) | v5.3 · 2026-10-16 (approx.) |
+| 008E6CE4 | 4 bytes | xbreadfail_sp | ---------------- Return to Lobby (LAN host, during a match or after it): every console goes back to the lobby, the session kept. | v5.3 · 2026-10-16 (approx.) |
 | 008E8800 | 582 bytes | xbreadfail_sp | ---------------- XZ: end of the generic team-spawn loop (jmp at 0x6cd61) | v5.3 · 2026-10-16 |
 | 008E8A46 | 61 bytes | xbreadfail_sp | xmm0 = SGN*((Z-MZ)*DX - (X-MX)*DZ) | v5.3 · 2026-10-16 |
 | 008E8A83 | 97 bytes | xbreadfail_sp | esi = entry index, edi = spawn set -> eax=1 and X,Z in SCR if usable for this mode | v5.3 · 2026-10-16 |
@@ -102,7 +102,7 @@ NTSC address first; the PAL address follows where it differs.
 | 0013EB24 | 260F8E50 | 3C100063 | addiu t7,s0,-29104 | lui s0,0x63 | LAN: hide the host's disabled colours from the Teams/Scores panel | v5.3 · 2026-10-16 |
 | 004F4A24 / PAL 004F4ACC | 0C13EA36 | 0C03F900 | jal 0x4fa8d8 | jal 0xfe400 | LAN host: check team picks received from other players (code at 0x000FE400): a disabled colour moves the player on to the next enabled colour in the direction they were scrolling, so on their Select Team screen the disabled colour is skipped | v5.15 · 2026-10-16 |
 | 00144CE0 | 1000FF0C | 0803ED80 | beq zero,zero,0x144914 | j 0xfb600 | Zones (and other 4-team modes): on maps without yellow/green spawn points (e.g. Vietnam), Yellow and Green get their own spawn areas on either side of the line between the red and blue spawns (host only on LAN) | v5.3 · 2026-10-16 |
-| 0043A334 | 0C054408 | 0C03B8E7 | jal 0x151020 | jal 0xee39c | Hook: match settings refresh, Friendly Fire: was jal 0x151020 (greyed out with Teamplay Off) | v5.3 · 2026-10-16 |
+| 0043A334 | 0C054408 | 0C03B8F3 | jal 0x151020 | jal 0xee3cc | Hook: match settings refresh, Friendly Fire: was jal 0x151020 (greyed out with Teamplay Off) | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -115,9 +115,9 @@ NTSC address first; the PAL address follows where it differs.
 | 000FB600-000FB8F3 | 189 | Zones (and other 4-team modes): on maps without yellow/green spawn points (e.g. Vietnam), Yellow and Green get their own spawn areas on either side of the line between the red and blue spawns (host only on LAN) | v5.3 · 2026-10-16 |
 | 000FB974-000FB9D7 | 25 | Advanced Settings in Assault / Capture the Bag: Team Spawns hidden in Assault; Disable Red/Blue/Yellow/Green Team hidden in both (disabled colours are set aside while one of these modes is picked and come back for other modes) | v5.3 · 2026-10-16 |
 | 000E470C-000E48EB | 120 | PTIC: item draw (a0 menu, a1 item, a2 rect: left, top, right, bottom pixels; v1 = colour 0-3): drawn before the item's text; nothing in a level | v5.18 · 2026-10-17 |
-| 000EE39C-000EE3FB | 24 | FFI: match settings refresh (jal at 0x43A334, was jal 0x151020 for Friendly Fire, a1 = 4): greyed out while the menu's mode has a Teamplay item and Teamplay is Off (the game greyed it by its own Teamplay item, not on this page now) | v5.3 · 2026-10-16 |
-| 000EEF5C-000EEFAB | 20 | PTICR: adds the item, then its draw is PTICS + 8 * team | v5.3 · 2026-10-16 |
-| 000F0044-000F0063 | 8 | PTICRS: team Respawn Delay items (jal at 0xFB204 / 0xFB214 / 0xFB238 / 0xFB248, was jal 0xFB100, the item adder (a0 label, a1 id 30-33)): v1 = team, then PTICR | v5.3 · 2026-10-16 |
-| 000F0064-000F0083 | 8 | PTICS: the four item draws: v1 = colour, then PTIC | v5.3 · 2026-10-16 |
-| 000F00E8-000F00FF | 6 | PTICADD: jal at 0xFD284 in the builder's colour loop (was jal 0x14E8F0, menu add routine; s3 = colour 0-3): the item's draw (t0) is PTICS + 8 * colour | v5.3 · 2026-10-16 |
-| 000F04DC-000F04DF | 1 | LTSPC: text | v5.3 · 2026-10-16 (approx.) |
+| 000EE3CC-000EE42B | 24 | FFI: match settings refresh (jal at 0x43A334, was jal 0x151020 for Friendly Fire, a1 = 4): greyed out while the menu's mode has a Teamplay item and Teamplay is Off (the game greyed it by its own Teamplay item, not on this page now) | v5.3 · 2026-10-16 |
+| 000EEF8C-000EEFDB | 20 | PTICR: adds the item, then its draw is PTICS + 8 * team | v5.3 · 2026-10-16 |
+| 000F0074-000F0093 | 8 | PTICRS: team Respawn Delay items (jal at 0xFB204 / 0xFB214 / 0xFB238 / 0xFB248, was jal 0xFB100, the item adder (a0 label, a1 id 30-33)): v1 = team, then PTICR | v5.3 · 2026-10-16 |
+| 000F0094-000F00B3 | 8 | PTICS: the four item draws: v1 = colour, then PTIC | v5.3 · 2026-10-16 |
+| 000F0118-000F012F | 6 | PTICADD: jal at 0xFD284 in the builder's colour loop (was jal 0x14E8F0, menu add routine; s3 = colour 0-3): the item's draw (t0) is PTICS + 8 * colour | v5.3 · 2026-10-16 |
+| 000F050C-000F050F | 1 | LTSPC: text | v5.3 · 2026-10-16 (approx.) |

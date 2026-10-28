@@ -30,7 +30,7 @@ Every change the current build makes to the original game files, grouped by feat
 | [Player Health](player-health.md) | 3 | 14 | 3 | 359 |
 | [Capture the Bag: Reverse Scoring, Score With Bag Away](capture-the-bag-reverse-scoring-score-with-bag-away.md) | 4 | 9 | 0 | 219 |
 | [4 Teams, team play in more modes](4-teams-team-play-in-more-modes.md) | 28 | 1 | 61 | 104 |
-| [Spectate (Elimination, Vampire)](spectate-elimination-vampire.md) | 4 | 46 | 6 | 1482 |
+| [Spectate (Elimination, Vampire)](spectate-elimination-vampire.md) | 4 | 46 | 6 | 1494 |
 | [Respawn Delay](respawn-delay.md) | 2 | 32 | 0 | 266 |
 | [King of the Hill](king-of-the-hill.md) | 6 | 33 | 4 | 907 |
 | [Assault: Auto-Complete Phase, Time Bonus After Phase](assault-auto-complete-phase-time-bonus-after-phase.md) | 1 | 14 | 1 | 328 |

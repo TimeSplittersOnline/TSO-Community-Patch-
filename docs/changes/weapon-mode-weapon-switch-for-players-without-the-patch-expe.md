@@ -31,14 +31,14 @@
 | 008E0173 | 293 bytes | xbreadfail_sp | every frame (XGGT, Weapon Mode on; LAN host): end the overrides that are done (the player holds the weapon, 4 seconds passed, the game frame went back = a new match, or someone finished the ladder: before the match ends); forget players who left | v5.100 · 2026-10-28 |
 | 008E0298 | 15 bytes | xbreadfail_sp | the end of a match (call at 0x679f3 in the end-of-level code every mode's end goes through, was call 0x64890): every "Always" still on goes back now (XPFT only runs while the match is played, so one handed out in the last seconds stayed) | v5.3 · 2026-10-16 (approx.) |
 | 008E02A7 | 51 bytes | xbreadfail_sp | every "Always" override still on goes back now (LAN host; a LAN player's table can only hold stale ones); keeps all | v5.100 · 2026-10-28 |
-| 008E75E4 | 64 bytes | xbreadfail_sp | host: per chr, the gameframe it made another game's player take a hand-out (XGGDROP; XPFT) | v5.3 · 2026-10-16 (approx.) |
-| 008E7AC8 | 64 bytes | xbreadfail_sp | Gun Game weapon switch: owner client of each player slot when its setting was saved | v5.3 · 2026-10-16 (approx.) |
-| 008E7B08 | 64 bytes | xbreadfail_sp | gameframe the "Always" override ends (0 = none) | v5.3 · 2026-10-16 (approx.) |
-| 008E7B48 | 16 bytes | xbreadfail_sp | its half seconds added (the weapon still on the floor), 16 at most | v5.3 · 2026-10-16 (approx.) |
-| 008E7B58 | 16 bytes | xbreadfail_sp | that player's own setting + 1 (0 = not known yet) | v5.3 · 2026-10-16 (approx.) |
-| 008E7B68 | 16 bytes | xbreadfail_sp | the weapon handed out | v5.3 · 2026-10-16 (approx.) |
-| 008E7B78 | 16 bytes | xbreadfail_sp | 1 = they already held it when it was handed out (wait for the time instead) | v5.3 · 2026-10-16 (approx.) |
-| 008E7B88 | 132 bytes | xbreadfail_sp | packet 15: 4-byte header, slot, then the 124 bytes of prefs (0x81 bytes) | v5.3 · 2026-10-16 (approx.) |
+| 008E75F4 | 64 bytes | xbreadfail_sp | host: per chr, the gameframe it made another game's player take a hand-out (XGGDROP; XPFT) | v5.3 · 2026-10-16 (approx.) |
+| 008E7AD8 | 64 bytes | xbreadfail_sp | Gun Game weapon switch: owner client of each player slot when its setting was saved | v5.3 · 2026-10-16 (approx.) |
+| 008E7B18 | 64 bytes | xbreadfail_sp | gameframe the "Always" override ends (0 = none) | v5.3 · 2026-10-16 (approx.) |
+| 008E7B58 | 16 bytes | xbreadfail_sp | its half seconds added (the weapon still on the floor), 16 at most | v5.3 · 2026-10-16 (approx.) |
+| 008E7B68 | 16 bytes | xbreadfail_sp | that player's own setting + 1 (0 = not known yet) | v5.3 · 2026-10-16 (approx.) |
+| 008E7B78 | 16 bytes | xbreadfail_sp | the weapon handed out | v5.3 · 2026-10-16 (approx.) |
+| 008E7B88 | 16 bytes | xbreadfail_sp | 1 = they already held it when it was handed out (wait for the time instead) | v5.3 · 2026-10-16 (approx.) |
+| 008E7B98 | 132 bytes | xbreadfail_sp | packet 15: 4-byte header, slot, then the 124 bytes of prefs (0x81 bytes) | v5.3 · 2026-10-16 (approx.) |
 
 ## PS2: changes to the game's own code and data
 
@@ -46,7 +46,7 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013C994 | 0C04E762 | 0C03AE11 | jal 0x139d88 | jal 0xeb844 | Hook: end-of-level code: was jal 0x139D88 (delay slot daddu s0,zero,zero kept): the "Always" overrides go back | v5.15 · 2026-10-16 |
+| 0013C994 | 0C04E762 | 0C03AE1D | jal 0x139d88 | jal 0xeb874 | Hook: end-of-level code: was jal 0x139D88 (delay slot daddu s0,zero,zero kept): the "Always" overrides go back | v5.15 · 2026-10-16 |
 | 004F462C / PAL 004F46D4 | 8DEE3D2C | 0803F285 | lw t6,15660(t7) | j 0xfca14 | Hook: packet decode, not in the match: packet 15 kept (PFGATE) | v5.82 · 2026-10-26 |
 | 004F4630 / PAL 004F46D8 | 11C0000C | 8DEE3D2C | beq t6,zero,0x4f4664 | lw t6,15660(t7) | Hook: packet decode, not in the match: packet 15 kept (PFGATE) | v5.82 · 2026-10-26 |
 | 004F4910 / PAL 004F49B8 | 0C13F9CE | 0C03F7EC | jal 0x4fe738 | jal 0xfdfb0 | Hook: packet 15 received: keep a copy (PFRCV) | v5.81 · 2026-10-26 |
@@ -58,16 +58,16 @@ NTSC address first; the PAL address follows where it differs.
 | 000E48EC-000E4ABF | 117 | PFKEEP: a0 = packet 15 data (slot, then 128 bytes of prefs), a1 = the game it came from (0: not checked), LAN: keep a copy of another game's player's prefs under their name; an "Always" that is our own override (PFON) keeps their own setting | v5.89 · 2026-10-27 |
 | 000E5004-000E519B | 102 | PFON: a0 = character record, a1 = weapon (GGGIVE / SDGIVE, LAN host, just before the weapon is dropped at the feet of another game's player): their game to "Always" until they hold it (at most 4 s in Gun Game and Showdown, 1 s in | v5.96 · 2026-10-28 |
 | 000E519C-000E532F | 101 | PFT: every frame (GGT, Weapon Mode on; LAN host): end the overrides that are done (the player holds the weapon, 4 seconds passed, the game frame went back = a new match, or someone finished the ladder: before the | v5.83 · 2026-10-26 |
-| 000E8FA0-000E908B | 59 | PFREST: a0 = slot (another game's player whose prefs this host doesn't have): v0 = 1 if a copy kept under their name was taken as if they sent it (player settings reader: this game's copy and its flag), else 0 | v5.89 · 2026-10-27 |
-| 000E9FC4-000EA08B | 50 | PFSLOT: a0 = character record -> v0 = its player slot when it is another game's connected player whose prefs this host has, else -1 | v5.81 · 2026-10-26 |
-| 000EB4F4-000EB59F | 43 | PFENT: a0 = slot (ENTER, LAN host: another game's player entering): their own setting sent once more if it was put back at the last match's end (that message can arrive after their game has left the match, and is thrown away there) and this | v5.83 · 2026-10-26 |
-| 000EB844-000EB8E3 | 40 | PFALL: jal at 0x13C994 in the end-of-level code 0x13C980 that every mode's end goes through (was jal 0x139D88; its delay slot daddu s0,zero,zero kept): every "Always" override still on goes back now (PFT only runs while the match is | v5.99 · 2026-10-28 |
-| 000EBB64-000EBBFF | 39 | PFSEND: a0 = slot, a1 = setting: send that player's prefs (this game's copy) with that weapon setting to their game only | v5.3 · 2026-10-16 |
-| 000EBC00-000EBC9B | 39 | PFDONE: a0 = slot: the override is over: their own setting back to their game, if that player is still there | v5.99 · 2026-10-28 |
-| 000EBFA8-000EC03F | 38 | PFBACK: every "Always" override still on goes back now (LAN host; a LAN player's table can only hold stale ones) | v5.83 · 2026-10-26 |
-| 000ED00C-000ED087 | 31 | PFDUP: leaf (a0 = slot): v0 = 1 if another player in the game (another network player table slot with an owner) has the same name; uses t0-t7 | v5.81 · 2026-10-26 |
-| 000ED468-000ED4DF | 30 | PFKFIND: leaf (a0 = a name, as network player table +8): v0 = the kept entry with that name (0 = none), v1 = the first empty one (0 = none); uses t0-t5 | v5.81 · 2026-10-26 |
-| 000EFE18-000EFE3F | 10 | PFPREFS: leaf (a0 = slot): v0 = this game's copy of that player's prefs (0 = none); uses t0,t1 | v5.3 · 2026-10-16 |
+| 000E9098-000E9183 | 59 | PFREST: a0 = slot (another game's player whose prefs this host doesn't have): v0 = 1 if a copy kept under their name was taken as if they sent it (player settings reader: this game's copy and its flag), else 0 | v5.89 · 2026-10-27 |
+| 000EA0BC-000EA183 | 50 | PFSLOT: a0 = character record -> v0 = its player slot when it is another game's connected player whose prefs this host has, else -1 | v5.81 · 2026-10-26 |
+| 000EB524-000EB5CF | 43 | PFENT: a0 = slot (ENTER, LAN host: another game's player entering): their own setting sent once more if it was put back at the last match's end (that message can arrive after their game has left the match, and is thrown away there) and this | v5.83 · 2026-10-26 |
+| 000EB874-000EB913 | 40 | PFALL: jal at 0x13C994 in the end-of-level code 0x13C980 that every mode's end goes through (was jal 0x139D88; its delay slot daddu s0,zero,zero kept): every "Always" override still on goes back now (PFT only runs while the match is | v5.99 · 2026-10-28 |
+| 000EBB94-000EBC2F | 39 | PFSEND: a0 = slot, a1 = setting: send that player's prefs (this game's copy) with that weapon setting to their game only | v5.3 · 2026-10-16 |
+| 000EBC30-000EBCCB | 39 | PFDONE: a0 = slot: the override is over: their own setting back to their game, if that player is still there | v5.99 · 2026-10-28 |
+| 000EBFD8-000EC06F | 38 | PFBACK: every "Always" override still on goes back now (LAN host; a LAN player's table can only hold stale ones) | v5.83 · 2026-10-26 |
+| 000ED03C-000ED0B7 | 31 | PFDUP: leaf (a0 = slot): v0 = 1 if another player in the game (another network player table slot with an owner) has the same name; uses t0-t7 | v5.81 · 2026-10-26 |
+| 000ED498-000ED50F | 30 | PFKFIND: leaf (a0 = a name, as network player table +8): v0 = the kept entry with that name (0 = none), v1 = the first empty one (0 = none); uses t0-t5 | v5.81 · 2026-10-26 |
+| 000EFE48-000EFE6F | 10 | PFPREFS: leaf (a0 = slot): v0 = this game's copy of that player's prefs (0 = none); uses t0,t1 | v5.3 · 2026-10-16 |
 | 000FC5A8-000FC5FF | 22 | PFHELD: leaf: a0 = character record, a1 = gun id -> v0 = 1 if the gun in its hands (+148) is that gun (by gun type); uses t0-t5 | v5.77 · 2026-10-25 |
 | 000FCA14-000FCA3F | 11 | PFGATE: The game takes packet 15 only while its own game is in the match (its in-game traffic flag, 0x6E3D2C); one that comes sooner (this game still loading or on its start screen while the other is already in) is thrown away, and the other game doesn't send it again (it sends only when the prefs changed since it last sent them). So the host lost a player's prefs whenever their game got into the match first. PFGATE: j at 0x4F462C (was lw t6,0x3D2C(t7) / beqz t6,0x4F4664, its delay slot sltiu t7,a1,0x47 kept at 0x4F4634; the load now in the jump's delay slot): a packet 15 thrown away is kept (PFKEEP; the game's own copy isn't touched, its players may not be set up yet), and PFREST takes it at the hand-out | v5.82 · 2026-10-26 |
 | 000FCB44-000FCB7F | 15 | PFKIX: leaf (a0 = a PFK entry): v0 = its PFKC byte's address; uses t0, t1 | v5.89 · 2026-10-27 |

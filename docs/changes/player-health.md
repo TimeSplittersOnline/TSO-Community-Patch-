@@ -34,8 +34,8 @@ NTSC address first; the PAL address follows where it differs.
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
 | 001B18D0 | 27BDFFE0 | 08039592 | addiu sp,sp,-32 | j 0xe5648 | Hook: damage routine: Player Health (host / offline, hits it decides); its delay slot lui t7,0x67 kept | v5.67 · 2026-10-23 |
-| 001B1968 | 0C13E5CA | 0C03B186 | jal 0x4f9728 | jal 0xec618 | Hook: damage routine, the hit's report: was jal 0x4F9728 (Player Health, a LAN player's own copy); delay slot kept | v5.78 · 2026-10-26 |
-| 004F9418 / PAL 004F94C0 | 8FCF0088 | 0C03B1AA | lw t7,136(fp) | jal 0xec6a8 | Hook: damage report decode: Player Health (host, reports it passes on); its delay slot kept | v5.67 · 2026-10-23 |
+| 001B1968 | 0C13E5CA | 0C03B192 | jal 0x4f9728 | jal 0xec648 | Hook: damage routine, the hit's report: was jal 0x4F9728 (Player Health, a LAN player's own copy); delay slot kept | v5.78 · 2026-10-26 |
+| 004F9418 / PAL 004F94C0 | 8FCF0088 | 0C03B1B6 | lw t7,136(fp) | jal 0xec6d8 | Hook: damage report decode: Player Health (host, reports it passes on); its delay slot kept | v5.67 · 2026-10-23 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -43,15 +43,15 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|
 | 000E5648-000E57D3 | 99 | PHDA: j at 0x1B18D0 in the game's damage routine (its delay slot lui t7,0x67 done; a0 = the hit): host / offline, a hit it decides here (not one reported by another game: PKDMGF): the amount by Player Health, for the routine (it takes | v5.89 · 2026-10-27 |
 | 000E7CC0-000E7DD3 | 69 | PHOK: t0 = target prop, t1 = attacker prop, t2 = bullet type -> v1 = 0, or the setting * 4 (PHM) if Player Health changes this hit (the setting that applies here, phef, not Default; not Leech; a character hit by another character; its guns and | v5.89 · 2026-10-27 |
-| 000EBE70-000EBF0B | 39 | PHITEM: Advanced page (every mode but Leech): Player Health (Default / Low / Weakling / Pathetic (75% / 50% / 25%)) | v5.67 · 2026-10-23 |
-| 000EC618-000EC6A7 | 36 | PHNH: jal at 0x1B1968 in the damage routine (was jal 0x4F9728, the hit's report: sends a hit this game decides; its delay slot daddu a0,s0 = the hit kept; v0: 1 = this game takes it now): LAN player, a hit of its own going through PHDA's LAN | v5.78 · 2026-10-26 |
-| 000EC6A8-000EC737 | 36 | PHRX: jal at 0x4F9418 in the damage report decode (was lw t7,136(fp): the buffer, at the amount; its delay slot kept; fp = its frame: +0 target, +8 attacker; s3 = packet type): the host passing on another game's report (packet 17): | v5.67 · 2026-10-23 |
-| 000EF1C8-000EF213 | 19 | PHRA: a0 = page, a1 = 0 refresh / 1 apply: Player Health (stored as the option) | v5.68 · 2026-10-23 |
-| 000F01D4-000F01E3 | 4 | PHM: by PHVAR: Default, 75, 50, 25% | v5.67 · 2026-10-23 |
-| 000F0254-000F0263 | 4 | LPH: text | v5.67 · 2026-10-23 |
-| 000F02E4-000F02EF | 3 | PHORIG: the damage routine's own start (PHDA's tail; its first word, then on at 0x1B18D8) | v5.67 · 2026-10-23 |
-| 000F0398-000F03A3 | 3 | LPH25: text | v5.67 · 2026-10-23 (approx.) |
-| 000F03A4-000F03AF | 3 | LPH50: text | v5.67 · 2026-10-23 (approx.) |
-| 000F045C-000F0463 | 2 | LPH100: text | v5.67 · 2026-10-23 (approx.) |
-| 000F04E0-000F04E3 | 1 | LPH75: text | v5.67 · 2026-10-23 (approx.) |
+| 000EBEA0-000EBF3B | 39 | PHITEM: Advanced page (every mode but Leech): Player Health (Default / Low / Weakling / Pathetic (75% / 50% / 25%)) | v5.67 · 2026-10-23 |
+| 000EC648-000EC6D7 | 36 | PHNH: jal at 0x1B1968 in the damage routine (was jal 0x4F9728, the hit's report: sends a hit this game decides; its delay slot daddu a0,s0 = the hit kept; v0: 1 = this game takes it now): LAN player, a hit of its own going through PHDA's LAN | v5.78 · 2026-10-26 |
+| 000EC6D8-000EC767 | 36 | PHRX: jal at 0x4F9418 in the damage report decode (was lw t7,136(fp): the buffer, at the amount; its delay slot kept; fp = its frame: +0 target, +8 attacker; s3 = packet type): the host passing on another game's report (packet 17): | v5.67 · 2026-10-23 |
+| 000EF1F8-000EF243 | 19 | PHRA: a0 = page, a1 = 0 refresh / 1 apply: Player Health (stored as the option) | v5.68 · 2026-10-23 |
+| 000F0204-000F0213 | 4 | PHM: by PHVAR: Default, 75, 50, 25% | v5.67 · 2026-10-23 |
+| 000F0284-000F0293 | 4 | LPH: text | v5.67 · 2026-10-23 |
+| 000F0314-000F031F | 3 | PHORIG: the damage routine's own start (PHDA's tail; its first word, then on at 0x1B18D8) | v5.67 · 2026-10-23 |
+| 000F03C8-000F03D3 | 3 | LPH25: text | v5.67 · 2026-10-23 (approx.) |
+| 000F03D4-000F03DF | 3 | LPH50: text | v5.67 · 2026-10-23 (approx.) |
+| 000F048C-000F0493 | 2 | LPH100: text | v5.67 · 2026-10-23 (approx.) |
+| 000F0510-000F0513 | 1 | LPH75: text | v5.67 · 2026-10-23 (approx.) |
 | 000FC95C-000FC9FF | 41 | PHKL: kill message (from SDKL, when not a Showdown shot: the jal at 0x4FA898 in kill message, was jal local-send routine: a0 the prop it goes by, a1 type as host (18), a2 type as player (19), a3 data, t0 size, t1 reliable; s0 = damage info): LAN host, | v5.67 · 2026-10-23 |
