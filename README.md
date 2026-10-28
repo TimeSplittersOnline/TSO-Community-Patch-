@@ -17,7 +17,7 @@ The easiest way is the **TSO Community Patcher** (Windows). It makes the TSO Com
 3. In step 1, pick your disc image (.iso), or a `default.xbe` file. Either works with or without the title update, USA or Europe: the disc's own `default.xbe`, or the title update's `TDATA\45410066\$u\default.xbe`.
 4. Press **PATCH DISC IMAGE** to put the patch into your disc image, or **SAVE TSO XBE AS...** to save the XBE as a file. **Put the original back** undoes a patched disc image.
 
-The patcher checks your file is a copy of the game it knows and that the result is byte for byte the current build; anything else is refused. Its source is in [`patcher`](patcher).
+The patcher checks your file is a copy of the game it knows and that the result is byte for byte the current build; anything else is refused. Its source is in [`tools/patcher`](tools/patcher).
 
 Or by hand, with a BPS patcher:
 1. Take `default.xbe` from your copy of the game **with the title update** (the patch only applies to that exact file: size 6,344,704 bytes, MD5 `d2fc3bed99456864a96fff179d5336d1`).

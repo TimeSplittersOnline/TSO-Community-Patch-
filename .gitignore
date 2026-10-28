@@ -3,6 +3,6 @@ __pycache__/
 *.xbe
 *.elf
 *.bin
-patcher/build/
-patcher/dist/
+tools/patcher/build/
+tools/patcher/dist/
 *.spec
