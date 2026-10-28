@@ -11,7 +11,7 @@ The host decides: when the host has the mod, its settings reach everyone through
 You need your own copy of the game. This repository contains no game files.
 
 ### PS2 (PCSX2)
-1. Download the pnach for your region from the latest release (or `build/`):
+1. Download the pnach for your region from the [`build`](build) folder:
    - NTSC (USA): `SLUS-21148_FB2F4502.pnach`
    - PAL (Europe): `SLES-52993_E0F96C7D.pnach`
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
@@ -19,7 +19,7 @@ You need your own copy of the game. This repository contains no game files.
 ### Xbox (xemu or a modded console)
 The Xbox mod is shipped as a patch for your own game executable.
 1. Take `default.xbe` from your copy of the game **with the title update** (the patch only applies to that exact file: size 6,344,704 bytes, MD5 `d2fc3bed99456864a96fff179d5336d1`).
-2. Apply `default_4team_zones.bps` from the latest release with any BPS patcher (Floating IPS, beat, or `python tools/make_bps.py apply default.xbe default_4team_zones.bps default_4team_zones.xbe`). The patcher refuses a different version of the file.
+2. Apply [`build/default_4team_zones.bps`](build/default_4team_zones.bps) with any BPS patcher (Floating IPS, beat, or `python tools/make_bps.py apply default.xbe default_4team_zones.bps default_4team_zones.xbe`). The patcher refuses a different version of the file.
 3. Use the patched XBE in place of the original (keep a backup of the original).
 
 ## What is documented here
@@ -30,7 +30,7 @@ The Xbox mod is shipped as a patch for your own game executable.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses, with descriptive names, addresses on each platform and what each is for.
 - [docs/site](docs/site/index.html): the searchable change register as a web page (also published with GitHub Pages).
 
-Each release tag (`v5.3` ... `v5.98`) holds that version's pnach files and Xbox patch in `build/`, so any two versions can be compared on GitHub.
+The [`build`](build) folder always holds the current version's pnach files and Xbox patch. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
 ## Features
 
