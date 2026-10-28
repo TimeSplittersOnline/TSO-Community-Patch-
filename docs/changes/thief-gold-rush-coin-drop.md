@@ -36,28 +36,28 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 001B04FC | 0C107D9A | 0C03B59E | jal 0x41f668 | jal 0xed678 | Hook: Thief death coin in character death routine: was jal 0x41F668 | v5.3 · 2026-10-16 |
-| 004F9168 / PAL 004F9210 | 0C107E62 | 0C03B432 | jal 0x41f988 | jal 0xed0c8 | Hook: Thief collect message: was jal 0x41F988 (Coin Rush: still scores when the coin is gone here) | v5.3 · 2026-10-16 |
-| 004F933C / PAL 004F93E4 | 0C107D20 | 0C03ABB3 | jal 0x41f480 | jal 0xeaecc | Hook: a LAN player's death coin arriving: was jal 0x41F480 | v5.3 · 2026-10-16 |
+| 001B04FC | 0C107D9A | 0C03B5EB | jal 0x41f668 | jal 0xed7ac | Hook: Thief death coin in character death routine: was jal 0x41F668 | v5.3 · 2026-10-16 |
+| 004F9168 / PAL 004F9210 | 0C107E62 | 0C03B47F | jal 0x41f988 | jal 0xed1fc | Hook: Thief collect message: was jal 0x41F988 (Coin Rush: still scores when the coin is gone here) | v5.3 · 2026-10-16 |
+| 004F933C / PAL 004F93E4 | 0C107D20 | 0C03ABDC | jal 0x41f480 | jal 0xeaf70 | Hook: a LAN player's death coin arriving: was jal 0x41F480 | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000E0100-000E05EB | 315 | CRSP: put a Coin Rush coin on one of 48 random navigation pads without a coin (else a spawn point), picked at random from the quarter furthest from the coins already out and from every player / bot (so they spread over the map, away from campers), as this game's player | v5.15 · 2026-10-16 |
-| 000E5EA0-000E600B | 91 | CDRM: a0 = victim prop, a1 = pad, LAN host, a death coin of another game's player dropped (CDF): that game (without the patch: a game with it makes none) already shows the coin on its own, where it fills one of the game's 30 dropped- | v5.17 · 2026-10-17 |
-| 000E70EC-000E721F | 77 | CRT: every frame (called at the start of GGT): Coin Rush, host / offline: a coin every 5/8 second, 3 seconds in | v5.83 · 2026-10-26 |
-| 000E8D1C-000E8E0B | 60 | CRJOIN: Thief, LAN host: a mid-match joiner gets the coins already out (Coin Rush coins stay until someone takes them, so its game never saw them come): each one sent again to that game only (message 35, as the host's player's coin at its | v5.63 · 2026-10-22 |
-| 000E9D88-000E9E53 | 51 | CRITEM: Thief menu: Coin Rush, Coin Drop | v5.3 · 2026-10-16 |
-| 000EA854-000EA90F | 47 | CDS: leaf: v0 = bit 0 Coin Rush, bit 1 Player Kills only, when they apply (Thief; host / offline: the settings, LAN client: the host's, from byte 74), else 0; uses t8,t9 | v5.89 · 2026-10-27 |
-| 000EAECC-000EAF7F | 45 | CDF: jal at 0x4F933C (a LAN player's death coin arriving, was jal 0x41F480; a0 = victim prop, a1 = pad): the host drops it with Coin Rush, or with Player Kills when it saw that chr die without a kill in the last 3 seconds, | v5.17 · 2026-10-17 |
-| 000EAF80-000EB033 | 45 | CRRA: a0 = page, a1 = 0 refresh / 1 apply: Coin Rush and Coin Drop; Coin Drop is greyed out while Coin Rush is On | v5.3 · 2026-10-16 |
-| 000EB8E0-000EB97F | 40 | CB74: leaf: t6 = team-list byte 74 for LAN players: 0xC0 \| Zone Interval \| bits 2-3: King of the Hill in Zones, else Coin Rush << 2 \| Player Kills << 3 (Thief), Switch Spawns << 2 (Capture the Bag); uses t7,t8 (jal at 0xFBBB0, the team list, | v5.95 · 2026-10-27 |
-| 000ED0C8-000ED143 | 31 | CRNR: jal at 0x4F9168 in collect reader (was jal 0x41F988 pickup removal routine; a0 = chr id, a1 = pad): with Coin Rush, a coin another console says it picked up still scores when this game no longer has it (taken | v5.3 · 2026-10-16 |
-| 000ED678-000ED6EB | 29 | CDK: jal at 0x1B04FC in character death routine (Thief death coin, was jal 0x41F668 pickup spawn routine; a0 = victim prop, s1 = damage info: 0 target prop, 4 original attacker prop): no coin with Coin Rush, or with Player Kills | v5.3 · 2026-10-16 |
-| 000EF4C4-000EF507 | 17 | CRCH: Coin Rush changefn (a0 = page, a1 = item): Coin Drop only selectable with Coin Rush Off | v5.3 · 2026-10-16 |
-| 000EF7AC-000EF7E7 | 15 | CDREC: leaf (a0 = victim prop, t6 = 1 no coin / 0 coin): remember it for the host's check of LAN players' coins; uses t7-t9 | v5.3 · 2026-10-16 |
-| 000F00EC-000F00FB | 4 | LCD1: text | v5.3 · 2026-10-16 |
-| 000F0218-000F0223 | 3 | LCR: text | v5.3 · 2026-10-16 |
-| 000F0224-000F022F | 3 | LCD: text | v5.3 · 2026-10-16 |
-| 000F0230-000F023B | 3 | LCD0: text | v5.3 · 2026-10-16 |
+| 000E5F44-000E60AF | 91 | CDRM: a0 = victim prop, a1 = pad, LAN host, a death coin of another game's player dropped (CDF): that game (without the patch: a game with it makes none) already shows the coin on its own, where it fills one of the game's 30 dropped- | v5.17 · 2026-10-17 |
+| 000E7190-000E72C3 | 77 | CRT: every frame (called at the start of GGT): Coin Rush, host / offline: a coin every 5/8 second, 3 seconds in | v5.83 · 2026-10-26 |
+| 000E8DC0-000E8EAF | 60 | CRJOIN: Thief, LAN host: a mid-match joiner gets the coins already out (Coin Rush coins stay until someone takes them, so its game never saw them come): each one sent again to that game only (message 35, as the host's player's coin at its | v5.63 · 2026-10-22 |
+| 000E9E2C-000E9EF7 | 51 | CRITEM: Thief menu: Coin Rush, Coin Drop | v5.3 · 2026-10-16 |
+| 000EA8F8-000EA9B3 | 47 | CDS: leaf: v0 = bit 0 Coin Rush, bit 1 Player Kills only, when they apply (Thief; host / offline: the settings, LAN client: the host's, from byte 74), else 0; uses t8,t9 | v5.89 · 2026-10-27 |
+| 000EAF70-000EB023 | 45 | CDF: jal at 0x4F933C (a LAN player's death coin arriving, was jal 0x41F480; a0 = victim prop, a1 = pad): the host drops it with Coin Rush, or with Player Kills when it saw that chr die without a kill in the last 3 seconds, | v5.17 · 2026-10-17 |
+| 000EB024-000EB0D7 | 45 | CRRA: a0 = page, a1 = 0 refresh / 1 apply: Coin Rush and Coin Drop; Coin Drop is greyed out while Coin Rush is On | v5.3 · 2026-10-16 |
+| 000EB984-000EBA23 | 40 | CB74: leaf: t6 = team-list byte 74 for LAN players: 0xC0 \| Zone Interval \| bits 2-3: King of the Hill in Zones, else Coin Rush << 2 \| Player Kills << 3 (Thief), Switch Spawns << 2 (Capture the Bag); uses t7,t8 (jal at 0xFBBB0, the team list, | v5.95 · 2026-10-27 |
+| 000ED1FC-000ED277 | 31 | CRNR: jal at 0x4F9168 in collect reader (was jal 0x41F988 pickup removal routine; a0 = chr id, a1 = pad): with Coin Rush, a coin another console says it picked up still scores when this game no longer has it (taken | v5.3 · 2026-10-16 |
+| 000ED7AC-000ED81F | 29 | CDK: jal at 0x1B04FC in character death routine (Thief death coin, was jal 0x41F668 pickup spawn routine; a0 = victim prop, s1 = damage info: 0 target prop, 4 original attacker prop): no coin with Coin Rush, or with Player Kills | v5.3 · 2026-10-16 |
+| 000EF5F8-000EF63B | 17 | CRCH: Coin Rush changefn (a0 = page, a1 = item): Coin Drop only selectable with Coin Rush Off | v5.3 · 2026-10-16 |
+| 000EF8E0-000EF91B | 15 | CDREC: leaf (a0 = victim prop, t6 = 1 no coin / 0 coin): remember it for the host's check of LAN players' coins; uses t7-t9 | v5.3 · 2026-10-16 |
+| 000F0224-000F0233 | 4 | LCD1: text | v5.3 · 2026-10-16 |
+| 000F0350-000F035B | 3 | LCR: text | v5.3 · 2026-10-16 |
+| 000F035C-000F0367 | 3 | LCD: text | v5.3 · 2026-10-16 |
+| 000F0368-000F0373 | 3 | LCD0: text | v5.3 · 2026-10-16 |

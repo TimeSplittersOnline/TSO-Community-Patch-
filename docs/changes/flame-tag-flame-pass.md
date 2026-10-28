@@ -19,11 +19,11 @@
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000EAE18-000EAECB | 45 | FPK: kills (INFK's exit, then j 0xFF370 multikill; s0 = killer data or 0, s1 = victim data): Flame Pass Kill / Touch Or Kill: a burning player who kills a player not on fire passes the flame to them | v5.3 · 2026-10-16 |
-| 000EC1FC-000EC293 | 38 | FPITEM: Flame Tag menu, LAN only: Flame Pass | v5.3 · 2026-10-16 |
-| 000EEC30-000EEC83 | 21 | FPRA: a0 = page, a1 = 0 refresh / 1 apply: Flame Pass value | v5.3 · 2026-10-16 |
-| 000F00FC-000F010B | 4 | LFP2: text | v5.3 · 2026-10-16 |
-| 000F023C-000F0247 | 3 | LFP: text | v5.3 · 2026-10-16 |
-| 000F030C-000F0313 | 2 | LFP0: text | v5.3 · 2026-10-16 (approx.) |
-| 000F0314-000F031B | 2 | LFP1: text | v5.3 · 2026-10-16 (approx.) |
+| 000EAEBC-000EAF6F | 45 | FPK: kills (INFK's exit, then j 0xFF370 multikill; s0 = killer data or 0, s1 = victim data): Flame Pass Kill / Touch Or Kill: a burning player who kills a player not on fire passes the flame to them | v5.3 · 2026-10-16 |
+| 000EC2A0-000EC337 | 38 | FPITEM: Flame Tag menu, LAN only: Flame Pass | v5.3 · 2026-10-16 |
+| 000EED64-000EEDB7 | 21 | FPRA: a0 = page, a1 = 0 refresh / 1 apply: Flame Pass value | v5.3 · 2026-10-16 |
+| 000F0234-000F0243 | 4 | LFP2: text | v5.3 · 2026-10-16 |
+| 000F0374-000F037F | 3 | LFP: text | v5.3 · 2026-10-16 |
+| 000F0444-000F044B | 2 | LFP0: text | v5.3 · 2026-10-16 (approx.) |
+| 000F044C-000F0453 | 2 | LFP1: text | v5.3 · 2026-10-16 (approx.) |
 | 000FC040-000FC11F | 56 | FPT: Flame Tag touch passing (j at 0xFCD1C, the start of the host's touch check; delay slot harmless; s2 = who is on fire among the players there, s1 = how many flames there should be): more than that (a player not on fire left), one is put | v5.69 · 2026-10-23 |

@@ -23,12 +23,12 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 00471C5C / PAL 00471CFC | 0C0439FA | 0C03BC4A | jal 0x10e7e8 | jal 0xef128 | Hook: Select Team: the host's second press made for it (spawns once picked; delay slot kept) | v5.43 · 2026-10-19 |
-| 00500DD4 / PAL 00500E7C | 0C13D616 | 0C03A6C6 | jal 0x4f5858 | jal 0xe9b18 | Hook: jumps to LRDYSP: jal at 0x500DD4 in spawn point message(player) (was jal 0x4F5858 network host check; delay slot move s0,a0 kept). LAN host: other games' players get their spawn point (and so start their 3-2-1) only once the host has left | v5.3 · 2026-10-16 |
+| 00471C5C / PAL 00471CFC | 0C0439FA | 0C03BC97 | jal 0x10e7e8 | jal 0xef25c | Hook: Select Team: the host's second press made for it (spawns once picked; delay slot kept) | v5.43 · 2026-10-19 |
+| 00500DD4 / PAL 00500E7C | 0C13D616 | 0C03A6EF | jal 0x4f5858 | jal 0xe9bbc | Hook: jumps to LRDYSP: jal at 0x500DD4 in spawn point message(player) (was jal 0x4F5858 network host check; delay slot move s0,a0 kept). LAN host: other games' players get their spawn point (and so start their 3-2-1) only once the host has left | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E9B18-000E9BE7 | 52 | LRDYSP: jal at 0x500DD4 in spawn point message(player) (was jal 0x4F5858 network host check; delay slot move s0,a0 kept). LAN host: other games' players get their spawn point (and so start their 3-2-1) only once the host has left | v5.89 · 2026-10-27 |
-| 000EF128-000EF16F | 18 | HBTN: jal at 0x471C5C in Select Team (was jal 0x10E7E8, the pad's pressed buttons; delay slot lw a0,60(t5) kept; then bit 0x40 sets the step to 2, everyone picked and ready): on the LAN host it reads as pressed, so the host spawns as soon as | v5.76 · 2026-10-24 |
+| 000E9BBC-000E9C8B | 52 | LRDYSP: jal at 0x500DD4 in spawn point message(player) (was jal 0x4F5858 network host check; delay slot move s0,a0 kept). LAN host: other games' players get their spawn point (and so start their 3-2-1) only once the host has left | v5.89 · 2026-10-27 |
+| 000EF25C-000EF2A3 | 18 | HBTN: jal at 0x471C5C in Select Team (was jal 0x10E7E8, the pad's pressed buttons; delay slot lw a0,60(t5) kept; then bit 0x40 sets the step to 2, everyone picked and ready): on the LAN host it reads as pressed, so the host spawns as soon as | v5.76 · 2026-10-24 |

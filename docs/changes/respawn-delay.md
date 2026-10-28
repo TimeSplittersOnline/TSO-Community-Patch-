@@ -48,9 +48,9 @@
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E79F4-000E7B07 | 69 | RDGR: a0 = page, a1 = 1 Teamplay On: Respawn Delay greyed out with it On; the team Respawn Delays, Team Spawns and the colours greyed out with it Off, and Spawn Rule's Near Teammates becomes Default; then the team items' own rules (TGX) | v5.40 · 2026-10-19 |
-| 000E8758-000E884F | 62 | RDRA: a0 = page, a1 = 0 refresh / 1 apply: refresh greys the items out by the Teamplay setting, and makes Teamplay do it again as it is changed (RDCH) | v5.19 · 2026-10-17 |
-| 000E8A40-000E8B33 | 61 | PRDI: the items | v5.3 · 2026-10-16 |
-| 000EC0CC-000EC163 | 38 | PRDT: at a death (jal at 0x1CC768 in place of 'sh zero,5038(t6)', was jal rd3.py's RT1; t6 = player; leaves t7 = 0x650000): the respawn delay (PRDF). Also its end, as a gameframe (RDDF), for the host's hold of other games' players (PRDH): | v5.70 · 2026-10-23 |
-| 000EF170-000EF1B7 | 18 | RDCHV: Team VIP changefn (a0 = page, a1 = item): its options are Off (0) / On (1) | v5.3 · 2026-10-16 |
-| 000EF1B8-000EF1FF | 18 | RDCH: Teamplay changefn (a0 = page, a1 = item): its options are On (0) / Off (1) | v5.3 · 2026-10-16 |
+| 000E7A98-000E7BAB | 69 | RDGR: a0 = page, a1 = 1 Teamplay On: Respawn Delay greyed out with it On; the team Respawn Delays, Team Spawns and the colours greyed out with it Off, and Spawn Rule's Near Teammates becomes Default; then the team items' own rules (TGX) | v5.40 · 2026-10-19 |
+| 000E87FC-000E88F3 | 62 | RDRA: a0 = page, a1 = 0 refresh / 1 apply: refresh greys the items out by the Teamplay setting, and makes Teamplay do it again as it is changed (RDCH) | v5.19 · 2026-10-17 |
+| 000E8AE4-000E8BD7 | 61 | PRDI: the items | v5.3 · 2026-10-16 |
+| 000EC170-000EC207 | 38 | PRDT: at a death (jal at 0x1CC768 in place of 'sh zero,5038(t6)', was jal rd3.py's RT1; t6 = player; leaves t7 = 0x650000): the respawn delay (PRDF). Also its end, as a gameframe (RDDF), for the host's hold of other games' players (PRDH): | v5.70 · 2026-10-23 |
+| 000EF2A4-000EF2EB | 18 | RDCHV: Team VIP changefn (a0 = page, a1 = item): its options are Off (0) / On (1) | v5.3 · 2026-10-16 |
+| 000EF2EC-000EF333 | 18 | RDCH: Teamplay changefn (a0 = page, a1 = item): its options are On (0) / Off (1) | v5.3 · 2026-10-16 |

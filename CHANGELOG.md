@@ -2,6 +2,13 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.100 · 2026-10-28 · Spectate: with Teamplay, free cam only once your team is out
+
+*v5.100 · FreecamTeamOut* · Xbox, PS2 NTSC, PS2 PAL
+
+- Spectate (Elimination / Vampire) with Teamplay: free cam can't be turned on while anyone on your team is still in (alive, or waiting to respawn with lives left), so a player who is out can't scout the other teams for team-mates who are still playing. You can still watch your team-mates as before. Once your whole team is out, free cam works as before.
+- While free cam isn't available, the spectate button hints leave out "Freecam". If a team-mate is back in while you're in free cam (moved to your team, or a player joining), free cam ends and you go back to watching a team-mate. Turning free cam off always works. Without Teamplay nothing changes.
+
 ## v5.99 · 2026-10-28 · Bug fixes: team rows, kicks, Showdown setting, score rows, Temporal Uplink
 
 *v5.99 · BugFixRound599* · Xbox, PS2 NTSC, PS2 PAL

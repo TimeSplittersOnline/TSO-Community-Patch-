@@ -45,22 +45,22 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 004F9320 / PAL 004F93C8 | 05E30009 | 0803B3D5 | bgezl t7,0x4f9348 | j 0xecf54 | Hook: coin message: the host's Setbacks message for this game's own player (was bgezl t7,0x4F9348 / sw zero,25724(s0)) | v5.8 · 2026-10-16 |
+| 004F9320 / PAL 004F93C8 | 05E30009 | 0803B422 | bgezl t7,0x4f9348 | j 0xed088 | Hook: coin message: the host's Setbacks message for this game's own player (was bgezl t7,0x4F9348 / sw zero,25724(s0)) | v5.8 · 2026-10-16 |
 | 004F9324 / PAL 004F93CC | AE00647C | 00000000 | sw zero,25724(s0) | nop | Hook: coin message: the host's Setbacks message for this game's own player (was bgezl t7,0x4F9348 / sw zero,25724(s0)) | v5.8 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E6FB8-000E70EB | 77 | SBK: ---------------- Setbacks (Advanced Settings, Gun Game: Off / One Kill / One Weapon), decided by the host (offline: this game) A player killed unarmed (a melee hit, bullet type 0, by a killer holding the fists, gun id 1, or no gun: not a gun melee hit) or by themselves (own weapons, falls, anything that is not another chr) goes back: One Kill = one kill fewer (with none on this weapon: the previous weapon, one kill short of this one); One Weapon = the previous weapon with no kills on it (on the first weapon: its kills go). The level is the Gun Game score everyone sees, and the respawn hands out the level's weapon, so players without the patch get it too. Greyed out, and Off, with a Weapon Mode other than Gun Game. With 1 Kill To Advance One Kill is the same as One Weapon, so it is not offered: scrolling skips it, and a One Kill already chosen shows as One Weapon. Port of the Xbox version (gg.s XSB*). jal from GGK at add-kill routine' hook (s0 = killer chr or 0, s1 = the caller's s1: character death routine's damage info, s2 = victim id; add-kill routine' return address at 48 in its frame = 64(sp) here); uses t0-t9, v0, v1 | v5.13 · 2026-10-16 |
-| 000E8464-000E8563 | 64 | SBHUM: a0 = chr id: a player set back gets "Humiliation!" (centre text, as the multikill messages) and a laugh on their own screen: on this game when it is one of its own players; a LAN host sends another game's player's game message | v5.8 · 2026-10-16 |
-| 000EABF8-000EACAF | 46 | SBGR: a0 = page: Setbacks greyed out unless the page's Weapon Mode is Gun Game (option 1: the item is only there when it can be played); with Kills To Advance at 1 Kill (option 0) a One Kill choice becomes One Weapon | v5.3 · 2026-10-16 |
-| 000EACB0-000EAD63 | 45 | SBREF: a0 = page, a1 = 0 refresh / 1 apply (tail of GGKREF): Setbacks value; refresh also makes Kills To Advance grey it out with 1 Kill, and greys it now | v5.3 · 2026-10-16 |
-| 000ECF54-000ECFCF | 31 | SBRX: coin message arriving (j at 0x4F9320, was bgezl t7,0x4F9348 / sw zero,25724(s0); t7 = the player's local number, t3 its slot, a1 the pad): another game's player's coin as before; for this game's own player (which the game | v5.70 · 2026-10-23 |
-| 000EDB4C-000EDBB7 | 27 | SBCH: Setbacks changefn (a0 = page, a1 = item): with 1 Kill To Advance One Kill is skipped, on to One Weapon or back to Off, whichever way the player is scrolling | v5.3 · 2026-10-16 |
-| 000EFDD0-000EFDF3 | 9 | SNDLD: sound loader decision (j from 0x1123D8, was j mk.py's MKLD; a0 = sound id, t7 = table entry): always load the multikill jingle (3455) and the Setbacks laugh at level start | v5.8 · 2026-10-16 |
-| 000F015C-000F016B | 4 | LHUM: text | v5.8 · 2026-10-16 |
-| 000F02C0-000F02CB | 3 | LSB: text | v5.3 · 2026-10-16 (approx.) |
-| 000F02CC-000F02D7 | 3 | LSB1: text | v5.3 · 2026-10-16 (approx.) |
-| 000F02D8-000F02E3 | 3 | LSB2: text | v5.3 · 2026-10-16 |
-| 000F02EC-000F02F3 | 2 | SBKCH: Kills To Advance changefn (a0 = page, a1 = item) | v5.3 · 2026-10-16 (approx.) |
+| 000E705C-000E718F | 77 | SBK: ---------------- Setbacks (Advanced Settings, Gun Game: Off / One Kill / One Weapon), decided by the host (offline: this game) A player killed unarmed (a melee hit, bullet type 0, by a killer holding the fists, gun id 1, or no gun: not a gun melee hit) or by themselves (own weapons, falls, anything that is not another chr) goes back: One Kill = one kill fewer (with none on this weapon: the previous weapon, one kill short of this one); One Weapon = the previous weapon with no kills on it (on the first weapon: its kills go). The level is the Gun Game score everyone sees, and the respawn hands out the level's weapon, so players without the patch get it too. Greyed out, and Off, with a Weapon Mode other than Gun Game. With 1 Kill To Advance One Kill is the same as One Weapon, so it is not offered: scrolling skips it, and a One Kill already chosen shows as One Weapon. Port of the Xbox version (gg.s XSB*). jal from GGK at add-kill routine' hook (s0 = killer chr or 0, s1 = the caller's s1: character death routine's damage info, s2 = victim id; add-kill routine' return address at 48 in its frame = 64(sp) here); uses t0-t9, v0, v1 | v5.13 · 2026-10-16 |
+| 000E8508-000E8607 | 64 | SBHUM: a0 = chr id: a player set back gets "Humiliation!" (centre text, as the multikill messages) and a laugh on their own screen: on this game when it is one of its own players; a LAN host sends another game's player's game message | v5.8 · 2026-10-16 |
+| 000EAC9C-000EAD53 | 46 | SBGR: a0 = page: Setbacks greyed out unless the page's Weapon Mode is Gun Game (option 1: the item is only there when it can be played); with Kills To Advance at 1 Kill (option 0) a One Kill choice becomes One Weapon | v5.3 · 2026-10-16 |
+| 000EAD54-000EAE07 | 45 | SBREF: a0 = page, a1 = 0 refresh / 1 apply (tail of GGKREF): Setbacks value; refresh also makes Kills To Advance grey it out with 1 Kill, and greys it now | v5.3 · 2026-10-16 |
+| 000ED088-000ED103 | 31 | SBRX: coin message arriving (j at 0x4F9320, was bgezl t7,0x4F9348 / sw zero,25724(s0); t7 = the player's local number, t3 its slot, a1 the pad): another game's player's coin as before; for this game's own player (which the game | v5.70 · 2026-10-23 |
+| 000EDC80-000EDCEB | 27 | SBCH: Setbacks changefn (a0 = page, a1 = item): with 1 Kill To Advance One Kill is skipped, on to One Weapon or back to Off, whichever way the player is scrolling | v5.3 · 2026-10-16 |
+| 000EFF08-000EFF2B | 9 | SNDLD: sound loader decision (j from 0x1123D8, was j mk.py's MKLD; a0 = sound id, t7 = table entry): always load the multikill jingle (3455) and the Setbacks laugh at level start | v5.8 · 2026-10-16 |
+| 000F0294-000F02A3 | 4 | LHUM: text | v5.8 · 2026-10-16 |
+| 000F03F8-000F0403 | 3 | LSB: text | v5.3 · 2026-10-16 (approx.) |
+| 000F0404-000F040F | 3 | LSB1: text | v5.3 · 2026-10-16 (approx.) |
+| 000F0410-000F041B | 3 | LSB2: text | v5.3 · 2026-10-16 |
+| 000F0424-000F042B | 2 | SBKCH: Kills To Advance changefn (a0 = page, a1 = item) | v5.3 · 2026-10-16 (approx.) |

@@ -102,7 +102,7 @@ NTSC address first; the PAL address follows where it differs.
 | 0013EB24 | 260F8E50 | 3C100063 | addiu t7,s0,-29104 | lui s0,0x63 | LAN: hide the host's disabled colours from the Teams/Scores panel | v5.3 · 2026-10-16 |
 | 004F4A24 / PAL 004F4ACC | 0C13EA36 | 0C03F900 | jal 0x4fa8d8 | jal 0xfe400 | LAN host: check team picks received from other players (code at 0x000FE400): a disabled colour moves the player on to the next enabled colour in the direction they were scrolling, so on their Select Team screen the disabled colour is skipped | v5.15 · 2026-10-16 |
 | 00144CE0 | 1000FF0C | 0803ED80 | beq zero,zero,0x144914 | j 0xfb600 | Zones (and other 4-team modes): on maps without yellow/green spawn points (e.g. Vietnam), Yellow and Green get their own spawn areas on either side of the line between the red and blue spawns (host only on LAN) | v5.3 · 2026-10-16 |
-| 0043A334 | 0C054408 | 0C03B89A | jal 0x151020 | jal 0xee268 | Hook: match settings refresh, Friendly Fire: was jal 0x151020 (greyed out with Teamplay Off) | v5.3 · 2026-10-16 |
+| 0043A334 | 0C054408 | 0C03B8E7 | jal 0x151020 | jal 0xee39c | Hook: match settings refresh, Friendly Fire: was jal 0x151020 (greyed out with Teamplay Off) | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -114,10 +114,10 @@ NTSC address first; the PAL address follows where it differs.
 | 000FE400-000FE637 | 142 | LAN host: check team picks received from other players (code at 0x000FE400): a disabled colour moves the player on to the next enabled colour in the direction they were scrolling, so on their Select Team screen the disabled colour is skipped | v5.15 · 2026-10-16 |
 | 000FB600-000FB8F3 | 189 | Zones (and other 4-team modes): on maps without yellow/green spawn points (e.g. Vietnam), Yellow and Green get their own spawn areas on either side of the line between the red and blue spawns (host only on LAN) | v5.3 · 2026-10-16 |
 | 000FB974-000FB9D7 | 25 | Advanced Settings in Assault / Capture the Bag: Team Spawns hidden in Assault; Disable Red/Blue/Yellow/Green Team hidden in both (disabled colours are set aside while one of these modes is picked and come back for other modes) | v5.3 · 2026-10-16 |
-| 000E44E0-000E46BF | 120 | PTIC: item draw (a0 menu, a1 item, a2 rect: left, top, right, bottom pixels; v1 = colour 0-3): drawn before the item's text; nothing in a level | v5.18 · 2026-10-17 |
-| 000EE268-000EE2C7 | 24 | FFI: match settings refresh (jal at 0x43A334, was jal 0x151020 for Friendly Fire, a1 = 4): greyed out while the menu's mode has a Teamplay item and Teamplay is Off (the game greyed it by its own Teamplay item, not on this page now) | v5.3 · 2026-10-16 |
-| 000EEE28-000EEE77 | 20 | PTICR: adds the item, then its draw is PTICS + 8 * team | v5.3 · 2026-10-16 |
-| 000EFF0C-000EFF2B | 8 | PTICRS: team Respawn Delay items (jal at 0xFB204 / 0xFB214 / 0xFB238 / 0xFB248, was jal 0xFB100, the item adder (a0 label, a1 id 30-33)): v1 = team, then PTICR | v5.3 · 2026-10-16 |
-| 000EFF2C-000EFF4B | 8 | PTICS: the four item draws: v1 = colour, then PTIC | v5.3 · 2026-10-16 |
-| 000EFFB0-000EFFC7 | 6 | PTICADD: jal at 0xFD284 in the builder's colour loop (was jal 0x14E8F0, menu add routine; s3 = colour 0-3): the item's draw (t0) is PTICS + 8 * colour | v5.3 · 2026-10-16 |
-| 000F03A4-000F03A7 | 1 | LTSPC: text | v5.3 · 2026-10-16 (approx.) |
+| 000E470C-000E48EB | 120 | PTIC: item draw (a0 menu, a1 item, a2 rect: left, top, right, bottom pixels; v1 = colour 0-3): drawn before the item's text; nothing in a level | v5.18 · 2026-10-17 |
+| 000EE39C-000EE3FB | 24 | FFI: match settings refresh (jal at 0x43A334, was jal 0x151020 for Friendly Fire, a1 = 4): greyed out while the menu's mode has a Teamplay item and Teamplay is Off (the game greyed it by its own Teamplay item, not on this page now) | v5.3 · 2026-10-16 |
+| 000EEF5C-000EEFAB | 20 | PTICR: adds the item, then its draw is PTICS + 8 * team | v5.3 · 2026-10-16 |
+| 000F0044-000F0063 | 8 | PTICRS: team Respawn Delay items (jal at 0xFB204 / 0xFB214 / 0xFB238 / 0xFB248, was jal 0xFB100, the item adder (a0 label, a1 id 30-33)): v1 = team, then PTICR | v5.3 · 2026-10-16 |
+| 000F0064-000F0083 | 8 | PTICS: the four item draws: v1 = colour, then PTIC | v5.3 · 2026-10-16 |
+| 000F00E8-000F00FF | 6 | PTICADD: jal at 0xFD284 in the builder's colour loop (was jal 0x14E8F0, menu add routine; s3 = colour 0-3): the item's draw (t0) is PTICS + 8 * colour | v5.3 · 2026-10-16 |
+| 000F04DC-000F04DF | 1 | LTSPC: text | v5.3 · 2026-10-16 (approx.) |

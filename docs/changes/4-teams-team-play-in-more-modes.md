@@ -90,7 +90,7 @@ NTSC address first; the PAL address follows where it differs.
 | 0047501C / PAL 004750BC | 8DEE8E9C | 91ED8E9D | lw t6,-29028(t7) | lbu t5,-29027(t7) | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 00475020 / PAL 004750C0 | 35ADFF00 | 31CE0001 | ori t5,t5,0xff00 | andi t6,t6,0x1 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 00475024 / PAL 004750C4 | 3C0F0004 | 25ADFFF7 | lui t7,0x4 | addiu t5,t5,-9 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
-| 00475028 / PAL 004750C8 | 01CD7024 | 0803B7D5 | and t6,t6,t5 | j 0xedf54 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
+| 00475028 / PAL 004750C8 | 01CD7024 | 0803B822 | and t6,t6,t5 | j 0xee088 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 0047502C / PAL 004750CC | 35EF0900 | 00000000 | ori t7,t7,0x900 | nop | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 00475030 / PAL 004750D0 | 15CF002D | 00000000 | bne t6,t7,0x4750e8 | nop | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 0046E988 / PAL 0046EA28 | 3C1300FF | 3C130000 | lui s3,0xff | lui s3,0x0 | pause menu team items | v5.3 · 2026-10-16 |
