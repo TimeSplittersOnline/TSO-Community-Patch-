@@ -13,7 +13,7 @@ You need your own copy of the game. This repository contains no game files.
 ### Xbox (xemu or a modded console)
 The Xbox mod is shipped as a patch for your own game executable.
 1. Take `default.xbe` from your copy of the game **with the title update** (the patch only applies to that exact file: size 6,344,704 bytes, MD5 `d2fc3bed99456864a96fff179d5336d1`).
-2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) with any BPS patcher (Floating IPS, beat, or `python tools/make_bps.py apply default.xbe "TSO Community Patch.bps" "TSO Community Patch.xbe"`). The patcher refuses a different version of the file.
+2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) with any BPS patcher (Floating IPS, beat, etc).
 3. Use the patched XBE in place of the original (keep a backup of the original).
 
 ## Resources 
