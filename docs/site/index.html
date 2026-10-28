@@ -318,7 +318,7 @@ function ps2Body(it){
 }
 function renderList(){
   const L=filtered();
-  $('#count').textContent=L.length+' of '+items().length+' '+(S.p==='xbox'?'changes':'change groups')+(S.p==='xbox'?' in default_4team_zones.xbe compared with the original XBE':S.p==='ntsc'?' in SLUS-21148_FB2F4502.pnach compared with the retail SLUS_211.48':' in SLES-52993_E0F96C7D.pnach compared with the retail SLES_529.93');
+  $('#count').textContent=L.length+' of '+items().length+' '+(S.p==='xbox'?'changes':'change groups')+(S.p==='xbox'?' in the patched XBE compared with the original XBE':S.p==='ntsc'?' in SLUS-21148_FB2F4502.pnach compared with the retail SLUS_211.48':' in SLES-52993_E0F96C7D.pnach compared with the retail SLES_529.93');
   const show=L.slice(0,S.shown);
   $('#list').innerHTML=show.map((it,i)=>'<article class="card" data-open="0">'+head(it,i)+'<div class="body" hidden></div></article>').join('');
   $('#list')._items=show;

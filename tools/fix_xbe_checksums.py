@@ -1,5 +1,5 @@
 """Recompute every section's SHA-1 in an XBE's section headers (after editing bytes by hand), in place.
-Usage: python fix_xbe_checksums.py default_4team_zones.xbe"""
+Usage: python fix_xbe_checksums.py "TSO Community Patch.xbe""""
 import sys,struct,hashlib
 p=sys.argv[1]; d=bytearray(open(p,'rb').read())
 base=struct.unpack_from('<I',d,0x104)[0]; n,sh=struct.unpack_from('<II',d,0x11c); sh-=base; fixed=0
