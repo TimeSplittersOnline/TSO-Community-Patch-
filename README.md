@@ -1,11 +1,5 @@
 # TSO Community Patch
 
-A backwards compatible hook-based mod for TimeSplitters: Future Perfect online matches.
-
-For **Xbox** and **PS2 (NTSC and PAL)**: four teams in more modes, Gun Game, Showdown, King of the Hill, Team Lives, Spectate, Manage Players, an Advanced Settings page with many match options, and a long list of fixes. Current version: **v5.98** (2026-10-28).
-
-The host decides: when the host has the mod, its settings reach everyone through the game's normal messages, so players without the mod can still join and play a normal, fair match.
-
 ## Install
 
 You need your own copy of the game. This repository contains no game files.
