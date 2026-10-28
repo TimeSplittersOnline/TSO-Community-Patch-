@@ -16,12 +16,12 @@ The Xbox mod is shipped as a patch for your own game executable.
 2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) with any BPS patcher (Floating IPS, beat, or `python tools/make_bps.py apply default.xbe "TSO Community Patch.bps" "TSO Community Patch.xbe"`). The patcher refuses a different version of the file.
 3. Use the patched XBE in place of the original (keep a backup of the original).
 
-## What is documented here
+## Resources 
 
 - [CHANGELOG.md](CHANGELOG.md): every version, newest first, with the date and what changed.
 - [docs/versions](docs/versions/README.md): one page per version (v5.3 on) listing every change to the game's code and data compared with the build before it: what was there, what it became and why.
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, by feature, with the original and new bytes or instructions.
-- [docs/functions.md](docs/functions.md): the game routines and data the mod uses, with descriptive names, addresses on each platform and what each is for.
+- [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 - [docs/site](docs/site/index.html): the searchable change register as a web page (also published with GitHub Pages).
 
 The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and `TSO Community Patch.bps` for Xbox. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
