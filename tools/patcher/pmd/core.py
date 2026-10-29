@@ -179,6 +179,8 @@ def describe_xbe(data, what="This file"):
     if kind == "done":
         return True, "%s is already the TSO Community Patch %s." % (what, p.version)
     if kind == "input":
+        if e["name"].startswith("TSO Community Patch"):
+            return True, "Found: %s. Ready to update it to %s." % (e["name"], p.version)
         return True, "Found: %s. Ready to make the TSO Community Patch %s." % (e["name"], p.version)
     if kind == "known":
         text = "Found: %s. %s" % (e["name"], e["why"])
@@ -204,10 +206,20 @@ def takes_disc_xbe():
         return True
 
 
+def takes_old_builds():
+    """True when the shipped patch data can update earlier TSO Community Patch builds."""
+    try:
+        return any(i["name"].startswith("TSO Community Patch") for i in tso_patch().inputs.values())
+    except tsopatch.PatchError:
+        return False
+
+
 def source_hint():
     if takes_disc_xbe():
-        return "From the USA or Europe disc, or the title update (TDATA\\45410066\\$u\\default.xbe)."
-    return "The title update's default.xbe (TDATA\\45410066\\$u\\default.xbe)."
+        text = "From the USA or Europe disc, or the title update (TDATA\\45410066\\$u\\default.xbe)"
+    else:
+        text = "The title update's default.xbe (TDATA\\45410066\\$u\\default.xbe)"
+    return text + (", or an older TSO Community Patch XBE (v5.3 on)." if takes_old_builds() else ".")
 
 
 def pick_hint():
