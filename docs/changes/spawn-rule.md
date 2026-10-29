@@ -57,9 +57,9 @@ NTSC address first; the PAL address follows where it differs.
 | 000EE71C-000EE777 | 23 | SRCH: Spawn Rule changefn (a0 = page, a1 = item): with the page's Teamplay item Off (Gladiator: Team VIP Off), Near Teammates is skipped (on to Default, or back to Away From Enemies) | v5.3 · 2026-10-16 |
 | 000EECA4-000EECF7 | 21 | SRON: v0 = Spawn Rule when it applies to the match being played (SRV; not Assault / Escort; Near Teammates only in team games), else 0; uses t5-t9 | v5.3 · 2026-10-16 |
 | 000EFA38-000EFA6F | 14 | SRRS: jal at 0x4FCAE0 (was jal spawn point message; a0 = the player, delay slot kept): the host's resend of a dead LAN player's spawn point every 1.5 seconds: picked again first (SRAG); then sent as before, unless that sent it | v5.64 · 2026-10-22 |
-| 000EFCE8-000EFD17 | 12 | SRTEAM: leaf: v0 = 1 if the menu's mode can have teams (mode table team game, or Gladiator: Team VIP); uses t6,t7 | v5.3 · 2026-10-16 |
-| 000F0198-000F01AB | 5 | LSR1: text | v5.3 · 2026-10-16 |
-| 000F0210-000F021F | 4 | SRITEM: Spawn Settings page tail (j at 0xFBDE4, frame open, ra at 0(sp); was j 0xFB180 = Respawn Delay items; not used now): Spawn Rule, then the Respawn Delay items | v5.3 · 2026-10-16 (approx.) |
-| 000F02B0-000F02BF | 4 | LSR2: text | v5.3 · 2026-10-16 |
-| 000F03B0-000F03BB | 3 | LSR: text | v5.3 · 2026-10-16 |
-| 000F04C0-000F04C7 | 2 | LSR0: text | v5.3 · 2026-10-16 (approx.) |
+| 000EFD1C-000EFD4B | 12 | SRTEAM: leaf: v0 = 1 if the menu's mode can have teams (mode table team game, or Gladiator: Team VIP); uses t6,t7 | v5.3 · 2026-10-16 |
+| 000F01D0-000F01E3 | 5 | LSR1: text | v5.3 · 2026-10-16 |
+| 000F0248-000F0257 | 4 | SRITEM: Spawn Settings page tail (j at 0xFBDE4, frame open, ra at 0(sp); was j 0xFB180 = Respawn Delay items; not used now): Spawn Rule, then the Respawn Delay items | v5.3 · 2026-10-16 (approx.) |
+| 000F02E8-000F02F7 | 4 | LSR2: text | v5.3 · 2026-10-16 |
+| 000F03E8-000F03F3 | 3 | LSR: text | v5.3 · 2026-10-16 |
+| 000F04F8-000F04FF | 2 | LSR0: text | v5.3 · 2026-10-16 (approx.) |

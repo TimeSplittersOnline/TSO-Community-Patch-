@@ -42,15 +42,15 @@ NTSC address first; the PAL address follows where it differs.
 | 000EBE04-000EBE9F | 39 | TBITEM: Assault menu: Time Bonus After Phase (Off, 1 Min, 2 Mins, 3 Mins) | v5.20 · 2026-10-17 |
 | 000ED2B4-000ED32F | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
 | 000EEE9C-000EEEEF | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
-| 000F016C-000F0183 | 6 | LTB: text | v5.20 · 2026-10-17 |
-| 000F01AC-000F01BF | 5 | LAS: text | v5.11 · 2026-10-16 |
-| 000F04F0-000F04F7 | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
-| 000F04F8-000F04FF | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0500-000F0507 | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0508-000F050F | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0510-000F0517 | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0518-000F051F | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0520-000F0527 | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0528-000F052F | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0530-000F0537 | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0538-000F053F | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |
+| 000F01A4-000F01BB | 6 | LTB: text | v5.20 · 2026-10-17 |
+| 000F01E4-000F01F7 | 5 | LAS: text | v5.11 · 2026-10-16 |
+| 000F0528-000F052F | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0530-000F0537 | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0538-000F053F | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0540-000F0547 | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0548-000F054F | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0550-000F0557 | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0558-000F055F | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0560-000F0567 | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0568-000F056F | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0570-000F0577 | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |

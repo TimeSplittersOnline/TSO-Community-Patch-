@@ -47,5 +47,5 @@ NTSC address first; the PAL address follows where it differs.
 | 000ED85C-000ED8CF | 29 | OTRA: a0 = page, a1 = 0 refresh / 1 apply: Overtime value; refresh greys it out with no time limit (time never runs out) | v5.19 · 2026-10-17 |
 | 000EF120-000EF16B | 19 | OTRST: leaf: a new match clears the overtime state; uses t8,t9,v1 | v5.16 · 2026-10-17 |
 | 000EF738-000EF777 | 16 | OTBAG: leaf: v0 = 1 when any active chr is carrying a bag (character record +128); uses t7-t9 | v5.3 · 2026-10-16 |
-| 000F03F8-000F0403 | 3 | LOTI: text | v5.3 · 2026-10-16 (approx.) |
-| 000F0434-000F043F | 3 | LOT: text | v5.3 · 2026-10-16 |
+| 000F0430-000F043B | 3 | LOTI: text | v5.3 · 2026-10-16 (approx.) |
+| 000F046C-000F0477 | 3 | LOT: text | v5.3 · 2026-10-16 |

@@ -57,7 +57,7 @@ NTSC address first; the PAL address follows where it differs.
 | 000EE7D4-000EE82F | 23 | CUSC: j at 0x13A6F0, add-points routine (a0 = character record, a1 = points; its delay slot lui t6,0x63 done): Catch-Up doubles points for the last-placed player (team games: the last-placed team) | v5.3 · 2026-10-16 |
 | 000EEDF4-000EEE47 | 21 | CURST: leaf: a new match (gameframe went back into the first 20 seconds) clears the Catch-Up kills; uses t8,t9,v0,v1 | v5.16 · 2026-10-17 |
 | 000EEE48-000EEE9B | 21 | CUGG: a0 = page, a1 = 0 refresh / 1 apply (after CURA): refresh greys Catch-Up out while Gun Game is chosen (CUGR) | v5.3 · 2026-10-16 |
-| 000F0310-000F031F | 4 | LCUW: text | v5.3 · 2026-10-16 |
-| 000F03EC-000F03F7 | 3 | LCU: text | v5.3 · 2026-10-16 (approx.) |
-| 000F0440-000F044B | 3 | LCUA: text | v5.3 · 2026-10-16 |
-| 000F044C-000F0457 | 3 | LCUL: text | v5.3 · 2026-10-16 |
+| 000F0348-000F0357 | 4 | LCUW: text | v5.3 · 2026-10-16 |
+| 000F0424-000F042F | 3 | LCU: text | v5.3 · 2026-10-16 (approx.) |
+| 000F0478-000F0483 | 3 | LCUA: text | v5.3 · 2026-10-16 |
+| 000F0484-000F048F | 3 | LCUL: text | v5.3 · 2026-10-16 |

@@ -2,6 +2,14 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.103 · 2026-10-29 · LAN: the Temporal Uplink is taken out of the weapon set the host sends, so MapMaker maps don't get it either
+
+*v5.103 · UplinkLanSet* · Xbox, PS2 NTSC, PS2 PAL
+
+- Since v5.102 the Temporal Uplink can be in weapon sets again offline, so a custom set saved with it could be used to host a LAN game. The match's own list already left it out, but MapMaker maps take their guns straight from the host's weapon set, so their Uplink spots could still appear on LAN, where the Uplink crashes the game.
+- A patched host now takes the Uplink out of the weapon set it sends to everyone (and keeps for itself). Every console, with or without the patch, then builds the map from the same set and leaves out the same gun spots, so the map stays in step. Offline nothing changes.
+- Xbox, MapMaker maps on LAN: a host with a custom weapon set saved built the map's guns from its own copy of that set, while its clients use the set it sent (unlike PS2, the Xbox game already does that for clients). Both held the same guns until now; with the Uplink taken out of the sent set they could differ, so on LAN the Xbox host now also uses the set it sent, as PS2 does since v5.102.
+
 ## v5.102 · 2026-10-29 · PS2 MapMaker maps on LAN: weapons, zones and bags in step with the host; Temporal Uplink back offline
 
 *v5.102 · MapMakerLanWeapons* · Xbox, PS2 NTSC, PS2 PAL

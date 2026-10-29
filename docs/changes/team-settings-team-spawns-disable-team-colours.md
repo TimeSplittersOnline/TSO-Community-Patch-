@@ -117,7 +117,7 @@ NTSC address first; the PAL address follows where it differs.
 | 000E470C-000E48EB | 120 | PTIC: item draw (a0 menu, a1 item, a2 rect: left, top, right, bottom pixels; v1 = colour 0-3): drawn before the item's text; nothing in a level | v5.18 · 2026-10-17 |
 | 000EE3D8-000EE437 | 24 | FFI: match settings refresh (jal at 0x43A334, was jal 0x151020 for Friendly Fire, a1 = 4): greyed out while the menu's mode has a Teamplay item and Teamplay is Off (the game greyed it by its own Teamplay item, not on this page now) | v5.3 · 2026-10-16 |
 | 000EEF98-000EEFE7 | 20 | PTICR: adds the item, then its draw is PTICS + 8 * team | v5.3 · 2026-10-16 |
-| 000F00B0-000F00CF | 8 | PTICRS: team Respawn Delay items (jal at 0xFB204 / 0xFB214 / 0xFB238 / 0xFB248, was jal 0xFB100, the item adder (a0 label, a1 id 30-33)): v1 = team, then PTICR | v5.3 · 2026-10-16 |
-| 000F00D0-000F00EF | 8 | PTICS: the four item draws: v1 = colour, then PTIC | v5.3 · 2026-10-16 |
-| 000F0154-000F016B | 6 | PTICADD: jal at 0xFD284 in the builder's colour loop (was jal 0x14E8F0, menu add routine; s3 = colour 0-3): the item's draw (t0) is PTICS + 8 * colour | v5.3 · 2026-10-16 |
-| 000F0548-000F054B | 1 | LTSPC: text | v5.3 · 2026-10-16 (approx.) |
+| 000F00E8-000F0107 | 8 | PTICRS: team Respawn Delay items (jal at 0xFB204 / 0xFB214 / 0xFB238 / 0xFB248, was jal 0xFB100, the item adder (a0 label, a1 id 30-33)): v1 = team, then PTICR | v5.3 · 2026-10-16 |
+| 000F0108-000F0127 | 8 | PTICS: the four item draws: v1 = colour, then PTIC | v5.3 · 2026-10-16 |
+| 000F018C-000F01A3 | 6 | PTICADD: jal at 0xFD284 in the builder's colour loop (was jal 0x14E8F0, menu add routine; s3 = colour 0-3): the item's draw (t0) is PTICS + 8 * colour | v5.3 · 2026-10-16 |
+| 000F0580-000F0583 | 1 | LTSPC: text | v5.3 · 2026-10-16 (approx.) |

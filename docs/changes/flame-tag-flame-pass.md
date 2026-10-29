@@ -22,8 +22,8 @@
 | 000EAEEC-000EAF9F | 45 | FPK: kills (INFK's exit, then j 0xFF370 multikill; s0 = killer data or 0, s1 = victim data): Flame Pass Kill / Touch Or Kill: a burning player who kills a player not on fire passes the flame to them | v5.3 · 2026-10-16 |
 | 000EC2D0-000EC367 | 38 | FPITEM: Flame Tag menu, LAN only: Flame Pass | v5.3 · 2026-10-16 |
 | 000EEDA0-000EEDF3 | 21 | FPRA: a0 = page, a1 = 0 refresh / 1 apply: Flame Pass value | v5.3 · 2026-10-16 |
-| 000F02A0-000F02AF | 4 | LFP2: text | v5.3 · 2026-10-16 |
-| 000F03E0-000F03EB | 3 | LFP: text | v5.3 · 2026-10-16 |
-| 000F04B0-000F04B7 | 2 | LFP0: text | v5.3 · 2026-10-16 (approx.) |
-| 000F04B8-000F04BF | 2 | LFP1: text | v5.3 · 2026-10-16 (approx.) |
+| 000F02D8-000F02E7 | 4 | LFP2: text | v5.3 · 2026-10-16 |
+| 000F0418-000F0423 | 3 | LFP: text | v5.3 · 2026-10-16 |
+| 000F04E8-000F04EF | 2 | LFP0: text | v5.3 · 2026-10-16 (approx.) |
+| 000F04F0-000F04F7 | 2 | LFP1: text | v5.3 · 2026-10-16 (approx.) |
 | 000FC040-000FC11F | 56 | FPT: Flame Tag touch passing (j at 0xFCD1C, the start of the host's touch check; delay slot harmless; s2 = who is on fire among the players there, s1 = how many flames there should be): more than that (a player not on fire left), one is put | v5.69 · 2026-10-23 |
