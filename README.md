@@ -15,19 +15,17 @@ The easiest way is the **TSO Community Patcher** (Windows), on the [latest relea
 1. Download `TSO Community Patcher.exe` from the [latest release](https://github.com/TimeSplittersOnline/TSO-Community-Patch-/releases/latest).
 2. Close xemu and run the patcher. You only need it once: each time it starts it checks for a newer TSO version and asks before switching to it (or press **Check for updates**).
 3. In step 1, pick your disc image (.iso), or a `default.xbe` file. Either works with or without the title update, USA or Europe: the disc's own `default.xbe`, or the title update's `TDATA\45410066\$u\default.xbe`. An older TSO Community Patch XBE (v5.3 on), or a disc image with one in it, is updated to the current build.
-4. Press **Apply patch**. A disc image is patched in place; a default.xbe file is saved as a new patched XBE for xemu or an Xbox hard drive. **Restore original ISO/XBE** undoes a patched disc image.
+4. Press **Apply patch**. A disc image is patched in place; a default.xbe file is saved as a new patched XBE for xemu or an Xbox hard drive. **Restore original ISO/XBE** reverts the file back to the original version without the patch.
 
-The patcher checks your file is a copy of the game it knows and that the result is byte for byte the current build; anything else is refused. Its source is in [`tools/patcher`](tools/patcher).
-
-Or by hand, with a BPS patcher:
+If you would rather not use the TSO Community Patcher, you can use a variety of alternative BPS patchers:
 1. Take `default.xbe` from your copy of the game **with the title update**.
 2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) with any BPS patcher (Floating IPS, beat, etc).
 3. Use the patched XBE in place of the original.
 
 ## Resources 
 
-- [CHANGELOG.md](CHANGELOG.md): every version, newest first, with the date and what changed.
-- [docs/versions](docs/versions/README.md): one page per version (v5.3 on) listing every change to the game's code and data compared with the build before it: what was there, what it became and why.
+- [CHANGELOG.md](CHANGELOG.md): every version, newest first, with the date and what changes were made.
+- [docs/versions](docs/versions/README.md): one page per version (v5.3 on) listing every change to the game's code and data compared with the build before it.
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
