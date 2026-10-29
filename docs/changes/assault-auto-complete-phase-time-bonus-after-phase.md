@@ -38,19 +38,19 @@ NTSC address first; the PAL address follows where it differs.
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000E35B4-000E37DF | 139 | ASK: timer is for + 1 (0 none: RAM starts at 0), the match clock / gameframe when it started, gameframe last seen jal at 0x3772FC (objectives update's Assault tick, was jal 0x384D20): the skip check and the time bonus, then the tick (same args) | v5.89 · 2026-10-27 |
-| 000E7E64-000E7F6F | 67 | ASITEM: Assault menu: Auto-Complete Phase (Off, 1 Min .. 10 Mins, as the game's own times) | v5.11 · 2026-10-16 |
-| 000EBE94-000EBF2F | 39 | TBITEM: Assault menu: Time Bonus After Phase (Off, 1 Min, 2 Mins, 3 Mins) | v5.20 · 2026-10-17 |
-| 000ED344-000ED3BF | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
-| 000EEF2C-000EEF7F | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
-| 000F0234-000F024B | 6 | LTB: text | v5.20 · 2026-10-17 |
-| 000F0274-000F0287 | 5 | LAS: text | v5.11 · 2026-10-16 |
-| 000F05B8-000F05BF | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05C0-000F05C7 | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05C8-000F05CF | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05D0-000F05D7 | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05D8-000F05DF | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05E0-000F05E7 | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05E8-000F05EF | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05F0-000F05F7 | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
-| 000F05F8-000F05FF | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0600-000F0607 | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |
+| 000E7E70-000E7F7B | 67 | ASITEM: Assault menu: Auto-Complete Phase (Off, 1 Min .. 10 Mins, as the game's own times) | v5.11 · 2026-10-16 |
+| 000EBEA0-000EBF3B | 39 | TBITEM: Assault menu: Time Bonus After Phase (Off, 1 Min, 2 Mins, 3 Mins) | v5.20 · 2026-10-17 |
+| 000ED350-000ED3CB | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
+| 000EEF38-000EEF8B | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
+| 000F023C-000F0253 | 6 | LTB: text | v5.20 · 2026-10-17 |
+| 000F027C-000F028F | 5 | LAS: text | v5.11 · 2026-10-16 |
+| 000F05C0-000F05C7 | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05C8-000F05CF | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05D0-000F05D7 | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05D8-000F05DF | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05E0-000F05E7 | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05E8-000F05EF | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05F0-000F05F7 | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
+| 000F05F8-000F05FF | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0600-000F0607 | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0608-000F060F | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |

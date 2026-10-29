@@ -37,8 +37,8 @@ NTSC address first; the PAL address follows where it differs.
 | 00475418 / PAL 004754B8 | 3C0F0075 | 0040282D | lui t7,0x75 | daddu a1,v0,zero | team Bag Tag: team scores on the scoreboard shown as times | v5.3 · 2026-10-16 |
 | 0047541C / PAL 004754BC | 0040302D | 00000000 | daddu a2,v0,zero | nop | team Bag Tag: team scores on the scoreboard shown as times | v5.3 · 2026-10-16 |
 | 00475420 / PAL 004754C0 | 25E5F3D0 | 00000000 | addiu a1,t7,-3120 | nop | team Bag Tag: team scores on the scoreboard shown as times | v5.3 · 2026-10-16 |
-| 00475424 / PAL 004754C4 | 0C176686 | 0C039B4C | jal 0x5d9a18 | jal 0xe6d30 | team Bag Tag: team scores on the scoreboard shown as times | v5.3 · 2026-10-16 |
-| 001CC768 | A5C013AE | 0C03B08C | sh zero,5038(t6) | jal 0xec230 | Respawn Delay (Advanced Settings, Off/1-5 Seconds): Bag Tag, Elimination, Flame Tag, Virus, Monkey Assistant have one delay; Capture the Bag (Red/Blue), Zones (Red/Blue/Yellow/Green) and Assault (Attacker/Defender) have one per team. Host-only for LAN: the host holds back the spawn point until the delay is over | v5.3 · 2026-10-16 |
+| 00475424 / PAL 004754C4 | 0C176686 | 0C039B4F | jal 0x5d9a18 | jal 0xe6d3c | team Bag Tag: team scores on the scoreboard shown as times | v5.3 · 2026-10-16 |
+| 001CC768 | A5C013AE | 0C03B08F | sh zero,5038(t6) | jal 0xec23c | Respawn Delay (Advanced Settings, Off/1-5 Seconds): Bag Tag, Elimination, Flame Tag, Virus, Monkey Assistant have one delay; Capture the Bag (Red/Blue), Zones (Red/Blue/Yellow/Green) and Assault (Attacker/Defender) have one per team. Host-only for LAN: the host holds back the spawn point until the delay is over | v5.3 · 2026-10-16 |
 | 001CC7E0 | 0C0730A8 | 0C03ED58 | jal 0x1cc2a0 | jal 0xfb560 | Respawn Delay (Advanced Settings, Off/1-5 Seconds): Bag Tag, Elimination, Flame Tag, Virus, Monkey Assistant have one delay; Capture the Bag (Red/Blue), Zones (Red/Blue/Yellow/Green) and Assault (Attacker/Defender) have one per team. Host-only for LAN: the host holds back the spawn point until the delay is over | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)

@@ -37,27 +37,27 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013A208 | 27BDFFF0 | 0803BA02 | addiu sp,sp,-16 | j 0xee808 | Hook: team score add routine: was addiu sp,sp,-16 (Catch-Up; delay slot lui t7,0x63 kept) | v5.3 · 2026-10-16 |
-| 0013A6F0 | 27BDFFE0 | 0803BA19 | addiu sp,sp,-32 | j 0xee864 | Hook: add-points routine: was addiu sp,sp,-32 (Catch-Up; delay slot lui t6,0x63 kept) | v5.3 · 2026-10-16 |
-| 0013A774 | 0804E882 | 0803BA16 | j 0x13a208 | j 0xee858 | Hook: add-points routine's tail call to team score add routine: was j 0x13A208 (points already doubled there) | v5.3 · 2026-10-16 |
+| 0013A208 | 27BDFFF0 | 0803BA05 | addiu sp,sp,-16 | j 0xee814 | Hook: team score add routine: was addiu sp,sp,-16 (Catch-Up; delay slot lui t7,0x63 kept) | v5.3 · 2026-10-16 |
+| 0013A6F0 | 27BDFFE0 | 0803BA1C | addiu sp,sp,-32 | j 0xee870 | Hook: add-points routine: was addiu sp,sp,-32 (Catch-Up; delay slot lui t6,0x63 kept) | v5.3 · 2026-10-16 |
+| 0013A774 | 0804E882 | 0803BA19 | j 0x13a208 | j 0xee864 | Hook: add-points routine's tail call to team score add routine: was j 0x13A208 (points already doubled there) | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E8184-000E828B | 66 | CUEN: leaf: v0 = Catch-Up setting (bit 0 On, bit 1 Last Minute) when it applies to the match being played (offline / LAN host, its modes), else 0; uses t8,t9 | v5.89 · 2026-10-27 |
-| 000E8E54-000E8F47 | 61 | CURA: a0 = page, a1 = 0 refresh / 1 apply: Catch-Up and Catch-Up Period for the menu's mode; Catch-Up Period is greyed out while Catch-Up is Off | v5.3 · 2026-10-16 |
-| 000E95B4-000E9693 | 56 | CUITEM: Advanced page: Catch-Up, Catch-Up Period (its modes) | v5.3 · 2026-10-16 |
-| 000EB198-000EB247 | 44 | CUDOG: leaf (a0 = character record, or 0 and a1 = team): v0 = 1 if that player / team is in last place: its ranking score is the lowest of the ranked characters (monkey assistants left out) and below the highest; uses t0-t9 | v5.3 · 2026-10-16 |
-| 000EC5B4-000EC647 | 37 | CUK: kills (FPK's exit, then j 0xFF370 multikill; s0 = killer data or 0, s1 = victim data): in the kill-scored modes a kill by the last-placed player (team games: team) counts 2 (the team's extra point goes through team score add routine) | v5.3 · 2026-10-16 |
-| 000EC9AC-000ECA37 | 35 | CUGR: a0 = page, a1 = 1 when Gun Game is chosen for the menu's mode: Catch-Up greyed out with Gun Game, Catch-Up Period greyed out with Gun Game, while Catch-Up is Off, or with no time limit (Catch-Up then runs all match) | v5.19 · 2026-10-17 |
-| 000ECFDC-000ED05B | 32 | CUNOW: v0 = 1 when Catch-Up is active right now (CUEN; Last Minute: the time limit has 60 seconds or less left, Overtime holds the match after its time ran out, or all match when there is no time limit); uses t7-t9 | v5.19 · 2026-10-17 |
-| 000EE4C8-000EE527 | 24 | CUCH: Catch-Up changefn (a0 = page, a1 = item): Catch-Up Period only selectable with Catch-Up On | v5.19 · 2026-10-17 |
-| 000EE808-000EE863 | 23 | CUTA: j at 0x13A208, team score add routine (a0 = team, a1 = points; its delay slot lui t7,0x63 done): Catch-Up doubles points for the last-placed team. CUTAR: the plain entry, for add-points routine's tail call (it has doubled them already) | v5.3 · 2026-10-16 |
-| 000EE864-000EE8BF | 23 | CUSC: j at 0x13A6F0, add-points routine (a0 = character record, a1 = points; its delay slot lui t6,0x63 done): Catch-Up doubles points for the last-placed player (team games: the last-placed team) | v5.3 · 2026-10-16 |
-| 000EEE84-000EEED7 | 21 | CURST: leaf: a new match (gameframe went back into the first 20 seconds) clears the Catch-Up kills; uses t8,t9,v0,v1 | v5.16 · 2026-10-17 |
-| 000EEED8-000EEF2B | 21 | CUGG: a0 = page, a1 = 0 refresh / 1 apply (after CURA): refresh greys Catch-Up out while Gun Game is chosen (CUGR) | v5.3 · 2026-10-16 |
-| 000F03D8-000F03E7 | 4 | LCUW: text | v5.3 · 2026-10-16 |
-| 000F04B4-000F04BF | 3 | LCU: text | v5.3 · 2026-10-16 (approx.) |
-| 000F0508-000F0513 | 3 | LCUA: text | v5.3 · 2026-10-16 |
-| 000F0514-000F051F | 3 | LCUL: text | v5.3 · 2026-10-16 |
+| 000E8190-000E8297 | 66 | CUEN: leaf: v0 = Catch-Up setting (bit 0 On, bit 1 Last Minute) when it applies to the match being played (offline / LAN host, its modes), else 0; uses t8,t9 | v5.89 · 2026-10-27 |
+| 000E8E60-000E8F53 | 61 | CURA: a0 = page, a1 = 0 refresh / 1 apply: Catch-Up and Catch-Up Period for the menu's mode; Catch-Up Period is greyed out while Catch-Up is Off | v5.3 · 2026-10-16 |
+| 000E95C0-000E969F | 56 | CUITEM: Advanced page: Catch-Up, Catch-Up Period (its modes) | v5.3 · 2026-10-16 |
+| 000EB1A4-000EB253 | 44 | CUDOG: leaf (a0 = character record, or 0 and a1 = team): v0 = 1 if that player / team is in last place: its ranking score is the lowest of the ranked characters (monkey assistants left out) and below the highest; uses t0-t9 | v5.3 · 2026-10-16 |
+| 000EC5C0-000EC653 | 37 | CUK: kills (FPK's exit, then j 0xFF370 multikill; s0 = killer data or 0, s1 = victim data): in the kill-scored modes a kill by the last-placed player (team games: team) counts 2 (the team's extra point goes through team score add routine) | v5.3 · 2026-10-16 |
+| 000EC9B8-000ECA43 | 35 | CUGR: a0 = page, a1 = 1 when Gun Game is chosen for the menu's mode: Catch-Up greyed out with Gun Game, Catch-Up Period greyed out with Gun Game, while Catch-Up is Off, or with no time limit (Catch-Up then runs all match) | v5.19 · 2026-10-17 |
+| 000ECFE8-000ED067 | 32 | CUNOW: v0 = 1 when Catch-Up is active right now (CUEN; Last Minute: the time limit has 60 seconds or less left, Overtime holds the match after its time ran out, or all match when there is no time limit); uses t7-t9 | v5.19 · 2026-10-17 |
+| 000EE4D4-000EE533 | 24 | CUCH: Catch-Up changefn (a0 = page, a1 = item): Catch-Up Period only selectable with Catch-Up On | v5.19 · 2026-10-17 |
+| 000EE814-000EE86F | 23 | CUTA: j at 0x13A208, team score add routine (a0 = team, a1 = points; its delay slot lui t7,0x63 done): Catch-Up doubles points for the last-placed team. CUTAR: the plain entry, for add-points routine's tail call (it has doubled them already) | v5.3 · 2026-10-16 |
+| 000EE870-000EE8CB | 23 | CUSC: j at 0x13A6F0, add-points routine (a0 = character record, a1 = points; its delay slot lui t6,0x63 done): Catch-Up doubles points for the last-placed player (team games: the last-placed team) | v5.3 · 2026-10-16 |
+| 000EEE90-000EEEE3 | 21 | CURST: leaf: a new match (gameframe went back into the first 20 seconds) clears the Catch-Up kills; uses t8,t9,v0,v1 | v5.16 · 2026-10-17 |
+| 000EEEE4-000EEF37 | 21 | CUGG: a0 = page, a1 = 0 refresh / 1 apply (after CURA): refresh greys Catch-Up out while Gun Game is chosen (CUGR) | v5.3 · 2026-10-16 |
+| 000F03E0-000F03EF | 4 | LCUW: text | v5.3 · 2026-10-16 |
+| 000F04BC-000F04C7 | 3 | LCU: text | v5.3 · 2026-10-16 (approx.) |
+| 000F0510-000F051B | 3 | LCUA: text | v5.3 · 2026-10-16 |
+| 000F051C-000F0527 | 3 | LCUL: text | v5.3 · 2026-10-16 |

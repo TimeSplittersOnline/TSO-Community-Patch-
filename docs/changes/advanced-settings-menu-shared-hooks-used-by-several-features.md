@@ -95,16 +95,16 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|
 | 000FD010-000FDF9F | 592 | new code, page descriptor, label text and settings in free low memory (0x000FD000-0x000FDFA0) | v5.70 · 2026-10-23 |
 | 000FDC80-000FDCD7 | 22 | "Advanced Settings" page: same layout as the match settings page (title line + match settings text style) at 0x000FDC80 | v5.3 · 2026-10-16 |
-| 000EE348-000EE3A7 | 24 | NCFL: j at 0xFCC5C in the flame function (was lui t0,0x10 / lbu s1,-12512(t0): Number of Flames, 0 = one): custom arcade and LAN only, else one; then on at 0xFCC64 | v5.89 · 2026-10-27 |
-| 000EE3A8-000EE407 | 24 | NCZI: j at 0xFBBD0, the zone interval's start (was lui t9,0x10 / lbu t8,-16552(t9): Zone Scoring Interval, 0 = 15 s): custom arcade and LAN only, else the default; then on at 0xFBBD8 | v5.89 · 2026-10-27 |
-| 000EEA24-000EEA7B | 22 | NCZE: jal at 0x13E578 (time up, was jal 0xFB9E0: ze.py, Zones scores the held zones once more, then 0x13C8B8 with a0 = 0, set in the delay slot): custom arcade and LAN only; else straight to 0x13C8B8 | v5.95 · 2026-10-27 |
-| 000EEA7C-000EEAD3 | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
-| 000EF8F8-000EF933 | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EF934-000EF96F | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EFC7C-000EFCAF | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
-| 000EFE10-000EFE3F | 12 | GGCT: text | v5.15 · 2026-10-16 |
-| 000F0348-000F0357 | 4 | LWWA: text | v5.3 · 2026-10-16 |
-| 000F0560-000F0567 | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
+| 000EE354-000EE3B3 | 24 | NCFL: j at 0xFCC5C in the flame function (was lui t0,0x10 / lbu s1,-12512(t0): Number of Flames, 0 = one): custom arcade and LAN only, else one; then on at 0xFCC64 | v5.89 · 2026-10-27 |
+| 000EE3B4-000EE413 | 24 | NCZI: j at 0xFBBD0, the zone interval's start (was lui t9,0x10 / lbu t8,-16552(t9): Zone Scoring Interval, 0 = 15 s): custom arcade and LAN only, else the default; then on at 0xFBBD8 | v5.89 · 2026-10-27 |
+| 000EEA30-000EEA87 | 22 | NCZE: jal at 0x13E578 (time up, was jal 0xFB9E0: ze.py, Zones scores the held zones once more, then 0x13C8B8 with a0 = 0, set in the delay slot): custom arcade and LAN only; else straight to 0x13C8B8 | v5.95 · 2026-10-27 |
+| 000EEA88-000EEADF | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
+| 000EF904-000EF93F | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
+| 000EF940-000EF97B | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
+| 000EFC88-000EFCBB | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
+| 000EFE18-000EFE47 | 12 | GGCT: text | v5.15 · 2026-10-16 |
+| 000F0350-000F035F | 4 | LWWA: text | v5.3 · 2026-10-16 |
+| 000F0568-000F056F | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
 | 000FE640-000FE663 | 9 | LTEAML=lstr('Team Settings >',16); LSPAWNL=lstr('Spawn Settings >',20) | v5.3 · 2026-10-16 |
 | 000FE664-000FE677 | 5 | LSCORE=lstr('Score With Bag Away',20) | v5.3 · 2026-10-16 |
 | 000FE678-000FE6B3 | 15 | a.w[ZR_]=addiu('t7','t7',lo(a.lab['ZRET'])); FLRET=a.lab['FLRET']; place(a) | v5.3 · 2026-10-16 |

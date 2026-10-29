@@ -28,11 +28,11 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013E660 | 0C0E236C | 0C03BA9F | jal 0x388db0 | jal 0xeea7c | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
+| 0013E660 | 0C0E236C | 0C03BAA2 | jal 0x388db0 | jal 0xeea88 | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000FC000-000FC91B | 342 | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
-| 000EFDDC-000EFE0B | 12 | LMIN: text | v5.3 · 2026-10-16 |
+| 000EFDE8-000EFE17 | 12 | LMIN: text | v5.3 · 2026-10-16 |

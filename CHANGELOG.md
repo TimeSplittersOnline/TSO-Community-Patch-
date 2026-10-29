@@ -2,6 +2,12 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.105 · 2026-10-29 · Team Lives: a player who is already out stays out
+
+*v5.105 · TeamLivesOutStaysOut* · Xbox, PS2 NTSC, PS2 PAL
+
+- Team Elimination / Team Vampire with Team Lives: a player killed while already out (no lives left) was given the team's pool of lives, so they came back in. This could happen to a mid-match joiner the host places out (its team has nobody left) in the moment before it is taken out of play: a team that was knocked out came back and the match didn't end. A player with no lives left now stays out, and the pool is untouched, as in the game without Team Lives.
+
 ## v5.104 · 2026-10-29 · Manage Players and King of the Hill fixes
 
 *v5.104 · ManagePlayersKotHFixes* · Xbox, PS2 NTSC, PS2 PAL

@@ -123,33 +123,33 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013A7C4 | 1080008A | 0803AB29 | beq a0,zero,0x13a9f0 | j 0xeaca4 | Hook: jumps to GGK: j from add-kill routine (0x13A7C4, was beq a0,zero,<out>; delay slot kept; s0 = killer, s2 = victim id) Gun Game: a kill with the level's weapon moves the killer up a level | v5.3 · 2026-10-16 |
-| 0013FCFC | 0C13E230 | 0C03B7F1 | jal 0x4f88c0 | jal 0xedfc4 | Hook: start-of-level wait: was jal 0x4F88C0 (ready-start routine) | v5.3 · 2026-10-16 |
+| 0013A7C4 | 1080008A | 0803AB2C | beq a0,zero,0x13a9f0 | j 0xeacb0 | Hook: jumps to GGK: j from add-kill routine (0x13A7C4, was beq a0,zero,<out>; delay slot kept; s0 = killer, s2 = victim id) Gun Game: a kill with the level's weapon moves the killer up a level | v5.3 · 2026-10-16 |
+| 0013FCFC | 0C13E230 | 0C03B7F4 | jal 0x4f88c0 | jal 0xedfd0 | Hook: start-of-level wait: was jal 0x4F88C0 (ready-start routine) | v5.3 · 2026-10-16 |
 | 00143F68 | 0C04ED74 | 0C03F57F | jal 0x13b5d0 | jal 0xfd5fc | Hook: the match's weapon set: was jal 0x13B5D0 (no Temporal Uplink on LAN) | v5.99 · 2026-10-28 |
-| 001B6000 | 27BDFFD0 | 0803BEF8 | addiu sp,sp,-48 | j 0xefbe0 | Hook: jumps to GGVIS: j from pickup show routine (0x1B6000): map weapon and ammo pickups never come back in Gun Game or Showdown (the host's game decides: other games only show a pickup again when it says so) | v5.3 · 2026-10-16 |
+| 001B6000 | 27BDFFD0 | 0803BEFB | addiu sp,sp,-48 | j 0xefbec | Hook: jumps to GGVIS: j from pickup show routine (0x1B6000): map weapon and ammo pickups never come back in Gun Game or Showdown (the host's game decides: other games only show a pickup again when it says so) | v5.3 · 2026-10-16 |
 | 001B6004 | FFB00010 | 00000000 | sd s0,16(sp) | nop | Hook: jumps to GGVIS: j from pickup show routine (0x1B6000): map weapon and ammo pickups never come back in Gun Game or Showdown (the host's game decides: other games only show a pickup again when it says so) | v5.3 · 2026-10-16 |
 | 001C95A4 | 104000EA | 0803ED5F | beq v0,zero,0x1c9950 | j 0xfb57c | Hook: jumps to GGPR: j from respawn routine at its "can it respawn" test (0x1C95A4, was beq v0,zero,0x1C9950 / addiu t6,zero,1: after the test, as the Xbox's; before it, a call that bails (the level-start loop's for every other game's player) marked them as in | v5.76 · 2026-10-24 |
 | 001C95A8 | 240E0001 | 00000000 | addiu t6,zero,1 | nop | Hook: jumps to GGPR: j from respawn routine at its "can it respawn" test (0x1C95A4, was beq v0,zero,0x1C9950 / addiu t6,zero,1: after the test, as the Xbox's; before it, a call that bails (the level-start loop's for every other game's player) marked them as in | v5.76 · 2026-10-24 |
 | 001D4DDC | 0C06E6C6 | 0C03FFD8 | jal 0x1b9b18 | jal 0xfff60 | Hook: jumps to GGPD: jal from the death drops (0x1D4DDC / 0x1D4E34): no gun drops in Gun Game or Showdown, or when Player Drops Gun is Off (custom arcade and LAN only: else the drop as the game does) | v5.3 · 2026-10-16 |
 | 001D4E34 | 0C06E6C6 | 0C03FFD8 | jal 0x1b9b18 | jal 0xfff60 | Hook: jumps to GGPD: jal from the death drops (0x1D4DDC / 0x1D4E34): no gun drops in Gun Game or Showdown, or when Player Drops Gun is Off (custom arcade and LAN only: else the drop as the game does) | v5.3 · 2026-10-16 |
-| 00249238 | AE320168 | 0C03BB77 | sw s2,360(s1) | jal 0xeeddc | Hook: kill message made: keeps the victim's team | v5.36 · 2026-10-19 |
-| 002492E8 | AE320168 | 0C03BB77 | sw s2,360(s1) | jal 0xeeddc | Hook: (its other adder, type 12) | v5.36 · 2026-10-19 |
-| 0024A84C | 8E2E0084 | 0C03C032 | lw t6,132(s1) | jal 0xf00c8 | Hook: kill message drawn: in the kept colour | v5.36 · 2026-10-19 |
-| 0024AB98 | 8E2D0084 | 0C03C03B | lw t5,132(s1) | jal 0xf00ec | Hook: jumps to KMD2: jal at 0x24AB98 (was lw t5,132(s1); its delay slot addiu t6,zero,20 has run): t5 = the kept team. Uses at | v5.36 · 2026-10-19 |
-| 004197E4 | 0C13EBC6 | 0C03C075 | jal 0x4faf18 | jal 0xf01d4 | Hook: jumps to GGBR: jal from the arcade bot respawn (0x4197E4, was jal 0x4FAF18; a0 = character record) | v5.3 · 2026-10-16 |
-| 0042D550 | 0C04ED74 | 0C03BDA0 | jal 0x13b5d0 | jal 0xef680 | Hook: weapon picker / weapon set page slots (SDDRW, then GGBAN): was jal 0x13B5D0 | v5.3 · 2026-10-16 |
-| 0042E46C | 0C04ED74 | 0C03B0FE | jal 0x13b5d0 | jal 0xec3f8 | Hook: weapon picker / weapon set page slots (SDDRW, then GGBAN): was jal 0x13B5D0 | v5.3 · 2026-10-16 |
+| 00249238 | AE320168 | 0C03BB7A | sw s2,360(s1) | jal 0xeede8 | Hook: kill message made: keeps the victim's team | v5.36 · 2026-10-19 |
+| 002492E8 | AE320168 | 0C03BB7A | sw s2,360(s1) | jal 0xeede8 | Hook: (its other adder, type 12) | v5.36 · 2026-10-19 |
+| 0024A84C | 8E2E0084 | 0C03C034 | lw t6,132(s1) | jal 0xf00d0 | Hook: kill message drawn: in the kept colour | v5.36 · 2026-10-19 |
+| 0024AB98 | 8E2D0084 | 0C03C03D | lw t5,132(s1) | jal 0xf00f4 | Hook: jumps to KMD2: jal at 0x24AB98 (was lw t5,132(s1); its delay slot addiu t6,zero,20 has run): t5 = the kept team. Uses at | v5.36 · 2026-10-19 |
+| 004197E4 | 0C13EBC6 | 0C03C077 | jal 0x4faf18 | jal 0xf01dc | Hook: jumps to GGBR: jal from the arcade bot respawn (0x4197E4, was jal 0x4FAF18; a0 = character record) | v5.3 · 2026-10-16 |
+| 0042D550 | 0C04ED74 | 0C03BDA3 | jal 0x13b5d0 | jal 0xef68c | Hook: weapon picker / weapon set page slots (SDDRW, then GGBAN): was jal 0x13B5D0 | v5.3 · 2026-10-16 |
+| 0042E46C | 0C04ED74 | 0C03B101 | jal 0x13b5d0 | jal 0xec404 | Hook: weapon picker / weapon set page slots (SDDRW, then GGBAN): was jal 0x13B5D0 | v5.3 · 2026-10-16 |
 | 0043A2E8 | 0C054408 | 0C03F6A2 | jal 0x151020 | jal 0xfda88 | Hook: match settings refresh, Always Start With Gun: was jal 0x151020 | v5.3 · 2026-10-16 |
-| 0043A380 | 0C054408 | 0C039958 | jal 0x151020 | jal 0xe6560 | Hook: match settings refresh, Score Limit: was jal 0x151020 | v5.3 · 2026-10-16 |
-| 0043A39C | 0C054408 | 0C03B961 | jal 0x151020 | jal 0xee584 | Hook: match settings refresh, Score Method: was jal 0x151020 | v5.3 · 2026-10-16 |
-| 004F326C / PAL 004F3314 | 3C0F006E | 0C03BA30 | lui t7,0x6e | jal 0xee8c0 | Hook: host's match info 44 into the setup: bytes 64-75 cleared | v5.70 · 2026-10-23 |
-| 004F33B0 / PAL 004F3458 | 0C11363E | 0C03BAB5 | jal 0x44d8f8 | jal 0xeead4 | Hook: ... 45 | v5.70 · 2026-10-23 |
-| 004F3458 / PAL 004F3500 | 1000FFD7 | 0803BACB | beq zero,zero,0x4f33b8 | j 0xeeb2c | Hook: ... 59 (until the host says it has the patch) | v5.70 · 2026-10-23 |
-| 004F4474 / PAL 004F451C | 0C10ACE8 | 0C03BF12 | jal 0x42b3a0 | jal 0xefc48 | Hook: host's match info builders: was jal 0x42B3A0 (the set sent: no Temporal Uplink) | v5.103 · 2026-10-29 |
-| 004F63FC / PAL 004F64A4 | 0C10ACE8 | 0C03BF12 | jal 0x42b3a0 | jal 0xefc48 | Hook: host's match info builders: was jal 0x42B3A0 (the set sent: no Temporal Uplink) | v5.103 · 2026-10-29 |
-| 004FA95C / PAL 004FAA04 | AD2B0084 | 0C03A9DF | sw t3,132(t1) | jal 0xea77c | Hook: team message: a team change mid-match banks its kills | v5.32 · 2026-10-18 |
-| 004FC7A4 / PAL 004FC84C | AECD0084 | 0C03AA3F | sw t5,132(s6) | jal 0xea8fc | Hook: state packet: the same | v5.32 · 2026-10-18 |
-| 0050024C / PAL 005002F4 | 0C13FA9C | 0C039901 | jal 0x4fea70 | jal 0xe6404 | Hook: host greets a mid-match joiner: was jal 0x4FEA70 | v5.3 · 2026-10-16 |
+| 0043A380 | 0C054408 | 0C03995B | jal 0x151020 | jal 0xe656c | Hook: match settings refresh, Score Limit: was jal 0x151020 | v5.3 · 2026-10-16 |
+| 0043A39C | 0C054408 | 0C03B964 | jal 0x151020 | jal 0xee590 | Hook: match settings refresh, Score Method: was jal 0x151020 | v5.3 · 2026-10-16 |
+| 004F326C / PAL 004F3314 | 3C0F006E | 0C03BA33 | lui t7,0x6e | jal 0xee8cc | Hook: host's match info 44 into the setup: bytes 64-75 cleared | v5.70 · 2026-10-23 |
+| 004F33B0 / PAL 004F3458 | 0C11363E | 0C03BAB8 | jal 0x44d8f8 | jal 0xeeae0 | Hook: ... 45 | v5.70 · 2026-10-23 |
+| 004F3458 / PAL 004F3500 | 1000FFD7 | 0803BACE | beq zero,zero,0x4f33b8 | j 0xeeb38 | Hook: ... 59 (until the host says it has the patch) | v5.70 · 2026-10-23 |
+| 004F4474 / PAL 004F451C | 0C10ACE8 | 0C03BF15 | jal 0x42b3a0 | jal 0xefc54 | Hook: host's match info builders: was jal 0x42B3A0 (the set sent: no Temporal Uplink) | v5.103 · 2026-10-29 |
+| 004F63FC / PAL 004F64A4 | 0C10ACE8 | 0C03BF15 | jal 0x42b3a0 | jal 0xefc54 | Hook: host's match info builders: was jal 0x42B3A0 (the set sent: no Temporal Uplink) | v5.103 · 2026-10-29 |
+| 004FA95C / PAL 004FAA04 | AD2B0084 | 0C03A9E2 | sw t3,132(t1) | jal 0xea788 | Hook: team message: a team change mid-match banks its kills | v5.32 · 2026-10-18 |
+| 004FC7A4 / PAL 004FC84C | AECD0084 | 0C03AA42 | sw t5,132(s6) | jal 0xea908 | Hook: state packet: the same | v5.32 · 2026-10-18 |
+| 0050024C / PAL 005002F4 | 0C13FA9C | 0C039904 | jal 0x4fea70 | jal 0xe6410 | Hook: host greets a mid-match joiner: was jal 0x4FEA70 | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -164,83 +164,83 @@ NTSC address first; the PAL address follows where it differs.
 | 000E41D8-000E43C3 | 123 | GGDROP2: put the chr's gun combo, ammo and id back (last changed first) | v5.66 · 2026-10-23 |
 | 000E4ED0-000E5083 | 109 | PRDF: leaf, t6 = player -> t4 = its respawn delay in frames (the team's or everyone's); uses t5, t7. Offline / LAN host: this game's settings; LAN player: the host's, setup bytes 64 (0xE0 \| everyone), 65 (0x80 \| Red \| Blue << 3), 66 (Yellow / | v5.89 · 2026-10-27 |
 | 000E53B0-000E553B | 99 | GGLATE: a0 = player: Gun Game / Showdown, LAN host, its first spawn point this match: its game may have started its level late (a slower console, or one left on a menu such as a profile prompt): the map guns' "picked up" go out again 3 s | v5.71 · 2026-10-23 |
-| 000E5854-000E59DB | 98 | GGCL: Gun Game, LAN player with the patch (the host's setup byte 72 bit 3 under its 0xB0 marker): only the host runs Gun Game and can only take weapons away from players its own game controls, so each patched player's game does | v5.51 · 2026-10-21 |
-| 000E5B5C-000E5CDB | 96 | TGX: code | v5.19 · 2026-10-17 |
-| 000E5CDC-000E5E57 | 95 | NMCLR: leaf, every frame (GGT, first): a new match (the gameframe back into its first 20 seconds) clears, for every chr, the tables otherwise only checked when that chr kills or scores: Catch-Up's extra kills, mk.py's Multikill last kill | v5.104 · 2026-10-29 |
-| 000E6140-000E62A3 | 89 | GGITEM: jal from the Advanced page's mode items: Weapon Mode (deathmatch-style modes: Off, [Gun Game], Random Weapon, [Showdown]), then Player Drops Gun | v5.67 · 2026-10-23 |
-| 000E62A4-000E6403 | 88 | GGMV: a0 = pickup prop, a1 = pad: drop that pickup on that pad on every other game (packet 22, DROPMSG_OTHER: its network setup value, the pad's position, the pad; as LKMV) and here (drop message reader, as a game that receives it, with network game flag 0: | v5.63 · 2026-10-22 |
-| 000E6404-000E655F | 87 | GGJOIN: jal from the host's greeting of a mid-match joiner (0x50024C, was jal SENDCTRL; a0 = joining client) Gun Game: their game shows every map gun and armoury, so say again that they were picked up / moved; both modes: a fresh | v5.76 · 2026-10-24 |
-| 000E6560-000E66B3 | 85 | GGSLI: jal at 0x43A380 (match settings refresh, every frame; was jal 0x151020 for Score Limit, a1 = 7): Score Limit greyed out while Gun Game is chosen for a mode that can play it | v5.98 · 2026-10-28 |
-| 000E695C-000E6AA7 | 83 | GGON: leaf: v0 = setting (1/2/3) when it applies (Gun Game: its modes, no teamplay; Random Weapon: deathmatch-style modes; Showdown: Elimination, Vampire), offline or LAN host, else 0; uses t8,t9 | v5.89 · 2026-10-27 |
-| 000E6AA8-000E6BEB | 81 | GGDROPA: code | v5.60 · 2026-10-22 |
-| 000E6BEC-000E6D2F | 81 | GGGOT: a0 = character record, every frame (host / offline, Random Weapon): 2 s after a weapon was handed out, a living player who doesn't have it (any entry: a drop it never got) is given one again, twice at most (Showdown: one bullet, as | v5.76 · 2026-10-24 |
-| 000E6E74-000E6FB3 | 80 | GGDROP: 900 / 908 main / other ammo (word address, old value), 916 chr id, 920 / 928 main ammo loaded left / right, 936 / 944 other a0 = character record, a1 = gun id, a2 = bullets: the chr "drops" that gun at its own feet (sent to every player), then picks it up. Bullets 0 (Gun Game, Random Weapon): 9999 of each of its ammo types, cut to the game's maximum on | v5.76 · 2026-10-24 |
-| 000E6FB4-000E70EB | 78 | PRDH: (from LRDYSP, LAN host in the match: s0 = the player, a1 = spawn point message's caller) v0 = 1: hold its spawn point. The host decides the Respawn Delay for every player: a game without the patch respawns as soon as it has a spawn point, so the | v5.70 · 2026-10-23 |
-| 000E7480-000E75A3 | 73 | GGADD: j from the score add (VIPADD's exit; s0 = score, s1 = character record; keep t6/t7; ra is reloaded later) Gun Game: score = weapon level. First: Catch-Up's extra kills (CURST/CUEN keep t6/t7) | v5.16 · 2026-10-17 |
-| 000E75A4-000E76C3 | 72 | GGK2: v0 = the level's weapon, v1 = ladder length | v5.64 · 2026-10-22 |
-| 000E76C4-000E77DF | 71 | GGDIR: a0 = character record, a1 = its hand-out's pickup (just dropped): picked up by its player at once, on every game, through the game's own pickup: another game's player is reported as having picked it up (as the host does for a pickup a client | v5.70 · 2026-10-23 |
-| 000E807C-000E8183 | 66 | GGGIVE: a0 = character record: give its weapon (Gun Game: its level's weapon; Random Weapon: a random one; Showdown: SDGIVE, one bullet). Nothing for a chr that is dead (its respawn hands it out again, GGSP) | v5.51 · 2026-10-21 |
-| 000E8498-000E8597 | 64 | GGCHR: a0 = character record, every frame: weapon due -> give it; Showdown: bullets owed for kills, once no weapon is on its way; weapon given and now held -> switch to it | v5.75 · 2026-10-24 |
-| 000E8698-000E8793 | 63 | GGKREF: a0 = page, a1 = 0 refresh / 1 apply: Kills To Advance value; refresh also greys it out unless Weapon Mode is Gun Game, greys Player Drops Gun out with Gun Game or Showdown, and makes Weapon Mode update those whenever it | v5.3 · 2026-10-16 |
-| 000E9038-000E9127 | 60 | RDYGO: every frame (GGT), LAN host: once it has left its start screen and Select Team, the spawn points it held go out now to every other game's player who has one (not 0x7fffffff), as spawn point message would have sent them | v5.76 · 2026-10-24 |
-| 000E9770-000E9847 | 54 | GGGC: a0 = index -> v0 = that weapon of the match's weapon set (0 = none), v1 = number of usable weapons usable: a valid gun that can be dropped (not grenades / mines / no-ammo weapons) | v5.3 · 2026-10-16 |
-| 000E99F8-000E9ACB | 53 | GGTELL: a0 = character record, a1 = gun id: Gun Game, LAN host: another game's player was handed that gun (or has it and should hold it): tell their game with message 35 (the coin message) to them only, their own slot and pad 0xFF00 + gun id. A game ignores | v5.51 · 2026-10-21 |
-| 000E9ACC-000E9B9F | 53 | GGKITEM: add the Kills To Advance item: 1 / 3 / 5 / 10, then Setbacks: Off / One Kill / One Weapon | v5.3 · 2026-10-16 |
-| 000E9C74-000E9D43 | 52 | GGDOLD: a0 = character record (GGDROP): the weapon it was last handed, still on the floor, goes before the new one is followed (a respawn, a new level): left, nothing removed it any more and anyone could take it (in Showdown a bullet more). Not while | v5.76 · 2026-10-24 |
-| 000EA214-000EA2DB | 50 | GGRM2: s0 = prop, s1 = end, s3 = host's player prop (LAN), s2 = mode (0 remove, 1 resend) | v5.3 · 2026-10-16 |
-| 000EA46C-000EA533 | 50 | ENTMARK: leaf, a0 = a mid-match joiner (client): its players (by network player table number): their next spawn point request is their game entering (ENTP: whatever their slot's chr is), and their game has no coins yet (CRSNT); uses t0-t7 | v5.71 · 2026-10-23 |
-| 000EA77C-000EA83B | 48 | MPTW1: jal at 0x4FA95C (was sw t3,132(t1), the team message): t1 = the chr, t3 = its team | v5.86 · 2026-10-27 |
-| 000EA8FC-000EA9B7 | 47 | MPTW2: jal at 0x4FC7A4 (was sw t5,132(s6), a state packet): s6 = the chr, t5 = its team | v5.86 · 2026-10-27 |
-| 000EAA74-000EAB2F | 47 | HPSEND: a0 = player number, LAN host: pad 0xFFFD to that player's game (another game's player only) | v5.70 · 2026-10-23 |
-| 000EABEC-000EACA3 | 46 | GRDYC: leaf, a0 = character record: v0 = 0 give it its weapon now; 1 not yet (its game entered less than 4.5 s ago: ENTER's GENT; next frame again); 2 none (another game's player whose game isn't in the match yet: its entry gives it one; given now it | v5.75 · 2026-10-24 |
-| 000EACA4-000EAD5B | 46 | GGK: j from add-kill routine (0x13A7C4, was beq a0,zero,<out>; delay slot kept; s0 = killer, s2 = victim id) Gun Game: a kill with the level's weapon moves the killer up a level | v5.26 · 2026-10-17 |
-| 000EB508-000EB5B3 | 43 | GGNR: leaf: a0 = a pickup prop -> v0 = 1 if a chr (alive or dead) is within 4 of it on every axis (as GGCH's); uses t4-t9, f0, f1, f3 | v5.76 · 2026-10-24 |
-| 000EB660-000EB70B | 43 | GGT6: Gun Game, Showdown: map weapons removed (LAN: armouries moved again, LKMV); everyone gets a weapon now | v5.76 · 2026-10-24 |
-| 000EBB84-000EBC23 | 40 | HPT: every frame (GGT), LAN host: once a second, pad 0xFFFD to every other game's player | v5.70 · 2026-10-23 |
-| 000EC3F8-000EC48B | 37 | GGBAN: jal from the weapon picker (0x42E46C) and, via SDDRW, the custom weapon set list (0x42D550), was jal 0x13B5D0 (a0 = menu mode, a1 = gun id): the game's ban, the Temporal Uplink on LAN, plus guns Gun Game / Showdown cannot hand out while it is chosen | v5.102 · 2026-10-29 |
-| 000ECA38-000ECABF | 34 | HSTW: v0 = 1 while the LAN host is still at its start: its start screen (state 4; 6 kept from the Xbox's Select Team state, which PS2 never sets), or its Select Team, a page over the match (HBTN ran) while its first player has no character yet, in | v5.76 · 2026-10-24 |
-| 000ECC58-000ECCDB | 33 | TSPN: j at 0xFD62C (spawn pick, was lui t4,0x10 / lw t4,-12288(t4) / andi t4,t4,1): t4, then on at 0xFD638 | v5.89 · 2026-10-27 |
-| 000ECCDC-000ECD5B | 32 | GGLHR: leaf, a0 = character record, every frame (GGCHR): while it is alive, the type of the gun it holds and the gameframe (GGK2: a kill reaching it after the killer's death is checked against them); uses t0-t6 | v5.64 · 2026-10-22 |
-| 000ED05C-000ED0D7 | 31 | GGHOLD: The game has several gun id entries for one gun (single, a pair, alternate fire), and a gun picked up can sit under any of them, so Gun Game goes by the gun (gun id +16), not the entry. leaf: a0 = character record, a1 = gun id -> v0 = an entry of that gun the chr holds (that one first), 0 if none; uses t0-t3 | v5.3 · 2026-10-16 |
-| 000EDAB8-000EDB27 | 28 | LKRS: s0 = gameframe, s2 = 0x100000 (GGT2, once started): the armouries' moves again every 10 seconds of the match (LAN host, Gun Game / Showdown): a game that missed them (an emulator that was still behind when the start's moves went out | v5.76 · 2026-10-24 |
-| 000EDB28-000EDB97 | 28 | SPCF: leaf: a0 = a local number, a1 = its Spectate entry -> v0 = 1 when another entry of its ring is a message the game holds back while a kill message shows (types 2, 6, 9, 10: one kill message at a time, these wait behind it); uses t5-t9 | v5.79 · 2026-10-26 |
-| 000EDE90-000EDEF7 | 26 | GGPAL: leaf: v0 = the prop of a living player of this game (any of its own players), 0 if none; uses t0-t3 | v5.64 · 2026-10-22 |
-| 000EDF60-000EDFC3 | 25 | GGSWITCH: a0 = character record, a1 = the weapon it now holds: switch to it, then (Gun Game, Showdown) every other gun goes (it only has that one); Random Weapon keeps them (the map's weapons stay in that mode) | v5.15 · 2026-10-16 |
-| 000EDFC4-000EE027 | 25 | GGRDY: jal from the start-of-level wait (0x13FCFC, was jal ready-start routine): Gun Game / Showdown, host / offline, removes the map guns on the first frame every player has loaded, before anyone's countdown can end (LAN: and moves the | v5.3 · 2026-10-16 |
-| 000EE08C-000EE0EF | 25 | GGRSN: s0 = gameframe, s2 = 0x100000: the map guns' "picked up" sent again (GGRS) at the times GGT6 set, twice; keeps s regs | v5.48 · 2026-10-20 |
-| 000EE584-000EE5DF | 23 | GGSMI: jal at 0x43A39C (match settings refresh; was jal 0x151020 for Score Method, a1 = 8): greyed out while Gun Game or Showdown is chosen for a mode that plays it (the score is the ladder / lives there) | v5.3 · 2026-10-16 |
-| 000EE8C0-000EE91B | 23 | HPZ1: jal at 0x4F326C (the host's match info 44 just copied into the setup; was lui t7,0x6e, its delay slot addiu s0,t7,25432 done again here) | v5.71 · 2026-10-23 |
-| 000EE974-000EE9CB | 22 | GGT2: 2 seconds in: start | v5.76 · 2026-10-24 |
-| 000EEAD4-000EEB2B | 22 | HPZ2: jal at 0x4F33B0 (match info 45 copied; was jal 0x44D8F8, its delay slot the copy's last store): then 0x44D8F8 as before | v5.71 · 2026-10-23 |
-| 000EEB2C-000EEB83 | 22 | HPZ3: j at 0x4F3458 (match info 59 copied; was b 0x4F33B8, its delay slot the copy's last store) | v5.71 · 2026-10-23 |
-| 000EEC8C-000EECDF | 21 | GGT4: every active chr: weapon due / switch | v5.3 · 2026-10-16 |
-| 000EECE0-000EED33 | 21 | GGMOK: v0 = 1 when Gun Game can be picked for the menu's mode (its modes, teams off); uses t4-t7, v1 | v5.3 · 2026-10-16 |
-| 000EED88-000EEDDB | 21 | CLCH: colour item changefn (a0 = page, a1 = item): its own first, then TGX again (teams are on: the colours can be changed) | v5.19 · 2026-10-17 |
-| 000EEDDC-000EEE2F | 21 | KMC: Kill messages keep the victim's colour: the "Killed <name>" HUD entry holds only the chr id (+360) and the game's draw (0x24A610) colours the name from that chr's team every frame, so a Manage Players move one frame after the death recoloured it while it was on screen. The team is kept in the entry when it is made (+356, 0x100 \| team; unused by these entries) and the draw uses it jal at 0x249238 (was sw s2,360(s1); its delay slot lwc1 f2,0(t7) has run): s2 = the chr id. Uses t4-t6 | v5.36 · 2026-10-19 |
-| 000EF078-000EF0C7 | 20 | HPRX: leaf, pad 0xFFFD arrived (SBRX): on a LAN player's game, the match's (and the next match's) bytes 64-75 from the host's match info (SINFO+12); uses t6-t9 | v5.70 · 2026-10-23 |
-| 000EF118-000EF163 | 19 | GGP0: v0 = this game's first player's prop (0 if it has no character yet); uses t0-t3 | v5.3 · 2026-10-16 |
-| 000EF520-000EF567 | 18 | TMSKA: j at 0xFD650 (team cycling forward, was lui t8,0x10 / lw t8,-12284(t8)) | v5.70 · 2026-10-23 |
-| 000EF568-000EF5AF | 18 | TMSKB: j at 0xFD6A4 (team cycling back, the same) | v5.70 · 2026-10-23 |
-| 000EF5B0-000EF5F7 | 18 | TMSKC: j at 0xFDAE4 (Select Team, was lui t0,0x10 / lw t0,-12284(t0), then the host's under its marker): t0, then on at 0xFDB18 | v5.70 · 2026-10-23 |
-| 000EF5F8-000EF63B | 17 | GGVIS2: code | v5.3 · 2026-10-16 |
-| 000EF844-000EF87F | 15 | GGOPTV: a0 = Weapon Mode option -> v0 = its setting for the menu's mode. The options: Off, [Gun Game], Random Weapon, Gun Game only where the mode lists it (GGLST); uses t0, t1, t6, t7 | v5.3 · 2026-10-16 |
-| 000EF880-000EF8BB | 15 | GGVOPT: a0 = Weapon Mode setting (0-2; 3 Showdown: shown as Off) -> v0 = its option on the menu's mode; uses t0, t1, t6, t7 | v5.3 · 2026-10-16 |
-| 000EF970-000EF9AB | 15 | TSCH: Team Spawns changefn (a0 = page, a1 = item) | v5.19 · 2026-10-17 |
-| 000EF9E8-000EFA1F | 14 | PKMASK: leaf: v0 = the dropped pickup slots in use (bit per slot, 30); uses t4-t6 | v5.49 · 2026-10-20 |
-| 000EFBE0-000EFC13 | 13 | GGVIS: j from pickup show routine (0x1B6000): map weapon and ammo pickups never come back in Gun Game or Showdown (the host's game decides: other games only show a pickup again when it says so) | v5.3 · 2026-10-16 |
-| 000EFC14-000EFC47 | 13 | GGLOC: leaf (a0 = character record): v1 = 1 if this game controls the chr (offline, a bot, or this console's own player); uses t9 | v5.3 · 2026-10-16 |
-| 000EFC48-000EFC7B | 13 | UPSET: jal at 0x4F4474 and 0x4F63FC, the host's two match info builders (were jal 0x42B3A0, which keeps the set for this game; a0 = HOSTINFO+0x9C, the weapon set just copied in: +8 its 15 gun slots): the Temporal Uplink (gun ids 56 / 57) | v5.103 · 2026-10-29 |
-| 000EFEF0-000EFF1B | 11 | LMPKQ: text | v5.37 · 2026-10-19 |
-| 000EFF1C-000EFF43 | 10 | GGHOST: leaf: v1 = 1 when this game decides (offline or LAN host), else 0; uses t9 | v5.3 · 2026-10-16 |
-| 000F0080-000F00A3 | 9 | NOTL: v0 = 1 when the menu's mode has no time limit (its match settings Time limit is None: the setting after Teamplay's, +8 in the mode's settings, 0); like any call, a0-a3, v1 and the t-registers may change | v5.19 · 2026-10-17 |
-| 000F00C8-000F00EB | 9 | KMD1: jal at 0x24A84C in the draw (was lw t6,132(s1); s1 = the chr, s3 = the entry): t6 = the kept team. Uses at | v5.36 · 2026-10-19 |
-| 000F00EC-000F010F | 9 | KMD2: jal at 0x24AB98 (was lw t5,132(s1); its delay slot addiu t6,zero,20 has run): t5 = the kept team. Uses at | v5.36 · 2026-10-19 |
-| 000F01D4-000F01EB | 6 | GGBR: jal from the arcade bot respawn (0x4197E4, was jal 0x4FAF18; a0 = character record) | v5.3 · 2026-10-16 |
-| 000F0204-000F021B | 6 | GGLST: leaf: v0 = 1 when the menu's mode lists Gun Game (its modes; it only plays with Teamplay Off); uses t6, t7 | v5.3 · 2026-10-16 |
-| 000F0398-000F03A7 | 4 | LMP: text | v5.23 · 2026-10-17 |
-| 000F04F0-000F04FB | 3 | LMPKT: text | v5.37 · 2026-10-19 |
-| 000F0608-000F060B | 1 | GGPST: a word written 2 by the pnach: frames between the characters' start hand-outs (the test programs set 0: all at once) | v5.3 · 2026-10-16 (approx.) |
-| 000F060C-000F060F | 1 | GGDOFF: a word written 0 by the pnach: 1 turns GGDIR off (the test programs only) | v5.3 · 2026-10-16 (approx.) |
+| 000E59E0-000E5B67 | 98 | GGCL: Gun Game, LAN player with the patch (the host's setup byte 72 bit 3 under its 0xB0 marker): only the host runs Gun Game and can only take weapons away from players its own game controls, so each patched player's game does | v5.51 · 2026-10-21 |
+| 000E5B68-000E5CE7 | 96 | TGX: code | v5.19 · 2026-10-17 |
+| 000E5CE8-000E5E63 | 95 | NMCLR: leaf, every frame (GGT, first): a new match (the gameframe back into its first 20 seconds) clears, for every chr, the tables otherwise only checked when that chr kills or scores: Catch-Up's extra kills, mk.py's Multikill last kill | v5.104 · 2026-10-29 |
+| 000E614C-000E62AF | 89 | GGITEM: jal from the Advanced page's mode items: Weapon Mode (deathmatch-style modes: Off, [Gun Game], Random Weapon, [Showdown]), then Player Drops Gun | v5.67 · 2026-10-23 |
+| 000E62B0-000E640F | 88 | GGMV: a0 = pickup prop, a1 = pad: drop that pickup on that pad on every other game (packet 22, DROPMSG_OTHER: its network setup value, the pad's position, the pad; as LKMV) and here (drop message reader, as a game that receives it, with network game flag 0: | v5.63 · 2026-10-22 |
+| 000E6410-000E656B | 87 | GGJOIN: jal from the host's greeting of a mid-match joiner (0x50024C, was jal SENDCTRL; a0 = joining client) Gun Game: their game shows every map gun and armoury, so say again that they were picked up / moved; both modes: a fresh | v5.76 · 2026-10-24 |
+| 000E656C-000E66BF | 85 | GGSLI: jal at 0x43A380 (match settings refresh, every frame; was jal 0x151020 for Score Limit, a1 = 7): Score Limit greyed out while Gun Game is chosen for a mode that can play it | v5.98 · 2026-10-28 |
+| 000E6968-000E6AB3 | 83 | GGON: leaf: v0 = setting (1/2/3) when it applies (Gun Game: its modes, no teamplay; Random Weapon: deathmatch-style modes; Showdown: Elimination, Vampire), offline or LAN host, else 0; uses t8,t9 | v5.89 · 2026-10-27 |
+| 000E6AB4-000E6BF7 | 81 | GGDROPA: code | v5.60 · 2026-10-22 |
+| 000E6BF8-000E6D3B | 81 | GGGOT: a0 = character record, every frame (host / offline, Random Weapon): 2 s after a weapon was handed out, a living player who doesn't have it (any entry: a drop it never got) is given one again, twice at most (Showdown: one bullet, as | v5.76 · 2026-10-24 |
+| 000E6E80-000E6FBF | 80 | GGDROP: 900 / 908 main / other ammo (word address, old value), 916 chr id, 920 / 928 main ammo loaded left / right, 936 / 944 other a0 = character record, a1 = gun id, a2 = bullets: the chr "drops" that gun at its own feet (sent to every player), then picks it up. Bullets 0 (Gun Game, Random Weapon): 9999 of each of its ammo types, cut to the game's maximum on | v5.76 · 2026-10-24 |
+| 000E6FC0-000E70F7 | 78 | PRDH: (from LRDYSP, LAN host in the match: s0 = the player, a1 = spawn point message's caller) v0 = 1: hold its spawn point. The host decides the Respawn Delay for every player: a game without the patch respawns as soon as it has a spawn point, so the | v5.70 · 2026-10-23 |
+| 000E748C-000E75AF | 73 | GGADD: j from the score add (VIPADD's exit; s0 = score, s1 = character record; keep t6/t7; ra is reloaded later) Gun Game: score = weapon level. First: Catch-Up's extra kills (CURST/CUEN keep t6/t7) | v5.16 · 2026-10-17 |
+| 000E75B0-000E76CF | 72 | GGK2: v0 = the level's weapon, v1 = ladder length | v5.64 · 2026-10-22 |
+| 000E76D0-000E77EB | 71 | GGDIR: a0 = character record, a1 = its hand-out's pickup (just dropped): picked up by its player at once, on every game, through the game's own pickup: another game's player is reported as having picked it up (as the host does for a pickup a client | v5.70 · 2026-10-23 |
+| 000E8088-000E818F | 66 | GGGIVE: a0 = character record: give its weapon (Gun Game: its level's weapon; Random Weapon: a random one; Showdown: SDGIVE, one bullet). Nothing for a chr that is dead (its respawn hands it out again, GGSP) | v5.51 · 2026-10-21 |
+| 000E84A4-000E85A3 | 64 | GGCHR: a0 = character record, every frame: weapon due -> give it; Showdown: bullets owed for kills, once no weapon is on its way; weapon given and now held -> switch to it | v5.75 · 2026-10-24 |
+| 000E86A4-000E879F | 63 | GGKREF: a0 = page, a1 = 0 refresh / 1 apply: Kills To Advance value; refresh also greys it out unless Weapon Mode is Gun Game, greys Player Drops Gun out with Gun Game or Showdown, and makes Weapon Mode update those whenever it | v5.3 · 2026-10-16 |
+| 000E9044-000E9133 | 60 | RDYGO: every frame (GGT), LAN host: once it has left its start screen and Select Team, the spawn points it held go out now to every other game's player who has one (not 0x7fffffff), as spawn point message would have sent them | v5.76 · 2026-10-24 |
+| 000E977C-000E9853 | 54 | GGGC: a0 = index -> v0 = that weapon of the match's weapon set (0 = none), v1 = number of usable weapons usable: a valid gun that can be dropped (not grenades / mines / no-ammo weapons) | v5.3 · 2026-10-16 |
+| 000E9A04-000E9AD7 | 53 | GGTELL: a0 = character record, a1 = gun id: Gun Game, LAN host: another game's player was handed that gun (or has it and should hold it): tell their game with message 35 (the coin message) to them only, their own slot and pad 0xFF00 + gun id. A game ignores | v5.51 · 2026-10-21 |
+| 000E9AD8-000E9BAB | 53 | GGKITEM: add the Kills To Advance item: 1 / 3 / 5 / 10, then Setbacks: Off / One Kill / One Weapon | v5.3 · 2026-10-16 |
+| 000E9C80-000E9D4F | 52 | GGDOLD: a0 = character record (GGDROP): the weapon it was last handed, still on the floor, goes before the new one is followed (a respawn, a new level): left, nothing removed it any more and anyone could take it (in Showdown a bullet more). Not while | v5.76 · 2026-10-24 |
+| 000EA220-000EA2E7 | 50 | GGRM2: s0 = prop, s1 = end, s3 = host's player prop (LAN), s2 = mode (0 remove, 1 resend) | v5.3 · 2026-10-16 |
+| 000EA478-000EA53F | 50 | ENTMARK: leaf, a0 = a mid-match joiner (client): its players (by network player table number): their next spawn point request is their game entering (ENTP: whatever their slot's chr is), and their game has no coins yet (CRSNT); uses t0-t7 | v5.71 · 2026-10-23 |
+| 000EA788-000EA847 | 48 | MPTW1: jal at 0x4FA95C (was sw t3,132(t1), the team message): t1 = the chr, t3 = its team | v5.86 · 2026-10-27 |
+| 000EA908-000EA9C3 | 47 | MPTW2: jal at 0x4FC7A4 (was sw t5,132(s6), a state packet): s6 = the chr, t5 = its team | v5.86 · 2026-10-27 |
+| 000EAA80-000EAB3B | 47 | HPSEND: a0 = player number, LAN host: pad 0xFFFD to that player's game (another game's player only) | v5.70 · 2026-10-23 |
+| 000EABF8-000EACAF | 46 | GRDYC: leaf, a0 = character record: v0 = 0 give it its weapon now; 1 not yet (its game entered less than 4.5 s ago: ENTER's GENT; next frame again); 2 none (another game's player whose game isn't in the match yet: its entry gives it one; given now it | v5.75 · 2026-10-24 |
+| 000EACB0-000EAD67 | 46 | GGK: j from add-kill routine (0x13A7C4, was beq a0,zero,<out>; delay slot kept; s0 = killer, s2 = victim id) Gun Game: a kill with the level's weapon moves the killer up a level | v5.26 · 2026-10-17 |
+| 000EB514-000EB5BF | 43 | GGNR: leaf: a0 = a pickup prop -> v0 = 1 if a chr (alive or dead) is within 4 of it on every axis (as GGCH's); uses t4-t9, f0, f1, f3 | v5.76 · 2026-10-24 |
+| 000EB66C-000EB717 | 43 | GGT6: Gun Game, Showdown: map weapons removed (LAN: armouries moved again, LKMV); everyone gets a weapon now | v5.76 · 2026-10-24 |
+| 000EBB90-000EBC2F | 40 | HPT: every frame (GGT), LAN host: once a second, pad 0xFFFD to every other game's player | v5.70 · 2026-10-23 |
+| 000EC404-000EC497 | 37 | GGBAN: jal from the weapon picker (0x42E46C) and, via SDDRW, the custom weapon set list (0x42D550), was jal 0x13B5D0 (a0 = menu mode, a1 = gun id): the game's ban, the Temporal Uplink on LAN, plus guns Gun Game / Showdown cannot hand out while it is chosen | v5.102 · 2026-10-29 |
+| 000ECA44-000ECACB | 34 | HSTW: v0 = 1 while the LAN host is still at its start: its start screen (state 4; 6 kept from the Xbox's Select Team state, which PS2 never sets), or its Select Team, a page over the match (HBTN ran) while its first player has no character yet, in | v5.76 · 2026-10-24 |
+| 000ECC64-000ECCE7 | 33 | TSPN: j at 0xFD62C (spawn pick, was lui t4,0x10 / lw t4,-12288(t4) / andi t4,t4,1): t4, then on at 0xFD638 | v5.89 · 2026-10-27 |
+| 000ECCE8-000ECD67 | 32 | GGLHR: leaf, a0 = character record, every frame (GGCHR): while it is alive, the type of the gun it holds and the gameframe (GGK2: a kill reaching it after the killer's death is checked against them); uses t0-t6 | v5.64 · 2026-10-22 |
+| 000ED068-000ED0E3 | 31 | GGHOLD: The game has several gun id entries for one gun (single, a pair, alternate fire), and a gun picked up can sit under any of them, so Gun Game goes by the gun (gun id +16), not the entry. leaf: a0 = character record, a1 = gun id -> v0 = an entry of that gun the chr holds (that one first), 0 if none; uses t0-t3 | v5.3 · 2026-10-16 |
+| 000EDAC4-000EDB33 | 28 | LKRS: s0 = gameframe, s2 = 0x100000 (GGT2, once started): the armouries' moves again every 10 seconds of the match (LAN host, Gun Game / Showdown): a game that missed them (an emulator that was still behind when the start's moves went out | v5.76 · 2026-10-24 |
+| 000EDB34-000EDBA3 | 28 | SPCF: leaf: a0 = a local number, a1 = its Spectate entry -> v0 = 1 when another entry of its ring is a message the game holds back while a kill message shows (types 2, 6, 9, 10: one kill message at a time, these wait behind it); uses t5-t9 | v5.79 · 2026-10-26 |
+| 000EDE9C-000EDF03 | 26 | GGPAL: leaf: v0 = the prop of a living player of this game (any of its own players), 0 if none; uses t0-t3 | v5.64 · 2026-10-22 |
+| 000EDF6C-000EDFCF | 25 | GGSWITCH: a0 = character record, a1 = the weapon it now holds: switch to it, then (Gun Game, Showdown) every other gun goes (it only has that one); Random Weapon keeps them (the map's weapons stay in that mode) | v5.15 · 2026-10-16 |
+| 000EDFD0-000EE033 | 25 | GGRDY: jal from the start-of-level wait (0x13FCFC, was jal ready-start routine): Gun Game / Showdown, host / offline, removes the map guns on the first frame every player has loaded, before anyone's countdown can end (LAN: and moves the | v5.3 · 2026-10-16 |
+| 000EE098-000EE0FB | 25 | GGRSN: s0 = gameframe, s2 = 0x100000: the map guns' "picked up" sent again (GGRS) at the times GGT6 set, twice; keeps s regs | v5.48 · 2026-10-20 |
+| 000EE590-000EE5EB | 23 | GGSMI: jal at 0x43A39C (match settings refresh; was jal 0x151020 for Score Method, a1 = 8): greyed out while Gun Game or Showdown is chosen for a mode that plays it (the score is the ladder / lives there) | v5.3 · 2026-10-16 |
+| 000EE8CC-000EE927 | 23 | HPZ1: jal at 0x4F326C (the host's match info 44 just copied into the setup; was lui t7,0x6e, its delay slot addiu s0,t7,25432 done again here) | v5.71 · 2026-10-23 |
+| 000EE980-000EE9D7 | 22 | GGT2: 2 seconds in: start | v5.76 · 2026-10-24 |
+| 000EEAE0-000EEB37 | 22 | HPZ2: jal at 0x4F33B0 (match info 45 copied; was jal 0x44D8F8, its delay slot the copy's last store): then 0x44D8F8 as before | v5.71 · 2026-10-23 |
+| 000EEB38-000EEB8F | 22 | HPZ3: j at 0x4F3458 (match info 59 copied; was b 0x4F33B8, its delay slot the copy's last store) | v5.71 · 2026-10-23 |
+| 000EEC98-000EECEB | 21 | GGT4: every active chr: weapon due / switch | v5.3 · 2026-10-16 |
+| 000EECEC-000EED3F | 21 | GGMOK: v0 = 1 when Gun Game can be picked for the menu's mode (its modes, teams off); uses t4-t7, v1 | v5.3 · 2026-10-16 |
+| 000EED94-000EEDE7 | 21 | CLCH: colour item changefn (a0 = page, a1 = item): its own first, then TGX again (teams are on: the colours can be changed) | v5.19 · 2026-10-17 |
+| 000EEDE8-000EEE3B | 21 | KMC: Kill messages keep the victim's colour: the "Killed <name>" HUD entry holds only the chr id (+360) and the game's draw (0x24A610) colours the name from that chr's team every frame, so a Manage Players move one frame after the death recoloured it while it was on screen. The team is kept in the entry when it is made (+356, 0x100 \| team; unused by these entries) and the draw uses it jal at 0x249238 (was sw s2,360(s1); its delay slot lwc1 f2,0(t7) has run): s2 = the chr id. Uses t4-t6 | v5.36 · 2026-10-19 |
+| 000EF084-000EF0D3 | 20 | HPRX: leaf, pad 0xFFFD arrived (SBRX): on a LAN player's game, the match's (and the next match's) bytes 64-75 from the host's match info (SINFO+12); uses t6-t9 | v5.70 · 2026-10-23 |
+| 000EF124-000EF16F | 19 | GGP0: v0 = this game's first player's prop (0 if it has no character yet); uses t0-t3 | v5.3 · 2026-10-16 |
+| 000EF52C-000EF573 | 18 | TMSKA: j at 0xFD650 (team cycling forward, was lui t8,0x10 / lw t8,-12284(t8)) | v5.70 · 2026-10-23 |
+| 000EF574-000EF5BB | 18 | TMSKB: j at 0xFD6A4 (team cycling back, the same) | v5.70 · 2026-10-23 |
+| 000EF5BC-000EF603 | 18 | TMSKC: j at 0xFDAE4 (Select Team, was lui t0,0x10 / lw t0,-12284(t0), then the host's under its marker): t0, then on at 0xFDB18 | v5.70 · 2026-10-23 |
+| 000EF604-000EF647 | 17 | GGVIS2: code | v5.3 · 2026-10-16 |
+| 000EF850-000EF88B | 15 | GGOPTV: a0 = Weapon Mode option -> v0 = its setting for the menu's mode. The options: Off, [Gun Game], Random Weapon, Gun Game only where the mode lists it (GGLST); uses t0, t1, t6, t7 | v5.3 · 2026-10-16 |
+| 000EF88C-000EF8C7 | 15 | GGVOPT: a0 = Weapon Mode setting (0-2; 3 Showdown: shown as Off) -> v0 = its option on the menu's mode; uses t0, t1, t6, t7 | v5.3 · 2026-10-16 |
+| 000EF97C-000EF9B7 | 15 | TSCH: Team Spawns changefn (a0 = page, a1 = item) | v5.19 · 2026-10-17 |
+| 000EF9F4-000EFA2B | 14 | PKMASK: leaf: v0 = the dropped pickup slots in use (bit per slot, 30); uses t4-t6 | v5.49 · 2026-10-20 |
+| 000EFBEC-000EFC1F | 13 | GGVIS: j from pickup show routine (0x1B6000): map weapon and ammo pickups never come back in Gun Game or Showdown (the host's game decides: other games only show a pickup again when it says so) | v5.3 · 2026-10-16 |
+| 000EFC20-000EFC53 | 13 | GGLOC: leaf (a0 = character record): v1 = 1 if this game controls the chr (offline, a bot, or this console's own player); uses t9 | v5.3 · 2026-10-16 |
+| 000EFC54-000EFC87 | 13 | UPSET: jal at 0x4F4474 and 0x4F63FC, the host's two match info builders (were jal 0x42B3A0, which keeps the set for this game; a0 = HOSTINFO+0x9C, the weapon set just copied in: +8 its 15 gun slots): the Temporal Uplink (gun ids 56 / 57) | v5.103 · 2026-10-29 |
+| 000EFEF8-000EFF23 | 11 | LMPKQ: text | v5.37 · 2026-10-19 |
+| 000EFF24-000EFF4B | 10 | GGHOST: leaf: v1 = 1 when this game decides (offline or LAN host), else 0; uses t9 | v5.3 · 2026-10-16 |
+| 000F0088-000F00AB | 9 | NOTL: v0 = 1 when the menu's mode has no time limit (its match settings Time limit is None: the setting after Teamplay's, +8 in the mode's settings, 0); like any call, a0-a3, v1 and the t-registers may change | v5.19 · 2026-10-17 |
+| 000F00D0-000F00F3 | 9 | KMD1: jal at 0x24A84C in the draw (was lw t6,132(s1); s1 = the chr, s3 = the entry): t6 = the kept team. Uses at | v5.36 · 2026-10-19 |
+| 000F00F4-000F0117 | 9 | KMD2: jal at 0x24AB98 (was lw t5,132(s1); its delay slot addiu t6,zero,20 has run): t5 = the kept team. Uses at | v5.36 · 2026-10-19 |
+| 000F01DC-000F01F3 | 6 | GGBR: jal from the arcade bot respawn (0x4197E4, was jal 0x4FAF18; a0 = character record) | v5.3 · 2026-10-16 |
+| 000F020C-000F0223 | 6 | GGLST: leaf: v0 = 1 when the menu's mode lists Gun Game (its modes; it only plays with Teamplay Off); uses t6, t7 | v5.3 · 2026-10-16 |
+| 000F03A0-000F03AF | 4 | LMP: text | v5.23 · 2026-10-17 |
+| 000F04F8-000F0503 | 3 | LMPKT: text | v5.37 · 2026-10-19 |
+| 000F0610-000F0613 | 1 | GGPST: a word written 2 by the pnach: frames between the characters' start hand-outs (the test programs set 0: all at once) | v5.3 · 2026-10-16 (approx.) |
+| 000F0614-000F0617 | 1 | GGDOFF: a word written 0 by the pnach: 1 turns GGDIR off (the test programs only) | v5.3 · 2026-10-16 (approx.) |
 | 000FA800-000FADB3 | 365 | GGCH: a0 = character record, every frame (GGCHR: LAN host / offline): a handed-out weapon still on the floor follows the player | v5.76 · 2026-10-24 |
 | 000FAFDC-000FAFDF | 1 | GGHOFF: a word written 0 by the pnach: 1 turns GGHELD off (the test programs only) | v5.3 · 2026-10-16 (approx.) |
 | 000FB4A0-000FB4AF | 4 | LRWO: text | v5.3 · 2026-10-16 |

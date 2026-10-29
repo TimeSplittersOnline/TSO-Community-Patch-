@@ -23,13 +23,13 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0044CBE4 / PAL 0044CC34 | 03E00008 | 08039FDC | jr ra | j 0xe7f70 | Hook: setup builder's return: was jr ra (Random Characters; delay slot addiu sp,sp,240 kept) | v5.3 · 2026-10-16 |
+| 0044CBE4 / PAL 0044CC34 | 03E00008 | 08039FDF | jr ra | j 0xe7f7c | Hook: setup builder's return: was jr ra (Random Characters; delay slot addiu sp,sp,240 kept) | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E7F70-000E807B | 67 | RCEND: j at 0x44CBE4, the setup builder's return (was jr ra; its delay slot addiu sp,sp,240 done): every player and bot now has a character, so Random Characters can replace them; then return | v5.15 · 2026-10-16 |
-| 000EE280-000EE2E3 | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
-| 000EF248-000EF293 | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
-| 000F0288-000F029B | 5 | LRC: text | v5.3 · 2026-10-16 |
+| 000E7F7C-000E8087 | 67 | RCEND: j at 0x44CBE4, the setup builder's return (was jr ra; its delay slot addiu sp,sp,240 done): every player and bot now has a character, so Random Characters can replace them; then return | v5.15 · 2026-10-16 |
+| 000EE28C-000EE2EF | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
+| 000EF254-000EF29F | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
+| 000F0290-000F02A3 | 5 | LRC: text | v5.3 · 2026-10-16 |

@@ -57,37 +57,37 @@ NTSC address first; the PAL address follows where it differs.
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
 | 0013DDA0 | 3C0F0067 | 0C0389BF | lui t7,0x67 | jal 0xe26fc | Hook: zone tick routine: was lui t7,0x67 (delay slot lw t6,32524(t3) kept; KHT returns t7 = 0x670000) | v5.3 · 2026-10-16 |
-| 0025E714 | 0C0950CC | 0C03BAE1 | jal 0x254330 | jal 0xeeb84 | Hook: the radar: was jal 0x254330 (delay slot nop kept) | v5.3 · 2026-10-16 |
+| 0025E714 | 0C0950CC | 0C03BAE4 | jal 0x254330 | jal 0xeeb90 | Hook: the radar: was jal 0x254330 (delay slot nop kept) | v5.3 · 2026-10-16 |
 | 00266428 | 3C0F0026 | 3C0F000F | lui t7,0x26 | lui t7,0xf | Hook: Zones score bar: was lui t7,0x26 / addiu s4,t7,0x5230 | v5.3 · 2026-10-16 |
-| 00266430 | 25F45230 | 25F4EBDC | addiu s4,t7,21040 | addiu s4,t7,-5156 | Hook: Zones score bar: was lui t7,0x26 / addiu s4,t7,0x5230 | v5.3 · 2026-10-16 |
+| 00266430 | 25F45230 | 25F4EBE8 | addiu s4,t7,21040 | addiu s4,t7,-5144 | Hook: Zones score bar: was lui t7,0x26 / addiu s4,t7,0x5230 | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000E26FC-000E2997 | 167 | KHT: zones tick (jal at 0x13DDA0 in zone tick routine, was lui t7,0x67; its delay slot lw t6,32524(t3) kept): every game works out the Hill's period; host / offline set the match up, move the Hill when the period moves on and resync | v5.104 · 2026-10-29 |
-| 000E6808-000E695B | 85 | KHMID: v0 = the middle place: the one with the shortest total distance to the other places (the first of equals; 0 with none; a pad the game does not know counts as 0,0,0); 20 places at most; uses t0-t9, f0-f4 | v5.3 · 2026-10-16 |
-| 000E828C-000E8393 | 66 | KHCOL: host / offline, after the zones were dropped: their colours back on this game, then on every other player's game (the zone owners when any zone is not held, then each held zone's capture replayed, which also gives a | v5.3 · 2026-10-16 |
-| 000E8B74-000E8C6B | 62 | KHMOVE: host / offline: the Hill moves to another of the places at random, one it has not been to yet this round (every place once before any repeats; a new round never starts at the place it is at); the top 16 bits of the random number | v5.44 · 2026-10-19 |
-| 000E9EE4-000E9FB3 | 52 | KHMV: LAN player with the patch: the message when the Hill actually moves (the first zone flies to its new place), as well as on this game's own count of the periods | v5.3 · 2026-10-16 |
-| 000EA080-000EA14B | 51 | KHGATHER: host / offline: every zone dropped on the Hill's pad (offline the game would scatter them around a big pad, so its size is 0 meanwhile), then their colours back | v5.3 · 2026-10-16 |
-| 000EAB30-000EABEB | 47 | KHZONES: LAN host: every other game's connected player gets their spawn pad again, which carries the zone owners (their game sets the zones' colours). Only players this game holds no spawn pad for (0x7fffffff: alive, their last one | v5.89 · 2026-10-27 |
-| 000EB458-000EB507 | 44 | KHEFF: leaf: v0 = King of the Hill setting (1 / 2 / 3) for the match being played (Zones; offline / LAN host: the setting; LAN player: the host's byte 74 bits 2-3 under its 0xC0 marker), else 0; uses t8,t9 | v5.89 · 2026-10-27 |
-| 000EB860-000EB903 | 41 | KHMSG: "The Hill has moved!" to every player of this game and the sting; at most one every 5 seconds (a LAN player has two ways to notice a move) | v5.3 · 2026-10-16 |
-| 000EBFCC-000EC067 | 39 | KHITEM: Advanced page (Zones): King of the Hill, the mode's own setting, first (after Zone Scoring Interval) | v5.3 · 2026-10-16 |
-| 000ECBD0-000ECC57 | 34 | KHSTART: host / offline, match start: the zones' own places noted (the Hill's places), the Hill starts at the middle one | v5.44 · 2026-10-19 |
-| 000ED4B8-000ED533 | 31 | KHDROP: a0 = zone prop, a1 = pad: drop the zone on the pad as the game drops a bag (every player's game moves it there), then this game's capture check uses where it lands (home position +32 = target position +144) | v5.3 · 2026-10-16 |
-| 000EDB98-000EDC07 | 28 | KHVIS: a game with the patch: the Hill drawn as one zone (every other zone in it without its beam and flame) | v5.3 · 2026-10-16 |
-| 000EEB84-000EEBDB | 22 | KHRAD: jal at 0x25E714 (was jal 0x254330, the radar): the radar's zone blips, one for the Hill | v5.3 · 2026-10-16 |
-| 000EEBDC-000EEC33 | 22 | KHZB: the Zones score bar (its address, loaded at 0x266428 / 0x266430, was 0x265230): one circle for the Hill | v5.3 · 2026-10-16 |
-| 000EEC34-000EEC8B | 22 | KHJOINED: host: a player is joining mid-match (from GGJOIN): resync the zones 5 seconds later | v5.3 · 2026-10-16 |
-| 000EEF80-000EEFD3 | 21 | KHRA: a0 = page, a1 = 0 refresh / 1 apply: King of the Hill value | v5.3 · 2026-10-16 |
-| 000EF0C8-000EF117 | 20 | KHCHR: leaf: v0 = this game's first player's character record (the zone drops are made "by" it), or chr slot 0 when it has none (the host before it has spawned, or dead); uses t0-t3. The drop only reads the chr's prop (Story only) and id (the | v5.3 · 2026-10-16 |
-| 000EFBA8-000EFBDF | 14 | KHLATER: leaf: LAN host: every zone dropped on the Hill again 2 seconds later (a game whose network let a drop or capture arrive late or out of order puts it right); uses t8,t9 | v5.3 · 2026-10-16 |
-| 000EFD18-000EFD4B | 13 | KHON: leaf: v0 = 1 while King of the Hill runs in this match on this game (Zones, set up), else 0; uses t9 | v5.3 · 2026-10-16 |
-| 000F0034-000F005B | 10 | KHAUTH: leaf: v0 = 1 when this game decides (offline or LAN host); uses t9 | v5.3 · 2026-10-16 |
-| 000F02B0-000F02C3 | 5 | LKH: text | v5.3 · 2026-10-16 |
-| 000F02C4-000F02D7 | 5 | LKHM: text | v5.3 · 2026-10-16 |
-| 000F03E8-000F03F7 | 4 | LKH30: text | v5.3 · 2026-10-16 |
-| 000F03F8-000F0407 | 4 | LKH60: text | v5.3 · 2026-10-16 |
-| 000F0408-000F0417 | 4 | LKH90: text | v5.3 · 2026-10-16 |
+| 000E6814-000E6967 | 85 | KHMID: v0 = the middle place: the one with the shortest total distance to the other places (the first of equals; 0 with none; a pad the game does not know counts as 0,0,0); 20 places at most; uses t0-t9, f0-f4 | v5.3 · 2026-10-16 |
+| 000E8298-000E839F | 66 | KHCOL: host / offline, after the zones were dropped: their colours back on this game, then on every other player's game (the zone owners when any zone is not held, then each held zone's capture replayed, which also gives a | v5.3 · 2026-10-16 |
+| 000E8B80-000E8C77 | 62 | KHMOVE: host / offline: the Hill moves to another of the places at random, one it has not been to yet this round (every place once before any repeats; a new round never starts at the place it is at); the top 16 bits of the random number | v5.44 · 2026-10-19 |
+| 000E9EF0-000E9FBF | 52 | KHMV: LAN player with the patch: the message when the Hill actually moves (the first zone flies to its new place), as well as on this game's own count of the periods | v5.3 · 2026-10-16 |
+| 000EA08C-000EA157 | 51 | KHGATHER: host / offline: every zone dropped on the Hill's pad (offline the game would scatter them around a big pad, so its size is 0 meanwhile), then their colours back | v5.3 · 2026-10-16 |
+| 000EAB3C-000EABF7 | 47 | KHZONES: LAN host: every other game's connected player gets their spawn pad again, which carries the zone owners (their game sets the zones' colours). Only players this game holds no spawn pad for (0x7fffffff: alive, their last one | v5.89 · 2026-10-27 |
+| 000EB464-000EB513 | 44 | KHEFF: leaf: v0 = King of the Hill setting (1 / 2 / 3) for the match being played (Zones; offline / LAN host: the setting; LAN player: the host's byte 74 bits 2-3 under its 0xC0 marker), else 0; uses t8,t9 | v5.89 · 2026-10-27 |
+| 000EB86C-000EB90F | 41 | KHMSG: "The Hill has moved!" to every player of this game and the sting; at most one every 5 seconds (a LAN player has two ways to notice a move) | v5.3 · 2026-10-16 |
+| 000EBFD8-000EC073 | 39 | KHITEM: Advanced page (Zones): King of the Hill, the mode's own setting, first (after Zone Scoring Interval) | v5.3 · 2026-10-16 |
+| 000ECBDC-000ECC63 | 34 | KHSTART: host / offline, match start: the zones' own places noted (the Hill's places), the Hill starts at the middle one | v5.44 · 2026-10-19 |
+| 000ED4C4-000ED53F | 31 | KHDROP: a0 = zone prop, a1 = pad: drop the zone on the pad as the game drops a bag (every player's game moves it there), then this game's capture check uses where it lands (home position +32 = target position +144) | v5.3 · 2026-10-16 |
+| 000EDBA4-000EDC13 | 28 | KHVIS: a game with the patch: the Hill drawn as one zone (every other zone in it without its beam and flame) | v5.3 · 2026-10-16 |
+| 000EEB90-000EEBE7 | 22 | KHRAD: jal at 0x25E714 (was jal 0x254330, the radar): the radar's zone blips, one for the Hill | v5.3 · 2026-10-16 |
+| 000EEBE8-000EEC3F | 22 | KHZB: the Zones score bar (its address, loaded at 0x266428 / 0x266430, was 0x265230): one circle for the Hill | v5.3 · 2026-10-16 |
+| 000EEC40-000EEC97 | 22 | KHJOINED: host: a player is joining mid-match (from GGJOIN): resync the zones 5 seconds later | v5.3 · 2026-10-16 |
+| 000EEF8C-000EEFDF | 21 | KHRA: a0 = page, a1 = 0 refresh / 1 apply: King of the Hill value | v5.3 · 2026-10-16 |
+| 000EF0D4-000EF123 | 20 | KHCHR: leaf: v0 = this game's first player's character record (the zone drops are made "by" it), or chr slot 0 when it has none (the host before it has spawned, or dead); uses t0-t3. The drop only reads the chr's prop (Story only) and id (the | v5.3 · 2026-10-16 |
+| 000EFBB4-000EFBEB | 14 | KHLATER: leaf: LAN host: every zone dropped on the Hill again 2 seconds later (a game whose network let a drop or capture arrive late or out of order puts it right); uses t8,t9 | v5.3 · 2026-10-16 |
+| 000EFD24-000EFD57 | 13 | KHON: leaf: v0 = 1 while King of the Hill runs in this match on this game (Zones, set up), else 0; uses t9 | v5.3 · 2026-10-16 |
+| 000F003C-000F0063 | 10 | KHAUTH: leaf: v0 = 1 when this game decides (offline or LAN host); uses t9 | v5.3 · 2026-10-16 |
+| 000F02B8-000F02CB | 5 | LKH: text | v5.3 · 2026-10-16 |
+| 000F02CC-000F02DF | 5 | LKHM: text | v5.3 · 2026-10-16 |
+| 000F03F0-000F03FF | 4 | LKH30: text | v5.3 · 2026-10-16 |
+| 000F0400-000F040F | 4 | LKH60: text | v5.3 · 2026-10-16 |
+| 000F0410-000F041F | 4 | LKH90: text | v5.3 · 2026-10-16 |
