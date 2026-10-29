@@ -231,7 +231,7 @@ class App(tk.Tk):
         ttk.Entry(a, textvariable=self.src_xbe).grid(row=2, column=1, sticky="ew", padx=4, pady=(6, 0))
         ttk.Button(a, text="Choose...", command=self.browse_xbe).grid(row=2, column=2, padx=8, pady=(6, 0))
         ttk.Label(a, text=core.source_hint(),
-                  foreground="#555").grid(row=3, column=1, columnspan=2, sticky="w", padx=4)
+                  foreground="#555", wraplength=700, justify="left").grid(row=3, column=1, columnspan=2, sticky="w", padx=4)
         self.src_info = ttk.Label(a, text="", wraplength=800, justify="left")
         self.src_info.grid(row=4, column=0, columnspan=3, sticky="w", padx=8, pady=(8, 6))
         a.columnconfigure(1, weight=1)

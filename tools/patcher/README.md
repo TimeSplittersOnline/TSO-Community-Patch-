@@ -14,6 +14,10 @@ with the versions `tso_patch.dat`, and checks the result is byte for byte the de
   makes `tso_patch.dat` for a new TSO build (run for every delivered build, then rebuild the exe).
   An input written `"!<name>=<default.xbe>"` is only recognised (no delta is shipped for it); the patcher names it
   and asks for the title update's default.xbe instead.
+  `"@<builds folder>"` adds every earlier TSO build in it (one `v<X.Y> <date>` folder per build), so an old TSO XBE
+  updates straight to the new one. Current data: 6 game XBEs (USA title update, two title update + MapMaker XBEs,
+  USA and Europe disc, and a USA disc copy with 4 flag bytes changed that circulates as an xiso) and every earlier TSO build
+  from v5.3 on.
 - Tests: `tests/test_tso.py <TSO xbe> <known default.xbe> ...`, `tests/test_iso.py <extract-xiso>`,
   `tests/test_ps2.py <dir with SLUS_211.48 and SLES_529.93> <pnach>` (needs genisoimage).
 - `build_exe.bat`: rebuilds `TSO Community Patcher.exe` with PyInstaller on Windows (bundles `tso_patch.dat`).
