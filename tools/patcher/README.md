@@ -11,9 +11,10 @@ ISO through webMAN reads this one; patching only ISO9660 made it boot the unmodd
 - `TSO Community Patcher.pyw`: the window (Tkinter).
 - `pmd/tsopatch.py`: the patch format (copy/add deltas, lzma), applying and making it.
 - `pmd/update.py`: keeps the patch data current. At start (and from "Check for updates") it downloads
-  `tools/patcher/tso_patch.dat` from this repository's main branch and keeps it (in `%APPDATA%\TSO Community Patcher`)
-  when it is valid and for a later TSO version; a newer `tso_patch.dat` next to the exe also works. So committing a new
-  `tso_patch.dat` to main updates every player's patcher; the exe only needs rebuilding when its code changes.
+  `tools/patcher/tso_patch.dat` from this repository's main branch. When it is valid and for a later TSO version the
+  player is asked, and on Yes it is kept (in `%APPDATA%\TSO Community Patcher`) and used; a newer `tso_patch.dat` next to
+  the exe also works. So committing a new `tso_patch.dat` to main offers the update to every player's patcher; the exe
+  only needs rebuilding when its code changes.
 - `pmd/core.py`: checks, patching, undo records (`backups.json` in the backup folder).
 - `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF, ISO9660 and UDF.
 - `tools/make_tso_patch.py <version> <TSO Community Patch.xbe> tso_patch.dat "<name>=<default.xbe>" ...`:

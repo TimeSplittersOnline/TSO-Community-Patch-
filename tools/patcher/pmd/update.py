@@ -60,9 +60,18 @@ def best_patch():
     return best
 
 
+def pending_path():
+    return os.path.join(data_dir(), "tso_patch.pending.dat")
+
+
+def install_pending():
+    """Start using the newer patch data that check() found."""
+    os.replace(pending_path(), cached_path())
+
+
 def check(current_version, timeout=20):
-    """Download the newest patch data. Returns its version when it is newer than current_version (and keeps it),
-    else None. Raises OSError when it can't be reached."""
+    """Download the newest patch data. When it is newer than current_version it is kept aside (not used until
+    install_pending()) and its version returned, else None. Raises OSError when it can't be reached."""
     with urllib.request.urlopen(urllib.request.Request(URL, headers={"User-Agent": "TSO Community Patcher"}),
                                 timeout=timeout) as r:
         raw = r.read(MAX_SIZE + 1)
@@ -76,7 +85,7 @@ def check(current_version, timeout=20):
         t = tsopatch.TsoPatch(tmp)  # only valid patch data is kept
         if version_key(t.version) <= version_key(current_version):
             return None
-        os.replace(tmp, cached_path())
+        os.replace(tmp, pending_path())
         return t.version
     finally:
         if os.path.exists(tmp):

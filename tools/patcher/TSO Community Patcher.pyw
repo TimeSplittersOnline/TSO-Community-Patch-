@@ -296,7 +296,7 @@ class App(tk.Tk):
         self.update_info.configure(text=text + ((" " + extra) if extra else ""))
 
     def check_updates(self, quiet):
-        """Fetch the newest patch data in the background (at start, and from the button)."""
+        """Look for newer patch data in the background (at start, and from the button); ask before using it."""
         try:
             current = core.tso_patch().version
         except Exception:
@@ -318,12 +318,19 @@ class App(tk.Tk):
                                                 "can't be reached).\n\n%s" % err)
                 return
             if newer:
+                self.show_patch_version("%s is available." % newer)
+                if not messagebox.askyesno(APP, "TSO Community Patch %s is available (this patcher makes %s).\n\n"
+                                                "Update to %s now?" % (newer, current, newer)):
+                    return
+                try:
+                    update.install_pending()
+                except OSError as e:
+                    messagebox.showerror(APP, "Couldn't update: %s" % e)
+                    return
                 core.reload_tso_patch()
                 self.show_patch_version("Updated just now.")
-                self.log("Downloaded the patch data for the TSO Community Patch %s." % newer)
+                self.log("Updated the patch data to the TSO Community Patch %s." % newer)
                 self.xbox_check()
-                if not quiet:
-                    messagebox.showinfo(APP, "Updated: the patcher now makes the TSO Community Patch %s." % newer)
             else:
                 self.show_patch_version("Up to date.")
                 if not quiet:

@@ -1,4 +1,4 @@
-"""Update check test: a newer tso_patch.dat is downloaded, kept and used; an older or damaged one is not.
+"""Update check test: a newer tso_patch.dat is downloaded and used once installed; an older or damaged one is not.
 Serves the files from a local web server, so it needs no internet. Usage: python tests/test_update.py
 """
 import http.server
@@ -27,6 +27,8 @@ def main():
     old, new = b"o" * 4096, b"n" * 4096
     tsopatch.make_patch("v99.1", new, [("test", old)], web)
     assert update.check(built_in) == "v99.1"
+    assert core.reload_tso_patch().version == built_in        # found, but not used until the player says yes
+    update.install_pending()
     assert core.reload_tso_patch().version == "v99.1" and core.make_tso_xbe(old) == new
     assert update.check("v99.1") is None                      # nothing newer
     tsopatch.make_patch("v1.0", new, [("test", old)], web)
@@ -48,7 +50,7 @@ def main():
         pass
     httpd.shutdown()
     shutil.rmtree(root)
-    print("update check: newer kept and used, older / damaged / missing ignored OK (built in: %s)" % built_in)
+    print("update check: newer found, used only after install, older / damaged / missing ignored OK (built in: %s)" % built_in)
 
 
 if __name__ == "__main__":
