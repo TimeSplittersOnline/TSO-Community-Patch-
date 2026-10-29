@@ -618,7 +618,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 
 - When a player leaves a LAN match, the game moves the kills other teams made of them into those players' totals and clears them, but it left the kills by their own team. If someone then joined into that slot on another team, those old entries started counting as kills.
 - After a Manage Players move this could count kills twice: a moved player who then left kept kills that had already been counted when they changed team. The kills by the leaver's own team are now cleared as well. Nothing that was counted changes.
-- This also fixes the base game's smaller version of the same leak (old team kills counting as kills against the new joiner).
+- This also fixes the base game's smaller version of the same bug (old team kills counting as kills against the new joiner).
 - Host and patched consoles. Tests updated on PS2 NTSC and PS2 PAL; the Xbox change is a one-byte branch change checked against the retail code.
 
 ## v5.32 · 2026-10-18 · Manage Players: a queued team is locked until A cancels it; kill counts kept on every patched console
