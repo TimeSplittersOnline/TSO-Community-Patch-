@@ -50,7 +50,6 @@ The [`build`](build) folder always holds the current version's TSO Community Pat
 - New game modes & changes to existing modes
   - Four teams available on Thief, Zones, Shrink, Gladiator, Elimination, Vampire, Bagtag, Regeneration, and Leech.
   - Flame Tag has been restored and fixed.
-  - Additional modes: Gun Game, Showdown, Gold Rush, Team VIP, and King of the Hill have been implemented.
   - Siberia available on Virus.
   - Spectating and free-cam options for dead players on Elimination and Vampire.
   - Yellow and green zones are coloured appropriately rather than being blue.
