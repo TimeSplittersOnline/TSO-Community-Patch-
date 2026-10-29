@@ -7,6 +7,10 @@ with the versions `tso_patch.dat`, and checks the result is byte for byte the de
 **PS2:** builds a pnach into the game's ISO, "Restore original ISO" undoes it. The patched game file is added at the
 end of the ISO and both of the disc's file listings point at it: ISO9660 (PCSX2, real PS2) and UDF (a PS3 running the
 ISO through webMAN reads this one; patching only ISO9660 made it boot the unmodded game).
+The mod's own code (below the game, 0xE0100-0x100000) is not a separate ELF segment: a real PS2 / PS3 PS2 chip
+loads the game with the console's loader, which runs in that memory. It rides at the end of the game's one segment
+with a small copier the ELF starts at, which puts it in place, flushes the caches and jumps to the game's entry.
+`tests/ps2_boot_sim.py` runs that copier on the real ELFs and checks memory at the game's entry.
 
 - `TSO Community Patcher.pyw`: the window (Tkinter).
 - `pmd/tsopatch.py`: the patch format (copy/add deltas, lzma), applying and making it.
@@ -26,5 +30,6 @@ ISO through webMAN reads this one; patching only ISO9660 made it boot the unmodd
   USA and Europe disc, and a USA disc copy with 4 flag bytes changed that circulates as an xiso) and every earlier TSO build
   from v5.3 on.
 - Tests: `tests/test_update.py` (local web server, no internet), `tests/test_tso.py <TSO xbe> <known default.xbe> ...`, `tests/test_iso.py <extract-xiso>`,
-  `tests/test_ps2.py <dir with SLUS_211.48 and SLES_529.93> <pnach>` (needs genisoimage).
+  `tests/test_ps2.py <dir with SLUS_211.48 and SLES_529.93> <pnach>` (needs genisoimage),
+  `tests/ps2_boot_sim.py <same dir> <NTSC pnach> <PAL pnach>`.
 - `build_exe.bat`: rebuilds `TSO Community Patcher.exe` with PyInstaller on Windows (bundles `tso_patch.dat`).

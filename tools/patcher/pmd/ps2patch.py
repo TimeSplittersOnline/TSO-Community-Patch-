@@ -2,7 +2,8 @@
 
 The pnach's EE writes are applied to the game's ELF. Writes inside the ELF's
 loaded file data change those bytes; writes below/above every segment (the
-mod's own code area, e.g. 0xFA800-0x100000) go into a new loadable segment.
+mod's own code area, e.g. 0xFA800-0x100000) are carried at the end of the
+game's segment and copied into place by a boot copier (_add_boot_copier).
 The patched ELF is appended to the end of the ISO and the ISO's directory
 entry is pointed at it, so the original ELF bytes are never touched and
 undoing is just pointing back and trimming the ISO to its old length.
@@ -161,11 +162,7 @@ def patch_elf(elf, pnach):
             for p in loads:
                 if lo < p[2] + p[5] and hi > p[2]:
                     raise Ps2PatchError("Patch range %08X-%08X overlaps the game's memory" % (lo, hi))
-        first_data = min(p[1] for p in phdrs if p[4]) if phdrs else len(out)
-        need = phoff + (len(phdrs) + len(ranges)) * phentsize
-        if need > first_data or any(out[phoff + len(phdrs) * phentsize:need]):
-            raise Ps2PatchError("No room in the ELF header for the extra code segment")
-        new_ph = []
+        blobs = []
         for lo, hi in ranges:
             lo &= ~3
             hi = (hi + 3) & ~3
@@ -173,19 +170,112 @@ def patch_elf(elf, pnach):
             for a in range(lo, hi):
                 if a in outside:
                     seg[a - lo] = outside[a]
-            while len(out) % 16:
-                out.append(0)
-            # keep file offset and address congruent modulo the alignment
-            while len(out) % 16 != lo % 16:
-                out.append(0)
-            off = len(out)
-            out += seg
-            new_ph.append((PT_LOAD, off, lo, lo, len(seg), len(seg), 7, 16))
-        for i, p in enumerate(new_ph):
-            struct.pack_into("<8I", out, phoff + (len(phdrs) + i) * phentsize, *p)
-        struct.pack_into("<H", out, 44, len(phdrs) + len(new_ph))
-        report["segments"] = [(p[2], p[2] + p[4]) for p in new_ph]
+            blobs.append((lo, bytes(seg)))
+        _add_boot_copier(out, loads, blobs)
+        report["segments"] = [(lo, lo + len(b)) for lo, b in blobs]
     return bytes(out), report
+
+
+# The mod's own code lives below the game (0xE0100-0x100000). A real PS2 (and a PS3's PS2 chip) loads the
+# game with the console's loader, which itself runs in that memory, and not every loader takes extra ELF
+# segments. So the mod code is not given its own segment: it is carried at the end of the game's one
+# segment (in memory the game clears at start anyway) together with a small copier that the ELF now
+# starts at. The copier clears what the longer segment loaded over the game's zeroed memory, copies the
+# mod code down, flushes the caches and jumps to the game's own entry point.
+
+def _i(op, rs, rt, imm):
+    return (op << 26) | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+V1, A0, T0, T1, T2, T3, T4 = 3, 4, 8, 9, 10, 11, 12
+
+
+def _li32(rt, value):
+    return [_i(0x0F, 0, rt, value >> 16), _i(0x0D, rt, rt, value)]       # lui, ori
+
+
+def copier_code(base, table, clear_lo, clear_hi, entry):
+    """MIPS words of the copier; `table` = address of (src, dst, end) words, 0-terminated.
+
+    Both loops are kept longer than six instructions with empty delay slots (the PS2 CPU can run
+    very short loops wrongly)."""
+    w, labels, fix = [], {}, []
+
+    def br(op, rs, rt, label):
+        fix.append((len(w), op, rs, rt, label))
+        w.append(0)
+
+    w += _li32(T1, clear_lo) + _li32(T2, clear_hi)
+    labels["clear"] = len(w)
+    br(0x04, T1, T2, "cleared")                  # beq t1,t2,cleared
+    w += [0,
+          _i(0x2B, T1, 0, 0),                    # sw zero,0(t1)
+          _i(0x09, T1, T1, 4),                   # addiu t1,t1,4
+          0, 0]
+    br(0x04, 0, 0, "clear")                      # b clear
+    w += [0]
+    labels["cleared"] = len(w)
+    w += _li32(T4, table)
+    labels["next"] = len(w)
+    w += [_i(0x23, T4, T0, 0), 0]                # lw t0,0(t4)
+    br(0x04, T0, 0, "done")                      # beq t0,zero,done
+    w += [0,
+          _i(0x23, T4, T1, 4),                   # lw t1,4(t4)
+          _i(0x23, T4, T2, 8),                   # lw t2,8(t4)
+          _i(0x09, T4, T4, 12)]                  # addiu t4,t4,12
+    labels["copy"] = len(w)
+    w += [_i(0x23, T0, T3, 0),                   # lw t3,0(t0)
+          _i(0x09, T0, T0, 4),                   # addiu t0,t0,4
+          _i(0x2B, T1, T3, 0),                   # sw t3,0(t1)
+          _i(0x09, T1, T1, 4),                   # addiu t1,t1,4
+          0, 0]
+    br(0x05, T1, T2, "copy")                     # bne t1,t2,copy
+    w += [0]
+    br(0x04, 0, 0, "next")                       # b next
+    w += [0]
+    labels["done"] = len(w)
+    w += [_i(0x09, 0, V1, 0x64), _i(0x09, 0, A0, 0), 0x0C,       # FlushCache(0): write back the data cache
+          _i(0x09, 0, V1, 0x64), _i(0x09, 0, A0, 2), 0x0C]       # FlushCache(2): drop the instruction cache
+    w += _li32(T0, entry) + [(T0 << 21) | 0x08, 0]                  # jr t0
+    for at, op, rs, rt, label in fix:
+        w[at] = _i(op, rs, rt, labels[label] - at - 1)
+    return w
+
+
+def _add_boot_copier(out, loads, blobs):
+    if len(loads) != 1:
+        raise Ps2PatchError("The game's main file has an unexpected layout (%d segments)" % len(loads))
+    phoff, = struct.unpack_from("<I", out, 28)
+    phentsize, phnum = struct.unpack_from("<HH", out, 42)
+    idx = [i for i in range(phnum) if struct.unpack_from("<I", out, phoff + i * phentsize)[0] == PT_LOAD][0]
+    _t, off, va, pa, filesz, memsz, flags, align = loads[0]
+    if off + filesz > len(out):
+        raise Ps2PatchError("The game's main file is cut short")
+    entry, = struct.unpack_from("<I", out, 24)
+    if (va + filesz) % 4 or (off - va) % 16:
+        raise Ps2PatchError("The game's main file has an unexpected layout")
+    while len(out) % 16:
+        out.append(0)
+    base = va + len(out) - off
+    ncode = len(copier_code(0, 0, 0, 0, 0))
+    table = base + ncode * 4
+    data = table + (len(blobs) * 3 + 1) * 4
+    data = (data + 15) & ~15
+    rows, body, at = [], b"", data
+    for lo, b in blobs:
+        rows += [at, lo, lo + len(b)]
+        body += b
+        at += len(b)
+    end = at
+    if end > va + memsz:
+        raise Ps2PatchError("No room in the game's memory for the mod code")
+    code = copier_code(base, table, va + filesz, base, entry)
+    pay = struct.pack("<%dI" % len(code), *code) + struct.pack("<%dI" % (len(rows) + 1), *(rows + [0]))
+    pay += b"\0" * (data - table - (len(rows) + 1) * 4) + body
+    out += pay
+    newfilesz = end - va
+    struct.pack_into("<8I", out, phoff + idx * phentsize, PT_LOAD, off, va, pa, newfilesz, memsz, flags, align)
+    struct.pack_into("<I", out, 24, base)
 
 
 # -- ISO9660 ------------------------------------------------------------------

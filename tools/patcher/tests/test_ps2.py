@@ -1,6 +1,6 @@
 """PS2 pnach -> ISO test. Usage: python3 tests/test_ps2.py <dir with SLUS_211.48 and SLES_529.93> <pnach>
 Needs genisoimage. Builds small ISOs with the real ELFs and checks patch, region check and undo."""
-import hashlib, os, shutil, subprocess, sys, tempfile
+import hashlib, os, shutil, struct, subprocess, sys, tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from pmd import core, ps2patch as p
 
@@ -58,20 +58,12 @@ def main(elfdir, pnach):
         after = iso.read(iso.find("DATA/AFTER.BIN"))
         cnf = iso.read(iso.find("SYSTEM.CNF"))
     assert b"SLUS_211.48" in cnf
-    # every pnach byte is in the ELF image as loaded
-    _off, _sz, phdrs = p._phdrs(elf)
-    mem = {}
-    for t, off, va, _pa, fs, ms, _f, _a in phdrs:
-        if t == 1:
-            mem[(va, va + fs)] = off
-    def peek(a):
-        for (lo, hi), off in mem.items():
-            if lo <= a < hi:
-                return elf[off + a - lo]
-        raise AssertionError("address %08X not loaded" % a)
+    # every pnach byte is in memory when the game starts (after the boot copier ran)
+    import ps2_boot_sim
+    orig = open(os.path.join(elfdir, "SLUS_211.48"), "rb").read()
+    mem, _sc = ps2_boot_sim.boot(elf, struct.unpack_from("<I", orig, 24)[0])
     for a, d in pn.writes:
-        for i, b in enumerate(d):
-            assert peek(a + i) == b, "%08X" % (a + i)
+        assert mem[a:a + len(d)] == d, "%08X" % a
     print("all %d pnach writes present in the patched ELF" % len(pn.writes))
     assert subprocess.run(["readelf", "-lW", "-"], input=b"", capture_output=True) is not None
     open(os.path.join(work, "patched.elf"), "wb").write(elf)
