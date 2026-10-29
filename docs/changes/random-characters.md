@@ -4,18 +4,18 @@
 
 | Address | File offset | Bytes | Original | New | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 002D83B8 | 2C83B8 | 5 | `5b 83 c4 48 c3` | `e9 63 af 60 00` | setup builder exit: was pop %ebx / add $0x48,%esp / ret (Random Characters) \| When the match setup is built (the builder's exits at 0x2d83b8 / 0x2d83c7) every player and bot gets a random character \| jmp from the builder's exit (was pop %ebx / add $0x48,%esp / ret) | v5.3 · 2026-10-16 |
-| 002D83C7 | 2C83C7 | 5 | `5b 83 c4 48 c3` | `e9 54 af 60 00` | its other exit (network matches, no bots) \| When the match setup is built (the builder's exits at 0x2d83b8 / 0x2d83c7) every player and bot gets a random character \| jmp from the builder's exit (was pop %ebx / add $0x48,%esp / ret) | v5.3 · 2026-10-16 |
+| 002D83B8 | 2C83B8 | 5 | `5b 83 c4 48 c3` | `e9 7b af 60 00` | setup builder exit: was pop %ebx / add $0x48,%esp / ret (Random Characters) \| When the match setup is built (the builder's exits at 0x2d83b8 / 0x2d83c7) every player and bot gets a random character \| jmp from the builder's exit (was pop %ebx / add $0x48,%esp / ret) | v5.3 · 2026-10-16 |
+| 002D83C7 | 2C83C7 | 5 | `5b 83 c4 48 c3` | `e9 6c af 60 00` | its other exit (network matches, no bots) \| When the match setup is built (the builder's exits at 0x2d83b8 / 0x2d83c7) every player and bot gets a random character \| jmp from the builder's exit (was pop %ebx / add $0x48,%esp / ret) | v5.3 · 2026-10-16 |
 
 ## Xbox: added code
 
 | Address | Size | Where | Purpose | Since |
 |---|---|---|---|---|
-| 008E3320 | 171 bytes | xbreadfail_sp | jmp from the builder's exit (was pop %ebx / add $0x48,%esp / ret) | v5.99 · 2026-10-28 |
-| 008E33CB | 56 bytes | xbreadfail_sp | Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
-| 008E3403 | 32 bytes | xbreadfail_sp | Code: XRCR (see the code shown) | v5.3 · 2026-10-16 |
-| 008E3423 | 30 bytes | xbreadfail_sp | ---------------- Player Health (Advanced Settings, every mode but Leech: Default / Low / Weakling / Pathetic = 75% / 50% / 25%), decided by the host (offline: | v5.3 · 2026-10-16 |
-| 008E79CB | 18 bytes | xbreadfail_sp | Menu / message text "Random Characters" | v5.3 · 2026-10-16 |
+| 008E3338 | 171 bytes | xbreadfail_sp | jmp from the builder's exit (was pop %ebx / add $0x48,%esp / ret) | v5.99 · 2026-10-28 |
+| 008E33E3 | 56 bytes | xbreadfail_sp | Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
+| 008E341B | 32 bytes | xbreadfail_sp | Code: XRCR (see the code shown) | v5.3 · 2026-10-16 |
+| 008E343B | 30 bytes | xbreadfail_sp | ---------------- Player Health (Advanced Settings, every mode but Leech: Default / Low / Weakling / Pathetic = 75% / 50% / 25%), decided by the host (offline: | v5.3 · 2026-10-16 |
+| 008E79FB | 18 bytes | xbreadfail_sp | Menu / message text "Random Characters" | v5.3 · 2026-10-16 |
 
 ## PS2: changes to the game's own code and data
 
@@ -23,13 +23,13 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0044CBE4 / PAL 0044CC34 | 03E00008 | 08039FB8 | jr ra | j 0xe7ee0 | Hook: setup builder's return: was jr ra (Random Characters; delay slot addiu sp,sp,240 kept) | v5.3 · 2026-10-16 |
+| 0044CBE4 / PAL 0044CC34 | 03E00008 | 08039FDC | jr ra | j 0xe7f70 | Hook: setup builder's return: was jr ra (Random Characters; delay slot addiu sp,sp,240 kept) | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E7EE0-000E7FEB | 67 | RCEND: j at 0x44CBE4, the setup builder's return (was jr ra; its delay slot addiu sp,sp,240 done): every player and bot now has a character, so Random Characters can replace them; then return | v5.15 · 2026-10-16 |
-| 000EE1F0-000EE253 | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
-| 000EF1B8-000EF203 | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
-| 000F01F8-000F020B | 5 | LRC: text | v5.3 · 2026-10-16 |
+| 000E7F70-000E807B | 67 | RCEND: j at 0x44CBE4, the setup builder's return (was jr ra; its delay slot addiu sp,sp,240 done): every player and bot now has a character, so Random Characters can replace them; then return | v5.15 · 2026-10-16 |
+| 000EE280-000EE2E3 | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
+| 000EF248-000EF293 | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
+| 000F0288-000F029B | 5 | LRC: text | v5.3 · 2026-10-16 |

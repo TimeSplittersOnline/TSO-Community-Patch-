@@ -2,6 +2,15 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.104 · 2026-10-29 · Manage Players and King of the Hill fixes
+
+*v5.104 · ManagePlayersKotHFixes* · Xbox, PS2 NTSC, PS2 PAL
+
+- Manage Players: a team move the host had picked stayed waiting when the match ended before that player died. If that console later joined another host's game as a player and a match there had the same match number, it could carry out the old move there. Only the LAN host now carries out moves; on any other game nothing waits.
+- Manage Players: if the player you were asked to confirm a kick for left while the confirm was open, and someone else joined into the same slot, Yes kicked the new player. The kick is now forgotten as soon as that player leaves, so Yes does nothing.
+- King of the Hill: the Hill's time counted from the level loading, so the countdown and the host's Select Team time used up part of the first Hill (a 60 Second Hill could move after a few seconds). It now counts from the first moment of play, so the first Hill gets its full time.
+- King of the Hill: a match left in its first moments could make the next one skip its set-up, so the Hill used the old map's zone places. Every new match now sets King of the Hill up again.
+
 ## v5.103 · 2026-10-29 · LAN: the Temporal Uplink is taken out of the weapon set the host sends, so MapMaker maps don't get it either
 
 *v5.103 · UplinkLanSet* · Xbox, PS2 NTSC, PS2 PAL

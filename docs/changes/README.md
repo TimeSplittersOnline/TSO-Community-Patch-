@@ -12,13 +12,13 @@ Every change the current build makes to the original game files, grouped by feat
 | [LAN: allowed modes, Xbox Live option removed, original-disc compatibility](lan-allowed-modes-xbox-live-option-removed-original-disc-com.md) | 14 | 10 | 0 | 0 |
 | [Mercy Rule](mercy-rule.md) | 6 | 6 | 1 | 354 |
 | [Gun Game: Setbacks](gun-game-setbacks.md) | 5 | 24 | 2 | 314 |
-| [Weapon Mode (Gun Game / Random Weapon), Player Drops Gun](weapon-mode-gun-game-random-weapon-player-drops-gun.md) | 17 | 90 | 27 | 5216 |
+| [Weapon Mode (Gun Game / Random Weapon), Player Drops Gun](weapon-mode-gun-game-random-weapon-player-drops-gun.md) | 17 | 90 | 27 | 5220 |
 | [Catch-Up](catch-up.md) | 2 | 19 | 3 | 456 |
 | [Team VIP](team-vip.md) | 1 | 11 | 3 | 285 |
 | [Team Elimination / Team Vampire, Team Lives](team-elimination-team-vampire-team-lives.md) | 7 | 40 | 4 | 836 |
 | [Virus: Spread By Kills](virus-spread-by-kills.md) | 2 | 4 | 0 | 149 |
 | [Showdown (Elimination, Vampire)](showdown-elimination-vampire.md) | 11 | 28 | 14 | 847 |
-| [LAN: Manage Players (host: move a player to another team, kick a player)](lan-manage-players-host-move-a-player-to-another-team-kick-a.md) | 12 | 96 | 8 | 1514 |
+| [LAN: Manage Players (host: move a player to another team, kick a player)](lan-manage-players-host-move-a-player-to-another-team-kick-a.md) | 12 | 96 | 8 | 1540 |
 | [Zones: Scoring Interval, last score at time up](zones-scoring-interval-last-score-at-time-up.md) | 2 | 12 | 27 | 337 |
 | [Weapon Mode: weapon switch for players without the patch (experimental)](weapon-mode-weapon-switch-for-players-without-the-patch-expe.md) | 3 | 27 | 4 | 759 |
 | [Flame Tag: Number of Flames, LAN play, scoring](flame-tag-number-of-flames-lan-play-scoring.md) | 5 | 16 | 12 | 356 |
@@ -32,7 +32,7 @@ Every change the current build makes to the original game files, grouped by feat
 | [4 Teams, team play in more modes](4-teams-team-play-in-more-modes.md) | 28 | 1 | 61 | 104 |
 | [Spectate (Elimination, Vampire)](spectate-elimination-vampire.md) | 4 | 46 | 6 | 1494 |
 | [Respawn Delay](respawn-delay.md) | 2 | 32 | 0 | 266 |
-| [King of the Hill](king-of-the-hill.md) | 6 | 33 | 4 | 907 |
+| [King of the Hill](king-of-the-hill.md) | 6 | 34 | 4 | 913 |
 | [Assault: Auto-Complete Phase, Time Bonus After Phase](assault-auto-complete-phase-time-bonus-after-phase.md) | 1 | 14 | 1 | 328 |
 | [LAN: Return to Lobby (host)](lan-return-to-lobby-host.md) | 8 | 13 | 0 | 0 |
 | [Random Characters](random-characters.md) | 2 | 5 | 1 | 116 |
