@@ -14,7 +14,7 @@ import sys
 
 from .xbe import parse_xbe_header, is_xbe
 from .xiso import Xiso
-from . import ps2patch, tsopatch
+from . import ps2patch, tsopatch, update
 
 MANIFEST = "backups.json"
 
@@ -154,11 +154,17 @@ _PATCH = None
 
 
 def tso_patch():
-    """The TSO patch data shipped with the patcher (loaded once)."""
+    """The patch data for the latest TSO version the patcher has (loaded once; see update.py)."""
     global _PATCH
     if _PATCH is None:
-        _PATCH = tsopatch.TsoPatch()
+        _PATCH = update.best_patch()
     return _PATCH
+
+
+def reload_tso_patch():
+    global _PATCH
+    _PATCH = None
+    return tso_patch()
 
 
 def tso_build_version(data):

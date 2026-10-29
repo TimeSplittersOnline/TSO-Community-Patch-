@@ -18,7 +18,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from pmd import core, ps2patch  # noqa: E402
+from pmd import core, ps2patch, update  # noqa: E402
 from pmd.xbe import parse_xbe_header  # noqa: E402
 
 APP = "TSO Community Patcher"
@@ -217,6 +217,11 @@ class App(tk.Tk):
         pad = {"padx": 8, "pady": 6}
         ttk.Label(tab, text="Makes the TSO Community Patch from your own copy of the game. Close xemu before you start.",
                   wraplength=820, foreground="#555").pack(anchor="w", **pad)
+        up = ttk.Frame(tab)
+        up.pack(fill="x", padx=8)
+        self.update_info = ttk.Label(up, text="", foreground="#555")
+        self.update_info.pack(side="left")
+        ttk.Button(up, text="Check for updates", command=lambda: self.check_updates(quiet=False)).pack(side="right")
 
         a = ttk.LabelFrame(tab, text="1. What to make it from (pick one)")
         a.pack(fill="x", **pad)
@@ -251,6 +256,50 @@ class App(tk.Tk):
         self.src_xbe.trace_add("write", lambda *a: self.describe_source())
         self.xbe_source.trace_add("write", lambda *a: (self.save_settings(), self.describe_source()))
         self.xbox_check()
+        self.show_patch_version()
+        self.after(500, lambda: self.check_updates(quiet=True))
+
+    def show_patch_version(self, extra=""):
+        try:
+            text = "Makes TSO Community Patch %s." % core.tso_patch().version
+        except Exception as e:
+            text = str(e)
+        self.update_info.configure(text=text + ((" " + extra) if extra else ""))
+
+    def check_updates(self, quiet):
+        """Fetch the newest patch data in the background (at start, and from the button)."""
+        try:
+            current = core.tso_patch().version
+        except Exception:
+            current = ""
+        self.update_info.configure(text="Checking for a newer TSO Community Patch...")
+
+        def worker():
+            try:
+                newer, err = update.check(current), None
+            except Exception as e:
+                newer, err = None, e
+            self.q.put(("call", lambda: done(newer, err)))
+
+        def done(newer, err):
+            if err is not None:
+                self.show_patch_version("Couldn't check for updates.")
+                if not quiet:
+                    messagebox.showwarning(APP, "Couldn't check for updates (no internet connection, or GitHub "
+                                                "can't be reached).\n\n%s" % err)
+                return
+            if newer:
+                core.reload_tso_patch()
+                self.show_patch_version("Updated just now.")
+                self.log("Downloaded the patch data for the TSO Community Patch %s." % newer)
+                self.xbox_check()
+                if not quiet:
+                    messagebox.showinfo(APP, "Updated: the patcher now makes the TSO Community Patch %s." % newer)
+            else:
+                self.show_patch_version("Up to date.")
+                if not quiet:
+                    messagebox.showinfo(APP, "You have the latest TSO Community Patch (%s)." % current)
+        threading.Thread(target=worker, daemon=True).start()
 
     def xbox_browse_iso(self):
         cur = self.xbox_iso.get()
