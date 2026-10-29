@@ -1,8 +1,9 @@
 """Load a patched PS2 ELF the way the console does and run its boot copier up to the game's entry.
 
 Usage: python3 tests/ps2_boot_sim.py <dir with SLUS_211.48 and SLES_529.93> <NTSC pnach> <PAL pnach>
-Checks that memory at the game's entry holds the original ELF image plus every pnach write, that the
-mod code area is fully rewritten (stale RAM there is overwritten) and that both caches get flushed."""
+Checks that memory at the game's entry holds the original ELF image plus every pnach write (and the
+keeper's, see ps2_keeper_sim.py), that the mod code area is fully rewritten (stale RAM there is
+overwritten) and that both caches get flushed."""
 import os, struct, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from pmd import ps2patch as p
@@ -73,7 +74,8 @@ def check(orig, pnach):
     exp[va:va + fs] = orig[off:off + fs]
     for lo, hi in rep["segments"]:
         exp[lo:hi] = bytes(hi - lo)
-    for a, d in pn.writes:
+    words = lambda a: struct.unpack_from("<I", orig, off + a - va)[0] if va <= a < va + fs else None
+    for a, d in pn.writes + p.ps2keeper.keeper_writes(p.elf_crc(orig), pn.writes, words):
         exp[a:a + len(d)] = d
     copier, = struct.unpack_from("<I", new, 24)
     assert mem[:copier] == exp[:copier], "memory at the game's entry differs from the pnach result"

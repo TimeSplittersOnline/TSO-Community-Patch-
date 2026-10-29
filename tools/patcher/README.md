@@ -11,6 +11,11 @@ The mod's own code (below the game, 0xE0100-0x100000) is not a separate ELF segm
 loads the game with the console's loader, which runs in that memory. It rides at the end of the game's one segment
 with a small copier the ELF starts at, which puts it in place, flushes the caches and jumps to the game's entry.
 `tests/ps2_boot_sim.py` runs that copier on the real ELFs and checks memory at the game's entry.
+Right after the game reboots the IOP (at start, and when it shuts the network down) 0x84000-0x100000 gets zeroed,
+mod code included; PCSX2 hides that by re-applying the pnach every frame. `pmd/ps2keeper.py` hooks the two calls
+that lead to a reboot: the mod area is stashed, and a vblank handler (at 0x80200, which the wipe leaves alone)
+copies it back when it finds it wiped, then clears the stash and goes idle. `tests/ps2_keeper_sim.py` runs it
+through a boot wipe, an in-game wipe and the cases where it must not restore.
 
 - `TSO Community Patcher.pyw`: the window (Tkinter).
 - `pmd/tsopatch.py`: the patch format (copy/add deltas, lzma), applying and making it.
@@ -20,7 +25,7 @@ with a small copier the ELF starts at, which puts it in place, flushes the cache
   the exe also works. So committing a new `tso_patch.dat` to main offers the update to every player's patcher; the exe
   only needs rebuilding when its code changes.
 - `pmd/core.py`: checks, patching, undo records (`backups.json` in the backup folder).
-- `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF, ISO9660 and UDF.
+- `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF, ISO9660 and UDF; `pmd/ps2keeper.py`: the IOP-reboot keeper.
 - `tools/make_tso_patch.py <version> <TSO Community Patch.xbe> tso_patch.dat "<name>=<default.xbe>" ...`:
   makes `tso_patch.dat` for a new TSO build (run for every delivered build, then rebuild the exe).
   An input written `"!<name>=<default.xbe>"` is only recognised (no delta is shipped for it); the patcher names it

@@ -17,6 +17,8 @@ import os
 import re
 import struct
 
+from . import ps2keeper
+
 SECTOR = 2048
 
 # The only games this works on: (serial, ELF CRC as PCSX2 computes it, label)
@@ -122,7 +124,18 @@ def patch_elf(elf, pnach):
     out = bytearray(elf)
     outside = {}
     report = {"in_elf": 0, "new_segment": 0, "bss": []}
-    for addr, data in pnach.writes:
+
+    def elf_word(a):
+        for p in loads:
+            if p[2] <= a < p[2] + p[4]:
+                return struct.unpack_from("<I", elf, p[1] + a - p[2])[0]
+        return None
+    try:
+        keep = ps2keeper.keeper_writes(elf_crc(elf), pnach.writes, elf_word)
+    except ValueError as e:
+        raise Ps2PatchError("Can't keep the mod's code alive on a real console: %s" % e)
+    report["keeper"] = bool(keep)
+    for addr, data in pnach.writes + keep:
         for i, b in enumerate(data):
             a = addr + i
             placed = False
