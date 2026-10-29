@@ -4,7 +4,9 @@
 with the versions `tso_patch.dat`, and checks the result is byte for byte the delivered build.
 `tso_patch.dat` only holds the differences from each known XBE, never a whole XBE.
 
-**PS2:** builds a pnach into the game's ISO, "Restore original ISO" undoes it.
+**PS2:** builds a pnach into the game's ISO, "Restore original ISO" undoes it. The patched game file is added at the
+end of the ISO and both of the disc's file listings point at it: ISO9660 (PCSX2, real PS2) and UDF (a PS3 running the
+ISO through webMAN reads this one; patching only ISO9660 made it boot the unmodded game).
 
 - `TSO Community Patcher.pyw`: the window (Tkinter).
 - `pmd/tsopatch.py`: the patch format (copy/add deltas, lzma), applying and making it.
@@ -13,7 +15,7 @@ with the versions `tso_patch.dat`, and checks the result is byte for byte the de
   when it is valid and for a later TSO version; a newer `tso_patch.dat` next to the exe also works. So committing a new
   `tso_patch.dat` to main updates every player's patcher; the exe only needs rebuilding when its code changes.
 - `pmd/core.py`: checks, patching, undo records (`backups.json` in the backup folder).
-- `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF and ISO9660.
+- `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF, ISO9660 and UDF.
 - `tools/make_tso_patch.py <version> <TSO Community Patch.xbe> tso_patch.dat "<name>=<default.xbe>" ...`:
   makes `tso_patch.dat` for a new TSO build (run for every delivered build, then rebuild the exe).
   An input written `"!<name>=<default.xbe>"` is only recognised (no delta is shipped for it); the patcher names it

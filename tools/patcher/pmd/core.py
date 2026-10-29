@@ -3,6 +3,7 @@ TimeSplitters: Future Perfect, turn the player's own default.xbe into the TSO Co
 Patch XBE, put it into an Xbox disc image or save it, bake a pnach into a PS2 ISO, and
 put the original back."""
 
+import base64
 import datetime
 import hashlib
 import json
@@ -353,6 +354,9 @@ def restore_ps2_iso(rec, log=print):
     iso_path = rec["iso_path"]
     log("Putting the original game file back in %s ..." % os.path.basename(iso_path))
     with ps2patch.Ps2Iso(iso_path, writable=True) as iso:
+        for s, b64 in rec.get("udf_sectors", []):
+            iso.f.seek(s * ps2patch.SECTOR)
+            iso.f.write(base64.b64decode(b64))
         cur = iso.find(rec["boot"])
         iso.set_record(cur, rec["orig_extent"], rec["orig_size"])
         iso.set_volume_size(rec["orig_volume"])
@@ -363,6 +367,10 @@ def restore_ps2_iso(rec, log=print):
     info = ps2patch.inspect_iso(iso_path)
     if info["crc"] != rec["crc"]:
         raise IOError("Check failed: the game file in the ISO isn't the original after restoring")
+    with ps2patch.Ps2Iso(iso_path) as iso:
+        udf = ps2patch.open_udf(iso.f)
+        if udf and ps2patch.elf_crc(udf.read(rec["boot"])) != rec["crc"]:
+            raise IOError("Check failed: the disc's UDF listing doesn't point at the original game file after restoring")
     log("Original restored (checked: %s)." % ps2patch.describe_crc(info["crc"]))
 
 
@@ -393,11 +401,21 @@ def patch_ps2_iso(pnach_path, iso_path, backup_dir, log=print):
     alloc = (len(new_elf) + sectors - 1) // sectors
     with ps2patch.Ps2Iso(iso_path) as iso:
         orig_volume = struct.unpack_from("<I", iso.pvd, 80)[0]
+        # PS2 DVDs list their files twice (ISO9660 and UDF); a PS3 with webMAN reads the UDF
+        # listing, so it is re-pointed too. Its original sectors go in the undo record.
+        udf = ps2patch.open_udf(iso.f)
+        udf_sectors = []
+        if udf:
+            for s in udf.touched(info["boot"]):
+                iso.f.seek(s * sectors)
+                udf_sectors.append([s, base64.b64encode(iso.f.read(sectors)).decode("ascii")])
+    volume = start + alloc + (1 if udf else 0)   # UDF wants an anchor in the last sector
     undo = {"id": _now_id(), "kind": "ps2-elf", "file": name, "iso_path": os.path.abspath(iso_path),
             "boot": info["boot"], "crc": info["crc"], "size": len(elf),
             "sha1": hashlib.sha1(elf).hexdigest(), "title": "TimeSplitters FP " + ps2patch.TSFP_VERSIONS[info["crc"]][1],
             "orig_extent": rec["extent"], "orig_size": rec["size"], "orig_length": info["length"],
             "orig_volume": orig_volume, "patched_extent": start, "patched_size": len(new_elf),
+            "udf_sectors": udf_sectors,
             "pnach": os.path.basename(pnach_path), "note": "ORIGINAL (pnach: %s)" % os.path.basename(pnach_path),
             "created": datetime.datetime.now().isoformat(timespec="seconds")}
     _add_backup(backup_dir, undo)
@@ -411,16 +429,21 @@ def patch_ps2_iso(pnach_path, iso_path, backup_dir, log=print):
             iso.f.flush()
             os.fsync(iso.f.fileno())
             iso.set_record(iso.find(info["boot"]), start, len(new_elf))
-            iso.set_volume_size(max(orig_volume, start + alloc))
+            iso.set_volume_size(max(orig_volume, volume))
+            if udf:
+                ps2patch.Udf(iso.f).repoint(info["boot"], start, len(new_elf), volume)
             iso.f.flush()
             os.fsync(iso.f.fileno())
         with ps2patch.Ps2Iso(iso_path) as iso:
             back = iso.read(iso.find(info["boot"]))
+            back_udf = ps2patch.Udf(iso.f).read(info["boot"]) if udf else new_elf
         if back != new_elf:
             raise IOError("Check failed: the game file read back from the ISO doesn't match")
+        if back_udf != new_elf:
+            raise IOError("Check failed: the game file read back through the disc's UDF listing doesn't match")
     except Exception:
         log("Something went wrong, undoing...")
         restore_ps2_iso(undo, log)
         raise
-    log("Done. The ISO now has the pnach built in (checked).")
+    log("Done. The ISO now has the pnach built in (checked%s)." % (", both file listings" if udf else ""))
     return undo
