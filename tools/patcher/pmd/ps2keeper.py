@@ -284,6 +284,16 @@ def keeper_writes(crc, writes, elf_word):
     code, handler = k.done(), h.done()
     assert LO + len(code) <= 0xE0100 and HANDLER + len(handler) <= 0x81000, (len(code), len(handler))
     out = [(LO, code), (STATE, bytes(HANDLER - STATE)), (HANDLER, handler)]
+    # The mod keeps its variables in parts of its area the pnach doesn't write (they start at zero
+    # under PCSX2). On a console that memory still holds whatever the loader left there, so the
+    # boot copier zeroes those parts too.
+    gap = None
+    for a in range(LO + len(code), HI + 1):
+        if a < HI and a not in image:
+            gap = a if gap is None else gap
+        elif gap is not None:
+            out.append((gap, bytes(a - gap)))
+            gap = None
     for i, (site, _call) in enumerate(sites):
         out.append((site, struct.pack("<I", jal(k.addr("entry%d" % i)))))
     return out
