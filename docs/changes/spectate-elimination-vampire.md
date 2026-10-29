@@ -16,13 +16,13 @@
 | 008CC000 | 54 bytes | xbreadfail_sp | edi = a local number -> eax = its Spectate entry while it is still ours (a kill message saying "Spec..."), else 0; keeps the others | v5.91 · 2026-10-27 |
 | 008CC036 | 433 bytes | xbreadfail_sp | edi = a view's player -> eax = the player it watches (Spectate), else 0; keeps the others | v5.100 · 2026-10-28 |
 | 008CD75E | 61 bytes | xbreadfail_sp | ebx = this player's PLAYERS index -> eax = 1 with Teamplay while another player of its team is still in (alive, or waiting to respawn with lives left): free cam waits until its team is out (each team-mate can still be watched); keeps the others | v5.100 · 2026-10-28 |
-| 008CEB18 | 42 bytes | xbreadfail_sp | the buttons while watching, bottom left as the game's own remote gun / camera ones (0x136090: its font, place, colours, the | v5.98 · 2026-10-28 |
-| 008CEB42 | 381 bytes | xbreadfail_sp | the buttons while watching, bottom left as the game's own remote gun / camera ones (0x136090: its font, place, colours, the button names 0x436c0 and text 0x427e0): "<Activate> Freecam" (not while a team-mate is still in, with Teamplay; in free cam "Exit freecam", then "<RT> Speed up", one line higher) and "<D-pad> Switch player" (in .text2 since v5.98) | v5.102 · 2026-10-29 |
-| 008CECBF | 79 bytes | xbreadfail_sp | one line: [esp+4] = a button (popped), ebx = the text; the caller's frame: 0 the text, 0x100 x, 0x104 y (here +8) | v5.79 · 2026-10-26 |
-| 008CED0E | 9 bytes | xbreadfail_sp | Menu / message text " Freecam" | v5.79 · 2026-10-26 |
-| 008CED17 | 14 bytes | xbreadfail_sp | Menu / message text " Exit freecam" | v5.79 · 2026-10-26 |
-| 008CED25 | 15 bytes | xbreadfail_sp | Menu / message text " Switch player" | v5.79 · 2026-10-26 |
-| 008CED34 | 10 bytes | xbreadfail_sp | ---------------- Team Elimination: the Scores page's team rows show the team's lives | v5.98 · 2026-10-28 |
+| 008CEB40 | 42 bytes | xbreadfail_sp | the buttons while watching, bottom left as the game's own remote gun / camera ones (0x136090: its font, place, colours, the | v5.98 · 2026-10-28 |
+| 008CEB6A | 381 bytes | xbreadfail_sp | the buttons while watching, bottom left as the game's own remote gun / camera ones (0x136090: its font, place, colours, the button names 0x436c0 and text 0x427e0): "<Activate> Freecam" (not while a team-mate is still in, with Teamplay; in free cam "Exit freecam", then "<RT> Speed up", one line higher) and "<D-pad> Switch player" (in .text2 since v5.98) | v5.103 · 2026-10-29 |
+| 008CECE7 | 79 bytes | xbreadfail_sp | one line: [esp+4] = a button (popped), ebx = the text; the caller's frame: 0 the text, 0x100 x, 0x104 y (here +8) | v5.79 · 2026-10-26 |
+| 008CED36 | 9 bytes | xbreadfail_sp | Menu / message text " Freecam" | v5.79 · 2026-10-26 |
+| 008CED3F | 14 bytes | xbreadfail_sp | Menu / message text " Exit freecam" | v5.79 · 2026-10-26 |
+| 008CED4D | 15 bytes | xbreadfail_sp | Menu / message text " Switch player" | v5.79 · 2026-10-26 |
+| 008CED5C | 10 bytes | xbreadfail_sp | ---------------- Team Elimination: the Scores page's team rows show the team's lives | v5.98 · 2026-10-28 |
 | 008E3733 | 5 bytes | xbreadfail_sp | ---------------- Spectate (Elimination / Vampire, always on for games with the patch: no setting). A player of this game who is out (no lives left) watches a player still in through their eyes: their position and eye height, the way they face and look, their room. D-pad right / left picks the next / previous one; with Teamplay only team-mates; when the one watched is out the next one follows; "Spectating <name>" on each change. Only this game's own view changes (each game draws its own camera; nothing is sent), so games without the patch keep the game's own view and the match plays as before. The view is the game's first-person camera, which XSPFP takes behind the player watched (third person, XSP3P: pulled in by walls; right up against one, at their eyes with them not drawn). per local player number: the PLAYERS index it watches + 1 (0 = none) | v5.3 · 2026-10-16 (approx.) |
 | 008E3738 | 4 bytes | xbreadfail_sp | this frame: Spectate applies (XSPON) | v5.3 · 2026-10-16 (approx.) |
 | 008E373C | 16 bytes | xbreadfail_sp | per local player number: its "Spectating <name>" HUD entry (XSPMSG) | v5.3 · 2026-10-16 (approx.) |
@@ -99,11 +99,11 @@ NTSC address first; the PAL address follows where it differs.
 | 000EE254-000EE2B7 | 25 | HTSK: j at 0x262178 in the name tags' draw (Teamplay: the name over each team-mate; was bnel t6,t7,0x26219C, its delay slot lw t5,0x14(t4) now always run; t6 = the chr's id, t7 = this player's number, t4 = this player, s2 = the chr): | v5.91 · 2026-10-27 |
 | 000EF448-000EF48F | 18 | SPANG0: leaf: a0 = the PLAYERS index now watched, a1 = the local number: no free cam, the camera's angles its own; uses t6-t9 | v5.79 · 2026-10-26 |
 | 000EFAE0-000EFB17 | 14 | SPON: leaf: v0 = 1 when Spectate applies to the match being played (Elimination / Vampire with lives; always on for games with the patch, no setting); uses t8, t9 | v5.78 · 2026-10-26 |
-| 000EFDFC-000EFE27 | 11 | SPK2: code | v5.79 · 2026-10-26 |
-| 000F00F0-000F010B | 7 | SPK: code | v5.78 · 2026-10-26 |
-| 000F0260-000F026F | 4 | LSPFX: text | v5.79 · 2026-10-26 |
-| 000F0270-000F027F | 4 | LSPSW: text | v5.79 · 2026-10-26 |
-| 000F0380-000F038B | 3 | LSPG: text | v5.78 · 2026-10-26 |
-| 000F038C-000F0397 | 3 | LSPF: text | v5.78 · 2026-10-26 (approx.) |
-| 000F0398-000F03A3 | 3 | LSPRT: text | v5.98 · 2026-10-28 |
-| 000F04A8-000F04AF | 2 | SPK3: code | v5.78 · 2026-10-26 (approx.) |
+| 000EFE34-000EFE5F | 11 | SPK2: code | v5.79 · 2026-10-26 |
+| 000F0128-000F0143 | 7 | SPK: code | v5.78 · 2026-10-26 |
+| 000F0298-000F02A7 | 4 | LSPFX: text | v5.79 · 2026-10-26 |
+| 000F02A8-000F02B7 | 4 | LSPSW: text | v5.79 · 2026-10-26 |
+| 000F03B8-000F03C3 | 3 | LSPG: text | v5.78 · 2026-10-26 |
+| 000F03C4-000F03CF | 3 | LSPF: text | v5.78 · 2026-10-26 (approx.) |
+| 000F03D0-000F03DB | 3 | LSPRT: text | v5.98 · 2026-10-28 |
+| 000F04E0-000F04E7 | 2 | SPK3: code | v5.78 · 2026-10-26 (approx.) |

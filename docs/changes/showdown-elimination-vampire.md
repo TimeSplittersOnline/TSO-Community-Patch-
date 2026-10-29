@@ -94,6 +94,6 @@ NTSC address first; the PAL address follows where it differs.
 | 000EF5F0-000EF633 | 17 | SDDRW: jal at 0x42D550 (weapon set page, slot drawing; was jal 0x13B5D0 (GGBAN); a0 = menu mode, a1 = gun id, s0 = '1' + slot): Showdown chosen for a mode that plays it: slots 2-6 drawn greyed out (only slot 1 is used); else GGBAN | v5.3 · 2026-10-16 |
 | 000EF6B8-000EF6F7 | 16 | SDIAG: a0 = page, a1 = 1 greyed out: its Infinite Ammo item (ia.py IID 38) greyed out or not (a Showdown match has none) | v5.89 · 2026-10-27 |
 | 000EF82C-000EF867 | 15 | SDSLOT: jal at 0x42DDFC (weapon set page, its 6 slots; was jal 0x14E8F0, menu add routine (a0 text, a1 slot 0-5, a2 flags, f12 height, a3 select, t0 draw)): Showdown chosen for a mode that plays it: slots 2-6 can't be picked (flag 4) | v5.3 · 2026-10-16 |
-| 000EFDA4-000EFDCF | 11 | SDON: a0 = page: v0 = 1 when its Showdown item is On, else 0 (no item: 0) | v5.3 · 2026-10-16 |
-| 000F0124-000F013B | 6 | SDMOK: leaf: v0 = 1 when Showdown can be picked for the menu's mode (Elimination, Vampire; teams or not); uses t6, t7 | v5.3 · 2026-10-16 |
+| 000EFDDC-000EFE07 | 11 | SDON: a0 = page: v0 = 1 when its Showdown item is On, else 0 (no item: 0) | v5.3 · 2026-10-16 |
+| 000F015C-000F0173 | 6 | SDMOK: leaf: v0 = 1 when Showdown can be picked for the menu's mode (Elimination, Vampire; teams or not); uses t6, t7 | v5.3 · 2026-10-16 |
 | 000FD9E8-000FD9F3 | 3 | LSDO: text | v5.3 · 2026-10-16 (approx.) |

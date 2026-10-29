@@ -32,4 +32,4 @@ NTSC address first; the PAL address follows where it differs.
 | 000E7EE0-000E7FEB | 67 | RCEND: j at 0x44CBE4, the setup builder's return (was jr ra; its delay slot addiu sp,sp,240 done): every player and bot now has a character, so Random Characters can replace them; then return | v5.15 · 2026-10-16 |
 | 000EE1F0-000EE253 | 25 | RCITEM: Advanced page (every mode): Random Characters | v5.3 · 2026-10-16 |
 | 000EF1B8-000EF203 | 19 | RCRA: a0 = page, a1 = 0 refresh / 1 apply: Random Characters value | v5.3 · 2026-10-16 |
-| 000F01C0-000F01D3 | 5 | LRC: text | v5.3 · 2026-10-16 |
+| 000F01F8-000F020B | 5 | LRC: text | v5.3 · 2026-10-16 |

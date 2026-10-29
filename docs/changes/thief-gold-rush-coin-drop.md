@@ -57,7 +57,7 @@ NTSC address first; the PAL address follows where it differs.
 | 000ED7E8-000ED85B | 29 | CDK: jal at 0x1B04FC in character death routine (Thief death coin, was jal 0x41F668 pickup spawn routine; a0 = victim prop, s1 = damage info: 0 target prop, 4 original attacker prop): no coin with Coin Rush, or with Player Kills | v5.3 · 2026-10-16 |
 | 000EF634-000EF677 | 17 | CRCH: Coin Rush changefn (a0 = page, a1 = item): Coin Drop only selectable with Coin Rush Off | v5.3 · 2026-10-16 |
 | 000EF91C-000EF957 | 15 | CDREC: leaf (a0 = victim prop, t6 = 1 no coin / 0 coin): remember it for the host's check of LAN players' coins; uses t7-t9 | v5.3 · 2026-10-16 |
-| 000F0290-000F029F | 4 | LCD1: text | v5.3 · 2026-10-16 |
-| 000F03BC-000F03C7 | 3 | LCR: text | v5.3 · 2026-10-16 |
-| 000F03C8-000F03D3 | 3 | LCD: text | v5.3 · 2026-10-16 |
-| 000F03D4-000F03DF | 3 | LCD0: text | v5.3 · 2026-10-16 |
+| 000F02C8-000F02D7 | 4 | LCD1: text | v5.3 · 2026-10-16 |
+| 000F03F4-000F03FF | 3 | LCR: text | v5.3 · 2026-10-16 |
+| 000F0400-000F040B | 3 | LCD: text | v5.3 · 2026-10-16 |
+| 000F040C-000F0417 | 3 | LCD0: text | v5.3 · 2026-10-16 |

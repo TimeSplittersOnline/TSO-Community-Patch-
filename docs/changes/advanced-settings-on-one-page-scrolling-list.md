@@ -24,7 +24,7 @@
 | 008E5F00 | 10 bytes | xbreadfail_sp | Menu / message text "Modifiers" | v5.3 · 2026-10-16 |
 | 008E5F0A | 14 bytes | xbreadfail_sp | Menu / message text "Team Settings" | v5.3 · 2026-10-16 |
 | 008E5F18 | 12 bytes | xbreadfail_sp | ---------------- Showdown (Elimination, Vampire): the match uses the mode's own Lives; a player with none left doesn't respawn. | v5.3 · 2026-10-16 (approx.) |
-| 008E5F24 | 28 bytes | xbreadfail_sp | Code: VERTXT (see the code shown) | v5.102 · 2026-10-29 |
+| 008E5F24 | 28 bytes | xbreadfail_sp | Code: VERTXT (see the code shown) | v5.103 · 2026-10-29 |
 | 008E5F40 | 12 bytes | xbreadfail_sp | Data: OPCNT | v5.3 · 2026-10-16 (approx.) |
 | 008E5F4C | 4 bytes | xbreadfail_sp | Data: OPN | v5.3 · 2026-10-16 (approx.) |
 | 008E5F50 | 4 bytes | xbreadfail_sp | Data: OPNB | v5.3 · 2026-10-16 (approx.) |
@@ -46,13 +46,13 @@
 | 000EF400-000EF447 | 18 | OPPUT: leaf: a0 = id: the item of A with it (if any) goes next in B (OPPUTI); uses t7-t9, a0 | v5.3 · 2026-10-16 |
 | 000EFA70-000EFAA7 | 14 | OPINA: leaf: v0 = 1 when a0 is one of A's items; uses t7-t9 | v5.3 · 2026-10-16 |
 | 000EFAA8-000EFADF | 14 | OPPUTI: leaf: a0 = A index: next in B; uses t7-t9 | v5.3 · 2026-10-16 |
-| 000EFC20-000EFC53 | 13 | OPMARG: the Advanced items' text margins and item flags, as the title set them | v5.3 · 2026-10-16 |
-| 000EFF44-000EFF6B | 10 | OPFIRST: leaf: v0 = the first item of the scrolled part (0 = none) | v5.3 · 2026-10-16 |
-| 000F0048-000F006B | 9 | PTPC: j at 0xFD17C (was j 0xFBD10, sub.py's Teamplay step): no Teamplay in the colour part | v5.3 · 2026-10-16 (approx.) |
-| 000F006C-000F008F | 9 | PCOL: jal at 0xFD23C (was jal 0xFBD80, sub.py's colour count): colours only in the colour part | v5.3 · 2026-10-16 |
-| 000F0184-000F0197 | 5 | OPHL1: code | v5.3 · 2026-10-16 |
-| 000F0250-000F025F | 4 | OPHL3: code | v5.3 · 2026-10-16 |
-| 000F035C-000F0367 | 3 | OPHL2: code | v5.3 · 2026-10-16 |
-| 000F0368-000F0373 | 3 | OPHLAB: code | v5.102 · 2026-10-29 |
-| 000F04A0-000F04A7 | 2 | NTL: folder links (j at 0xFBE58 in sub.py's ZA 'after', was mtc1 zero,$f12; its delay slot mtc1 zero,$f13 kept): none: every Advanced Settings item is on one page (OPT), so no divider and no Team / Spawn Settings links | v5.3 · 2026-10-16 (approx.) |
-| 000FB3A4-000FB3BF | 7 | VERT: code | v5.102 · 2026-10-29 |
+| 000EFC54-000EFC87 | 13 | OPMARG: the Advanced items' text margins and item flags, as the title set them | v5.3 · 2026-10-16 |
+| 000EFF7C-000EFFA3 | 10 | OPFIRST: leaf: v0 = the first item of the scrolled part (0 = none) | v5.3 · 2026-10-16 |
+| 000F0080-000F00A3 | 9 | PTPC: j at 0xFD17C (was j 0xFBD10, sub.py's Teamplay step): no Teamplay in the colour part | v5.3 · 2026-10-16 (approx.) |
+| 000F00A4-000F00C7 | 9 | PCOL: jal at 0xFD23C (was jal 0xFBD80, sub.py's colour count): colours only in the colour part | v5.3 · 2026-10-16 |
+| 000F01BC-000F01CF | 5 | OPHL1: code | v5.3 · 2026-10-16 |
+| 000F0288-000F0297 | 4 | OPHL3: code | v5.3 · 2026-10-16 |
+| 000F0394-000F039F | 3 | OPHL2: code | v5.3 · 2026-10-16 |
+| 000F03A0-000F03AB | 3 | OPHLAB: code | v5.103 · 2026-10-29 |
+| 000F04D8-000F04DF | 2 | NTL: folder links (j at 0xFBE58 in sub.py's ZA 'after', was mtc1 zero,$f12; its delay slot mtc1 zero,$f13 kept): none: every Advanced Settings item is on one page (OPT), so no divider and no Team / Spawn Settings links | v5.3 · 2026-10-16 (approx.) |
+| 000FB3A4-000FB3BF | 7 | VERT: code | v5.103 · 2026-10-29 |

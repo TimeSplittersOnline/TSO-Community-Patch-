@@ -58,9 +58,9 @@ NTSC address first; the PAL address follows where it differs.
 | 000EAD84-000EAE37 | 45 | SBREF: a0 = page, a1 = 0 refresh / 1 apply (tail of GGKREF): Setbacks value; refresh also makes Kills To Advance grey it out with 1 Kill, and greys it now | v5.3 · 2026-10-16 |
 | 000ED0C4-000ED13F | 31 | SBRX: coin message arriving (j at 0x4F9320, was bgezl t7,0x4F9348 / sw zero,25724(s0); t7 = the player's local number, t3 its slot, a1 the pad): another game's player's coin as before; for this game's own player (which the game | v5.70 · 2026-10-23 |
 | 000EDCBC-000EDD27 | 27 | SBCH: Setbacks changefn (a0 = page, a1 = item): with 1 Kill To Advance One Kill is skipped, on to One Weapon or back to Off, whichever way the player is scrolling | v5.3 · 2026-10-16 |
-| 000EFF94-000EFFB7 | 9 | SNDLD: sound loader decision (j from 0x1123D8, was j mk.py's MKLD; a0 = sound id, t7 = table entry): always load the multikill jingle (3455) and the Setbacks laugh at level start | v5.8 · 2026-10-16 |
-| 000F0300-000F030F | 4 | LHUM: text | v5.8 · 2026-10-16 |
-| 000F0464-000F046F | 3 | LSB: text | v5.3 · 2026-10-16 (approx.) |
-| 000F0470-000F047B | 3 | LSB1: text | v5.3 · 2026-10-16 (approx.) |
-| 000F047C-000F0487 | 3 | LSB2: text | v5.3 · 2026-10-16 |
-| 000F0490-000F0497 | 2 | SBKCH: Kills To Advance changefn (a0 = page, a1 = item) | v5.3 · 2026-10-16 (approx.) |
+| 000EFFCC-000EFFEF | 9 | SNDLD: sound loader decision (j from 0x1123D8, was j mk.py's MKLD; a0 = sound id, t7 = table entry): always load the multikill jingle (3455) and the Setbacks laugh at level start | v5.8 · 2026-10-16 |
+| 000F0338-000F0347 | 4 | LHUM: text | v5.8 · 2026-10-16 |
+| 000F049C-000F04A7 | 3 | LSB: text | v5.3 · 2026-10-16 (approx.) |
+| 000F04A8-000F04B3 | 3 | LSB1: text | v5.3 · 2026-10-16 (approx.) |
+| 000F04B4-000F04BF | 3 | LSB2: text | v5.3 · 2026-10-16 |
+| 000F04C8-000F04CF | 2 | SBKCH: Kills To Advance changefn (a0 = page, a1 = item) | v5.3 · 2026-10-16 (approx.) |

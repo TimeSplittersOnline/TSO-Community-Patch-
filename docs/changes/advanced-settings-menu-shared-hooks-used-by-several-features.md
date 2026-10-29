@@ -101,10 +101,10 @@ NTSC address first; the PAL address follows where it differs.
 | 000EE9EC-000EEA43 | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
 | 000EF868-000EF8A3 | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
 | 000EF8A4-000EF8DF | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EFBB8-000EFBEB | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
-| 000EFD48-000EFD77 | 12 | GGCT: text | v5.15 · 2026-10-16 |
-| 000F0280-000F028F | 4 | LWWA: text | v5.3 · 2026-10-16 |
-| 000F0498-000F049F | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
+| 000EFBEC-000EFC1F | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
+| 000EFD80-000EFDAF | 12 | GGCT: text | v5.15 · 2026-10-16 |
+| 000F02B8-000F02C7 | 4 | LWWA: text | v5.3 · 2026-10-16 |
+| 000F04D0-000F04D7 | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
 | 000FE640-000FE663 | 9 | LTEAML=lstr('Team Settings >',16); LSPAWNL=lstr('Spawn Settings >',20) | v5.3 · 2026-10-16 |
 | 000FE664-000FE677 | 5 | LSCORE=lstr('Score With Bag Away',20) | v5.3 · 2026-10-16 |
 | 000FE678-000FE6B3 | 15 | a.w[ZR_]=addiu('t7','t7',lo(a.lab['ZRET'])); FLRET=a.lab['FLRET']; place(a) | v5.3 · 2026-10-16 |

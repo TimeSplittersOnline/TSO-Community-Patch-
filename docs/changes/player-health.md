@@ -47,11 +47,11 @@ NTSC address first; the PAL address follows where it differs.
 | 000EC6DC-000EC76B | 36 | PHNH: jal at 0x1B1968 in the damage routine (was jal 0x4F9728, the hit's report: sends a hit this game decides; its delay slot daddu a0,s0 = the hit kept; v0: 1 = this game takes it now): LAN player, a hit of its own going through PHDA's LAN | v5.78 · 2026-10-26 |
 | 000EC76C-000EC7FB | 36 | PHRX: jal at 0x4F9418 in the damage report decode (was lw t7,136(fp): the buffer, at the amount; its delay slot kept; fp = its frame: +0 target, +8 attacker; s3 = packet type): the host passing on another game's report (packet 17): | v5.67 · 2026-10-23 |
 | 000EF204-000EF24F | 19 | PHRA: a0 = page, a1 = 0 refresh / 1 apply: Player Health (stored as the option) | v5.68 · 2026-10-23 |
-| 000F0240-000F024F | 4 | PHM: by PHVAR: Default, 75, 50, 25% | v5.67 · 2026-10-23 |
-| 000F02C0-000F02CF | 4 | LPH: text | v5.67 · 2026-10-23 |
-| 000F0350-000F035B | 3 | PHORIG: the damage routine's own start (PHDA's tail; its first word, then on at 0x1B18D8) | v5.67 · 2026-10-23 |
-| 000F0404-000F040F | 3 | LPH25: text | v5.67 · 2026-10-23 (approx.) |
-| 000F0410-000F041B | 3 | LPH50: text | v5.67 · 2026-10-23 (approx.) |
-| 000F04C8-000F04CF | 2 | LPH100: text | v5.67 · 2026-10-23 (approx.) |
-| 000F054C-000F054F | 1 | LPH75: text | v5.67 · 2026-10-23 (approx.) |
+| 000F0278-000F0287 | 4 | PHM: by PHVAR: Default, 75, 50, 25% | v5.67 · 2026-10-23 |
+| 000F02F8-000F0307 | 4 | LPH: text | v5.67 · 2026-10-23 |
+| 000F0388-000F0393 | 3 | PHORIG: the damage routine's own start (PHDA's tail; its first word, then on at 0x1B18D8) | v5.67 · 2026-10-23 |
+| 000F043C-000F0447 | 3 | LPH25: text | v5.67 · 2026-10-23 (approx.) |
+| 000F0448-000F0453 | 3 | LPH50: text | v5.67 · 2026-10-23 (approx.) |
+| 000F0500-000F0507 | 2 | LPH100: text | v5.67 · 2026-10-23 (approx.) |
+| 000F0584-000F0587 | 1 | LPH75: text | v5.67 · 2026-10-23 (approx.) |
 | 000FC95C-000FC9FF | 41 | PHKL: kill message (from SDKL, when not a Showdown shot: the jal at 0x4FA898 in kill message, was jal local-send routine: a0 the prop it goes by, a1 type as host (18), a2 type as player (19), a3 data, t0 size, t1 reliable; s0 = damage info): LAN host, | v5.67 · 2026-10-23 |

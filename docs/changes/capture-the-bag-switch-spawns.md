@@ -41,4 +41,4 @@ NTSC address first; the PAL address follows where it differs.
 | 000EBA54-000EBAF3 | 40 | SWSCAN: s4 = setup (pads +36, +40 of them; number +4, flags +8), s5 = the other team's flag, s2 = own, a1 = k (-1: count): v0 = the k-th usable spawn point of the other team (entry), or their number | v5.6 · 2026-10-16 |
 | 000ED3AC-000ED427 | 31 | SWITEM: Capture the Bag menu: Switch Spawns | v5.3 · 2026-10-16 |
 | 000EF16C-000EF1B7 | 19 | SWRA: a0 = page, a1 = 0 refresh / 1 apply: Switch Spawns value | v5.3 · 2026-10-16 |
-| 000F02F0-000F02FF | 4 | LSWI: text | v5.3 · 2026-10-16 |
+| 000F0328-000F0337 | 4 | LSWI: text | v5.3 · 2026-10-16 |

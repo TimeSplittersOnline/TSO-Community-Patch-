@@ -83,10 +83,10 @@ NTSC address first; the PAL address follows where it differs.
 | 000EEEF0-000EEF43 | 21 | KHRA: a0 = page, a1 = 0 refresh / 1 apply: King of the Hill value | v5.3 · 2026-10-16 |
 | 000EF038-000EF087 | 20 | KHCHR: leaf: v0 = this game's first player's character record (the zone drops are made "by" it), or chr slot 0 when it has none (the host before it has spawned, or dead); uses t0-t3. The drop only reads the chr's prop (Story only) and id (the | v5.3 · 2026-10-16 |
 | 000EFB18-000EFB4F | 14 | KHLATER: leaf: LAN host: every zone dropped on the Hill again 2 seconds later (a game whose network let a drop or capture arrive late or out of order puts it right); uses t8,t9 | v5.3 · 2026-10-16 |
-| 000EFC54-000EFC87 | 13 | KHON: leaf: v0 = 1 while King of the Hill runs in this match on this game (Zones, set up), else 0; uses t9 | v5.3 · 2026-10-16 |
-| 000EFF6C-000EFF93 | 10 | KHAUTH: leaf: v0 = 1 when this game decides (offline or LAN host); uses t9 | v5.3 · 2026-10-16 |
-| 000F01E8-000F01FB | 5 | LKH: text | v5.3 · 2026-10-16 |
-| 000F01FC-000F020F | 5 | LKHM: text | v5.3 · 2026-10-16 |
-| 000F0320-000F032F | 4 | LKH30: text | v5.3 · 2026-10-16 |
-| 000F0330-000F033F | 4 | LKH60: text | v5.3 · 2026-10-16 |
-| 000F0340-000F034F | 4 | LKH90: text | v5.3 · 2026-10-16 |
+| 000EFC88-000EFCBB | 13 | KHON: leaf: v0 = 1 while King of the Hill runs in this match on this game (Zones, set up), else 0; uses t9 | v5.3 · 2026-10-16 |
+| 000EFFA4-000EFFCB | 10 | KHAUTH: leaf: v0 = 1 when this game decides (offline or LAN host); uses t9 | v5.3 · 2026-10-16 |
+| 000F0220-000F0233 | 5 | LKH: text | v5.3 · 2026-10-16 |
+| 000F0234-000F0247 | 5 | LKHM: text | v5.3 · 2026-10-16 |
+| 000F0358-000F0367 | 4 | LKH30: text | v5.3 · 2026-10-16 |
+| 000F0368-000F0377 | 4 | LKH60: text | v5.3 · 2026-10-16 |
+| 000F0378-000F0387 | 4 | LKH90: text | v5.3 · 2026-10-16 |

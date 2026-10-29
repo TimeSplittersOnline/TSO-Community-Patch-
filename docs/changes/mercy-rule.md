@@ -35,4 +35,4 @@ NTSC address first; the PAL address follows where it differs.
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000FC000-000FC91B | 342 | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
-| 000EFD18-000EFD47 | 12 | LMIN: text | v5.3 · 2026-10-16 |
+| 000EFD4C-000EFD7B | 12 | LMIN: text | v5.3 · 2026-10-16 |
