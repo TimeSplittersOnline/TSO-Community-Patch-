@@ -4,8 +4,7 @@
 BPS: Floating IPS, beat and most patchers apply it. Only the changed bytes are stored; unchanged ones are copied from the
 player's own file, so the patch holds none of the game's code.
 Make the release patches from the files players have: the retail title update default.xbe (MD5
-f0de376970932db0812bb07909189f5d) -> TSO Community Patch.bps, and devildwarf's MapMaker XBE
-(b45afee1c66107dcb1fa4397bbaa02b0) -> TSO Community Patch (MapMaker XBE).bps. Not originals/xbox_default_supplied.xbe:
+f0de376970932db0812bb07909189f5d) -> TSO Community Patch.bps. Not originals/xbox_default_supplied.xbe:
 that one has extra private changes, so no player's file matches it."""
 import sys,zlib,struct
 def vint(n):
