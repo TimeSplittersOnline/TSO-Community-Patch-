@@ -11,11 +11,11 @@ You need your own copy of the game. This repository contains no game files.
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### Xbox (xemu or a modded console)
-1. Take the title update's `default.xbe` (`TDATA\45410066\$u\default.xbe`, 6,344,704 bytes, CRC32 `BDC3CEB9`, MD5 `f0de376970932db0812bb07909189f5d`).
+1. Take `default.xbe` from your USA retail disc (6,270,976 bytes, CRC32 `05BF2120`, MD5 `4aeb1a1fded674575759b681f2125966`). The title update isn't needed: the patch includes it.
 2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) to it with any BPS patcher (Floating IPS, beat, etc).
 3. Use the patched XBE in place of the original.
 
-A BPS patch only works on the exact file it was made from; a patcher that reports a checksum or size mismatch was given a different XBE (for example the disc's own `default.xbe`, which has no title update).
+A BPS patch only works on the exact file it was made from; a patcher that reports a checksum or size mismatch was given a different XBE (for example a Europe disc, a title update `default.xbe`, or an xiso copy with changed bytes).
 
 ## Resources 
 
@@ -24,7 +24,7 @@ A BPS patch only works on the exact file it was made from; a patcher that report
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
-The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and `TSO Community Patch.bps` for Xbox (made from the title update XBE). Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
+The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and `TSO Community Patch.bps` for Xbox (made from the USA retail disc XBE). Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
 ## Features
 
