@@ -11,18 +11,11 @@ You need your own copy of the game. This repository contains no game files.
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### Xbox (xemu or a modded console)
-The easiest way is the **TSO Community Patcher** (Windows), on the [latest release](https://github.com/TimeSplittersOnline/TSO-Community-Patch-/releases/latest). It makes the TSO Community Patch XBE from your own game, so the modded XBE itself is never shared.
-1. Download `TSO Community Patcher.exe` from the [latest release](https://github.com/TimeSplittersOnline/TSO-Community-Patch-/releases/latest).
-2. Close xemu and run the patcher. You only need it once: each time it starts it checks for a newer TSO version and asks before switching to it (or press **Check for updates**).
-3. In step 1, pick your disc image (.iso), or a `default.xbe` file. Either works with or without the title update, USA or Europe: the disc's own `default.xbe`, or the title update's `TDATA\45410066\$u\default.xbe`. An older TSO Community Patch XBE (v5.3 on), or a disc image with one in it, is updated to the current build.
-4. Press **Apply patch**. A disc image is patched in place; a default.xbe file is saved as a new patched XBE for xemu or an Xbox hard drive. **Restore original ISO/XBE** reverts the file back to the original version without the patch.
-
-If you would rather not use the TSO Community Patcher, you can use a variety of alternative BPS patchers:
 1. Take the title update's `default.xbe` (`TDATA\45410066\$u\default.xbe`, 6,344,704 bytes, CRC32 `BDC3CEB9`, MD5 `f0de376970932db0812bb07909189f5d`).
 2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) to it with any BPS patcher (Floating IPS, beat, etc). If you use devildwarf's MapMaker-patched title update XBE instead (CRC32 `0A0DA47C`, MD5 `b45afee1c66107dcb1fa4397bbaa02b0`), apply [`build/TSO Community Patch (MapMaker XBE).bps`](<build/TSO Community Patch (MapMaker XBE).bps>). Both give the same XBE.
 3. Use the patched XBE in place of the original.
 
-A BPS patch only works on the exact file it was made from; a patcher that reports a checksum or size mismatch was given a different XBE (for example the disc's own `default.xbe`, which has no title update). Use the TSO Community Patcher for those.
+A BPS patch only works on the exact file it was made from; a patcher that reports a checksum or size mismatch was given a different XBE (for example the disc's own `default.xbe`, which has no title update).
 
 ## Resources 
 
