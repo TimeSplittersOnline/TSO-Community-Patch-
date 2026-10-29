@@ -74,8 +74,11 @@ def check(orig, pnach):
     o = lambda a: struct.unpack_from("<I", orig, a - 0x100000 + 0x1000)[0]
     mem, _sc = sim.boot(new, struct.unpack_from("<I", orig, 24)[0])
     mod = bytes(mem[k.LO:k.HI])
-    for a, d in pn.writes:
-        assert mem[a:a + len(d)] == d
+    want = {}
+    for a, d in pn.writes:                                        # later lines win, as in PCSX2
+        for i, b in enumerate(d):
+            want[a + i] = b
+    assert all(mem[a] == b for a, b in want.items())
     _t, _off, va, _pa, fs, ms, _f, _a = p._phdrs(orig)[2][0]
     mem[0x774B00:va + ms] = bytes(va + ms - 0x774B00)        # crt0 clears the bss
     assert word(mem, site1) != o(site1) and word(mem, site2) != o(site2)
