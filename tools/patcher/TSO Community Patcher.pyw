@@ -518,7 +518,7 @@ class App(tk.Tk):
         self.ps2_match = tk.Label(c, text="", font=("TkDefaultFont", 11, "bold"), anchor="w", justify="left", wraplength=780)
         self.ps2_match.pack(fill="x", **pad)
         ttk.Label(c, text="The original game file is kept inside the ISO and a copy is saved to your backup folder, "
-                          "so \"Restore original ISO\" returns the ISO to exactly how it was.",
+                          "so \"Restore original ISO\" restores the ISO without the patch.",
                   wraplength=780, foreground="#555").pack(anchor="w", padx=8)
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
