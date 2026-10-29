@@ -248,7 +248,7 @@ class App(tk.Tk):
 
     def _build_xbox_page(self, tab):
         pad = {"padx": 8, "pady": 6}
-        ttk.Label(tab, text="Makes the TSO Community Patch from your own copy of the game. Close xemu before you start.",
+        ttk.Label(tab, text="Makes the TSO Community Patch from your own copy of the game. Close xemu if you are patching an Xbox ISO.",
                   wraplength=780, foreground="#555").pack(anchor="w", **pad)
         up = ttk.Frame(tab)
         up.pack(fill="x", padx=8)
