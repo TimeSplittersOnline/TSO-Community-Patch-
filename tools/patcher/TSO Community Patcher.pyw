@@ -256,7 +256,7 @@ class App(tk.Tk):
         self.update_info.pack(side="left")
         ttk.Button(up, text="Check for updates", command=lambda: self.check_updates(quiet=False)).pack(side="right")
 
-        a = ttk.LabelFrame(tab, text="1. What to make it from (pick one)")
+        a = ttk.LabelFrame(tab, text="1. Apply patch to... (pick one)")
         a.pack(fill="x", **pad)
         ttk.Radiobutton(a, text="My disc image (.iso):", value="iso", variable=self.xbe_source
                         ).grid(row=0, column=0, sticky="w", padx=8, pady=(6, 0))
@@ -276,10 +276,6 @@ class App(tk.Tk):
 
         c = ttk.LabelFrame(tab, text="2. Patch")
         c.pack(fill="x", **pad)
-        ttk.Label(c, text="Patches the disc image from step 1. If you only chose a default.xbe file, it saves the patched "
-                          "XBE as a file for xemu or an Xbox hard drive instead. A copy of the original is kept, so "
-                          "\"Restore original ISO/XBE\" undoes it.",
-                  wraplength=780, foreground="#555").pack(anchor="w", padx=8, pady=(6, 0))
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
         ttk.Button(row, text="Apply patch", style="Big.TButton", command=self.xbox_apply).pack(side="left")
@@ -350,7 +346,7 @@ class App(tk.Tk):
         p = self.xbox_iso.get().strip()
         self.xbox_target = None
         if not p:
-            self.xbox_iso_info.configure(text="With a default.xbe file: pick a disc image here to patch it, or leave this empty to save an XBE file.", foreground="#555")
+            self.xbox_iso_info.configure(text="", foreground="#555")
         else:
             try:
                 t = core.find_iso_game(p)
@@ -418,8 +414,8 @@ class App(tk.Tk):
         return data
 
     def xbox_apply(self):
-        """One button: patch the disc image when one is chosen, otherwise save the XBE as a file."""
-        if self.xbe_source.get() == "file" and not self.xbox_iso.get().strip():
+        """One button: patch the disc image, or save the patched default.xbe as a new file."""
+        if self.xbe_source.get() == "file":
             self.xbox_save()
         else:
             self.xbox_patch()
