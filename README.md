@@ -20,15 +20,15 @@ The easiest way is the **TSO Community Patcher** (Windows), found in [tools](too
 The patcher checks your file is a copy of the game it knows and that the result is byte for byte the current build; anything else is refused. Its source is in [`tools/patcher`](tools/patcher).
 
 Or by hand, with a BPS patcher:
-1. Take `default.xbe` from your copy of the game **with the title update** (the patch only applies to that exact file: size 6,344,704 bytes, MD5 `d2fc3bed99456864a96fff179d5336d1`).
+1. Take `default.xbe` from your copy of the game **with the title update**.
 2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) with any BPS patcher (Floating IPS, beat, etc).
-3. Use the patched XBE in place of the original (keep a backup of the original).
+3. Use the patched XBE in place of the original.
 
 ## Resources 
 
 - [CHANGELOG.md](CHANGELOG.md): every version, newest first, with the date and what changed.
 - [docs/versions](docs/versions/README.md): one page per version (v5.3 on) listing every change to the game's code and data compared with the build before it: what was there, what it became and why.
-- [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, by feature, with the original and new bytes or instructions.
+- [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
 The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and `TSO Community Patch.bps` for Xbox. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
