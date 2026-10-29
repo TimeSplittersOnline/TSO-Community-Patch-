@@ -45,10 +45,27 @@ def open_in_explorer(path):
         subprocess.Popen(["xdg-open", path])
 
 
+def see_through(widget, alpha):
+    """Let the background picture show through a panel (Windows 8 and later: a layered child window).
+    Anywhere else, or if Windows refuses, the panel just stays solid."""
+    if not sys.platform.startswith("win"):
+        return
+    try:
+        import ctypes
+        user32 = ctypes.windll.user32
+        hwnd = widget.winfo_id()
+        GWL_EXSTYLE, WS_EX_LAYERED, LWA_ALPHA = -20, 0x80000, 2
+        user32.SetWindowLongW(hwnd, GWL_EXSTYLE, user32.GetWindowLongW(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED)
+        user32.SetLayeredWindowAttributes(hwnd, 0, int(alpha * 255), LWA_ALPHA)
+    except Exception:
+        pass
+
+
 class App(tk.Tk):
     SECTIONS = (("xbox", "Xbox TSO patch", "Make the TSO Community Patch from your own XBE"),
                 ("ps2", "TSO PS2 PNACH", "Build a pnach into your PS2 ISO"))
     NAV_ON, NAV_OFF, NAV_HOVER = "#2b65d9", "#e4e7ec", "#d2d9e6"
+    PANEL_ALPHA = 0.86  # how solid the menu tiles and page are over the background picture
 
     def __init__(self):
         super().__init__()
@@ -188,6 +205,10 @@ class App(tk.Tk):
         self.logbox = tk.Text(bottom, height=6, state="disabled", wrap="word")
         self.logbox.pack(fill="x", pady=(4, 0))
         self.show_section("xbox")
+        if m:
+            self.update_idletasks()
+            for w in [n[0] for n in self.nav.values()] + [body]:
+                see_through(w, self.PANEL_ALPHA)
 
     def _page(self, key):
         f = ttk.Frame(self.page_area)
