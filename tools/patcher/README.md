@@ -28,6 +28,12 @@ through a boot wipe, an in-game wipe and the cases where it must not restore.
 - `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF, ISO9660 and UDF; `pmd/ps2keeper.py`: the IOP-reboot keeper.
 - `tools/make_xdelta.py <original.iso> <patched.iso> <out.xdelta>`: an xdelta (VCDIFF) from an untouched ISO to one
   the patcher made, for players who'd rather use xdelta3 / Delta Patcher (`tests/test_xdelta.py` checks it with xdelta3).
+- `tools/console_check.py <game ELF> <pnach>`: looks through the mod's code (and every game instruction the pnach
+  changes) for things PCSX2 lets slide but a real PS2/PS3 doesn't: NULL loads in branch delay slots, R5900 short loops,
+  instructions the EE doesn't have, jumps to nothing, misaligned or unmapped fixed addresses, stores into code or into
+  words PCSX2 keeps rewriting. Exit status 1 on errors. Run it after every change to the pnach.
+- `tools/consolefix.py <game ELF> <in.pnach> <out.pnach>`: a copy of the pnach with the NULL loads and short loops fixed
+  (lines added at the end, code at 0x000F4000); console_check.py should then find neither.
 - `tools/make_tso_patch.py <version> <TSO Community Patch.xbe> tso_patch.dat "<name>=<default.xbe>" ...`:
   makes `tso_patch.dat` for a new TSO build (run for every delivered build, then rebuild the exe).
   An input written `"!<name>=<default.xbe>"` is only recognised (no delta is shipped for it); the patcher names it
