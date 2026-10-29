@@ -4,7 +4,7 @@
 Xbox: turn the player's own default.xbe into the TSO Community Patch XBE, then put it
 into the game's disc image (as default.xbe) or save it as a file.
 PS2: build a PCSX2 .pnach into the game's ISO.
-Both can be undone with "Put the original back".
+Both can be undone with "Restore original ISO/XBE" (Xbox) or "Restore original ISO" (PS2).
 """
 
 import json
@@ -47,7 +47,7 @@ def open_in_explorer(path):
 
 class App(tk.Tk):
     SECTIONS = (("xbox", "Xbox TSO patch", "Make the TSO Community Patch from your own XBE"),
-                ("ps2", "PS2 pnach → ISO", "Build a pnach into your PS2 ISO"))
+                ("ps2", "TSO PS2 PNACH", "Build a pnach into your PS2 ISO"))
     NAV_ON, NAV_OFF, NAV_HOVER = "#2b65d9", "#e4e7ec", "#d2d9e6"
 
     def __init__(self):
@@ -243,14 +243,14 @@ class App(tk.Tk):
 
         c = ttk.LabelFrame(tab, text="2. Patch")
         c.pack(fill="x", **pad)
-        ttk.Label(c, text="Patch the disc image above, or save the patched XBE as a file for an xemu or Xbox hard drive. "
-                          "Patching keeps a copy of the original, so \"Put the original back\" undoes it.",
+        ttk.Label(c, text="Patch the disc image above, or save the patched XBE as a file for xemu or an Xbox hard drive. "
+                          "Patching keeps a copy of the original, so \"Restore original ISO/XBE\" undoes it.",
                   wraplength=820, foreground="#555").pack(anchor="w", padx=8, pady=(6, 0))
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
         ttk.Button(row, text="PATCH DISC IMAGE", style="Big.TButton", command=self.xbox_patch).pack(side="left")
-        ttk.Button(row, text="SAVE TSO XBE AS...", style="Big.TButton", command=self.xbox_save).pack(side="left", padx=12)
-        ttk.Button(row, text="Put the original back", command=self.xbox_restore).pack(side="left", padx=12)
+        ttk.Button(row, text="SAVE TSO XBE", style="Big.TButton", command=self.xbox_save).pack(side="left", padx=12)
+        ttk.Button(row, text="Restore original ISO/XBE", command=self.xbox_restore).pack(side="left", padx=12)
 
         self.xbox_iso.trace_add("write", lambda *a: self.xbox_check())
         self.src_xbe.trace_add("write", lambda *a: self.describe_source())
@@ -478,12 +478,12 @@ class App(tk.Tk):
         self.ps2_match = tk.Label(c, text="", font=("TkDefaultFont", 11, "bold"), anchor="w", justify="left", wraplength=820)
         self.ps2_match.pack(fill="x", **pad)
         ttk.Label(c, text="The original game file is kept inside the ISO and a copy is saved to your backup folder, "
-                          "so \"Put the original back\" returns the ISO to exactly how it was.",
+                          "so \"Restore original ISO\" returns the ISO to exactly how it was.",
                   wraplength=820, foreground="#555").pack(anchor="w", padx=8)
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
         ttk.Button(row, text="PATCH ISO", style="Big.TButton", command=self.ps2_patch).pack(side="left")
-        ttk.Button(row, text="Put the original back", command=lambda: self.ps2_restore(None)).pack(side="left", padx=12)
+        ttk.Button(row, text="Restore original ISO", command=lambda: self.ps2_restore(None)).pack(side="left", padx=12)
 
         self.ps2_pnach.trace_add("write", lambda *a: self.ps2_check())
         self.ps2_iso.trace_add("write", lambda *a: self.ps2_check())

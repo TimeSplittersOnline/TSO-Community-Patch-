@@ -4,7 +4,7 @@
 with the versions `tso_patch.dat`, and checks the result is byte for byte the delivered build.
 `tso_patch.dat` only holds the differences from each known XBE, never a whole XBE.
 
-**PS2:** builds a pnach into the game's ISO, "Put the original back" undoes it.
+**PS2:** builds a pnach into the game's ISO, "Restore original ISO" undoes it.
 
 - `TSO Community Patcher.pyw`: the window (Tkinter).
 - `pmd/tsopatch.py`: the patch format (copy/add deltas, lzma), applying and making it.
