@@ -20,7 +20,7 @@
 | 00011E4D | 50 bytes | XBE header | Code: XMEXT1 (see the code shown) | v5.3 · 2026-10-16 |
 | 00011E7F | 41 bytes | XBE header | Code: XMEXT2 (see the code shown) | v5.3 · 2026-10-16 |
 | 00011EA8 | 319 bytes | XBE header | Code: XCHK (see the code shown) | v5.89 · 2026-10-27 |
-| 008E78DC | 27 bytes | xbreadfail_sp | Mercy Rule times (mc3.s, header 0x11e1c: mov $LMIN,%esi; were "1 Min" .. "5 Min") | v5.3 · 2026-10-16 |
+| 008E78EC | 27 bytes | xbreadfail_sp | Mercy Rule times (mc3.s, header 0x11e1c: mov $LMIN,%esi; were "1 Min" .. "5 Min") | v5.3 · 2026-10-16 |
 
 ## PS2: changes to the game's own code and data
 
@@ -28,11 +28,11 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013E660 | 0C0E236C | 0C03BA78 | jal 0x388db0 | jal 0xee9e0 | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
+| 0013E660 | 0C0E236C | 0C03BA7B | jal 0x388db0 | jal 0xee9ec | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000FC000-000FC91B | 342 | Mercy Rule (Advanced Settings, set per mode): host ends the match when 1st place leads 2nd by the limit (kills; coins in Thief) | v5.89 · 2026-10-27 |
-| 000EFD0C-000EFD3B | 12 | LMIN: text | v5.3 · 2026-10-16 |
+| 000EFD18-000EFD47 | 12 | LMIN: text | v5.3 · 2026-10-16 |

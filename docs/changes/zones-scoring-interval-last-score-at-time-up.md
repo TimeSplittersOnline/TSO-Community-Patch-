@@ -30,7 +30,7 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013E578 | 0C04F22E | 0C03BA62 | jal 0x13c8b8 | jal 0xee988 | Zones: when time runs out, held zones score once more before the match ends (the last 15-second scoring tick landed after the end, so the final 15 seconds never counted). Host only on LAN (the player scores on the results screen are refreshed too) | v5.3 · 2026-10-16 |
+| 0013E578 | 0C04F22E | 0C03BA65 | jal 0x13c8b8 | jal 0xee994 | Zones: when time runs out, held zones score once more before the match ends (the last 15-second scoring tick landed after the end, so the final 15 seconds never counted). Host only on LAN (the player scores on the results screen are refreshed too) | v5.3 · 2026-10-16 |
 | 0013DDCC | 000E7900 | 0C03EEF4 | sll t7,t6,4 | jal 0xfbbd0 | Zones: "Zone Scoring Interval" (Advanced Settings, 10/15/20 Seconds, default 15). The host scores on its setting and sends it to patched players (spare team-list byte); players without the patch still get the right scores from the host | v5.89 · 2026-10-27 |
 | 0013DDD0 | 01EE7823 | 00000000 | subu t7,t7,t6 | nop | Zones: "Zone Scoring Interval" (Advanced Settings, 10/15/20 Seconds, default 15). The host scores on its setting and sends it to patched players (spare team-list byte); players without the patch still get the right scores from the host | v5.89 · 2026-10-27 |
 | 0013A910 | 000E7C00 | 00000000 | sll t7,t6,16 | nop | Hook: new[0x13A910]=NOP | v5.40 · 2026-10-19 |

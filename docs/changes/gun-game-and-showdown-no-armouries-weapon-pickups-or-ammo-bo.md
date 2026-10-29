@@ -36,9 +36,9 @@
 | 008E139F | 15 bytes | xbreadfail_sp | ecx = bits set in eax (eax, edx used) | v5.3 · 2026-10-16 |
 | 008E13AE | 140 bytes | xbreadfail_sp | XLKMV's pad (its position at 332(%ebp)) against one list of pads (esi, edx of them): a pad in use near it (2.5 across) less than 3 from an armoury's height takes that armoury off edi (the pad's armouries); stops once edi is 0. Uses eax, ecx, edx, esi | v5.29 · 2026-10-18 |
 | 008E143A | 51 bytes | xbreadfail_sp | drop message reader's DROPMSG_OTHER branch (jmp at 0x35cf2d, was mov 0x7c(%esi),%eax / test / je 0x35d033; esi = the pickup prop): an armoury (only this mod's host drops one: XLKMV) is hidden instead of dropped | v5.3 · 2026-10-16 |
-| 008E7C1C | 4 bytes | xbreadfail_sp | MapMaker map, this match: factories turned into normal pickups (LAN host, Gun Game / Showdown) | v5.3 · 2026-10-16 (approx.) |
-| 008E7C20 | 4 bytes | xbreadfail_sp | the map XMMWALK changed | v5.3 · 2026-10-16 (approx.) |
-| 008E7C24 | 4 bytes | xbreadfail_sp | how many items it changed | v5.3 · 2026-10-16 (approx.) |
+| 008E7C2C | 4 bytes | xbreadfail_sp | MapMaker map, this match: factories turned into normal pickups (LAN host, Gun Game / Showdown) | v5.3 · 2026-10-16 (approx.) |
+| 008E7C30 | 4 bytes | xbreadfail_sp | the map XMMWALK changed | v5.3 · 2026-10-16 (approx.) |
+| 008E7C34 | 4 bytes | xbreadfail_sp | how many items it changed | v5.3 · 2026-10-16 (approx.) |
 
 ## PS2: changes to the game's own code and data
 
@@ -46,14 +46,14 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 00147700 | 0C05109C | 0C03B66B | jal 0x144270 | jal 0xed9ac | Hook: level pickups: none of weapon / ammo / armoury when this game builds the map that way | v5.3 · 2026-10-16 |
-| 00394DB0 | 8E4D0000 | 0C03BE7D | lw t5,0(s2) | jal 0xef9f4 | Hook: MapMaker gun items: was lw t5,0(s2), their "always available" (delay slot addiu t7 kept) | v5.3 · 2026-10-16 |
-| 004F2FE4 / PAL 004F308C | 0813CD1C | 0803BE61 | j 0x4f3470 | j 0xef984 | Hook: the other mid-match joiner's start: the same | v5.3 · 2026-10-16 |
-| 004F61E8 / PAL 004F6290 | 0813CD1C | 0803B711 | j 0x4f3470 | j 0xedc44 | Hook: tile set message's send: was j NSEND (delay slot addiu sp,sp,16 kept) | v5.3 · 2026-10-16 |
-| 004F6324 / PAL 004F63CC | 0C13CD1C | 0C03BE61 | jal 0x4f3470 | jal 0xef984 | Hook: mid-match joiner's start: the same | v5.3 · 2026-10-16 |
-| 004F64DC / PAL 004F6584 | 0813CD1C | 0803B797 | j 0x4f3470 | j 0xede5c | Hook: match-start packet: Showdown sends only weapon-set slot 1 | v5.3 · 2026-10-16 |
-| 004FB980 / PAL 004FBA28 | 0C13FE16 | 0C03B544 | jal 0x4ff858 | jal 0xed510 | Hook: drop message reader, DROPMSG_OTHER: was jal network entity (delay slot lw a0,6188(fp) kept) | v5.3 · 2026-10-16 |
-| 004FED90 / PAL 004FEE38 | 27BDFEE0 | 0803B6F6 | addiu sp,sp,-288 | j 0xedbd8 | Hook: restart: Showdown's slot-1-only set again first (NWRS1 does the two replaced words) | v5.3 · 2026-10-16 |
+| 00147700 | 0C05109C | 0C03B66E | jal 0x144270 | jal 0xed9b8 | Hook: level pickups: none of weapon / ammo / armoury when this game builds the map that way | v5.3 · 2026-10-16 |
+| 00394DB0 | 8E4D0000 | 0C03BE80 | lw t5,0(s2) | jal 0xefa00 | Hook: MapMaker gun items: was lw t5,0(s2), their "always available" (delay slot addiu t7 kept) | v5.3 · 2026-10-16 |
+| 004F2FE4 / PAL 004F308C | 0813CD1C | 0803BE64 | j 0x4f3470 | j 0xef990 | Hook: the other mid-match joiner's start: the same | v5.3 · 2026-10-16 |
+| 004F61E8 / PAL 004F6290 | 0813CD1C | 0803B714 | j 0x4f3470 | j 0xedc50 | Hook: tile set message's send: was j NSEND (delay slot addiu sp,sp,16 kept) | v5.3 · 2026-10-16 |
+| 004F6324 / PAL 004F63CC | 0C13CD1C | 0C03BE64 | jal 0x4f3470 | jal 0xef990 | Hook: mid-match joiner's start: the same | v5.3 · 2026-10-16 |
+| 004F64DC / PAL 004F6584 | 0813CD1C | 0803B79A | j 0x4f3470 | j 0xede68 | Hook: match-start packet: Showdown sends only weapon-set slot 1 | v5.3 · 2026-10-16 |
+| 004FB980 / PAL 004FBA28 | 0C13FE16 | 0C03B547 | jal 0x4ff858 | jal 0xed51c | Hook: drop message reader, DROPMSG_OTHER: was jal network entity (delay slot lw a0,6188(fp) kept) | v5.3 · 2026-10-16 |
+| 004FED90 / PAL 004FEE38 | 27BDFEE0 | 0803B6F9 | addiu sp,sp,-288 | j 0xedbe4 | Hook: restart: Showdown's slot-1-only set again first (NWRS1 does the two replaced words) | v5.3 · 2026-10-16 |
 | 004FED94 / PAL 004FEE3C | FFBE0110 | 00000000 | sd fp,272(sp) | nop | Hook: restart: Showdown's slot-1-only set again first (NWRS1 does the two replaced words) | v5.3 · 2026-10-16 |
 | 00552538 / PAL 005525F0 | 0C14FCB6 | 0C03EE3D | jal 0x53f2d8 | jal 0xfb8f4 | Hook: map-send screen's start: was jal 0x53F2D8, its sender's reset (delay slot daddu a0,s0,zero kept) | v5.3 · 2026-10-16 |
 
@@ -62,17 +62,17 @@ NTSC address first; the PAL address follows where it differs.
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000E05EC-000E0AC7 | 311 | LKMV: a0 = 0: start of a match (LAN host, Gun Game / Showdown): every armoury on this game's map is hidden here, given a pad to go to (kept in its destination spawn point) and moved there on every other game. a0 = a client: a game that joined | v5.3 · 2026-10-16 |
-| 000EC5B8-000EC647 | 36 | NWPK: a0 client (0 = every game), a1 type, a2 restart: send the match info (SINFO) with every weapon-set slot but 1 empty. a2 = 1 (a0 a game): as a HOSTINFO 44 that applies mid-match without a reload ("host is in a level" | v5.71 · 2026-10-23 |
-| 000ED510-000ED587 | 30 | LKDEC: jal at 0x4FB980 in drop message reader's DROPMSG_OTHER branch (was jal network entity; delay slot lw a0, the network setup value, kept): v0 = the prop for the game's drop. An armoury (only this mod's host drops one: LKMV) is | v5.3 · 2026-10-16 |
-| 000ED9AC-000EDA1B | 28 | NWPST: jal from the level's pickups (0x147700, was jal PSUB (type, slot 0-5)): weapon (2), ammo (0x40) and armoury (0x800) pickups are not made when this game builds the map without them; on LAN slot 1's still are (every game loaded | v5.3 · 2026-10-16 |
-| 000EDB6C-000EDBD7 | 27 | NWALL: a0 = 1 (slot 1 only) / 3 (the full set): NWPK(game, 44, a0) for every other game in the match (as the game's own sends to everyone: a client with players on it, not left (state 9)) | v5.71 · 2026-10-23 |
-| 000EDBD8-000EDC43 | 27 | NWRS1: j from restart message (0x4FED90, was addiu sp,sp,-288 / sd fp,272(sp)): Restart / rematch reloads the map on every game with the weapon set it has now, so a Showdown match (every slot but 1 empty) gets that set again | v5.71 · 2026-10-23 |
-| 000EDC44-000EDCAF | 27 | MMSEND: j from tile set message's tail (0x4F61E8, was j NSEND: a0 client, a1 48, a2 map, a3 0x8000, t0 1), the map-send screen's send to each game and a mid-match joiner's: while MMCONV, with the factories turned into normal | v5.3 · 2026-10-16 |
-| 000EDE5C-000EDEC3 | 26 | NW45: j from the end of match start routine (0x4F64DC, was j NSEND with a0 0, a1 45, a2 SINFO, a3 312, t0 1), LAN host. Each game preloads the guns (models, animations) of the weapon set it loads the map with, so a game must load with | v5.3 · 2026-10-16 |
-| 000EE880-000EE8D7 | 22 | NWOFF: v0 = 1 when this game builds the map with no weapon, ammo or armoury pickups (on LAN: but slot 1's, NWPST): a LAN host whose match went out with only slot 1 (NWEMPTY), or Gun Game / Showdown offline; uses t0, t1, | v5.3 · 2026-10-16 |
-| 000EF984-000EF9BB | 14 | NW59: jal / j from the mid-match joiner's starts (0x4F6324 / 0x4F2FE4, were NSEND (client, 59, SINFO, 312, 1)): when the match went out with every slot but 1 empty, theirs is too, or their map's items would be numbered differently; | v5.3 · 2026-10-16 |
-| 000EF9BC-000EF9F3 | 14 | MMREST: leaf: the items MMWALK turned off: "always available" back (MMN is only ever set with MMB); uses t0-t4 (keeps v0) | v5.3 · 2026-10-16 |
-| 000EF9F4-000EFA2B | 14 | MMGUN: leaf, jal from the level builder's MapMaker gun items (0x394DB0, was lw t5,0(s2); delay slot addiu t7,t7,-29396 kept): t5 = the item's "always available" (0 while MMCONV on the LAN host: a normal gun pickup, as every game | v5.3 · 2026-10-16 |
-| 000F044C-000F0453 | 2 | NWSEND: a0 client (0 = every game), a1 type: send the match info with every weapon-set slot but 1 empty | v5.3 · 2026-10-16 (approx.) |
+| 000EC64C-000EC6DB | 36 | NWPK: a0 client (0 = every game), a1 type, a2 restart: send the match info (SINFO) with every weapon-set slot but 1 empty. a2 = 1 (a0 a game): as a HOSTINFO 44 that applies mid-match without a reload ("host is in a level" | v5.71 · 2026-10-23 |
+| 000ED51C-000ED593 | 30 | LKDEC: jal at 0x4FB980 in drop message reader's DROPMSG_OTHER branch (was jal network entity; delay slot lw a0, the network setup value, kept): v0 = the prop for the game's drop. An armoury (only this mod's host drops one: LKMV) is | v5.3 · 2026-10-16 |
+| 000ED9B8-000EDA27 | 28 | NWPST: jal from the level's pickups (0x147700, was jal PSUB (type, slot 0-5)): weapon (2), ammo (0x40) and armoury (0x800) pickups are not made when this game builds the map without them; on LAN slot 1's still are (every game loaded | v5.3 · 2026-10-16 |
+| 000EDB78-000EDBE3 | 27 | NWALL: a0 = 1 (slot 1 only) / 3 (the full set): NWPK(game, 44, a0) for every other game in the match (as the game's own sends to everyone: a client with players on it, not left (state 9)) | v5.71 · 2026-10-23 |
+| 000EDBE4-000EDC4F | 27 | NWRS1: j from restart message (0x4FED90, was addiu sp,sp,-288 / sd fp,272(sp)): Restart / rematch reloads the map on every game with the weapon set it has now, so a Showdown match (every slot but 1 empty) gets that set again | v5.71 · 2026-10-23 |
+| 000EDC50-000EDCBB | 27 | MMSEND: j from tile set message's tail (0x4F61E8, was j NSEND: a0 client, a1 48, a2 map, a3 0x8000, t0 1), the map-send screen's send to each game and a mid-match joiner's: while MMCONV, with the factories turned into normal | v5.3 · 2026-10-16 |
+| 000EDE68-000EDECF | 26 | NW45: j from the end of match start routine (0x4F64DC, was j NSEND with a0 0, a1 45, a2 SINFO, a3 312, t0 1), LAN host. Each game preloads the guns (models, animations) of the weapon set it loads the map with, so a game must load with | v5.3 · 2026-10-16 |
+| 000EE88C-000EE8E3 | 22 | NWOFF: v0 = 1 when this game builds the map with no weapon, ammo or armoury pickups (on LAN: but slot 1's, NWPST): a LAN host whose match went out with only slot 1 (NWEMPTY), or Gun Game / Showdown offline; uses t0, t1, | v5.3 · 2026-10-16 |
+| 000EF990-000EF9C7 | 14 | NW59: jal / j from the mid-match joiner's starts (0x4F6324 / 0x4F2FE4, were NSEND (client, 59, SINFO, 312, 1)): when the match went out with every slot but 1 empty, theirs is too, or their map's items would be numbered differently; | v5.3 · 2026-10-16 |
+| 000EF9C8-000EF9FF | 14 | MMREST: leaf: the items MMWALK turned off: "always available" back (MMN is only ever set with MMB); uses t0-t4 (keeps v0) | v5.3 · 2026-10-16 |
+| 000EFA00-000EFA37 | 14 | MMGUN: leaf, jal from the level builder's MapMaker gun items (0x394DB0, was lw t5,0(s2); delay slot addiu t7,t7,-29396 kept): t5 = the item's "always available" (0 while MMCONV on the LAN host: a normal gun pickup, as every game | v5.3 · 2026-10-16 |
+| 000F0488-000F048F | 2 | NWSEND: a0 client (0 = every game), a1 type: send the match info with every weapon-set slot but 1 empty | v5.3 · 2026-10-16 (approx.) |
 | 000FADB4-000FAFDB | 138 | MMWALK: a0 = map, a1 = convert: v0 = how many gun items (Gun 1-6, item 17-22) are set to "always available", or -1 when the map can't be read. convert 1: each one's "always available" is turned off, its old value kept in MMTAB (at | v5.14 · 2026-10-16 |
 | 000FB8F4-000FB973 | 32 | MMPREP: jal from the map-send screen's start (0x552538, was jal 0x53F2D8, its sender's reset; delay slot daddu a0,s0,zero kept): Start on LAN with a MapMaker map opens that screen, which sends the map to every game and waits until | v5.3 · 2026-10-16 |
