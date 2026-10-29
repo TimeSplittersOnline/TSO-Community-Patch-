@@ -62,8 +62,8 @@ def see_through(widget, alpha):
 
 
 class App(tk.Tk):
-    SECTIONS = (("xbox", "Xbox TSO patch", "Make the TSO Community Patch from your own XBE/ISO"),
-                ("ps2", "PS2 TSO PNACH", "Build a pnach into your PS2 ISO"))
+    SECTIONS = (("xbox", "Xbox/XEMU", "Make the TSO Community Patch from your own XBE/ISO"),
+                ("ps2", "PS2/PCSX2", "Build a pnach into your PS2 ISO"))
     NAV_ON, NAV_OFF, NAV_HOVER = "#2b65d9", "#e4e7ec", "#d2d9e6"
     PANEL_ALPHA = 0.86  # how solid the menu tiles and page are over the background picture
 
