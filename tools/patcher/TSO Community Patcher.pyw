@@ -493,8 +493,8 @@ class App(tk.Tk):
 
     def _build_ps2_page(self, tab):
         pad = {"padx": 8, "pady": 6}
-        ttk.Label(tab, text="Builds a PCSX2 .pnach into a TimeSplitters: Future Perfect PS2 ISO (USA or Europe), "
-                            "so the mod runs without loading the pnach. Close PCSX2 first.",
+        ttk.Label(tab, text="Builds a PCSX2 .pnach into a TimeSplitters: Future Perfect PS2 ISO (USA or Europe). "
+                            "Close PCSX2 first.",
                   wraplength=780, foreground="#555").pack(anchor="w", **pad)
 
         a = ttk.LabelFrame(tab, text="1. Your pnach file")
