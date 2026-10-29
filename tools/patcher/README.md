@@ -26,6 +26,8 @@ through a boot wipe, an in-game wipe and the cases where it must not restore.
   only needs rebuilding when its code changes.
 - `pmd/core.py`: checks, patching, undo records (`backups.json` in the backup folder).
 - `pmd/xiso.py`, `pmd/xbe.py`: Xbox disc images and XBE headers. `pmd/ps2patch.py`: pnach, PS2 ELF, ISO9660 and UDF; `pmd/ps2keeper.py`: the IOP-reboot keeper.
+- `tools/make_xdelta.py <original.iso> <patched.iso> <out.xdelta>`: an xdelta (VCDIFF) from an untouched ISO to one
+  the patcher made, for players who'd rather use xdelta3 / Delta Patcher (`tests/test_xdelta.py` checks it with xdelta3).
 - `tools/make_tso_patch.py <version> <TSO Community Patch.xbe> tso_patch.dat "<name>=<default.xbe>" ...`:
   makes `tso_patch.dat` for a new TSO build (run for every delivered build, then rebuild the exe).
   An input written `"!<name>=<default.xbe>"` is only recognised (no delta is shipped for it); the patcher names it
