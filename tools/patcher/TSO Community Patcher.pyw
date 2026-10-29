@@ -431,7 +431,7 @@ class App(tk.Tk):
         if not p:
             return
         p = os.path.normpath(p)
-        if os.path.isfile(self.src_xbe.get()) and os.path.samefile(p, self.src_xbe.get()) and not messagebox.askyesno(
+        if os.path.isfile(p) and os.path.isfile(self.src_xbe.get()) and os.path.samefile(p, self.src_xbe.get()) and not messagebox.askyesno(
                 APP, "That is the file you picked in step 1. Replace it with the TSO Community Patch?\n\n"
                      "(Keep a copy of your original somewhere first.)", icon="warning", default="no"):
             return
