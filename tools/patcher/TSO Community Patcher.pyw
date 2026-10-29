@@ -138,13 +138,23 @@ class App(tk.Tk):
     # -- layout ----------------------------------------------------------------
 
     def _build(self):
-        nav = tk.Frame(self)
-        nav.pack(fill="x", padx=6, pady=(8, 4))
+        # background.png (next to the program or in the exe) fills the window; everything else sits on top
+        # with a margin, so the picture shows around the menu tiles and the page.
+        bg_path = os.path.join(getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__))), "background.png")
+        m = 0
+        if os.path.isfile(bg_path):
+            try:
+                self.bg_image = tk.PhotoImage(file=bg_path)
+                tk.Label(self, image=self.bg_image, bd=0).place(relx=0.5, rely=0.5, anchor="center")
+                m = 18
+            except tk.TclError:
+                pass
+        nav_h = 78
         self.nav = {}
         for i, (key, title, sub) in enumerate(self.SECTIONS):
-            box = tk.Frame(nav, bd=2, relief="raised", cursor="hand2", bg=self.NAV_OFF)
-            box.grid(row=0, column=i, sticky="nsew", padx=4)
-            nav.columnconfigure(i, weight=1, uniform="nav")
+            box = tk.Frame(self, bd=2, relief="raised", cursor="hand2", bg=self.NAV_OFF)
+            box.place(relx=i / 2.0, x=m + 4 if i == 0 else m / 2 + 4, y=m + 8, relwidth=0.5,
+                      width=-(1.5 * m + 8), height=nav_h)
             t = tk.Label(box, text=title, font=("TkDefaultFont", 13, "bold"), bg=self.NAV_OFF, cursor="hand2")
             t.pack(padx=10, pady=(12, 0))
             d = tk.Label(box, text=sub, font=("TkDefaultFont", 9), bg=self.NAV_OFF, cursor="hand2")
@@ -154,9 +164,11 @@ class App(tk.Tk):
                 w.bind("<Enter>", lambda e, k=key: self._nav_paint(k, hover=True))
                 w.bind("<Leave>", lambda e, k=key: self._nav_paint(k))
             self.nav[key] = (box, t, d)
-        ttk.Separator(self).pack(fill="x", padx=6, pady=4)
+        top = m + 8 + nav_h + max(m, 8)
+        body = ttk.Frame(self)
+        body.place(x=m, y=top, relwidth=1, width=-2 * m, relheight=1, height=-(top + m))
 
-        self.page_area = ttk.Frame(self)
+        self.page_area = ttk.Frame(body)
         self.page_area.pack(fill="both", expand=True, padx=6, pady=4)
         self.pages = {}
         style = ttk.Style(self)
@@ -165,7 +177,7 @@ class App(tk.Tk):
         self._build_ps2_page(self._page("ps2"))
         self.section = None
 
-        bottom = ttk.Frame(self)
+        bottom = ttk.Frame(body)
         bottom.pack(fill="x", padx=6, pady=4)
         row = ttk.Frame(bottom)
         row.pack(fill="x")
@@ -216,7 +228,7 @@ class App(tk.Tk):
     def _build_xbox_page(self, tab):
         pad = {"padx": 8, "pady": 6}
         ttk.Label(tab, text="Makes the TSO Community Patch from your own copy of the game. Close xemu before you start.",
-                  wraplength=820, foreground="#555").pack(anchor="w", **pad)
+                  wraplength=780, foreground="#555").pack(anchor="w", **pad)
         up = ttk.Frame(tab)
         up.pack(fill="x", padx=8)
         self.update_info = ttk.Label(up, text="", foreground="#555")
@@ -236,8 +248,8 @@ class App(tk.Tk):
         ttk.Entry(a, textvariable=self.src_xbe).grid(row=2, column=1, sticky="ew", padx=4, pady=(6, 0))
         ttk.Button(a, text="Choose...", command=self.browse_xbe).grid(row=2, column=2, padx=8, pady=(6, 0))
         ttk.Label(a, text=core.source_hint(),
-                  foreground="#555", wraplength=700, justify="left").grid(row=3, column=1, columnspan=2, sticky="w", padx=4)
-        self.src_info = ttk.Label(a, text="", wraplength=800, justify="left")
+                  foreground="#555", wraplength=640, justify="left").grid(row=3, column=1, columnspan=2, sticky="w", padx=4)
+        self.src_info = ttk.Label(a, text="", wraplength=760, justify="left")
         self.src_info.grid(row=4, column=0, columnspan=3, sticky="w", padx=8, pady=(8, 6))
         a.columnconfigure(1, weight=1)
 
@@ -245,7 +257,7 @@ class App(tk.Tk):
         c.pack(fill="x", **pad)
         ttk.Label(c, text="Patch the disc image above, or save the patched XBE as a file for xemu or an Xbox hard drive. "
                           "Patching keeps a copy of the original, so \"Restore original ISO/XBE\" undoes it.",
-                  wraplength=820, foreground="#555").pack(anchor="w", padx=8, pady=(6, 0))
+                  wraplength=780, foreground="#555").pack(anchor="w", padx=8, pady=(6, 0))
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
         ttk.Button(row, text="PATCH DISC IMAGE", style="Big.TButton", command=self.xbox_patch).pack(side="left")
@@ -455,7 +467,7 @@ class App(tk.Tk):
         pad = {"padx": 8, "pady": 6}
         ttk.Label(tab, text="Builds a PCSX2 .pnach into a TimeSplitters: Future Perfect PS2 ISO (USA or Europe), "
                             "so the mod runs without loading the pnach. Close PCSX2 first.",
-                  wraplength=820, foreground="#555").pack(anchor="w", **pad)
+                  wraplength=780, foreground="#555").pack(anchor="w", **pad)
 
         a = ttk.LabelFrame(tab, text="1. Your pnach file")
         a.pack(fill="x", **pad)
@@ -475,11 +487,11 @@ class App(tk.Tk):
 
         c = ttk.LabelFrame(tab, text="3. Patch")
         c.pack(fill="x", **pad)
-        self.ps2_match = tk.Label(c, text="", font=("TkDefaultFont", 11, "bold"), anchor="w", justify="left", wraplength=820)
+        self.ps2_match = tk.Label(c, text="", font=("TkDefaultFont", 11, "bold"), anchor="w", justify="left", wraplength=780)
         self.ps2_match.pack(fill="x", **pad)
         ttk.Label(c, text="The original game file is kept inside the ISO and a copy is saved to your backup folder, "
                           "so \"Restore original ISO\" returns the ISO to exactly how it was.",
-                  wraplength=820, foreground="#555").pack(anchor="w", padx=8)
+                  wraplength=780, foreground="#555").pack(anchor="w", padx=8)
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
         ttk.Button(row, text="PATCH ISO", style="Big.TButton", command=self.ps2_patch).pack(side="left")
