@@ -189,7 +189,7 @@ class App(tk.Tk):
         self.page_area.pack(fill="both", expand=True, padx=6, pady=4)
         self.pages = {}
         style = ttk.Style(self)
-        style.configure("Big.TButton", font=("TkDefaultFont", 12, "bold"), padding=8)
+        style.configure("Big.TButton", font=("TkDefaultFont", 12), padding=8)
         self._build_xbox_page(self._page("xbox"))
         self._build_ps2_page(self._page("ps2"))
         self.section = None
@@ -276,13 +276,13 @@ class App(tk.Tk):
 
         c = ttk.LabelFrame(tab, text="2. Patch")
         c.pack(fill="x", **pad)
-        ttk.Label(c, text="Patch the disc image above, or save the patched XBE as a file for xemu or an Xbox hard drive. "
-                          "Patching keeps a copy of the original, so \"Restore original ISO/XBE\" undoes it.",
+        ttk.Label(c, text="Patches the disc image from step 1. If you only chose a default.xbe file, it saves the patched "
+                          "XBE as a file for xemu or an Xbox hard drive instead. A copy of the original is kept, so "
+                          "\"Restore original ISO/XBE\" undoes it.",
                   wraplength=780, foreground="#555").pack(anchor="w", padx=8, pady=(6, 0))
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
-        ttk.Button(row, text="PATCH DISC IMAGE", style="Big.TButton", command=self.xbox_patch).pack(side="left")
-        ttk.Button(row, text="SAVE TSO XBE", style="Big.TButton", command=self.xbox_save).pack(side="left", padx=12)
+        ttk.Button(row, text="Apply patch", style="Big.TButton", command=self.xbox_apply).pack(side="left")
         ttk.Button(row, text="Restore original ISO/XBE", command=self.xbox_restore).pack(side="left", padx=12)
 
         self.xbox_iso.trace_add("write", lambda *a: self.xbox_check())
@@ -350,7 +350,7 @@ class App(tk.Tk):
         p = self.xbox_iso.get().strip()
         self.xbox_target = None
         if not p:
-            self.xbox_iso_info.configure(text="Also pick it here to patch it when you start from a default.xbe file.", foreground="#555")
+            self.xbox_iso_info.configure(text="With a default.xbe file: pick a disc image here to patch it, or leave this empty to save an XBE file.", foreground="#555")
         else:
             try:
                 t = core.find_iso_game(p)
@@ -416,6 +416,13 @@ class App(tk.Tk):
         if data is None:
             messagebox.showerror(APP, self.src_info["text"].lstrip("\u2714\u2718 ") or "Choose your default.xbe in step 1.")
         return data
+
+    def xbox_apply(self):
+        """One button: patch the disc image when one is chosen, otherwise save the XBE as a file."""
+        if self.xbe_source.get() == "file" and not self.xbox_iso.get().strip():
+            self.xbox_save()
+        else:
+            self.xbox_patch()
 
     def xbox_save(self):
         data = self._tso_or_warn()
@@ -515,7 +522,7 @@ class App(tk.Tk):
                   wraplength=780, foreground="#555").pack(anchor="w", padx=8)
         row = ttk.Frame(c)
         row.pack(fill="x", **pad)
-        ttk.Button(row, text="PATCH ISO", style="Big.TButton", command=self.ps2_patch).pack(side="left")
+        ttk.Button(row, text="Apply patch", style="Big.TButton", command=self.ps2_patch).pack(side="left")
         ttk.Button(row, text="Restore original ISO", command=lambda: self.ps2_restore(None)).pack(side="left", padx=12)
 
         self.ps2_pnach.trace_add("write", lambda *a: self.ps2_check())
