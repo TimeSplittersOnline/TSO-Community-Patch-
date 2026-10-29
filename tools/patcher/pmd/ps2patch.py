@@ -6,6 +6,10 @@ mod's own code area, e.g. 0xFA800-0x100000) go into a new loadable segment.
 The patched ELF is appended to the end of the ISO and the ISO's directory
 entry is pointed at it, so the original ELF bytes are never touched and
 undoing is just pointing back and trimming the ISO to its old length.
+
+PS2 DVDs carry a second file listing (UDF) next to the ISO9660 one, and
+some loaders (a PS3 running the ISO through webMAN) read that one, so the
+UDF file entry is pointed at the patched ELF as well (class Udf).
 """
 
 import os
@@ -270,6 +274,156 @@ class Ps2Iso:
     def set_volume_size(self, sectors):
         self.f.seek(16 * SECTOR + 80)
         self.f.write(struct.pack("<I", sectors) + struct.pack(">I", sectors))
+
+
+# -- UDF (the DVD's second file listing) --------------------------------------
+
+def _crc16(b):
+    c = 0
+    for x in b:
+        c ^= x << 8
+        for _ in range(8):
+            c = ((c << 1) ^ 0x1021) & 0xFFFF if c & 0x8000 else (c << 1) & 0xFFFF
+    return c
+
+
+def _retag(sec, loc=None):
+    """Fix a UDF descriptor's tag (location, CRC, checksum) after changing it."""
+    if loc is not None:
+        struct.pack_into("<I", sec, 12, loc)
+    ln, = struct.unpack_from("<H", sec, 10)
+    struct.pack_into("<H", sec, 8, _crc16(bytes(sec[16:16 + ln])))
+    sec[4] = (sum(sec[0:4]) + sum(sec[5:16])) & 0xFF
+
+
+def _dstring(b, comp):
+    if comp == 16:
+        return b.decode("utf-16-be", "replace")
+    return b.decode("latin-1")
+
+
+class Udf:
+    """Just enough UDF 1.02 to find a file's entry and re-point it."""
+
+    def __init__(self, f):
+        self.f = f
+        avdp = self.sector(256)
+        if struct.unpack_from("<H", avdp, 0)[0] != 2:
+            raise Ps2PatchError("no UDF")
+        self.avdp = avdp
+        mlen, mloc, rlen, rloc = struct.unpack_from("<IIII", avdp, 16)
+        self.pds = []
+        lvd = None
+        for s in list(range(mloc, mloc + mlen // SECTOR)) + list(range(rloc, rloc + rlen // SECTOR)):
+            t, = struct.unpack_from("<H", self.sector(s), 0)
+            if t == 5:
+                self.pds.append(s)
+            elif t == 6 and lvd is None:
+                lvd = self.sector(s)
+            elif t == 8:
+                if s >= rloc:
+                    break
+        if not self.pds or lvd is None:
+            raise Ps2PatchError("UDF volume descriptors not found")
+        pd = self.sector(self.pds[0])
+        self.pstart, self.plen = struct.unpack_from("<II", pd, 188)
+        fsd_blk, = struct.unpack_from("<I", lvd, 252)
+        fsd = self.sector(self.pstart + fsd_blk)
+        if struct.unpack_from("<H", fsd, 0)[0] != 256:
+            raise Ps2PatchError("UDF file set descriptor not found")
+        self.root = struct.unpack_from("<I", fsd, 404)[0]
+
+    def sector(self, s):
+        self.f.seek(s * SECTOR)
+        return bytearray(self.f.read(SECTOR))
+
+    def _fe(self, blk):
+        sec = self.sector(self.pstart + blk)
+        if struct.unpack_from("<H", sec, 0)[0] != 261:
+            raise Ps2PatchError("UDF file entry not found")
+        if struct.unpack_from("<H", sec, 34)[0] & 7 != 0:
+            raise Ps2PatchError("UDF file entry uses an unsupported layout")
+        lea, lad = struct.unpack_from("<II", sec, 168)
+        ads = [(a & 0x3FFFFFFF, b) for a, b in struct.iter_unpack("<II", bytes(sec[176 + lea:176 + lea + lad]))]
+        return sec, ads, lea
+
+    def find(self, path):
+        """Return (FE sector number, [(length, partition block)], file length)."""
+        blk = self.root
+        parts = [p for p in path.replace("\\", "/").split("/") if p]
+        for part in parts:
+            sec, ads, _ = self._fe(blk)
+            ln, = struct.unpack_from("<Q", sec, 56)
+            data = b"".join(self.sector(self.pstart + b + i)
+                            for alen, b in ads for i in range((alen + SECTOR - 1) // SECTOR))[:ln]
+            want = part.upper().split(";")[0]
+            p = 0
+            found = None
+            while p + 38 <= len(data) and struct.unpack_from("<H", data, p)[0] == 257:
+                lfi = data[p + 19]
+                icb, = struct.unpack_from("<I", data, p + 24)
+                liu, = struct.unpack_from("<H", data, p + 36)
+                raw = data[p + 38 + liu:p + 38 + liu + lfi]
+                if raw and _dstring(raw[1:], raw[0]).upper().split(";")[0] == want:
+                    found = icb
+                    break
+                p += (38 + liu + lfi + 3) & ~3
+            if found is None:
+                raise Ps2PatchError("%s not found in the UDF listing" % path)
+            blk = found
+        sec, ads, _ = self._fe(blk)
+        return self.pstart + blk, ads, struct.unpack_from("<Q", sec, 56)[0]
+
+    def read(self, path):
+        _s, ads, ln = self.find(path)
+        out = b""
+        for alen, b in ads:
+            self.f.seek((self.pstart + b) * SECTOR)
+            out += self.f.read(alen)
+        return out[:ln]
+
+    def repoint(self, path, sector, size, volume_sectors):
+        """Point the file at `size` bytes from ISO sector `sector`, growing the partition to
+        cover `volume_sectors` (the image's new length) and adding an anchor at its last sector.
+        touched() lists the sectors this changes inside the old image, for undo."""
+        fes, ads, _ln = self.find(path)
+
+        def put(s, sec):
+            self.f.seek(s * SECTOR)
+            self.f.write(bytes(sec))
+
+        end = volume_sectors - 1          # last sector holds a new anchor
+        if self.pstart + self.plen < end:
+            for s in self.pds:
+                pd = self.sector(s)
+                struct.pack_into("<I", pd, 192, end - self.pstart)
+                _retag(pd)
+                put(s, pd)
+            self.plen = end - self.pstart
+        sec, _ads, lea = self._fe(fes - self.pstart)
+        blocks = (size + SECTOR - 1) // SECTOR
+        struct.pack_into("<QQ", sec, 56, size, blocks)
+        struct.pack_into("<I", sec, 172, 8)
+        struct.pack_into("<II", sec, 176 + lea, size, sector - self.pstart)
+        ln = 176 + lea + 8 - 16
+        struct.pack_into("<H", sec, 10, ln)
+        _retag(sec)
+        put(fes, sec)
+        anchor = bytearray(self.avdp)
+        _retag(anchor, end)
+        self.f.seek(end * SECTOR)
+        self.f.write(bytes(anchor))
+
+    def touched(self, path):
+        return self.pds + [self.find(path)[0]]
+
+
+def open_udf(f):
+    """The disc's UDF listing, or None if it has none."""
+    try:
+        return Udf(f)
+    except (Ps2PatchError, struct.error):
+        return None
 
 
 def inspect_iso(path):

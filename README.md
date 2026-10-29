@@ -13,9 +13,9 @@ You need your own copy of the game. This repository contains no game files.
 ### Xbox (xemu or a modded console)
 The easiest way is the **TSO Community Patcher** (Windows), found in [tools](tools). It makes the TSO Community Patch XBE from your own game, so the modded XBE itself is never shared.
 1. Download `TSO Community Patcher.exe` from the [latest release](https://github.com/TimeSplittersOnline/TSO-Community-Patch-/releases/latest).
-2. Close xemu and run the patcher.
+2. Close xemu and run the patcher. You only need it once: each time it starts it checks for a newer TSO version and asks before switching to it (or press **Check for updates**).
 3. In step 1, pick your disc image (.iso), or a `default.xbe` file. Either works with or without the title update, USA or Europe: the disc's own `default.xbe`, or the title update's `TDATA\45410066\$u\default.xbe`. An older TSO Community Patch XBE (v5.3 on), or a disc image with one in it, is updated to the current build.
-4. Press **PATCH DISC IMAGE** to put the patch into your disc image, or **SAVE TSO XBE AS...** to save the XBE as a file. **Put the original back** undoes a patched disc image.
+4. Press **Apply patch**. A disc image is patched in place; a default.xbe file is saved as a new patched XBE for xemu or an Xbox hard drive. **Restore original ISO/XBE** undoes a patched disc image.
 
 The patcher checks your file is a copy of the game it knows and that the result is byte for byte the current build; anything else is refused. Its source is in [`tools/patcher`](tools/patcher).
 
