@@ -41,7 +41,7 @@
 | 008CE79B | 24 bytes | xbreadfail_sp | zi.s, Zone Scoring Interval (0x8e8c42, was movzbl ZVAR,%eax: 0 = 15 seconds); flags kept | v5.89 · 2026-10-27 |
 | 008CE7C5 | 18 bytes | xbreadfail_sp | mc3.s XCHK, Mercy Rule (header 0x11ea8, was cmpl $7,GSTATE; then jne = no check) | v5.89 · 2026-10-27 |
 | 008DF000 | 256 bytes | xbreadfail_sp | Mod variables area (reserved, starts as zero). | v5.3 · 2026-10-16 (approx.) |
-| 008E7870 | 64 bytes | xbreadfail_sp | Data: XGGCT | v5.15 · 2026-10-16 |
+| 008E7880 | 64 bytes | xbreadfail_sp | Data: XGGCT | v5.15 · 2026-10-16 |
 | 008E81C0 | 20 bytes | xbreadfail_sp | Data: PLIST | v5.3 · 2026-10-16 (approx.) |
 | 008E81D4 | 20 bytes | xbreadfail_sp | Data: SLIST | v5.3 · 2026-10-16 (approx.) |
 | 008E81E8 | 24 bytes | xbreadfail_sp | ---------------- helpers | v5.3 · 2026-10-16 (approx.) |
@@ -95,16 +95,16 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|
 | 000FD010-000FDF9F | 592 | new code, page descriptor, label text and settings in free low memory (0x000FD000-0x000FDFA0) | v5.70 · 2026-10-23 |
 | 000FDC80-000FDCD7 | 22 | "Advanced Settings" page: same layout as the match settings page (title line + match settings text style) at 0x000FDC80 | v5.3 · 2026-10-16 |
-| 000EE2AC-000EE30B | 24 | NCFL: j at 0xFCC5C in the flame function (was lui t0,0x10 / lbu s1,-12512(t0): Number of Flames, 0 = one): custom arcade and LAN only, else one; then on at 0xFCC64 | v5.89 · 2026-10-27 |
-| 000EE30C-000EE36B | 24 | NCZI: j at 0xFBBD0, the zone interval's start (was lui t9,0x10 / lbu t8,-16552(t9): Zone Scoring Interval, 0 = 15 s): custom arcade and LAN only, else the default; then on at 0xFBBD8 | v5.89 · 2026-10-27 |
-| 000EE988-000EE9DF | 22 | NCZE: jal at 0x13E578 (time up, was jal 0xFB9E0: ze.py, Zones scores the held zones once more, then 0x13C8B8 with a0 = 0, set in the delay slot): custom arcade and LAN only; else straight to 0x13C8B8 | v5.95 · 2026-10-27 |
-| 000EE9E0-000EEA37 | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
-| 000EF85C-000EF897 | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EF898-000EF8D3 | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EFBAC-000EFBDF | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
-| 000EFD40-000EFD6F | 12 | GGCT: text | v5.15 · 2026-10-16 |
-| 000F0244-000F0253 | 4 | LWWA: text | v5.3 · 2026-10-16 |
-| 000F045C-000F0463 | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
+| 000EE2B8-000EE317 | 24 | NCFL: j at 0xFCC5C in the flame function (was lui t0,0x10 / lbu s1,-12512(t0): Number of Flames, 0 = one): custom arcade and LAN only, else one; then on at 0xFCC64 | v5.89 · 2026-10-27 |
+| 000EE318-000EE377 | 24 | NCZI: j at 0xFBBD0, the zone interval's start (was lui t9,0x10 / lbu t8,-16552(t9): Zone Scoring Interval, 0 = 15 s): custom arcade and LAN only, else the default; then on at 0xFBBD8 | v5.89 · 2026-10-27 |
+| 000EE994-000EE9EB | 22 | NCZE: jal at 0x13E578 (time up, was jal 0xFB9E0: ze.py, Zones scores the held zones once more, then 0x13C8B8 with a0 = 0, set in the delay slot): custom arcade and LAN only; else straight to 0x13C8B8 | v5.95 · 2026-10-27 |
+| 000EE9EC-000EEA43 | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
+| 000EF868-000EF8A3 | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
+| 000EF8A4-000EF8DF | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
+| 000EFBB8-000EFBEB | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
+| 000EFD48-000EFD77 | 12 | GGCT: text | v5.15 · 2026-10-16 |
+| 000F0280-000F028F | 4 | LWWA: text | v5.3 · 2026-10-16 |
+| 000F0498-000F049F | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
 | 000FE640-000FE663 | 9 | LTEAML=lstr('Team Settings >',16); LSPAWNL=lstr('Spawn Settings >',20) | v5.3 · 2026-10-16 |
 | 000FE664-000FE677 | 5 | LSCORE=lstr('Score With Bag Away',20) | v5.3 · 2026-10-16 |
 | 000FE678-000FE6B3 | 15 | a.w[ZR_]=addiu('t7','t7',lo(a.lab['ZRET'])); FLRET=a.lab['FLRET']; place(a) | v5.3 · 2026-10-16 |

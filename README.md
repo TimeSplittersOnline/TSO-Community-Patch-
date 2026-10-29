@@ -65,10 +65,11 @@ The [`build`](build) folder always holds the current version's TSO Community Pat
 
 
 - Bug fixes and compatability
-  - Fixes for players without the title update, including fixes for: loading into lobbies early when the host changed music settings, only hearing Scotland the brave for on-disc maps when "ban small characters is enabled.
+  - Fixes for players without the title update, including fixes for: loading into lobbies early when the host changed music settings, only hearing Scotland the brave for on-disc maps when "ban small characters is enabled. The client reads settings by menu order, but becaause the host has more settings, clients would misread the settings the host was sending. "Ban small characters" was now the music select, and since it could only be off/on, only music track 0 and 1 could be selected on consoles without the title update. 0 is recommended, which only works with the setting off, and 1 is scotland the brave (small characters on).  
   - All players wait for host before spawning (no more xbox one loading advantage).
   - The final 15 seconds of zones now count over LAN and online matches.
   - no limit for previously limited mapmaker items like bags & zones.
+  - On PS2, mapmaker desync is fixed. Clients would misread the weapon set sent by the host and spawn no weapons into the map, because item on a map is numbered in order, the client and host would have differing ones, which is why zones would not change colour, why guns would not spawn, etc. 
 
 
 

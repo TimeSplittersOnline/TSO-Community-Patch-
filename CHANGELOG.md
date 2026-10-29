@@ -2,6 +2,15 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.102 · 2026-10-29 · PS2 MapMaker maps on LAN: weapons, zones and bags in step with the host; Temporal Uplink back offline
+
+*v5.102 · MapMakerLanWeapons* · Xbox, PS2 NTSC, PS2 PAL
+
+- PS2, MapMaker maps on LAN (a bug in the original game): a console whose own saved Weapon Set choice was a custom set built the map without any of its gun items, because it looked for that custom set on its own console, where a LAN player's game doesn't have it. The map's items were then numbered differently from the host's, so on that console guns didn't appear, armour and health didn't disappear when taken, zones didn't change colour (or didn't show), and bags and the HUD were wrong.
+- With the patch, a PS2 console on LAN always builds a MapMaker map's guns from the weapon set the host sends, whatever it has saved itself, so it matches the host. Offline play is unchanged, and it works with an unpatched host.
+- Players without the patch still have the original bug. Workaround: on that console pick a built-in weapon set (Recommended, Assorted, Plasma, Conventional, Neon, Retro, Rockets, Doubles or Explosives), start any match so the choice is saved, then join. The host can use any set.
+- Temporal Uplink: since v5.99 it was taken out of every weapon list and every match. It is now only taken out on LAN, where it crashes the game. Offline it is back in the weapon lists and in weapon sets as in the original game (Xbox and PS2).
+
 ## v5.101 · 2026-10-28 · Spectate on LAN players' consoles: a joiner placed out no longer counts as still in
 
 *v5.101 · SpectateJoinerLives* · Xbox, PS2 NTSC, PS2 PAL

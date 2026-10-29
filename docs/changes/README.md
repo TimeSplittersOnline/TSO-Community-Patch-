@@ -12,7 +12,7 @@ Every change the current build makes to the original game files, grouped by feat
 | [LAN: allowed modes, Xbox Live option removed, original-disc compatibility](lan-allowed-modes-xbox-live-option-removed-original-disc-com.md) | 14 | 10 | 0 | 0 |
 | [Mercy Rule](mercy-rule.md) | 6 | 6 | 1 | 354 |
 | [Gun Game: Setbacks](gun-game-setbacks.md) | 5 | 24 | 2 | 314 |
-| [Weapon Mode (Gun Game / Random Weapon), Player Drops Gun](weapon-mode-gun-game-random-weapon-player-drops-gun.md) | 14 | 89 | 25 | 5197 |
+| [Weapon Mode (Gun Game / Random Weapon), Player Drops Gun](weapon-mode-gun-game-random-weapon-player-drops-gun.md) | 14 | 89 | 25 | 5203 |
 | [Catch-Up](catch-up.md) | 2 | 19 | 3 | 456 |
 | [Team VIP](team-vip.md) | 1 | 11 | 3 | 285 |
 | [Team Elimination / Team Vampire, Team Lives](team-elimination-team-vampire-team-lives.md) | 7 | 40 | 4 | 836 |
@@ -44,3 +44,4 @@ Every change the current build makes to the original game files, grouped by feat
 | [Mode list and limits](mode-list-and-limits.md) | 0 | 0 | 10 | 45 |
 | [Weapon lists (extra weapons enabled)](weapon-lists-extra-weapons-enabled.md) | 0 | 0 | 8 | 0 |
 | [Virus on Siberia](virus-on-siberia.md) | 0 | 0 | 2 | 0 |
+| [LAN: MapMaker maps use the host's weapon set](lan-mapmaker-maps-use-the-host-s-weapon-set.md) | 0 | 0 | 2 | 10 |
