@@ -5,7 +5,7 @@
 You need your own copy of the game. This repository contains no game files. This mod is only needed by the host online. You will be missing some quality of life features without it, but everything works.
 
 ### PS2 (PCSX2)
-1. Download the pnach for your region from the [`build`](build) folder:
+1. Download the pnach for your region from the [`build/ps2`](build/ps2) folder:
    - NTSC (USA): `SLUS-21148_FB2F4502.pnach`
    - PAL (Europe): `SLES-52993_E0F96C7D.pnach`
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
@@ -36,7 +36,7 @@ Check your file's MD5 before patching: an xdelta doesn't check its base, so a di
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
-The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) plus the xdelta patches of the same version: [`build/xbox`](build/xbox) for Xbox and `build/ps2` for PS2 disc images. Every new version updates all of them together. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
+The [`build`](build) folder always holds the current version's TSO Community Patch files: [`build/ps2`](build/ps2) has the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and the PS2 xdelta patches, and [`build/xbox`](build/xbox) has the Xbox xdelta patches. Every new version updates all of them together. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
 ## Features
 
