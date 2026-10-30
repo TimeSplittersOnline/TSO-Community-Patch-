@@ -2,6 +2,25 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.106 · 2026-10-29 · Fixes from the second review: Scores page team rows, Coin Rush, Switch Spawns, Overtime message, Time Bonus warning, Catch-Up Multikill, Spectate
+
+*v5.106 · ReviewFixes2* · Xbox, PS2 NTSC, PS2 PAL
+
+- Team Elimination / Team Vampire: the Scores page's team rows show the game's own value again (the first player's lives). The team's total that patched consoles showed (with Team Lives off) was more than an unpatched console shows. With Team Lives every member has the team's pool, so the row still shows it.
+- Coin Rush: when a player without the patch dies somewhere its game doesn't name a spawn point for the death coin (e.g. a fall), the host now works the point out the same way that game does, so that game's own coin is removed and can't give an extra point later.
+- Capture the Bag Switch Spawns: at the start of a match each player goes to the other team's spawn point in the same place as its own start point, so team-mates no longer end up on the same point (it was a random one).
+- Capture the Bag Overtime: a LAN player with the patch now shows "Overtime!" only after the host's time has been up for 3 seconds (was 1.5), so a host's normal end of match that takes a little longer no longer shows it by mistake.
+- Assault Time Bonus After Phase: when the bonus lifts the clock back above a minute, the "one minute remaining" warning plays again for the new last minute.
+- Catch-Up: a Multikill's team bonus is no longer doubled for the last-placed team (the player's own Multikill bonus never was), so the team and player totals agree.
+- Spectate: a player who was watching someone when a match ended gets their hands and gun drawn again in the next match.
+- Not changed: Coin Rush can still give two players a point for the same coin when both grab it within one network round trip (each console counts what it saw; it is the same on every console).
+
+## v5.105 · 2026-10-29 · Team Lives: a player who is already out stays out
+
+*v5.105 · TeamLivesOutStaysOut* · Xbox, PS2 NTSC, PS2 PAL
+
+- Team Elimination / Team Vampire with Team Lives: a player killed while already out (no lives left) was given the team's pool of lives, so they came back in. This could happen to a mid-match joiner the host places out (its team has nobody left) in the moment before it is taken out of play: a team that was knocked out came back and the match didn't end. A player with no lives left now stays out, and the pool is untouched, as in the game without Team Lives.
+
 ## v5.104 · 2026-10-29 · Manage Players and King of the Hill fixes
 
 *v5.104 · ManagePlayersKotHFixes* · Xbox, PS2 NTSC, PS2 PAL
