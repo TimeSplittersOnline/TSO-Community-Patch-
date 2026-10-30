@@ -5,13 +5,13 @@
 You need your own copy of the game. This repository contains no game files. This mod is only needed by the host online. You will be missing some quality of life features without it, but everything works.
 
 ### PS2 (PCSX2)
-1. Download the pnach for your region from the [`build/ps2`](build/ps2) folder:
+1. Download the pnach for your region from the [`patch/ps2`](patch/ps2) folder:
    - NTSC (USA): `SLUS-21148_FB2F4502.pnach`
    - PAL (Europe): `SLES-52993_E0F96C7D.pnach`
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### Xbox (xemu or a modded console)
-Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`build/xbox`](build/xbox). The title update isn't needed: the patches include it.
+Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/xbox`](patch/xbox). The title update isn't needed: the patches include it.
 
 **Whole xiso (simplest for xemu).** If your xiso is one of these unmodified 4,047,372,288-byte images, patch the whole image in one step with `TimeSplitters - Future Perfect [xiso] - TSO Community Patch.xdelta` (the same file works for both; each gives its own region's game):
 
@@ -36,7 +36,7 @@ Check your file's MD5 before patching: an xdelta doesn't check its base, so a di
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
-The [`build`](build) folder always holds the current version's TSO Community Patch files: [`build/ps2`](build/ps2) has the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and the PS2 xdelta patches, and [`build/xbox`](build/xbox) has the Xbox xdelta patches. Every new version updates all of them together. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
+The [`patch`](patch) folder always holds the current version's TSO Community Patch files: [`patch/ps2`](patch/ps2) has the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and the PS2 xdelta patches, and [`patch/xbox`](patch/xbox) has the Xbox xdelta patches. Every new version updates all of them together. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
 ## Features
 
