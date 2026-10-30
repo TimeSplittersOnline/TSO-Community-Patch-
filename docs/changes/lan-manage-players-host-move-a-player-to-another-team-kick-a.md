@@ -109,7 +109,7 @@
 | 008E5407 | 30 bytes | xbreadfail_sp | LAN host: every zone dropped on the Hill again 2 seconds later (a game whose network let a drop or capture arrive late or out of order puts it right); keeps all | v5.3 · 2026-10-16 |
 | 008E5425 | 53 bytes | xbreadfail_sp | a game with the patch: the Hill drawn as one zone (every other zone in it without its beam and flame); keeps all | v5.3 · 2026-10-16 |
 | 008E545A | 93 bytes | xbreadfail_sp | "The Hill has moved!" and a sting, on this game | v5.3 · 2026-10-16 |
-| 008E54B7 | 435 bytes | xbreadfail_sp | zones tick (call at 0x65fc0, was cmpl $5,GSTATE; that compare is redone at the end): every game works out the Hill's period; host / offline set the match up, move the Hill when the period moves on and resync a late joiner; every game with the patch shows the message and draws the Hill as one zone | v5.104 · 2026-10-29 |
+| 008E54B7 | 435 bytes | xbreadfail_sp | zones tick (call at 0x65fc0, was cmpl $5,GSTATE; that compare is redone at the end): every game works out the Hill's period; host / offline set the match up, move the Hill when the period moves on and resync a late joiner; every game with the patch shows the message and draws the Hill as one zone | v5.107 · 2026-10-29 |
 | 008E566A | 133 bytes | xbreadfail_sp | LAN player with the patch: the message when the Hill actually moves (the first zone flies to its new place), as well as on this game's own count of the periods; keeps all | v5.3 · 2026-10-16 |
 | 008E56EF | 328 bytes | xbreadfail_sp | ecx = player (spawn point message, XRDYSP), LAN host: another game's player entering the match (its chr alive here or none yet: not a respawn; not a spawn point held at the start, which the start covers). Its game has its level now (it asks for a spawn point): it may have started late (a slower console, or left on a menu such as a profile prompt) or joined mid-match, and whatever the host sent it before then is lost. Everything a feature sent at the start or to a joiner goes to it again here (Gun Game / Showdown map guns and armouries: XGGLATE, after this). Keeps all - King of the Hill: the zones to the Hill again at once, and 3 seconds later once more (else it shows them at their own places until the next move) - Thief: the coins already out, to its game only (XCRJOIN; a joiner gets them here, not at the greeting, when its game is still loading) - the weapon switch for players without the patch: an "Always" still on goes to its game again (XPFSEND); their own setting again if it was put back at the last match's end and this game's copy still says "Always" (XPFENT, also for a spawn point held at the start) - Weapon Mode: its own hand-out still on the floor (its game never had it) goes, as a dead player's does, and it is given another (XGGCH, XGCHRG) | v5.106 · 2026-10-29 |
 | 008E5837 | 124 bytes | xbreadfail_sp | XENTMARK(client), cdecl, keeps all: a mid-match joiner's players (by network player table number): their next spawn point request is their game entering (XENTP: whatever their slot's chr is, e.g. a leaver's dead one), and their game has no coins yet (XCRSNT) | v5.71 · 2026-10-23 |
@@ -125,13 +125,13 @@ NTSC address first; the PAL address follows where it differs.
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
 | 0015AA84 | 0C054E4E | 0C03AECA | jal 0x153938 | jal 0xebb28 | Hook: option text colour: a waiting move greyed out (Manage Players rows) | v5.30 · 2026-10-18 |
-| 0015AD7C | C62000DC | 0C03B626 | lwc1 zero,220(s1) | jal 0xed898 | Hook: option arrows: their end (Manage Players rows) | v5.29 · 2026-10-18 |
-| 0015ADE0 | 0C042C82 | 0C03B948 | jal 0x10b208 | jal 0xee520 | Hook: option arrows: the text's width (Manage Players rows) | v5.29 · 2026-10-18 |
-| 0015AEBC | 0C056A88 | 0C03BA1A | jal 0x15aa20 | jal 0xee868 | Hook: option text: in the middle between its arrows (Manage Players rows) | v5.30 · 2026-10-18 |
-| 0046DE20 / PAL 0046DEC0 | 0C0412CA | 0C03BF99 | jal 0x104b28 | jal 0xefe64 | Hook: confirm page texts | v5.21 · 2026-10-17 |
-| 0046DE60 / PAL 0046DF00 | 0C0412CA | 0C03BFA5 | jal 0x104b28 | jal 0xefe94 | Hook: confirm page texts | v5.21 · 2026-10-17 |
-| 0046ECB4 / PAL 0046ED54 | 0C13D554 | 0C03B4F4 | jal 0x4f5550 | jal 0xed3d0 | Hook: in-match pause (Options tab): Manage Players just above Leave Match | v5.25 · 2026-10-17 |
-| 004FF4A0 / PAL 004FF548 | 11CD000A | 0C03BF72 | beq t6,t5,0x4ff4cc | jal 0xefdc8 | Hook: a leaver's kills by its own team: cleared too (MPLVS) | v5.33 · 2026-10-18 |
+| 0015AD7C | C62000DC | 0C03B6B4 | lwc1 zero,220(s1) | jal 0xedad0 | Hook: option arrows: their end (Manage Players rows) | v5.29 · 2026-10-18 |
+| 0015ADE0 | 0C042C82 | 0C03B9D6 | jal 0x10b208 | jal 0xee758 | Hook: option arrows: the text's width (Manage Players rows) | v5.29 · 2026-10-18 |
+| 0015AEBC | 0C056A88 | 0C03BAA8 | jal 0x15aa20 | jal 0xeeaa0 | Hook: option text: in the middle between its arrows (Manage Players rows) | v5.30 · 2026-10-18 |
+| 0046DE20 / PAL 0046DEC0 | 0C0412CA | 0C03C03B | jal 0x104b28 | jal 0xf00ec | Hook: confirm page texts | v5.21 · 2026-10-17 |
+| 0046DE60 / PAL 0046DF00 | 0C0412CA | 0C03C047 | jal 0x104b28 | jal 0xf011c | Hook: confirm page texts | v5.21 · 2026-10-17 |
+| 0046ECB4 / PAL 0046ED54 | 0C13D554 | 0C03B582 | jal 0x4f5550 | jal 0xed608 | Hook: in-match pause (Options tab): Manage Players just above Leave Match | v5.25 · 2026-10-17 |
+| 004FF4A0 / PAL 004FF548 | 11CD000A | 0C03C014 | beq t6,t5,0x4ff4cc | jal 0xf0050 | Hook: a leaver's kills by its own team: cleared too (MPLVS) | v5.33 · 2026-10-18 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -150,31 +150,31 @@ NTSC address first; the PAL address follows where it differs.
 | 000EA6D8-000EA79B | 49 | MPBANK: a0 = a chr about to move to team a1 (MPTW1 / MPTW2, before the team is written; +0x84 still the old one). The game counts a player's kills from its kill table (chr +0xA18, per victim id) over the characters on another team NOW, plus | v5.32 · 2026-10-18 |
 | 000EBB28-000EBBC7 | 40 | MPTCOL: jal at 0x15AA84 in the option text's draw (was jal 0x153938, the text colour: a0 menu, a1 item, a2 &colour, a3; s4 = the option): the team a row's move waits for (picked with A; A on it again cancels) shows greyed out | v5.31 · 2026-10-18 |
 | 000EC31C-000EC3B3 | 38 | MPLOCK: a0 = a row (from MPDR, each frame before the option is drawn): with a move waiting (this match), the row shows the team it waits for whatever left / right did (the menu reads its input before it draws). A on it cancels the | v5.32 · 2026-10-18 |
-| 000ED060-000ED0DF | 32 | KDEF: a0 = PLAYERS index (MPKYES): their own setting back now (PFDONE), the kick due in half a second (KDT) | v5.96 · 2026-10-28 |
-| 000ED3D0-000ED44B | 31 | MPOP: jal at 0x46ECB4 (in-match pause menu, Options tab, just before its Leave Match; was jal 0x4F5550 (network game flag); s2 = page): the LAN host's first player gets "Manage Players" there when someone can be managed; v0 = network game flag as before | v5.97 · 2026-10-28 |
-| 000ED898-000ED90F | 30 | MPADC: jal at 0x15AD7C (was lwc1 f0,220(s1)): f0 = the end to place the arrows from; keeps everything else (the instruction after it, in the delay slot, has already run) | v5.31 · 2026-10-18 |
-| 000EE334-000EE397 | 25 | MPTM: leaf: v0 = the colours a player can be moved to (bit team-1), 0 with teams off: the match's colours less the disabled ones (all disabled = none, as the game takes it); uses t6-t9 | v5.23 · 2026-10-17 |
-| 000EE520-000EE57F | 24 | MPATW: jal at 0x15ADE0 (was jal text length routine 0x10B208; a0 = the text): its width, or the widest option's for such a row | v5.30 · 2026-10-18 |
-| 000EE80C-000EE867 | 23 | MPMOVE: a0 = PLAYERS index, a1 = team: the game's team message, applied on this (the host's) game as a player's pick is (TEAMRX 0x4FA8D8, a1 = the data after the 8-byte header, a2 = type), and sent to every other console | v5.26 · 2026-10-17 |
-| 000EE868-000EE8C3 | 23 | MPTXT: jal at 0x15AEBC (was jal 0x15AA20, the option text's draw: a0 menu, a1 item, a2 option, f12 x, f13 y, f14 0; s1 = the item): such a row's text sits in the middle between its arrows (the game places it after the left | v5.30 · 2026-10-18 |
-| 000EF518-000EF55F | 18 | MPANY: v0 = 1 when the LAN host has someone to manage (the Options tab item shows), else 0 | v5.26 · 2026-10-17 |
-| 000EF560-000EF5A7 | 18 | MPDIE: leaf, a0 = chr id (jal from GGK: every death the host scores, suicides too): a player with a move waiting is due; uses t6-t9 | v5.26 · 2026-10-17 |
-| 000EFDC8-000EFDFB | 13 | MPLVS: When a player leaves, the game banks the kills other teams made of it and clears them, but leaves the kills by its own team (team kills, not counted). A player who joins into that slot on another team then had them counted as kills; with moves (MPBANK), kills already banked while the leaver was on another team would count twice. Its own team's kills of it are cleared too (nothing counted changes: they didn't count, and what did is in the bank) jal at 0x4FF4A0 in the game's leaver loop (was beq t6,t5,0x4FF4CC, the same-team skip; its delay slot lw t5,228(fp) = the leaver's chr has run): t4 = chr i, t6 = its team. Returns past the game's body (0x4FF4CC) | v5.33 · 2026-10-18 |
-| 000EFE64-000EFE93 | 12 | MPTT: jal at 0x46DE20 (confirm page title, was jal 0x104B28): ours when its Yes is MPKYES ("Kick Player") | v5.68 · 2026-10-23 |
-| 000EFE94-000EFEC3 | 12 | MPTB: jal at 0x46DE60 (confirm page question, was jal 0x104B28): ours the same way | v5.68 · 2026-10-23 |
-| 000F00D4-000F00FB | 10 | MPCB: the Options tab item (a0 = pause page): our page, opened as the game opens its Players page (0x46E7E0) | v5.23 · 2026-10-17 |
-| 000F00FC-000F0123 | 10 | team write hook: a0 = an option text, s0 = the row: f0 = its width as the game draws it (the option font picked) | v5.29 · 2026-10-18 |
-| 000F01BC-000F01DF | 9 | MPBK: back (and after a kick): the page closes (as the Players page's back, 0x473F08) | v5.23 · 2026-10-17 |
-| 000F0270-000F028F | 8 | KDNOW: the match ends (PFALL): KDT no longer runs, so a kick still waiting is due now (the player's setting has just gone back again) and goes through the same checks | v5.99 · 2026-10-28 |
-| 000F0400-000F040F | 4 | Hook: on a quarter screen | v5.106 · 2026-10-29 |
-| 000F0410-000F041F | 4 | Hook: its team names | v5.106 · 2026-10-29 |
-| 000F04C0-000F04CF | 4 | Hook: Manage Players' page: builder, no tick | v5.21 · 2026-10-17 (approx.) |
-| 000F06C4-000F06CB | 2 | LKICK: text | v5.21 · 2026-10-17 (approx.) |
-| 000F06CC-000F06D3 | 2 | LMPB: text | v5.21 · 2026-10-17 (approx.) |
-| 000F06D4-000F06DB | 2 | LMPY: text | v5.21 · 2026-10-17 (approx.) |
-| 000F06DC-000F06E3 | 2 | LMPG: text | v5.21 · 2026-10-17 (approx.) |
-| 000F0744-000F0747 | 1 | LMPR: text | v5.21 · 2026-10-17 (approx.) |
-| 000F0748-000F074B | 1 | LMPRS: text | v5.21 · 2026-10-17 (approx.) |
-| 000F074C-000F074F | 1 | LMPBS: text | v5.21 · 2026-10-17 (approx.) |
-| 000F0750-000F0753 | 1 | LMPYS: text | v5.21 · 2026-10-17 (approx.) |
-| 000F0754-000F0757 | 1 | LMPGS: text | v5.21 · 2026-10-17 (approx.) |
+| 000ED298-000ED317 | 32 | KDEF: a0 = PLAYERS index (MPKYES): their own setting back now (PFDONE), the kick due in half a second (KDT) | v5.96 · 2026-10-28 |
+| 000ED608-000ED683 | 31 | MPOP: jal at 0x46ECB4 (in-match pause menu, Options tab, just before its Leave Match; was jal 0x4F5550 (network game flag); s2 = page): the LAN host's first player gets "Manage Players" there when someone can be managed; v0 = network game flag as before | v5.97 · 2026-10-28 |
+| 000EDAD0-000EDB47 | 30 | MPADC: jal at 0x15AD7C (was lwc1 f0,220(s1)): f0 = the end to place the arrows from; keeps everything else (the instruction after it, in the delay slot, has already run) | v5.31 · 2026-10-18 |
+| 000EE56C-000EE5CF | 25 | MPTM: leaf: v0 = the colours a player can be moved to (bit team-1), 0 with teams off: the match's colours less the disabled ones (all disabled = none, as the game takes it); uses t6-t9 | v5.23 · 2026-10-17 |
+| 000EE758-000EE7B7 | 24 | MPATW: jal at 0x15ADE0 (was jal text length routine 0x10B208; a0 = the text): its width, or the widest option's for such a row | v5.30 · 2026-10-18 |
+| 000EEA44-000EEA9F | 23 | MPMOVE: a0 = PLAYERS index, a1 = team: the game's team message, applied on this (the host's) game as a player's pick is (TEAMRX 0x4FA8D8, a1 = the data after the 8-byte header, a2 = type), and sent to every other console | v5.26 · 2026-10-17 |
+| 000EEAA0-000EEAFB | 23 | MPTXT: jal at 0x15AEBC (was jal 0x15AA20, the option text's draw: a0 menu, a1 item, a2 option, f12 x, f13 y, f14 0; s1 = the item): such a row's text sits in the middle between its arrows (the game places it after the left | v5.30 · 2026-10-18 |
+| 000EF7A0-000EF7E7 | 18 | MPANY: v0 = 1 when the LAN host has someone to manage (the Options tab item shows), else 0 | v5.26 · 2026-10-17 |
+| 000EF7E8-000EF82F | 18 | MPDIE: leaf, a0 = chr id (jal from GGK: every death the host scores, suicides too): a player with a move waiting is due; uses t6-t9 | v5.26 · 2026-10-17 |
+| 000F0050-000F0083 | 13 | MPLVS: When a player leaves, the game banks the kills other teams made of it and clears them, but leaves the kills by its own team (team kills, not counted). A player who joins into that slot on another team then had them counted as kills; with moves (MPBANK), kills already banked while the leaver was on another team would count twice. Its own team's kills of it are cleared too (nothing counted changes: they didn't count, and what did is in the bank) jal at 0x4FF4A0 in the game's leaver loop (was beq t6,t5,0x4FF4CC, the same-team skip; its delay slot lw t5,228(fp) = the leaver's chr has run): t4 = chr i, t6 = its team. Returns past the game's body (0x4FF4CC) | v5.33 · 2026-10-18 |
+| 000F00EC-000F011B | 12 | MPTT: jal at 0x46DE20 (confirm page title, was jal 0x104B28): ours when its Yes is MPKYES ("Kick Player") | v5.68 · 2026-10-23 |
+| 000F011C-000F014B | 12 | MPTB: jal at 0x46DE60 (confirm page question, was jal 0x104B28): ours the same way | v5.68 · 2026-10-23 |
+| 000F035C-000F0383 | 10 | MPCB: the Options tab item (a0 = pause page): our page, opened as the game opens its Players page (0x46E7E0) | v5.23 · 2026-10-17 |
+| 000F0384-000F03AB | 10 | team write hook: a0 = an option text, s0 = the row: f0 = its width as the game draws it (the option font picked) | v5.29 · 2026-10-18 |
+| 000F0444-000F0467 | 9 | MPBK: back (and after a kick): the page closes (as the Players page's back, 0x473F08) | v5.23 · 2026-10-17 |
+| 000F04F8-000F0517 | 8 | KDNOW: the match ends (PFALL): KDT no longer runs, so a kick still waiting is due now (the player's setting has just gone back again) and goes through the same checks | v5.99 · 2026-10-28 |
+| 000F0688-000F0697 | 4 | Hook: on a quarter screen | v5.107 · 2026-10-29 |
+| 000F0698-000F06A7 | 4 | Hook: its team names | v5.107 · 2026-10-29 |
+| 000F0748-000F0757 | 4 | Hook: Manage Players' page: builder, no tick | v5.21 · 2026-10-17 (approx.) |
+| 000F0950-000F0957 | 2 | LKICK: text | v5.21 · 2026-10-17 (approx.) |
+| 000F0958-000F095F | 2 | LMPB: text | v5.21 · 2026-10-17 (approx.) |
+| 000F0960-000F0967 | 2 | LMPY: text | v5.21 · 2026-10-17 (approx.) |
+| 000F0968-000F096F | 2 | LMPG: text | v5.21 · 2026-10-17 (approx.) |
+| 000F09D0-000F09D3 | 1 | LMPR: text | v5.21 · 2026-10-17 (approx.) |
+| 000F09D4-000F09D7 | 1 | LMPRS: text | v5.21 · 2026-10-17 (approx.) |
+| 000F09D8-000F09DB | 1 | LMPBS: text | v5.21 · 2026-10-17 (approx.) |
+| 000F09DC-000F09DF | 1 | LMPYS: text | v5.21 · 2026-10-17 (approx.) |
+| 000F09E0-000F09E3 | 1 | LMPGS: text | v5.21 · 2026-10-17 (approx.) |

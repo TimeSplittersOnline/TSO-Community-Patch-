@@ -30,7 +30,7 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013E578 | 0C04F22E | 0C03BACF | jal 0x13c8b8 | jal 0xeeb3c | Zones: when time runs out, held zones score once more before the match ends (the last 15-second scoring tick landed after the end, so the final 15 seconds never counted). Host only on LAN (the player scores on the results screen are refreshed too) | v5.3 · 2026-10-16 |
+| 0013E578 | 0C04F22E | 0C03BB5D | jal 0x13c8b8 | jal 0xeed74 | Zones: when time runs out, held zones score once more before the match ends (the last 15-second scoring tick landed after the end, so the final 15 seconds never counted). Host only on LAN (the player scores on the results screen are refreshed too) | v5.3 · 2026-10-16 |
 | 0013DDCC | 000E7900 | 0C03EEF4 | sll t7,t6,4 | jal 0xfbbd0 | Zones: "Zone Scoring Interval" (Advanced Settings, 10/15/20 Seconds, default 15). The host scores on its setting and sends it to patched players (spare team-list byte); players without the patch still get the right scores from the host | v5.89 · 2026-10-27 |
 | 0013DDD0 | 01EE7823 | 00000000 | subu t7,t7,t6 | nop | Zones: "Zone Scoring Interval" (Advanced Settings, 10/15/20 Seconds, default 15). The host scores on its setting and sends it to patched players (spare team-list byte); players without the patch still get the right scores from the host | v5.89 · 2026-10-27 |
 | 0013A910 | 000E7C00 | 00000000 | sll t7,t6,16 | nop | Hook: new[0x13A910]=NOP | v5.40 · 2026-10-19 |
@@ -44,6 +44,12 @@ NTSC address first; the PAL address follows where it differs.
 | 002620DC | 11E00225 | 11E00225 | beq t7,zero,0x262974 | beq t7,zero,0x262974 | Hook: name tags' Teamplay check: the game's own again (beq t7,zero,0x262974 / nop; v5.90-v5.91's HTTP | v5.92 · 2026-10-27 |
 | 002620E0 | 00000000 | 00000000 | nop | nop | Hook: name tags' Teamplay check: the game's own again (beq t7,zero,0x262974 / nop; v5.90-v5.91's HTTP | v5.92 · 2026-10-27 |
 | 0036F270 | 0C1409A0 | 0C1409A0 | jal 0x502680 | jal 0x502680 | Hook: removed: their original words back) | v5.47 · 2026-10-20 |
+| 0042BC0C | 108F0019 | 00000000 | beq a0,t7,0x42bc74 | nop | Hook: new[0x42BC0C]=NOP | v5.107 · 2026-10-29 |
+| 0043B838 | 0C053A3C | 0C053A3C | jal 0x14e8f0 | jal 0x14e8f0 | Hook: v5.107 test builds' Bots row hooks, taken out | v5.107 · 2026-10-29 |
+| 0043BAD4 | 3C0F0075 | 3C0F0075 | lui t7,0x75 | lui t7,0x75 | Hook: v5.107 test builds' Bots row hooks, taken out | v5.107 · 2026-10-29 |
+| 0043BAD8 | 25EFE4FC | 25EFE4FC | addiu t7,t7,-6916 | addiu t7,t7,-6916 | Hook: v5.107 test builds' Bots row hooks, taken out | v5.107 · 2026-10-29 |
+| 0043BAE4 | 3C0F0075 | 3C0F0075 | lui t7,0x75 | lui t7,0x75 | Hook: v5.107 test builds' Bots row hooks, taken out | v5.107 · 2026-10-29 |
+| 0043BAE8 | 25EFE500 | 25EFE500 | addiu t7,t7,-6912 | addiu t7,t7,-6912 | Hook: v5.107 test builds' Bots row hooks, taken out | v5.107 · 2026-10-29 |
 | 0046DA4C / PAL 0046DAEC | 0C053A3C | 0C053A3C | jal 0x14e8f0 | jal 0x14e8f0 | Hook: (Return to Lobby removed on PS2: the original words back) | v5.68 · 2026-10-23 |
 | 0046ECF8 / PAL 0046ED98 | 0C13D554 | 0C13D554 | jal 0x4f5550 | jal 0x4f5550 | Hook: (Return to Lobby removed on PS2: the original words back) | v5.68 · 2026-10-23 |
 | 0047759C / PAL 0047763C | 0C13D554 | 0C13D554 | jal 0x4f5550 | jal 0x4f5550 | Hook: (Return to Lobby removed on PS2: the original words back) | v5.68 · 2026-10-23 |

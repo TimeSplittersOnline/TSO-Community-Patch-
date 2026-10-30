@@ -36,8 +36,8 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 001B04FC | 0C107D9A | 0C03B67F | jal 0x41f668 | jal 0xed9fc | Hook: Thief death coin in character death routine: was jal 0x41F668 | v5.3 · 2026-10-16 |
-| 004F9168 / PAL 004F9210 | 0C107E62 | 0C03B513 | jal 0x41f988 | jal 0xed44c | Hook: Thief collect message: was jal 0x41F988 (Coin Rush: still scores when the coin is gone here) | v5.3 · 2026-10-16 |
+| 001B04FC | 0C107D9A | 0C03B70D | jal 0x41f668 | jal 0xedc34 | Hook: Thief death coin in character death routine: was jal 0x41F668 | v5.3 · 2026-10-16 |
+| 004F9168 / PAL 004F9210 | 0C107E62 | 0C03B5A1 | jal 0x41f988 | jal 0xed684 | Hook: Thief collect message: was jal 0x41F988 (Coin Rush: still scores when the coin is gone here) | v5.3 · 2026-10-16 |
 | 004F933C / PAL 004F93E4 | 0C107D20 | 0C03AC44 | jal 0x41f480 | jal 0xeb110 | Hook: a LAN player's death coin arriving: was jal 0x41F480 | v5.3 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
@@ -53,11 +53,11 @@ NTSC address first; the PAL address follows where it differs.
 | 000EB110-000EB1C3 | 45 | CDF: jal at 0x4F933C (a LAN player's death coin arriving, was jal 0x41F480; a0 = victim prop, a1 = pad): the host drops it with Coin Rush, or with Player Kills when it saw that chr die without a kill in the last 3 seconds, | v5.17 · 2026-10-17 |
 | 000EB1C4-000EB277 | 45 | CRRA: a0 = page, a1 = 0 refresh / 1 apply: Coin Rush and Coin Drop; Coin Drop is greyed out while Coin Rush is On | v5.3 · 2026-10-16 |
 | 000EBBC8-000EBC67 | 40 | CB74: leaf: t6 = team-list byte 74 for LAN players: 0xC0 \| Zone Interval \| bits 2-3: King of the Hill in Zones, else Coin Rush << 2 \| Player Kills << 3 (Thief), Switch Spawns << 2 (Capture the Bag); uses t7,t8 (jal at 0xFBBB0, the team list, | v5.95 · 2026-10-27 |
-| 000ED44C-000ED4C7 | 31 | CRNR: jal at 0x4F9168 in collect reader (was jal 0x41F988 pickup removal routine; a0 = chr id, a1 = pad): with Coin Rush, a coin another console says it picked up still scores when this game no longer has it (taken | v5.3 · 2026-10-16 |
-| 000ED9FC-000EDA6F | 29 | CDK: jal at 0x1B04FC in character death routine (Thief death coin, was jal 0x41F668 pickup spawn routine; a0 = victim prop, s1 = damage info: 0 target prop, 4 original attacker prop): no coin with Coin Rush, or with Player Kills | v5.3 · 2026-10-16 |
-| 000EF7DC-000EF81F | 17 | CRCH: Coin Rush changefn (a0 = page, a1 = item): Coin Drop only selectable with Coin Rush Off | v5.3 · 2026-10-16 |
-| 000EFAC4-000EFAFF | 15 | CDREC: leaf (a0 = victim prop, t6 = 1 no coin / 0 coin): remember it for the host's check of LAN players' coins; uses t7-t9 | v5.3 · 2026-10-16 |
-| 000F0470-000F047F | 4 | LCD1: text | v5.3 · 2026-10-16 |
-| 000F05A8-000F05B3 | 3 | LCR: text | v5.3 · 2026-10-16 |
-| 000F05B4-000F05BF | 3 | LCD: text | v5.3 · 2026-10-16 |
-| 000F05C0-000F05CB | 3 | LCD0: text | v5.3 · 2026-10-16 |
+| 000ED684-000ED6FF | 31 | CRNR: jal at 0x4F9168 in collect reader (was jal 0x41F988 pickup removal routine; a0 = chr id, a1 = pad): with Coin Rush, a coin another console says it picked up still scores when this game no longer has it (taken | v5.3 · 2026-10-16 |
+| 000EDC34-000EDCA7 | 29 | CDK: jal at 0x1B04FC in character death routine (Thief death coin, was jal 0x41F668 pickup spawn routine; a0 = victim prop, s1 = damage info: 0 target prop, 4 original attacker prop): no coin with Coin Rush, or with Player Kills | v5.3 · 2026-10-16 |
+| 000EFA64-000EFAA7 | 17 | CRCH: Coin Rush changefn (a0 = page, a1 = item): Coin Drop only selectable with Coin Rush Off | v5.3 · 2026-10-16 |
+| 000EFD4C-000EFD87 | 15 | CDREC: leaf (a0 = victim prop, t6 = 1 no coin / 0 coin): remember it for the host's check of LAN players' coins; uses t7-t9 | v5.3 · 2026-10-16 |
+| 000F06F8-000F0707 | 4 | LCD1: text | v5.3 · 2026-10-16 |
+| 000F083C-000F0847 | 3 | LCR: text | v5.3 · 2026-10-16 |
+| 000F0848-000F0853 | 3 | LCD: text | v5.3 · 2026-10-16 |
+| 000F0854-000F085F | 3 | LCD0: text | v5.3 · 2026-10-16 |

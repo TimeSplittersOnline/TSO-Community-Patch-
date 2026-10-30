@@ -5,7 +5,7 @@ Every change the current build makes to the original game files, grouped by feat
 | Feature | Xbox game code / data | Xbox added code | PS2 game code lines | PS2 added code words |
 |---|---|---|---|---|
 | [XBE header (checksums and sizes)](xbe-header-checksums-and-sizes.md) | 4 | 3 | 0 | 0 |
-| [Advanced Settings menu & shared hooks (used by several features)](advanced-settings-menu-shared-hooks-used-by-several-features.md) | 5 | 59 | 8 | 1144 |
+| [Advanced Settings menu & shared hooks (used by several features)](advanced-settings-menu-shared-hooks-used-by-several-features.md) | 8 | 64 | 11 | 1272 |
 | [Team Settings: Team Spawns, Disable Team colours](team-settings-team-spawns-disable-team-colours.md) | 13 | 41 | 33 | 649 |
 | [Infinite Ammo, Disable Unarmed (No Punch)](infinite-ammo-disable-unarmed-no-punch.md) | 1 | 8 | 0 | 72 |
 | [Team Bag Tag](team-bag-tag.md) | 9 | 7 | 8 | 370 |
@@ -19,7 +19,7 @@ Every change the current build makes to the original game files, grouped by feat
 | [Virus: Spread By Kills](virus-spread-by-kills.md) | 2 | 4 | 0 | 149 |
 | [Showdown (Elimination, Vampire)](showdown-elimination-vampire.md) | 11 | 28 | 14 | 847 |
 | [LAN: Manage Players (host: move a player to another team, kick a player)](lan-manage-players-host-move-a-player-to-another-team-kick-a.md) | 12 | 96 | 8 | 1540 |
-| [Zones: Scoring Interval, last score at time up](zones-scoring-interval-last-score-at-time-up.md) | 2 | 12 | 27 | 337 |
+| [Zones: Scoring Interval, last score at time up](zones-scoring-interval-last-score-at-time-up.md) | 2 | 12 | 33 | 337 |
 | [Weapon Mode: weapon switch for players without the patch (experimental)](weapon-mode-weapon-switch-for-players-without-the-patch-expe.md) | 3 | 27 | 4 | 759 |
 | [Flame Tag: Number of Flames, LAN play, scoring](flame-tag-number-of-flames-lan-play-scoring.md) | 5 | 16 | 12 | 356 |
 | [Capture the Bag: Overtime](capture-the-bag-overtime.md) | 1 | 16 | 1 | 313 |
@@ -30,7 +30,7 @@ Every change the current build makes to the original game files, grouped by feat
 | [Player Health](player-health.md) | 3 | 14 | 3 | 359 |
 | [Capture the Bag: Reverse Scoring, Score With Bag Away](capture-the-bag-reverse-scoring-score-with-bag-away.md) | 4 | 9 | 0 | 219 |
 | [4 Teams, team play in more modes](4-teams-team-play-in-more-modes.md) | 28 | 1 | 61 | 104 |
-| [Spectate (Elimination, Vampire)](spectate-elimination-vampire.md) | 4 | 46 | 6 | 1494 |
+| [Spectate (Elimination, Vampire)](spectate-elimination-vampire.md) | 4 | 46 | 6 | 1529 |
 | [Respawn Delay](respawn-delay.md) | 2 | 32 | 0 | 266 |
 | [King of the Hill](king-of-the-hill.md) | 6 | 34 | 4 | 913 |
 | [Assault: Auto-Complete Phase, Time Bonus After Phase](assault-auto-complete-phase-time-bonus-after-phase.md) | 1 | 14 | 1 | 338 |

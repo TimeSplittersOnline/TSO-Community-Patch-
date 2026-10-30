@@ -40,17 +40,17 @@ NTSC address first; the PAL address follows where it differs.
 | 000E3368-000E35BB | 149 | ASK: timer is for + 1 (0 none: RAM starts at 0), the match clock / gameframe when it started, gameframe last seen jal at 0x3772FC (objectives update's Assault tick, was jal 0x384D20): the skip check and the time bonus, then the tick (same args) | v5.106 · 2026-10-29 |
 | 000E7F44-000E804F | 67 | ASITEM: Assault menu: Auto-Complete Phase (Off, 1 Min .. 10 Mins, as the game's own times) | v5.11 · 2026-10-16 |
 | 000EC018-000EC0B3 | 39 | TBITEM: Assault menu: Time Bonus After Phase (Off, 1 Min, 2 Mins, 3 Mins) | v5.20 · 2026-10-17 |
-| 000ED4C8-000ED543 | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
-| 000EF044-000EF097 | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
-| 000F034C-000F0363 | 6 | LTB: text | v5.20 · 2026-10-17 |
-| 000F038C-000F039F | 5 | LAS: text | v5.11 · 2026-10-16 |
-| 000F06E4-000F06EB | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
-| 000F06EC-000F06F3 | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
-| 000F06F4-000F06FB | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
-| 000F06FC-000F0703 | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0704-000F070B | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
-| 000F070C-000F0713 | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0714-000F071B | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
-| 000F071C-000F0723 | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0724-000F072B | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
-| 000F072C-000F0733 | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |
+| 000ED700-000ED77B | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
+| 000EF27C-000EF2CF | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
+| 000F05D4-000F05EB | 6 | LTB: text | v5.20 · 2026-10-17 |
+| 000F0614-000F0627 | 5 | LAS: text | v5.11 · 2026-10-16 |
+| 000F0970-000F0977 | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0978-000F097F | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0980-000F0987 | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0988-000F098F | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0990-000F0997 | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0998-000F099F | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
+| 000F09A0-000F09A7 | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
+| 000F09A8-000F09AF | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
+| 000F09B0-000F09B7 | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
+| 000F09B8-000F09BF | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |

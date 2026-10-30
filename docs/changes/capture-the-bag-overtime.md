@@ -43,9 +43,9 @@ NTSC address first; the PAL address follows where it differs.
 | 000E95B0-000E9693 | 57 | OTH: j at 0x13E53C (was bgtz t6,0x13E58C; its delay slot lui t7,0x63 done; t6 = time left): time not up -> 0x13E58C. Time up: Overtime holds the match (once) while a bag is carried, else the game's time-up at 0x13E544 | v5.64 · 2026-10-22 |
 | 000EB328-000EB3D7 | 44 | OTT: every frame (called at the start of GGT): new-match check; host / offline in overtime: once no bag is carried, or after a minute of it, 1 frame of time left, so the game's own time-up ends the match this frame | v5.64 · 2026-10-22 |
 | 000EB7EC-000EB897 | 43 | OTON: leaf: v0 = 1 when Overtime applies to the match being played (Capture the Bag; offline / LAN host: the setting; LAN player: the host's, setup byte 72 bit 2 under its 0xB0 marker); uses t8,t9 | v5.89 · 2026-10-27 |
-| 000ED544-000ED5BF | 31 | OTITEM: Capture the Bag menu: Overtime | v5.3 · 2026-10-16 |
-| 000EDA70-000EDAE3 | 29 | OTRA: a0 = page, a1 = 0 refresh / 1 apply: Overtime value; refresh greys it out with no time limit (time never runs out) | v5.19 · 2026-10-17 |
-| 000EF2C8-000EF313 | 19 | OTRST: leaf: a new match clears the overtime state; uses t8,t9,v1 | v5.16 · 2026-10-17 |
-| 000EF8E0-000EF91F | 16 | OTBAG: leaf: v0 = 1 when any active chr is carrying a bag (character record +128); uses t7-t9 | v5.3 · 2026-10-16 |
-| 000F05E4-000F05EF | 3 | LOTI: text | v5.3 · 2026-10-16 (approx.) |
-| 000F0620-000F062B | 3 | LOT: text | v5.3 · 2026-10-16 |
+| 000ED77C-000ED7F7 | 31 | OTITEM: Capture the Bag menu: Overtime | v5.3 · 2026-10-16 |
+| 000EDCA8-000EDD1B | 29 | OTRA: a0 = page, a1 = 0 refresh / 1 apply: Overtime value; refresh greys it out with no time limit (time never runs out) | v5.19 · 2026-10-17 |
+| 000EF550-000EF59B | 19 | OTRST: leaf: a new match clears the overtime state; uses t8,t9,v1 | v5.16 · 2026-10-17 |
+| 000EFB68-000EFBA7 | 16 | OTBAG: leaf: v0 = 1 when any active chr is carrying a bag (character record +128); uses t7-t9 | v5.3 · 2026-10-16 |
+| 000F0878-000F0883 | 3 | LOTI: text | v5.3 · 2026-10-16 (approx.) |
+| 000F08B4-000F08BF | 3 | LOT: text | v5.3 · 2026-10-16 |

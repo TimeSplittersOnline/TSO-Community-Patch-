@@ -9,6 +9,9 @@
 | 002C7832 | 2B7832 | 5 | `e8 69 ae da ff` | `e8 c9 97 d4 ff` | Match settings page: after the game's item-flags call, run the mod's page code (0x8E8BA3) through header code 0x11000. | v5.3 · 2026-10-16 |
 | 002C7C3A | 2B7C3A | 2 | `75 4e` | `eb 4e` | Match settings page: the extra text line (game text 0x3BE) that the original added for some modes is always skipped, making room for the Advanced Settings link. (Reason inferred from the code; not written down at the time.) | v5.3 · 2026-10-16 |
 | 002C7F6F | 2B7F6F | 5 | `e8 ec 21 db ff` | `e8 dd 9d d4 ff` | XADVL (call at 0x2c7f6f, was call 0x7a160 with arg 1: the divider before Weapon Set): "Advanced Settings" as the first big link, just above Weapon Set \| XADVL (call at 0x2c7f6f, was call 0x7a160 with arg 1: the divider before Weapon Set): "Advanced Settings" as the first big link, just above Weapon Set | v5.3 · 2026-10-16 |
+| 002C82E0 | 2B82E0 | 5 | `e8 fb b5 ff ff` | `e8 cb 6b 60 00` | the Bots row: under the frame where XMNUUP can't clear it \| the "Bots" row (call at 0x2c82e0 in the offline match settings page draw 0x2c8260, was call 0x2c38e0(x, y, fade) pixels; esi = the \| the "Bots" row (call at 0x2c82e0 in the offline match settings page draw 0x2c8260, was call 0x2c38e0(x, y, fade) pixels; esi = the menu): no higher than 1% of the screen under the frame (the button bar is under it: no room for the game's own gap): only moves on pages too tall for XMNUUP to clear it (e.g. Team Deathmatch) | v5.3 · 2026-10-16 |
+| 002D873A | 2C873A | 5 | `e8 e1 f4 d9 ff` | `e8 16 67 5f 00` | the match settings pages' menus (offline: call at 0x2d873a; Change Game Type: call at 0x2f1389; the Advanced Settings page: XOPT), \| ---------------- Menu frames raised the match settings pages' menus (offline: call at 0x2d873a; Change Game Type: call at 0x2f1389; the Advanced Settings page: XOPT), in place of call 0x77c20 (the menu's place, centred in 0-88.25% of the screen's height; arg = the menu): then raised so the frame's bottom (+0x64 top + 0x68 height, % of the screen) is no lower than the "Bots" row under it offline (80.5) / the Select and Back buttons (86.5), which the frame reached since the Advanced Settings link made it a row taller; its top no higher than 1% | v5.3 · 2026-10-16 |
+| 002F1389 | 2E1389 | 5 | `e8 92 68 d8 ff` | `e8 ce da 5d 00` | the match settings pages' menus (offline: call at 0x2d873a; Change Game Type: call at 0x2f1389; the Advanced Settings page: XOPT), | v5.3 · 2026-10-16 |
 
 ## Xbox: added code
 
@@ -40,6 +43,11 @@
 | 008CE86B | 24 bytes | xbreadfail_sp | all.s, Number of Flames (0x8e8284, was movzbl FLAMES,%eax: 0 = one flame); flags kept | v5.89 · 2026-10-27 |
 | 008CE883 | 24 bytes | xbreadfail_sp | zi.s, Zone Scoring Interval (0x8e8c42, was movzbl ZVAR,%eax: 0 = 15 seconds); flags kept | v5.89 · 2026-10-27 |
 | 008CE8AD | 18 bytes | xbreadfail_sp | mc3.s XCHK, Mercy Rule (header 0x11ea8, was cmpl $7,GSTATE; then jne = no check) | v5.89 · 2026-10-27 |
+| 008CEE55 | 7 bytes | xbreadfail_sp | ---------------- Menu frames raised the match settings pages' menus (offline: call at 0x2d873a; Change Game Type: call at 0x2f1389; the Advanced Settings page: XOPT), in place of call 0x77c20 (the menu's place, centred in 0-88.25% of the screen's height; arg = the menu): then raised so the frame's bottom (+0x64 top + 0x68 height, % of the screen) is no lower than the "Bots" row under it offline (80.5) / the Select and Back buttons (86.5), which the frame reached since the Advanced Settings link made it a row taller; its top no higher than 1% | v5.3 · 2026-10-16 (approx.) |
+| 008CEE5C | 80 bytes | xbreadfail_sp | Code: XMNUUPC (see the code shown) | v5.107 · 2026-10-29 |
+| 008CEEAC | 4 bytes | xbreadfail_sp | 1.0 | v5.3 · 2026-10-16 (approx.) |
+| 008CEEB0 | 56 bytes | xbreadfail_sp | the "Bots" row (call at 0x2c82e0 in the offline match settings page draw 0x2c8260, was call 0x2c38e0(x, y, fade) pixels; esi = the menu): no higher than 1% of the screen under the frame (the button bar is under it: no room for the game's own gap): only moves on pages too tall for XMNUUP to clear it (e.g. Team Deathmatch) | v5.107 · 2026-10-29 |
+| 008CEEE8 | 4 bytes | xbreadfail_sp | 1.0 | v5.3 · 2026-10-16 (approx.) |
 | 008DF000 | 256 bytes | xbreadfail_sp | Mod variables area (reserved, starts as zero). | v5.3 · 2026-10-16 (approx.) |
 | 008E7900 | 64 bytes | xbreadfail_sp | Data: XGGCT | v5.15 · 2026-10-16 |
 | 008E81C0 | 20 bytes | xbreadfail_sp | Data: PLIST | v5.3 · 2026-10-16 (approx.) |
@@ -88,6 +96,9 @@ NTSC address first; the PAL address follows where it differs.
 | 001B9198 | 8D4F001C | 00000000 | lw t7,28(t2) | nop | new[0x1B9194]=j(SYM['WWD']); new[0x1B9198]=NOP | v5.3 · 2026-10-16 |
 | 001B9230 | 8E4C001C | 0803FFC8 | lw t4,28(s2) | j 0xfff20 | delay slot (lw t7,20(t5)) kept | v5.3 · 2026-10-16 |
 | 0043B59C | 0C053D0C | 0C03F9B3 | jal 0x14f430 | jal 0xfe6cc | new[0x43B59C]=jal(ADVL) | v5.3 · 2026-10-16 |
+| 0043BA28 | 0C05600C | 0C03B23C | jal 0x158030 | jal 0xec8f0 | Hook: jumps to MNUUP: jal at 0x43BA28 (offline match settings page build): above the "Bots" row under the frame (82.5%), which the frame reached since the Advanced Settings link made it a row taller (it was about 80% before) | v5.107 · 2026-10-29 |
+| 0043BB08 | 0C10CBC0 | 0C03BCF2 | jal 0x432f00 | jal 0xef3c8 | Hook: ... and the Bots row a little lower where even that isn't enough (BOTDN) | v5.107 · 2026-10-29 |
+| 00473E5C / PAL 00473EFC | 0C05600C | 0C03B260 | jal 0x158030 | jal 0xec980 | Hook: Change Game Type page: the same, above its Select / Back buttons | v5.107 · 2026-10-29 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -95,16 +106,20 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|
 | 000FD010-000FDF9F | 592 | new code, page descriptor, label text and settings in free low memory (0x000FD000-0x000FDFA0) | v5.70 · 2026-10-23 |
 | 000FDC80-000FDCD7 | 22 | "Advanced Settings" page: same layout as the match settings page (title line + match settings text style) at 0x000FDC80 | v5.3 · 2026-10-16 |
-| 000EE460-000EE4BF | 24 | NCFL: j at 0xFCC5C in the flame function (was lui t0,0x10 / lbu s1,-12512(t0): Number of Flames, 0 = one): custom arcade and LAN only, else one; then on at 0xFCC64 | v5.89 · 2026-10-27 |
-| 000EE4C0-000EE51F | 24 | NCZI: j at 0xFBBD0, the zone interval's start (was lui t9,0x10 / lbu t8,-16552(t9): Zone Scoring Interval, 0 = 15 s): custom arcade and LAN only, else the default; then on at 0xFBBD8 | v5.89 · 2026-10-27 |
-| 000EEB3C-000EEB93 | 22 | NCZE: jal at 0x13E578 (time up, was jal 0xFB9E0: ze.py, Zones scores the held zones once more, then 0x13C8B8 with a0 = 0, set in the delay slot): custom arcade and LAN only; else straight to 0x13C8B8 | v5.95 · 2026-10-27 |
-| 000EEB94-000EEBEB | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
-| 000EFA10-000EFA4B | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EFA4C-000EFA87 | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
-| 000EFD94-000EFDC7 | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
-| 000EFF28-000EFF57 | 12 | GGCT: text | v5.15 · 2026-10-16 |
-| 000F0460-000F046F | 4 | LWWA: text | v5.3 · 2026-10-16 |
-| 000F0684-000F068B | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
+| 000EC8F0-000EC97F | 36 | MNUUP: jal at 0x43BA28 (offline match settings page build): above the "Bots" row under the frame (82.5%), which the frame reached since the Advanced Settings link made it a row taller (it was about 80% before) | v5.107 · 2026-10-29 |
+| 000EC980-000ECA0F | 36 | MNUUPC: jal at 0x473E5C (Change Game Type page build, the same rows): above its Select / Back buttons (about 89%), which the frame reached since the Advanced Settings link made it a row taller | v5.107 · 2026-10-29 |
+| 000ECA10-000ECA9F | 36 | MNUUPA: jal at 0xFD2E4 (Advanced Settings page, its end: the menu's place): the same, above its Select / Back buttons (the page is as tall as Change Game Type's) | v5.107 · 2026-10-29 |
+| 000EE698-000EE6F7 | 24 | NCFL: j at 0xFCC5C in the flame function (was lui t0,0x10 / lbu s1,-12512(t0): Number of Flames, 0 = one): custom arcade and LAN only, else one; then on at 0xFCC64 | v5.89 · 2026-10-27 |
+| 000EE6F8-000EE757 | 24 | NCZI: j at 0xFBBD0, the zone interval's start (was lui t9,0x10 / lbu t8,-16552(t9): Zone Scoring Interval, 0 = 15 s): custom arcade and LAN only, else the default; then on at 0xFBBD8 | v5.89 · 2026-10-27 |
+| 000EED74-000EEDCB | 22 | NCZE: jal at 0x13E578 (time up, was jal 0xFB9E0: ze.py, Zones scores the held zones once more, then 0x13C8B8 with a0 = 0, set in the delay slot): custom arcade and LAN only; else straight to 0x13C8B8 | v5.95 · 2026-10-27 |
+| 000EEDCC-000EEE23 | 22 | NCMC: jal at 0x13E660 (was jal 0xFC2A4, Mercy Rule's check, which goes on to 0x388DB0): custom arcade and LAN only | v5.89 · 2026-10-27 |
+| 000EF3C8-000EF417 | 20 | BOTDN: jal at 0x43BB08 (offline match settings page draw, was jal 0x432F00: the "Bots" row, a0 = x, a1 = y pixels, f12 the fade; s0 = the menu): no higher than 1% of the screen under the frame (the button bar is | v5.107 · 2026-10-29 |
+| 000EFC98-000EFCD3 | 15 | NCWW: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Reverse Scoring (WWVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
+| 000EFCD4-000EFD0F | 15 | NCHM: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = Score With Bag Away (HOMEVAR) in a custom arcade match or on LAN, else 0 (Story, Arcade League, Challenge); in a match only | v5.89 · 2026-10-27 |
+| 000F001C-000F004F | 13 | NCJ: leaf for ia.py (jalr t9,t8; link t9, uses t8 only): t8 = 0 in a custom arcade match or on LAN, else non-zero (Story, game type 10; Arcade League, flag 0x40; Challenge, flag 0x8000000); in a match only | v5.89 · 2026-10-27 |
+| 000F01B0-000F01DF | 12 | GGCT: text | v5.15 · 2026-10-16 |
+| 000F06E8-000F06F7 | 4 | LWWA: text | v5.3 · 2026-10-16 |
+| 000F0918-000F091F | 2 | RGNT: chain step before Respawn Delay (j at 0xFBE14 in sub.py's RG, was j 0xFBE30 = the end of the chain): the end of the chain as before (Spawn Rule and the Respawn Delay items are added by OPT in every mode) | v5.3 · 2026-10-16 (approx.) |
 | 000FE640-000FE663 | 9 | LTEAML=lstr('Team Settings >',16); LSPAWNL=lstr('Spawn Settings >',20) | v5.3 · 2026-10-16 |
 | 000FE664-000FE677 | 5 | LSCORE=lstr('Score With Bag Away',20) | v5.3 · 2026-10-16 |
 | 000FE678-000FE6B3 | 15 | a.w[ZR_]=addiu('t7','t7',lo(a.lab['ZRET'])); FLRET=a.lab['FLRET']; place(a) | v5.3 · 2026-10-16 |

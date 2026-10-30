@@ -8,7 +8,7 @@
 | 00065264 | 055264 | 7 | `f6 05 58 d2 82 00 01` | `e8 56 2d 88 00 90 90` | the ranking's team step (call at 0x65264, was testb $1,0x82d258; then je = a player's own score): in Elimination / Vampire with \| the ranking's team step (call at 0x65264, was testb $1,0x82d258; then je = a player's own score): in Elimination / Vampire with lives a player's own score as without teams (their team scores are lives left, XTLFRM: kept out of the rank score the host sends, which games without the patch show as the time); ZF as the test; keeps the others | v5.40 · 2026-10-19 |
 | 000652C8 | 0552C8 | 12 | `8b 8e 6c 0a 00 00 8b 86 64 0a 00 00` | `e8 cd 81 86 00 90 90 90 90 90 90 90` | ranking: Elimination / Vampire with teams: the team's time   # ranking: lives team modes rank by own score \| the ranking's survival time in Elimination / Vampire (call at 0x652c8, was mov 0xa6c(%esi),%ecx / mov 0xa64(%esi),%eax; then \| the ranking's survival time in Elimination / Vampire (call at 0x652c8, was mov 0xa6c(%esi),%ecx / mov 0xa64(%esi),%eax; then ecx += eax is the rank score): with Teamplay the team's time, the longest any of its players (connected) survived (one still in: this frame), with no score of its own, so team-mates rank (and games without the patch show their time) as one; esi = chr; keeps the others | v5.42 · 2026-10-19 |
 | 002E8BB3 | 2D8BB3 | 6 | `8b 8f 70 0a 00 00` | `e8 96 62 5e 00 90` | Scores page team rows: calls XTLROW, which in Team Elimination / Vampire with team lives shows the team's lives left instead of the row player's own (was mov 0xa70(%edi),%ecx). | v5.99 · 2026-10-28 |
-| 002F2072 | 2E2072 | 13 | `3c 09 75 28 80 3d 56 d2 82 00 04 75 1f` | `e9 40 4f 5f 00 90 90 90 90 90 90 90 90` | Scores page player rows: Deathmatch with Teamplay shows the Team Deathmatch number (kills of other teams); jumps to XERS, which in Team Elimination / Vampire with lives shows the game's own lives / time instead ("N Lives" for a player still in, else the time it was knocked out). | v5.86 · 2026-10-27 |
+| 002F2072 | 2E2072 | 13 | `3c 09 75 28 80 3d 56 d2 82 00 04 75 1f` | `e9 44 4f 5f 00 90 90 90 90 90 90 90 90` | Scores page player rows: Deathmatch with Teamplay shows the Team Deathmatch number (kills of other teams); jumps to XERS, which in Team Elimination / Vampire with lives shows the game's own lives / time instead ("N Lives" for a player still in, else the time it was knocked out). | v5.86 · 2026-10-27 |
 | 004D6FEC | 4C760C | 5 | `00 00 00 00 00` | `02 00 00 00 01` | Mode table, Elimination: Teamplay possible (+0xc = 2) and its team spawn points used (+0x10 = 1): Team Elimination. Was 0, 0. | v5.40 · 2026-10-19 |
 | 004D702C | 4C764C | 5 | `00 00 00 00 00` | `02 00 00 00 01` | Mode table, Vampire: the same (Team Vampire). Was 0, 0. | v5.40 · 2026-10-19 |
 
@@ -65,8 +65,8 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|---|---|---|
 | 0013A90C | 962E0A68 | 0C0396A2 | lhu t6,2664(s1) | jal 0xe5a88 | Hook: a death's lives: Team Lives (TLDEC returns t6 / t7 as the game's two) | v5.40 · 2026-10-19 |
 | 0013ADBC | 8E0F0A74 | 0C038BAA | lw t7,2676(s0) | jal 0xe2ea8 | Hook: ranking: Elimination / Vampire with teams: the team's time (delay slot lw t6,2668(s0) kept) | v5.42 · 2026-10-19 |
-| 0013B1F0 | 11E00008 | 0803BC9F | beq t7,zero,0x13b214 | j 0xef27c | Hook: ranking: Team Lives' team scores kept out of Elimination / Vampire rank scores (delay slot kept) | v5.40 · 2026-10-19 |
-| 00467D88 / PAL 00467E18 | 0C119DB4 | 0C03C1A5 | jal 0x4676d0 | jal 0xf0694 | Hook: Scores page team rows: the team's lives left in Team Elimination / Vampire (TLROW; was jal 0x4676D0) | v5.99 · 2026-10-28 |
+| 0013B1F0 | 11E00008 | 0803BD41 | beq t7,zero,0x13b214 | j 0xef504 | Hook: ranking: Team Lives' team scores kept out of Elimination / Vampire rank scores (delay slot kept) | v5.40 · 2026-10-19 |
+| 00467D88 / PAL 00467E18 | 0C119DB4 | 0C03C24A | jal 0x4676d0 | jal 0xf0928 | Hook: Scores page team rows: the team's lives left in Team Elimination / Vampire (TLROW; was jal 0x4676D0) | v5.99 · 2026-10-28 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -77,16 +77,16 @@ NTSC address first; the PAL address follows where it differs.
 | 000E4F34-000E50F7 | 113 | JNTM: a0 = a chr whose team becomes a1 (team write hook, LAN). On the host of a Team Elimination / Vampire match being played, for a player that joined it mid-match (JNF; its lives were the fewest of the players in, SDMIN), once: on a team with | v5.98 · 2026-10-28 |
 | 000E5A88-000E5C13 | 99 | TLDEC: jal at 0x13A90C in add-kill routine (was lhu t6,2664(s1); its delay slot sll t7,t6,16 now a nop; s1 = the victim's chr; then the game takes one off its lives left when it has any): with Team Lives, the pool is the team's lives as the HUD shows | v5.105 · 2026-10-29 |
 | 000E6E14-000E6F57 | 81 | PSTSC: jal at 0x475424 in the Scores page's team rows (was jal 0xFE180, the Bag Tag team row: a0 the row's text, a1 the team score; s1 = the team 1-4): Team Elimination / Vampire with lives: a team knocked out (score 0: no lives left) that | v5.88 · 2026-10-27 |
-| 000ED354-000ED3CF | 31 | TLRA: a0 = page, a1 = 0 refresh / 1 apply: refresh shows it and greys it out while Teamplay is Off; apply stores it | v5.40 · 2026-10-19 |
-| 000ED820-000ED897 | 30 | TLON: v0 = 1 with Team Lives on in such a match, else 0 | v5.89 · 2026-10-27 |
-| 000ED988-000ED9FB | 29 | TLM: v0 = 1 in a lives match with Teamplay that this game decides, Elimination / Vampire, not Showdown, else 0; uses t, v | v5.40 · 2026-10-19 |
-| 000EE26C-000EE2CF | 25 | PERS: j at 0x475028 in the Scores page's player rows (was beq t6,zero,0x4750E8 / nop / bne t5,zero,0x4750E8; t6 = the Teamplay flag, t5 = game type - 9): Deathmatch with Teamplay shows the Team Deathmatch number (0x475038, kills of other | v5.99 · 2026-10-28 |
-| 000EE2D0-000EE333 | 25 | TLITEM: the item: Off / On | v5.40 · 2026-10-19 |
-| 000EE754-000EE7AF | 23 | ISSPN: leaf: a0 = a chr id -> v0 = 1 if the ranking takes it: offline always; LAN when its game (network player table +4) has spawned (that game's entry 0x6E41B0 + id x 0x30C, +0x34 bit 0x10, as the game's ranking); uses t8, t9 | v5.86 · 2026-10-27 |
-| 000EE7B0-000EE80B | 23 | TLSV: from PFALL, instead of 0x139D88 (the end scores saved, before game state 8; e.g. the match ended on its time limit): on the host (or offline) the ranking runs once more (0x13ACC0, a0 0) with no out-player time (TLNP: TLAGE), so with | v5.84 · 2026-10-26 |
-| 000EF27C-000EF2C7 | 19 | TLRK: j at 0x13B1F0 in the ranking (was beq t7,zero,<own score>; its delay slot addiu t7,zero,16 has run; t6 = the match's parms): Teamplay (not Assault) ranks by the team score, except in Elimination / Vampire with lives: a player's own score, | v5.40 · 2026-10-19 |
-| 000EF8A0-000EF8DF | 16 | TPGR: a0 = page, a1 = 1 greyed out: its Teamplay item greyed out or not | v5.40 · 2026-10-19 |
-| 000EFFB0-000EFFDB | 11 | TPON: a0 = page: v0 = 1 when it has a Teamplay item (25) set On (option 0), else 0 | v5.40 · 2026-10-19 |
-| 000F0560-000F056B | 3 | LTL: text | v5.40 · 2026-10-19 |
-| 000F0608-000F0613 | 3 | PTFMT: code | v5.86 · 2026-10-27 |
-| 000F0694-000F069B | 2 | TLROW: jal at 0x467D88 (was jal 0x4676D0, the Scores page row's score text): until v5.105 a team row in Elimination / Vampire with Teamplay showed the team's lives left (with Team Lives off the sum of its players', which an unpatched | v5.40 · 2026-10-19 (approx.) |
+| 000ED58C-000ED607 | 31 | TLRA: a0 = page, a1 = 0 refresh / 1 apply: refresh shows it and greys it out while Teamplay is Off; apply stores it | v5.40 · 2026-10-19 |
+| 000EDA58-000EDACF | 30 | TLON: v0 = 1 with Team Lives on in such a match, else 0 | v5.89 · 2026-10-27 |
+| 000EDBC0-000EDC33 | 29 | TLM: v0 = 1 in a lives match with Teamplay that this game decides, Elimination / Vampire, not Showdown, else 0; uses t, v | v5.40 · 2026-10-19 |
+| 000EE4A4-000EE507 | 25 | PERS: j at 0x475028 in the Scores page's player rows (was beq t6,zero,0x4750E8 / nop / bne t5,zero,0x4750E8; t6 = the Teamplay flag, t5 = game type - 9): Deathmatch with Teamplay shows the Team Deathmatch number (0x475038, kills of other | v5.99 · 2026-10-28 |
+| 000EE508-000EE56B | 25 | TLITEM: the item: Off / On | v5.40 · 2026-10-19 |
+| 000EE98C-000EE9E7 | 23 | ISSPN: leaf: a0 = a chr id -> v0 = 1 if the ranking takes it: offline always; LAN when its game (network player table +4) has spawned (that game's entry 0x6E41B0 + id x 0x30C, +0x34 bit 0x10, as the game's ranking); uses t8, t9 | v5.86 · 2026-10-27 |
+| 000EE9E8-000EEA43 | 23 | TLSV: from PFALL, instead of 0x139D88 (the end scores saved, before game state 8; e.g. the match ended on its time limit): on the host (or offline) the ranking runs once more (0x13ACC0, a0 0) with no out-player time (TLNP: TLAGE), so with | v5.84 · 2026-10-26 |
+| 000EF504-000EF54F | 19 | TLRK: j at 0x13B1F0 in the ranking (was beq t7,zero,<own score>; its delay slot addiu t7,zero,16 has run; t6 = the match's parms): Teamplay (not Assault) ranks by the team score, except in Elimination / Vampire with lives: a player's own score, | v5.40 · 2026-10-19 |
+| 000EFB28-000EFB67 | 16 | TPGR: a0 = page, a1 = 1 greyed out: its Teamplay item greyed out or not | v5.40 · 2026-10-19 |
+| 000F0238-000F0263 | 11 | TPON: a0 = page: v0 = 1 when it has a Teamplay item (25) set On (option 0), else 0 | v5.40 · 2026-10-19 |
+| 000F07E8-000F07F3 | 3 | LTL: text | v5.40 · 2026-10-19 |
+| 000F089C-000F08A7 | 3 | PTFMT: code | v5.86 · 2026-10-27 |
+| 000F0928-000F092F | 2 | TLROW: jal at 0x467D88 (was jal 0x4676D0, the Scores page row's score text): until v5.105 a team row in Elimination / Vampire with Teamplay showed the team's lives left (with Team Lives off the sum of its players', which an unpatched | v5.40 · 2026-10-19 (approx.) |

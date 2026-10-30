@@ -31,7 +31,7 @@
 | 008E0173 | 293 bytes | xbreadfail_sp | every frame (XGGT, Weapon Mode on; LAN host): end the overrides that are done (the player holds the weapon, 4 seconds passed, the game frame went back = a new match, or someone finished the ladder: before the match ends); forget players who left | v5.106 · 2026-10-29 |
 | 008E0298 | 15 bytes | xbreadfail_sp | the end of a match (call at 0x679f3 in the end-of-level code every mode's end goes through, was call 0x64890): every "Always" still on goes back now (XPFT only runs while the match is played, so one handed out in the last seconds stayed) | v5.3 · 2026-10-16 (approx.) |
 | 008E02A7 | 51 bytes | xbreadfail_sp | every "Always" override still on goes back now (LAN host; a LAN player's table can only hold stale ones); keeps all | v5.106 · 2026-10-29 |
-| 008E7684 | 64 bytes | xbreadfail_sp | host: per chr, the gameframe it made another game's player take a hand-out (XGGDROP; XPFT) | v5.3 · 2026-10-16 (approx.) |
+| 008E7688 | 64 bytes | xbreadfail_sp | host: per chr, the gameframe it made another game's player take a hand-out (XGGDROP; XPFT) | v5.3 · 2026-10-16 (approx.) |
 | 008E7B68 | 64 bytes | xbreadfail_sp | Gun Game weapon switch: owner client of each player slot when its setting was saved | v5.3 · 2026-10-16 (approx.) |
 | 008E7BA8 | 64 bytes | xbreadfail_sp | gameframe the "Always" override ends (0 = none) | v5.3 · 2026-10-16 (approx.) |
 | 008E7BE8 | 16 bytes | xbreadfail_sp | its half seconds added (the weapon still on the floor), 16 at most | v5.3 · 2026-10-16 (approx.) |
@@ -65,9 +65,9 @@ NTSC address first; the PAL address follows where it differs.
 | 000EBDA8-000EBE43 | 39 | PFSEND: a0 = slot, a1 = setting: send that player's prefs (this game's copy) with that weapon setting to their game only | v5.3 · 2026-10-16 |
 | 000EBE44-000EBEDF | 39 | PFDONE: a0 = slot: the override is over: their own setting back to their game, if that player is still there | v5.99 · 2026-10-28 |
 | 000EC1EC-000EC283 | 38 | PFBACK: every "Always" override still on goes back now (LAN host; a LAN player's table can only hold stale ones) | v5.83 · 2026-10-26 |
-| 000ED25C-000ED2D7 | 31 | PFDUP: leaf (a0 = slot): v0 = 1 if another player in the game (another network player table slot with an owner) has the same name; uses t0-t7 | v5.81 · 2026-10-26 |
-| 000ED6B8-000ED72F | 30 | PFKFIND: leaf (a0 = a name, as network player table +8): v0 = the kept entry with that name (0 = none), v1 = the first empty one (0 = none); uses t0-t5 | v5.81 · 2026-10-26 |
-| 000F005C-000F0083 | 10 | PFPREFS: leaf (a0 = slot): v0 = this game's copy of that player's prefs (0 = none); uses t0,t1 | v5.3 · 2026-10-16 |
+| 000ED494-000ED50F | 31 | PFDUP: leaf (a0 = slot): v0 = 1 if another player in the game (another network player table slot with an owner) has the same name; uses t0-t7 | v5.81 · 2026-10-26 |
+| 000ED8F0-000ED967 | 30 | PFKFIND: leaf (a0 = a name, as network player table +8): v0 = the kept entry with that name (0 = none), v1 = the first empty one (0 = none); uses t0-t5 | v5.81 · 2026-10-26 |
+| 000F02E4-000F030B | 10 | PFPREFS: leaf (a0 = slot): v0 = this game's copy of that player's prefs (0 = none); uses t0,t1 | v5.3 · 2026-10-16 |
 | 000FC5A8-000FC5FF | 22 | PFHELD: leaf: a0 = character record, a1 = gun id -> v0 = 1 if the gun in its hands (+148) is that gun (by gun type); uses t0-t5 | v5.77 · 2026-10-25 |
 | 000FCA14-000FCA3F | 11 | PFGATE: The game takes packet 15 only while its own game is in the match (its in-game traffic flag, 0x6E3D2C); one that comes sooner (this game still loading or on its start screen while the other is already in) is thrown away, and the other game doesn't send it again (it sends only when the prefs changed since it last sent them). So the host lost a player's prefs whenever their game got into the match first. PFGATE: j at 0x4F462C (was lw t6,0x3D2C(t7) / beqz t6,0x4F4664, its delay slot sltiu t7,a1,0x47 kept at 0x4F4634; the load now in the jump's delay slot): a packet 15 thrown away is kept (PFKEEP; the game's own copy isn't touched, its players may not be set up yet), and PFREST takes it at the hand-out | v5.82 · 2026-10-26 |
 | 000FCB44-000FCB7F | 15 | PFKIX: leaf (a0 = a PFK entry): v0 = its PFKC byte's address; uses t0, t1 | v5.89 · 2026-10-27 |

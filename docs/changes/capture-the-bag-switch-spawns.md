@@ -40,6 +40,6 @@ NTSC address first; the PAL address follows where it differs.
 | 000E3808-000E3A2B | 137 | SWSP: jal at 0x1C83E8 (a game placing its own player) and 0x1CC378 (the host's pick for a player) in place of jal start spawn point routine 0x1C8160 (a0 = the player): v0 = its pick, or with Switch Spawns (Teamplay, team spawn points on, | v5.106 · 2026-10-29 |
 | 000EA91C-000EA9DB | 48 | SWTM: jal at 0x144898 in spawn point picker's team spawn points (was lw t7,132(s7) / addiu t7,t7,1; the load is kept in the delay slot, s7 = the chr being spawned; then the pad flag bit team + 1 is required; teams 1-4, Red 1, Blue 2): t7 = its team + 1, Red and | v5.89 · 2026-10-27 |
 | 000EBC68-000EBD07 | 40 | SWSCAN: s4 = setup (pads +36, +40 of them; number +4, flags +8), s5 = the other team's flag, s2 = own, a1 = k (-1: count): v0 = the k-th usable spawn point of the other team (entry), or their number | v5.6 · 2026-10-16 |
-| 000ED5C0-000ED63B | 31 | SWITEM: Capture the Bag menu: Switch Spawns | v5.3 · 2026-10-16 |
-| 000EF314-000EF35F | 19 | SWRA: a0 = page, a1 = 0 refresh / 1 apply: Switch Spawns value | v5.3 · 2026-10-16 |
-| 000F04D0-000F04DF | 4 | LSWI: text | v5.3 · 2026-10-16 |
+| 000ED7F8-000ED873 | 31 | SWITEM: Capture the Bag menu: Switch Spawns | v5.3 · 2026-10-16 |
+| 000EF59C-000EF5E7 | 19 | SWRA: a0 = page, a1 = 0 refresh / 1 apply: Switch Spawns value | v5.3 · 2026-10-16 |
+| 000F0758-000F0767 | 4 | LSWI: text | v5.3 · 2026-10-16 |

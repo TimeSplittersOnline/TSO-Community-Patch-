@@ -37,7 +37,7 @@ NTSC address first; the PAL address follows where it differs.
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000EA614-000EA6D7 | 49 | VIPAD2: Team VIP's kill count routine step (ia.py: j from the multikill code's exit at 0xFF5C0; delay slot lw t6,108(t7) done, keep t6 / t7): s0 += the chr's VIP points (VBON 0xFEFC0) when Team VIP applies (on, Gladiator with Teamplay, offline / LAN | v5.89 · 2026-10-27 |
-| 000F0590-000F059B | 3 | LVIP: text | v5.3 · 2026-10-16 (approx.) |
+| 000F0824-000F082F | 3 | LVIP: text | v5.3 · 2026-10-16 (approx.) |
 | 000FE940-000FEA3B | 63 | for _i,_x in enumerate(_w): new[0xFE940+4*_i]=_x | v5.89 · 2026-10-27 |
 | 000FEA40-000FEAC7 | 34 | for _i,_x in enumerate(_w): new[0xFEA40+4*_i]=_x | v5.3 · 2026-10-16 |
 | 000FEDA0-000FEF4F | 108 | for _i,_x in enumerate(_w): new[0xFEDA0+4*_i]=_x | v5.89 · 2026-10-27 |

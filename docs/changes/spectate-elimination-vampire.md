@@ -68,10 +68,10 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|---|---|---|
 | 001C2010 | 3C0F0065 | 08038E8B | lui t7,0x65 | j 0xe3a2c | Hook: first-person camera: was lui t7,0x65 / lwc1 f0,184(s2) (Spectate) | v5.78 · 2026-10-26 |
 | 001C2014 | C64000B8 | 00000000 | lwc1 zero,184(s2) | nop | Hook: first-person camera: was lui t7,0x65 / lwc1 f0,184(s2) (Spectate) | v5.78 · 2026-10-26 |
-| 0025E174 | 8E6F0000 | 0803B333 | lw t7,0(s3) | j 0xecccc | Hook: the HUD: was lw t7,0(s3) / beq t7,s0,0x25EB2C (delay slot lui s5,0x68 kept) (Spectate) | v5.79 · 2026-10-26 |
+| 0025E174 | 8E6F0000 | 0803B39F | lw t7,0(s3) | j 0xece7c | Hook: the HUD: was lw t7,0(s3) / beq t7,s0,0x25EB2C (delay slot lui s5,0x68 kept) (Spectate) | v5.79 · 2026-10-26 |
 | 0025E178 | 11F0026C | 3C150068 | beq t7,s0,0x25eb2c | lui s5,0x68 | Hook: the HUD: was lw t7,0(s3) / beq t7,s0,0x25EB2C (delay slot lui s5,0x68 kept) (Spectate) | v5.79 · 2026-10-26 |
 | 0025EC70 | 0C098812 | 0C03A4BD | jal 0x262048 | jal 0xe92f4 | Hook: name tags' draw: while spectating, sight from the camera (HATW; was jal 0x262048) | v5.93 · 2026-10-27 |
-| 00262178 | 55CF0008 | 0803B8FF | bnel t6,t7,0x26219c | j 0xee3fc | Hook: name tags: not the watched player's (Spectate) | v5.85 · 2026-10-26 |
+| 00262178 | 55CF0008 | 0803B98D | bnel t6,t7,0x26219c | j 0xee634 | Hook: name tags: not the watched player's (Spectate) | v5.85 · 2026-10-26 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -89,21 +89,22 @@ NTSC address first; the PAL address follows where it differs.
 | 000EB488-000EB537 | 44 | SPOKK: (as SPOK, for the one already watched: alive or not, still in: a death with lives left keeps it; then) a0 = a PLAYERS index, a1 = this player's -> v0 = 1 if it can be watched: another player, in the match, alive, with | v5.86 · 2026-10-27 |
 | 000EB898-000EB93F | 42 | SPDV: a0 = a player of this game who is out: back to the game's death view on itself (the camera from its own eyes first, the way its death left it) | v5.84 · 2026-10-26 |
 | 000EC7CC-000EC85F | 37 | SPMSG: a0 = the PLAYERS index now watched, a1 = this player's local number: "Spectating <name>" as a kill message (the game's own HUD entry 0x2491E0: the text, then the name in its team colour, at the bottom), kept on screen while | v5.79 · 2026-10-26 |
-| 000ECA10-000ECA9F | 36 | SPTEAM: a1 = this player's PLAYERS index -> v0 = 1 with Teamplay while another player of its team is still in (alive, or waiting to respawn with lives left): free cam waits until its team is out; keeps a0-a3 | v5.100 · 2026-10-28 |
-| 000ECAA0-000ECB2F | 36 | SPL1: one line: a0 = a button, a1 = a second one (0: none), a2 = the text; the caller's frame (SPLEG's, at sp+32 here): 0 the text, 256 x, 260 y | v5.79 · 2026-10-26 |
-| 000ECCCC-000ECD53 | 34 | SPHUD: j at 0x25E174 in the HUD (was lw t7,0(s3) / beq t7,s0,0x25EB2C; s3 = this player's HUD, s0 = 11): a player of this game who is out with Spectate (SPAP, its view, dead, no lives) gets only its messages (the game's own message | v5.84 · 2026-10-26 |
-| 000ED910-000ED987 | 30 | SPFCT: leaf: a0 = the player, a1 = its local number: free cam on (from where the camera is, in its room) / off; uses t4-t9 | v5.86 · 2026-10-27 |
-| 000EDAE4-000EDB57 | 29 | SPSAME: leaf: a0, a1 = PLAYERS indexes -> v0 = 1 if their characters are on the same team; uses t5-t9 | v5.84 · 2026-10-26 |
-| 000EDB58-000EDBCB | 29 | SPNEXT: a0 = a PLAYERS index (-1: none), a2 = 1 / -1, a1 = this player's -> v0 = the next / previous one that can be watched (round the list; itself if it is the only one), -1 if none; uses a0, a3, t5-t9 | v5.78 · 2026-10-26 |
-| 000EDF3C-000EDFA7 | 27 | SPEV: leaf: a0 = a local number -> v0 = its Spectate HUD entry (SPE) while it is still ours (a kill message saying "Spec..."), else 0; uses t5-t9 | v5.79 · 2026-10-26 |
-| 000EE3FC-000EE45F | 25 | HTSK: j at 0x262178 in the name tags' draw (Teamplay: the name over each team-mate; was bnel t6,t7,0x26219C, its delay slot lw t5,0x14(t4) now always run; t6 = the chr's id, t7 = this player's number, t4 = this player, s2 = the chr): | v5.91 · 2026-10-27 |
-| 000EF5F0-000EF637 | 18 | SPANG0: leaf: a0 = the PLAYERS index now watched, a1 = the local number: no free cam, the camera's angles its own; uses t6-t9 | v5.79 · 2026-10-26 |
-| 000EFC88-000EFCBF | 14 | SPON: leaf: v0 = 1 when Spectate applies to the match being played (Elimination / Vampire with lives; always on for games with the patch, no setting); uses t8, t9 | v5.78 · 2026-10-26 |
-| 000EFFDC-000F0007 | 11 | SPK2: code | v5.79 · 2026-10-26 |
-| 000F02D0-000F02EB | 7 | SPK: code | v5.78 · 2026-10-26 |
-| 000F0440-000F044F | 4 | LSPFX: text | v5.79 · 2026-10-26 |
-| 000F0450-000F045F | 4 | LSPSW: text | v5.79 · 2026-10-26 |
-| 000F056C-000F0577 | 3 | LSPG: text | v5.78 · 2026-10-26 |
-| 000F0578-000F0583 | 3 | LSPF: text | v5.78 · 2026-10-26 (approx.) |
-| 000F0584-000F058F | 3 | LSPRT: text | v5.98 · 2026-10-28 |
-| 000F069C-000F06A3 | 2 | SPK3: code | v5.78 · 2026-10-26 (approx.) |
+| 000ECBC0-000ECC4F | 36 | SPTEAM: a1 = this player's PLAYERS index -> v0 = 1 with Teamplay while another player of its team is still in (alive, or waiting to respawn with lives left): free cam waits until its team is out; keeps a0-a3 | v5.100 · 2026-10-28 |
+| 000ECC50-000ECCDF | 36 | SPL1: one line: a0 = a button, a1 = a second one (0: none), a2 = the text; the caller's frame (SPLEG's, at sp+32 here): 0 the text, 256 x, 260 y | v5.79 · 2026-10-26 |
+| 000ECE7C-000ECF03 | 34 | SPHUD: j at 0x25E174 in the HUD (was lw t7,0(s3) / beq t7,s0,0x25EB2C; s3 = this player's HUD, s0 = 11): a player of this game who is out with Spectate (SPAP, its view, dead, no lives) gets only its messages (the game's own message | v5.84 · 2026-10-26 |
+| 000ECF04-000ECF8B | 34 | SPR2: the "<R2> Speed up" line (a0 = the button, a2 = the text; the caller's frame, SPLEG's, at sp+96 here: 256 x, 260 y): as SPL1, but the button 0.2 of a line higher than its text (its icon is taller than a line: it touched the | v5.107 · 2026-10-29 |
+| 000EDB48-000EDBBF | 30 | SPFCT: leaf: a0 = the player, a1 = its local number: free cam on (from where the camera is, in its room) / off; uses t4-t9 | v5.86 · 2026-10-27 |
+| 000EDD1C-000EDD8F | 29 | SPSAME: leaf: a0, a1 = PLAYERS indexes -> v0 = 1 if their characters are on the same team; uses t5-t9 | v5.84 · 2026-10-26 |
+| 000EDD90-000EDE03 | 29 | SPNEXT: a0 = a PLAYERS index (-1: none), a2 = 1 / -1, a1 = this player's -> v0 = the next / previous one that can be watched (round the list; itself if it is the only one), -1 if none; uses a0, a3, t5-t9 | v5.78 · 2026-10-26 |
+| 000EE174-000EE1DF | 27 | SPEV: leaf: a0 = a local number -> v0 = its Spectate HUD entry (SPE) while it is still ours (a kill message saying "Spec..."), else 0; uses t5-t9 | v5.79 · 2026-10-26 |
+| 000EE634-000EE697 | 25 | HTSK: j at 0x262178 in the name tags' draw (Teamplay: the name over each team-mate; was bnel t6,t7,0x26219C, its delay slot lw t5,0x14(t4) now always run; t6 = the chr's id, t7 = this player's number, t4 = this player, s2 = the chr): | v5.91 · 2026-10-27 |
+| 000EF878-000EF8BF | 18 | SPANG0: leaf: a0 = the PLAYERS index now watched, a1 = the local number: no free cam, the camera's angles its own; uses t6-t9 | v5.79 · 2026-10-26 |
+| 000EFF10-000EFF47 | 14 | SPON: leaf: v0 = 1 when Spectate applies to the match being played (Elimination / Vampire with lives; always on for games with the patch, no setting); uses t8, t9 | v5.78 · 2026-10-26 |
+| 000F0264-000F028F | 11 | SPK2: code | v5.79 · 2026-10-26 |
+| 000F0558-000F0573 | 7 | SPK: code | v5.78 · 2026-10-26 |
+| 000F06C8-000F06D7 | 4 | LSPFX: text | v5.79 · 2026-10-26 |
+| 000F06D8-000F06E7 | 4 | LSPSW: text | v5.79 · 2026-10-26 |
+| 000F07F4-000F07FF | 3 | LSPG: text | v5.78 · 2026-10-26 |
+| 000F0800-000F080B | 3 | SPK3: code | v5.107 · 2026-10-29 |
+| 000F080C-000F0817 | 3 | LSPF: text | v5.78 · 2026-10-26 (approx.) |
+| 000F0818-000F0823 | 3 | LSPRT: text | v5.98 · 2026-10-28 |

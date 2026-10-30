@@ -2,6 +2,16 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.107 · 2026-10-30 · Menus with the Advanced Settings link fit the screen again; King of the Hill's move message once on LAN; PS2 MapMaker maps allow as many bots as on Xbox
+
+*v5.107 · MenuFramesMapMakerBots* · Xbox, PS2 NTSC, PS2 PAL
+
+- Offline match settings, Change Game Type and Advanced Settings pages (PS2 and Xbox): the Advanced Settings link made these menus a row taller, so their frame ran into the "Bots" row under it or the Select / Back buttons. A menu that would reach them is now moved up, its top no higher than 1% of the screen; menus that already fit stay where they were.
+- Offline match settings, the tallest modes (e.g. Team Deathmatch, PS2 and Xbox): where even the raised frame still reaches the "Bots" row, the row sits just under the frame (1% of the screen below it). In the other modes it stays in its usual place.
+- King of the Hill on LAN (PS2 and Xbox): a player's game showed "The Hill has moved!" twice, about 5 seconds apart, when its own count of the Hill's time ran out of step with the host's (its count starts when its game starts the match, e.g. later than the host's, or after joining mid-match). A LAN player's game now shows it only when the Hill actually moves; the host and offline play are unchanged.
+- PS2, MapMaker maps: players and bots together were capped at 8, while the Xbox version allows MapMaker maps the same as any other map. The PS2 now allows the same as the Xbox.
+- PS2, Spectate free cam: the R2 button next to "Speed up" is taller than a line and touched the D-pad button under it; it is now drawn a little higher (the text stays where it was).
+
 ## v5.106 · 2026-10-29 · Fixes from the second review: Scores page team rows, Coin Rush, Switch Spawns, Overtime message, Time Bonus warning, Catch-Up Multikill, Spectate
 
 *v5.106 · ReviewFixes2* · Xbox, PS2 NTSC, PS2 PAL
@@ -942,7 +952,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 *v5.3 · Showdown-Dash-Unpatched* · Xbox, PS2 NTSC, PS2 PAL
 
 - A console without the patch shows a player who has no lives left as a time made from the score the host sends (kills read as seconds, e.g. 0:-3.0). In a Showdown match the LAN host now sends 0 for those players, which that game shows as "--". The order is still the host's ranking (by kills).
-- A patched LAN player's game no longer takes the score from that sync for Showdown: the score text counts that player's kills itself (kill count routine), so patched consoles still show the kills for everyone, out or not.
+- A patched LAN player's game no longer takes the score from that sync for Showdown: the score text counts that player's kills itself (countkills), so patched consoles still show the kills for everyone, out or not.
 - Host-decided: only the host's own Showdown setting changes what is sent; nothing changes outside Showdown.
 - Tests (Xbox, PS2 NTSC and PAL): the sync sends 0 only for a Showdown player with no lives left (host / offline, Elimination and Vampire, lives on), the score text's own kill count on a LAN player's game in a Showdown match, registers kept.
 
@@ -1284,7 +1294,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 *v3.13 · Start-Wait-1* · Xbox, PS2 NTSC, PS2 PAL
 
 - At the start of a match the host waits for every console to load, then tells everyone to start their 3-2-1 countdown. The game gave up waiting after 5 seconds, so a console that loads more slowly (an original Xbox reading the disc, a real PS2) started its countdown late, while fast-loading consoles (Xbox Series, emulators with fast loading) were already moving.
-- The host now waits up to 15 seconds (Xbox ready-start routine 0x35BED0, PS2 0x4F88C0). It points the check at the mod's own 15.0 instead of changing the game's 5.0, which other code may use. Only the host's game decides this, so it works with players on the original disc.
+- The host now waits up to 15 seconds (Xbox readystart 0x35BED0, PS2 0x4F88C0). It points the check at the mod's own 15.0 instead of changing the game's 5.0, which other code may use. Only the host's game decides this, so it works with players on the original disc.
 - If a console never finishes loading, the match starts without it after 15 seconds instead of 5.
 - Not changed: each console still counts its own 3-2-1. An emulator running below full speed counts more slowly in real time, and the host can shorten other consoles' countdowns but cannot hold them back.
 
@@ -1362,7 +1372,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 *v3.4 · R1* · Xbox, PS2 NTSC, PS2 PAL
 
 - No game changes. Added this register: every byte (Xbox) and word (PS2) that differs from the original files, with the original code, the code that replaced it and what it is for.
-- Project folder kept on Jake's PC (Desktop\TimeSplitters\TSFP Mod Project) with the files, build scripts, tests, original files and this register.
+- Project folder kept on Jake's PC (Desktop\TimeSplitters\TSFP Mod Project) with the sources, build scripts, tests, original files and this register.
 
 ## v3.3 · 2026-10-13 · King of the Hill: zones settle for unpatched players
 
