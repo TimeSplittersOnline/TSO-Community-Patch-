@@ -14,7 +14,7 @@ You need your own copy of the game. This repository contains no game files. This
 Patch your own ISO with an xdelta tool (delta UI, Delta Patcher). The files are in [`patch/ps2`](patch/ps2).
 
 ### Xbox (xemu or a modded console)
-Patch your own copy with an xdelta tool. The files are in [`patch/xbox`](patch/xbox). 
+Patch your own xbe/copy with an xdelta tool. The files are in [`patch/xbox`](patch/xbox). 
 
 **Whole xiso (simplest for xemu).** patch the whole image in one step with `TimeSplitters - Future Perfect [xiso] - TSO Community Patch.xdelta` (the same file works for PAL & NTSC)
 
