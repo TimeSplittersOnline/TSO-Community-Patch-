@@ -2,7 +2,7 @@
 
 ## Install
 
-You need your own copy of the game. This repository contains no game files.
+You need your own copy of the game. This repository contains no game files. This mod is only needed by the host online. You will be missing some quality of life features without it, but everything works.
 
 ### PS2 (PCSX2)
 1. Download the pnach for your region from the [`build`](build) folder:
@@ -55,6 +55,7 @@ The [`build`](build) folder always holds the current version's TSO Community Pat
    - Split-screen co-op mapmaker story.
    - Character select for mapmaker story levels.
    - no limit for previously limited mapmaker items like bags & zones.
+   - 10 bots available on PS2 mapmaker matches.
 
 
 - Bug fixes and compatability
