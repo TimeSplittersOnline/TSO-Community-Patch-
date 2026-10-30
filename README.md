@@ -10,6 +10,16 @@ You need your own copy of the game. This repository contains no game files. This
    - PAL (Europe): `SLES-52993_E0F96C7D.pnach`
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
+### PS2 disc image (real PS2 with OPL, PS3 with webMAN, or PCSX2 without the pnach)
+Patch your own ISO with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/ps2`](patch/ps2). The patched ISO has the mod built in, so no pnach is needed.
+
+| Patch | Your ISO must be |
+|---|---|
+| `TimeSplitters - Future Perfect (USA) - TSO Community Patch.xdelta` | 4,383,899,648 bytes, CRC32 `7962D3DF`, MD5 `2180703147eb25c3cbb8a1469ddcf9a4`, SHA-1 `a8f4444baff98319f9ab90d81ce2dc3eb27000da` |
+| `TimeSplitters - Future Perfect (Europe) - TSO Community Patch.xdelta` | 4,434,198,528 bytes (En,Fr,De,Es,It), CRC32 `69F2FDF0`, MD5 `f8b2bc4f0c666caffb3fffbd1c50409b`, SHA-1 `b554f6ec9ba528e2990007fa560bf272f428327f` |
+
+As with Xbox, check your ISO's MD5 first: a different dump gives a broken result instead of an error.
+
 ### Xbox (xemu or a modded console)
 Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/xbox`](patch/xbox). The title update isn't needed: the patches include it.
 
