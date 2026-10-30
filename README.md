@@ -11,33 +11,12 @@ You need your own copy of the game. This repository contains no game files. This
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### PS2 disc image (real PS2 with OPL, PS3 with webMAN, or PCSX2 without the pnach)
-Patch your own ISO with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/ps2`](patch/ps2). The patched ISO has the mod built in, so no pnach is needed.
-
-| Patch | Your ISO must be |
-|---|---|
-| `TimeSplitters - Future Perfect (USA) - TSO Community Patch.xdelta` | 4,383,899,648 bytes, CRC32 `7962D3DF`, MD5 `2180703147eb25c3cbb8a1469ddcf9a4`, SHA-1 `a8f4444baff98319f9ab90d81ce2dc3eb27000da` |
-| `TimeSplitters - Future Perfect (Europe) - TSO Community Patch.xdelta` | 4,434,198,528 bytes (En,Fr,De,Es,It), CRC32 `69F2FDF0`, MD5 `f8b2bc4f0c666caffb3fffbd1c50409b`, SHA-1 `b554f6ec9ba528e2990007fa560bf272f428327f` |
-
-As with Xbox, check your ISO's MD5 first: a different dump gives a broken result instead of an error.
+Patch your own ISO with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/ps2`](patch/ps2).
 
 ### Xbox (xemu or a modded console)
-Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/xbox`](patch/xbox). The title update isn't needed: the patches include it.
+Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/xbox`](patch/xbox). 
 
 **Whole xiso (simplest for xemu).** If your xiso is one of these unmodified 4,047,372,288-byte images, patch the whole image in one step with `TimeSplitters - Future Perfect [xiso] - TSO Community Patch.xdelta` (the same file works for both; each gives its own region's game):
-
-| Your xiso | CRC32 | MD5 | SHA-1 |
-|---|---|---|---|
-| USA | `36D57998` | `a5402ef4638fee51f7e0c89bfbfb8503` | `99ec856bd8d0639213b046e26d210d3822c54990` |
-| Europe (En,Fr,De,Es,It) | `611D7473` | `d4ca6163652a0da3bebb655a311d0905` | `5ab3b603d42232553317a70e19cabb4c291632be` |
-
-**Just the XBE (works with any copy of your region).** Take `default.xbe` out of your disc image (e.g. with extract-xiso), patch it, and put the patched file back as `default.xbe` (or run it from an Xbox hard drive):
-
-| Patch | Your `default.xbe` must be |
-|---|---|
-| `default.xbe (USA) - TSO Community Patch.xdelta` | 6,270,976 bytes, CRC32 `05BF2120`, MD5 `4aeb1a1fded674575759b681f2125966` |
-| `default.xbe (Europe) - TSO Community Patch.xdelta` | 6,270,976 bytes, CRC32 `657C98FE`, MD5 `a048c094f604559e870fe14f33f784b3` |
-
-Check your file's MD5 before patching: an xdelta doesn't check its base, so a different file (another dump, a title update XBE, an already modded XBE) gives a broken result instead of an error. Patching never changes your original; always save the output under a new name.
 
 ## Resources 
 
