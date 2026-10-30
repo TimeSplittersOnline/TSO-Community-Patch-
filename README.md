@@ -13,12 +13,12 @@ You need your own copy of the game. This repository contains no game files.
 ### Xbox (xemu or a modded console)
 Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`build/xbox`](build/xbox). The title update isn't needed: the patches include it.
 
-**Whole xiso (simplest for xemu).** If your xiso matches one of these exactly, patch the image in one step:
+**Whole xiso (simplest for xemu).** If your xiso is one of these unmodified 4,047,372,288-byte images, patch the whole image in one step with `TimeSplitters - Future Perfect [xiso] - TSO Community Patch.xdelta` (the same file works for both; each gives its own region's game):
 
-| Patch | Your xiso must be |
-|---|---|
-| `TimeSplitters - Future Perfect (USA) [xiso] - TSO Community Patch.xdelta` | 4,047,372,288 bytes, CRC32 `36D57998`, MD5 `a5402ef4638fee51f7e0c89bfbfb8503`, SHA-1 `99ec856bd8d0639213b046e26d210d3822c54990` |
-| `TimeSplitters - Future Perfect (Europe) [xiso] - TSO Community Patch.xdelta` | 4,047,372,288 bytes, CRC32 `611D7473`, MD5 `d4ca6163652a0da3bebb655a311d0905`, SHA-1 `5ab3b603d42232553317a70e19cabb4c291632be` |
+| Your xiso | CRC32 | MD5 | SHA-1 |
+|---|---|---|---|
+| USA | `36D57998` | `a5402ef4638fee51f7e0c89bfbfb8503` | `99ec856bd8d0639213b046e26d210d3822c54990` |
+| Europe (En,Fr,De,Es,It) | `611D7473` | `d4ca6163652a0da3bebb655a311d0905` | `5ab3b603d42232553317a70e19cabb4c291632be` |
 
 **Just the XBE (works with any copy of your region).** Take `default.xbe` out of your disc image (e.g. with extract-xiso), patch it, and put the patched file back as `default.xbe` (or run it from an Xbox hard drive):
 
