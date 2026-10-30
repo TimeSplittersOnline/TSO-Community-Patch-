@@ -1,8 +1,11 @@
 """Make a BPS patch (original file -> modded file) and apply one. Usage:
   python make_bps.py make <original.xbe> <modded.xbe> <out.bps>
   python make_bps.py apply <original.xbe> <patch.bps> <out.xbe>
-BPS: Floating IPS, beat and most patchers apply it. Only the changed bytes are stored; unchanged ones are copied from the
-player's own file, so the patch holds none of the game's code."""
+BPS: Floating IPS, beat and most patchers apply it. Only bytes the player's own file lacks are stored (the title
+update's changes and TSO's); everything else is copied from that file.
+Make the release patch from the USA retail disc default.xbe (no title update; 6270976 bytes, CRC32 05BF2120,
+MD5 4aeb1a1fded674575759b681f2125966) -> TSO Community Patch.bps. Not originals/xbox_default_supplied.xbe:
+that one has extra private changes, so no player's file matches it."""
 import sys,zlib,struct
 def vint(n):
     b=bytearray()
@@ -17,18 +20,28 @@ def rint(d,i):
         if x&0x80: return n,i
         s<<=7; n+=s
 def make(src,tgt):   # src = original file, tgt = modded file
+    # Copies from the same offset where the files line up, from anywhere else in the original where code has moved
+    # (found by 12-byte keys at every 4th original offset), the rest as new bytes.
+    K=12; idx={}
+    for p in range(0,len(src)-K+1,4): idx.setdefault(src[p:p+K],p)
     out=bytearray(b'BPS1'+vint(len(src))+vint(len(tgt))+vint(0))
-    i=0; n=len(tgt)
+    lit=bytearray(); srel=0; n=len(tgt); i=0
+    def flush():
+        if lit: out.extend(vint(((len(lit)-1)<<2)|1)+lit); lit.clear()
     while i<n:
-        if i<len(src) and src[i]==tgt[i]:
-            j=i
-            while j<n and j<len(src) and src[j]==tgt[j]: j+=1
-            out+=vint(((j-i-1)<<2)|0)                  # copy from the original
-        else:
-            j=i
-            while j<n and not (j<len(src) and src[j]==tgt[j] and j+8<=min(n,len(src)) and src[j:j+8]==tgt[j:j+8]): j+=1
-            out+=vint(((j-i-1)<<2)|1)+tgt[i:j]          # new bytes
+        s=i if i<len(src) and tgt[i:i+K]==src[i:i+K] else idx.get(tgt[i:i+K])
+        if s is None: lit.append(tgt[i]); i+=1; continue
+        j,e=i,s
+        while j<n and e<len(src) and tgt[j]==src[e]: j+=1; e+=1
+        b=0                                             # take back new bytes that match just before the copy
+        while b<len(lit) and s-b>0 and src[s-b-1]==tgt[i-b-1]: b+=1
+        if b: del lit[len(lit)-b:]
+        s-=b; l=j-(i-b); flush()
+        if s==i-b: out+=vint(((l-1)<<2)|0)              # copy from the same offset of the original
+        else:                                           # copy from elsewhere in the original
+            o=s-srel; out+=vint(((l-1)<<2)|2)+vint((abs(o)<<1)|(o<0)); srel=s+l
         i=j
+    flush()
     out+=struct.pack('<II',zlib.crc32(src),zlib.crc32(tgt))
     out+=struct.pack('<I',zlib.crc32(out)); return bytes(out)
 def apply(src,p):
