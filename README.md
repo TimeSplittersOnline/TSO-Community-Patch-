@@ -36,7 +36,7 @@ Check your file's MD5 before patching: an xdelta doesn't check its base, so a di
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
-The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and the Xbox xdelta patches in [`build/xbox`](build/xbox). Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
+The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) plus the xdelta patches of the same version: [`build/xbox`](build/xbox) for Xbox and `build/ps2` for PS2 disc images. Every new version updates all of them together. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
 ## Features
 
