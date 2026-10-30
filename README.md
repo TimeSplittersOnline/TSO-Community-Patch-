@@ -11,11 +11,23 @@ You need your own copy of the game. This repository contains no game files. This
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### Xbox (xemu or a modded console)
-1. Take `default.xbe` from your USA retail disc (6,270,976 bytes, CRC32 `05BF2120`, MD5 `4aeb1a1fded674575759b681f2125966`). The title update isn't needed: the patch includes it.
-2. Apply [`build/TSO Community Patch.bps`](<build/TSO Community Patch.bps>) to it with any BPS patcher (Floating IPS, beat, etc).
-3. Use the patched XBE in place of the original.
+Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`build/xbox`](build/xbox). The title update isn't needed: the patches include it.
 
-A BPS patch only works on the exact file it was made from; a patcher that reports a checksum or size mismatch was given a different XBE (for example a Europe disc, a title update `default.xbe`, or an xiso copy with changed bytes).
+**Whole xiso (simplest for xemu).** If your xiso is one of these unmodified 4,047,372,288-byte images, patch the whole image in one step with `TimeSplitters - Future Perfect [xiso] - TSO Community Patch.xdelta` (the same file works for both; each gives its own region's game):
+
+| Your xiso | CRC32 | MD5 | SHA-1 |
+|---|---|---|---|
+| USA | `36D57998` | `a5402ef4638fee51f7e0c89bfbfb8503` | `99ec856bd8d0639213b046e26d210d3822c54990` |
+| Europe (En,Fr,De,Es,It) | `611D7473` | `d4ca6163652a0da3bebb655a311d0905` | `5ab3b603d42232553317a70e19cabb4c291632be` |
+
+**Just the XBE (works with any copy of your region).** Take `default.xbe` out of your disc image (e.g. with extract-xiso), patch it, and put the patched file back as `default.xbe` (or run it from an Xbox hard drive):
+
+| Patch | Your `default.xbe` must be |
+|---|---|
+| `default.xbe (USA) - TSO Community Patch.xdelta` | 6,270,976 bytes, CRC32 `05BF2120`, MD5 `4aeb1a1fded674575759b681f2125966` |
+| `default.xbe (Europe) - TSO Community Patch.xdelta` | 6,270,976 bytes, CRC32 `657C98FE`, MD5 `a048c094f604559e870fe14f33f784b3` |
+
+Check your file's MD5 before patching: an xdelta doesn't check its base, so a different file (another dump, a title update XBE, an already modded XBE) gives a broken result instead of an error. Patching never changes your original; always save the output under a new name.
 
 ## Resources 
 
@@ -24,7 +36,7 @@ A BPS patch only works on the exact file it was made from; a patcher that report
 - [docs/changes](docs/changes/README.md): the current build's complete list of changes to the original files, with the original and new bytes or instructions.
 - [docs/functions.md](docs/functions.md): the game routines and data the mod uses.
 
-The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) and `TSO Community Patch.bps` for Xbox (made from the USA retail disc XBE). Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
+The [`build`](build) folder always holds the current version's TSO Community Patch files: the two pnach files (their names must stay as they are; PCSX2 finds a game's patch by them) plus the xdelta patches of the same version: [`build/xbox`](build/xbox) for Xbox and `build/ps2` for PS2 disc images. Every new version updates all of them together. Every earlier version (v5.3 on) is its own commit; the [version list](docs/versions/README.md) links each one's changes and files.
 
 ## Features
 
