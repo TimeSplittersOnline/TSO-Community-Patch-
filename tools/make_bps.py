@@ -63,6 +63,12 @@ def apply(src,p):
                 for _ in range(l): out.append(out[to]); to+=1
     assert len(out)==ts and zlib.crc32(out)==tc,'result check failed'
     return bytes(out)
+RETAIL_USA_CRC=0x05BF2120   # USA retail disc default.xbe, the file players have
 if __name__=='__main__':
-    if sys.argv[1]=='make': open(sys.argv[4],'wb').write(make(open(sys.argv[2],'rb').read(),open(sys.argv[3],'rb').read()))
+    if sys.argv[1]=='make':
+        src=open(sys.argv[2],'rb').read()
+        if sys.argv[4].endswith('TSO Community Patch.bps') and zlib.crc32(src)!=RETAIL_USA_CRC:
+            sys.exit('the release patch must be made from the USA retail disc default.xbe (CRC32 05BF2120); '
+                     'this file is CRC32 %08X, so no player could apply the patch' % zlib.crc32(src))
+        open(sys.argv[4],'wb').write(make(src,open(sys.argv[3],'rb').read()))
     else: open(sys.argv[4],'wb').write(apply(open(sys.argv[2],'rb').read(),open(sys.argv[3],'rb').read()))
