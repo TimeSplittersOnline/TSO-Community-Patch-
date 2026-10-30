@@ -11,10 +11,10 @@ You need your own copy of the game. This repository contains no game files. This
 2. Put it in PCSX2's `patches` folder, enable patches, and start the game. After updating, use Tools › Reload Cheats/Patches and start a new match (or restart the game).
 
 ### PS2 disc image
-Patch your own ISO with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/ps2`](patch/ps2).
+Patch your own ISO with an xdelta tool (delta UI, Delta Patcher). The files are in [`patch/ps2`](patch/ps2).
 
 ### Xbox (xemu or a modded console)
-Patch your own copy with an xdelta tool (xdelta UI, Delta Patcher, or `xdelta3 -d -s <original> <patch> <output>`). The files are in [`patch/xbox`](patch/xbox). 
+Patch your own copy with an xdelta tool. The files are in [`patch/xbox`](patch/xbox). 
 
 **Whole xiso (simplest for xemu).** patch the whole image in one step with `TimeSplitters - Future Perfect [xiso] - TSO Community Patch.xdelta` (the same file works for PAL & NTSC)
 
