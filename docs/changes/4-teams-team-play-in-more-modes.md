@@ -31,13 +31,15 @@
 | 002D8328 | 2C8328 | 13 | `80 fa 04 0f 94 c1 99 8d 4c 09 02 f7 f9` | `80 fa 06 0f 9d c1 99 e8 52 90 d3 ff 90` | 4-team patch: team count / team checks for 4 teams (incl. Zones) \| 4-team patch: team count / team checks for 4 teams (incl. Zones) | v5.3 · 2026-10-16 |
 | 002ED98F | 2DD98F | 9 | `80 3d 56 d2 82 00 04 75 04` | `f6 05 58 d2 82 00 01 74 04` | 4-team patch: team count / team checks for 4 teams (incl. Zones) \| 4-team patch: team count / team checks for 4 teams (incl. Zones) | v5.3 · 2026-10-16 |
 | 002ED9CC | 2DD9CC | 9 | `80 3d 56 d2 82 00 04 75 04` | `f6 05 58 d2 82 00 01 74 04` | 4-team patch: team count / team checks for 4 teams (incl. Zones) \| 4-team patch: team count / team checks for 4 teams (incl. Zones) | v5.3 · 2026-10-16 |
+| 0035B1BC | 34B1BC | 5 | `e8 8f 9f ff ff` | `e8 95 11 57 00` | Spawn pad message sent (was call 0x355150): calls XZSPR, which sends it as before and then replays the capture of each held zone the message cannot carry (green, or every held one with more than 14 zones). | v5.3 · 2026-10-16 |
 | 0035BC02 | 34BC02 | 10 | `80 3d 56 d2 82 00 04 0f 94 c3` | `b3 01 eb 06 82 00 06 0f 9d c3` | 4-team patch: team count / team checks for 4 teams (incl. Zones) \| 4-team patch: team count / team checks for 4 teams (incl. Zones) | v5.3 · 2026-10-16 |
 
 ## Xbox: added code
 
 | Address | Size | Where | Purpose | Since |
 |---|---|---|---|---|
-| 008E2335 | 32 bytes | xbreadfail_sp | number of team colours on the menus / LAN (jmp at 0x1105c, which counted 4 only for game type >= 6): 4 for Bag Tag (game type 1) too, as PS2 does; eax only. Used by the Select Team screen, the LAN team list, LAN default teams, Disable [colour] Team | v5.3 · 2026-10-16 |
+| 008CC356 | 135 bytes | xbreadfail_sp | call at 0x35b1bc in spawn point message(player) (was call 0x355150, sendto: the spawn pad message) | v5.109 · 2026-10-31 |
+| 008E2339 | 32 bytes | xbreadfail_sp | number of team colours on the menus / LAN (jmp at 0x1105c, which counted 4 only for game type >= 6): 4 for Bag Tag (game type 1) too, as PS2 does; eax only. Used by the Select Team screen, the LAN team list, LAN default teams, Disable [colour] Team | v5.3 · 2026-10-16 |
 
 ## PS2: changes to the game's own code and data
 
@@ -90,7 +92,7 @@ NTSC address first; the PAL address follows where it differs.
 | 0047501C / PAL 004750BC | 8DEE8E9C | 91ED8E9D | lw t6,-29028(t7) | lbu t5,-29027(t7) | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 00475020 / PAL 004750C0 | 35ADFF00 | 31CE0001 | ori t5,t5,0xff00 | andi t6,t6,0x1 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 00475024 / PAL 004750C4 | 3C0F0004 | 25ADFFF7 | lui t7,0x4 | addiu t5,t5,-9 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
-| 00475028 / PAL 004750C8 | 01CD7024 | 0803B929 | and t6,t6,t5 | j 0xee4a4 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
+| 00475028 / PAL 004750C8 | 01CD7024 | 0803B9D1 | and t6,t6,t5 | j 0xee744 | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 0047502C / PAL 004750CC | 35EF0900 | 00000000 | ori t7,t7,0x900 | nop | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 00475030 / PAL 004750D0 | 15CF002D | 00000000 | bne t6,t7,0x4750e8 | nop | scoreboard: kill-based score column only for Deathmatch-type team games | v5.90 · 2026-10-27 |
 | 0046E988 / PAL 0046EA28 | 3C1300FF | 3C130000 | lui s3,0xff | lui s3,0x0 | pause menu team items | v5.3 · 2026-10-16 |
@@ -106,6 +108,7 @@ NTSC address first; the PAL address follows where it differs.
 | 00220370 | 0C087202 | 0C03F738 | jal 0x21c808 | jal 0xfdce0 | Zones: yellow team uses a yellow-tinted red flame, green team a green-tinted blue flame (local drawing only; players without the patch are unaffected) | v5.3 · 2026-10-16 |
 | 00220774 | 0C087202 | 0C03F738 | jal 0x21c808 | jal 0xfdce0 | Zones: yellow team uses a yellow-tinted red flame, green team a green-tinted blue flame (local drawing only; players without the patch are unaffected) | v5.3 · 2026-10-16 |
 | 0044D300 / PAL 0044D360 | 3C0E006B | 0C03FE06 | lui t6,0x6b | jal 0xff818 | Zones flame colour code at 0x000FDCE0 | v5.3 · 2026-10-16 |
+| 00500E50 / PAL 00500EF8 | 0C13CF4C | 0C03A654 | jal 0x4f3d30 | jal 0xe9950 | Hook: jumps to ZSPR: Zone colours at a spawn: the spawn pad message (0x40, sent to a player's game each time it spawns) also carries every zone's owner, 2 bits each after a 4-bit zone count, and that game sets all its zones from it. Team 4 (green) does not fit (it arrived as 0: unclaimed, white), and with more than 14 zones the message has no room. The host now replays the capture of each such held zone right after the message, so every game shows it again jal at 0x500E50 in spawn point message(player) (was jal 0x4F3D30 sendto, the spawn pad message; delay slot lw a0 kept) | v5.109 · 2026-10-31 |
 
 ## PS2: added code (memory the game never uses)
 
@@ -113,3 +116,4 @@ NTSC address first; the PAL address follows where it differs.
 |---|---|---|---|
 | 000FDA00-000FDA87 | 34 | LAN team list builder at 0x000FDA00 (sends host's disabled colours to patched clients; team count is cut to the highest enabled colour so unpatched clients cannot pick disabled colours at the end of the list) | v5.3 · 2026-10-16 |
 | 000FDCE0-000FDDF7 | 70 | Zones flame colour code at 0x000FDCE0 | v5.3 · 2026-10-16 |
+| 000E9950-000E9A2B | 55 | ZSPR: Zone colours at a spawn: the spawn pad message (0x40, sent to a player's game each time it spawns) also carries every zone's owner, 2 bits each after a 4-bit zone count, and that game sets all its zones from it. Team 4 (green) does not fit (it arrived as 0: unclaimed, white), and with more than 14 zones the message has no room. The host now replays the capture of each such held zone right after the message, so every game shows it again jal at 0x500E50 in spawn point message(player) (was jal 0x4F3D30 sendto, the spawn pad message; delay slot lw a0 kept) | v5.109 · 2026-10-31 |

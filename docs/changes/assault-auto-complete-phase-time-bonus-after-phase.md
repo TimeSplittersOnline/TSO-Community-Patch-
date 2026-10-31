@@ -31,26 +31,26 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 003772FC | 0C0E1348 | 0C038CDA | jal 0x384d20 | jal 0xe3368 | Hook: objectives update's Assault tick: Auto-Complete Phase first (was jal 0x384D20; delay slot nop kept) | v5.11 · 2026-10-16 |
+| 003772FC | 0C0E1348 | 0C038CDC | jal 0x384d20 | jal 0xe3370 | Hook: objectives update's Assault tick: Auto-Complete Phase first (was jal 0x384D20; delay slot nop kept) | v5.11 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E3368-000E35BB | 149 | ASK: timer is for + 1 (0 none: RAM starts at 0), the match clock / gameframe when it started, gameframe last seen jal at 0x3772FC (objectives update's Assault tick, was jal 0x384D20): the skip check and the time bonus, then the tick (same args) | v5.106 · 2026-10-29 |
-| 000E7F44-000E804F | 67 | ASITEM: Assault menu: Auto-Complete Phase (Off, 1 Min .. 10 Mins, as the game's own times) | v5.11 · 2026-10-16 |
-| 000EC018-000EC0B3 | 39 | TBITEM: Assault menu: Time Bonus After Phase (Off, 1 Min, 2 Mins, 3 Mins) | v5.20 · 2026-10-17 |
-| 000ED700-000ED77B | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
-| 000EF27C-000EF2CF | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
-| 000F05D4-000F05EB | 6 | LTB: text | v5.20 · 2026-10-17 |
-| 000F0614-000F0627 | 5 | LAS: text | v5.11 · 2026-10-16 |
-| 000F0970-000F0977 | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0978-000F097F | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0980-000F0987 | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0988-000F098F | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0990-000F0997 | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
-| 000F0998-000F099F | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
-| 000F09A0-000F09A7 | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
-| 000F09A8-000F09AF | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
-| 000F09B0-000F09B7 | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
-| 000F09B8-000F09BF | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |
+| 000E3370-000E35C3 | 149 | ASK: timer is for + 1 (0 none: RAM starts at 0), the match clock / gameframe when it started, gameframe last seen jal at 0x3772FC (objectives update's Assault tick, was jal 0x384D20): the skip check and the time bonus, then the tick (same args) | v5.106 · 2026-10-29 |
+| 000E7F4C-000E8057 | 67 | ASITEM: Assault menu: Auto-Complete Phase (Off, 1 Min .. 10 Mins, as the game's own times) | v5.11 · 2026-10-16 |
+| 000EC2B8-000EC353 | 39 | TBITEM: Assault menu: Time Bonus After Phase (Off, 1 Min, 2 Mins, 3 Mins) | v5.20 · 2026-10-17 |
+| 000ED9A0-000EDA1B | 31 | TBRA: a0 = page, a1 = 0 refresh / 1 apply: Time Bonus After Phase value (0-3); refresh greys it out with no time limit | v5.20 · 2026-10-17 |
+| 000EF51C-000EF56F | 21 | ASRA: a0 = page, a1 = 0 refresh / 1 apply: Auto-Complete Phase value (0-10) | v5.11 · 2026-10-16 |
+| 000F0874-000F088B | 6 | LTB: text | v5.20 · 2026-10-17 |
+| 000F08B4-000F08C7 | 5 | LAS: text | v5.11 · 2026-10-16 |
+| 000F0C08-000F0C0F | 2 | LAS1: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C10-000F0C17 | 2 | LAS2: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C18-000F0C1F | 2 | LAS3: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C20-000F0C27 | 2 | LAS4: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C28-000F0C2F | 2 | LAS5: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C30-000F0C37 | 2 | LAS6: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C38-000F0C3F | 2 | LAS7: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C40-000F0C47 | 2 | LAS8: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C48-000F0C4F | 2 | LAS9: text | v5.11 · 2026-10-16 (approx.) |
+| 000F0C50-000F0C57 | 2 | LAS10: text | v5.11 · 2026-10-16 (approx.) |

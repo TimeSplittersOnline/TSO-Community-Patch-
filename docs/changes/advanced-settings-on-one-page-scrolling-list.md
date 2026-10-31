@@ -24,7 +24,7 @@
 | 008E5F80 | 10 bytes | xbreadfail_sp | Menu / message text "Modifiers" | v5.3 · 2026-10-16 |
 | 008E5F8A | 14 bytes | xbreadfail_sp | Menu / message text "Team Settings" | v5.3 · 2026-10-16 |
 | 008E5F98 | 12 bytes | xbreadfail_sp | ---------------- Showdown (Elimination, Vampire): the match uses the mode's own Lives; a player with none left doesn't respawn. | v5.3 · 2026-10-16 (approx.) |
-| 008E5FA4 | 28 bytes | xbreadfail_sp | Code: VERTXT (see the code shown) | v5.107 · 2026-10-29 |
+| 008E5FA4 | 28 bytes | xbreadfail_sp | Code: VERTXT (see the code shown) | v5.109 · 2026-10-31 |
 | 008E5FC0 | 12 bytes | xbreadfail_sp | Data: OPCNT | v5.3 · 2026-10-16 (approx.) |
 | 008E5FCC | 4 bytes | xbreadfail_sp | Data: OPN | v5.3 · 2026-10-16 (approx.) |
 | 008E5FD0 | 4 bytes | xbreadfail_sp | Data: OPNB | v5.3 · 2026-10-16 (approx.) |
@@ -37,22 +37,22 @@
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
 | 000E0AC8-000E0F5F | 294 | OPORD: Advanced Settings in sections (from OPEND, once every item is made and finished): General Settings, Modifiers, Team Settings, each under a header (a text item that can't be selected; a section with none of its items in the | v5.3 · 2026-10-16 |
-| 000E8A64-000E8B5B | 62 | OPEND: the scrolled part's height: with 15 options or fewer, all of it (never scrolls); with more, its rows up to and including the 15th option (every item's height counted; options: text items (types 4, 7, 8) without flag 4); | v5.18 · 2026-10-17 |
-| 000E94CC-000E95AF | 57 | OPT: j at 0xFD2DC (was lui a0,0x64; 0xFD2E0 lw a0,0x3674(a0) is now a nop): end of a part: the next part (back to the builder's item part at 0xFD158), or the end of the page | v5.3 · 2026-10-16 |
-| 000EBF7C-000EC017 | 39 | SRADD: Spawn Rule item (not in Assault) | v5.3 · 2026-10-16 |
-| 000EC44C-000EC4E3 | 38 | OPHD: jal at 0xFD150 (was jal 0xFDC80, the title; delay slot daddu s2 kept; only the first part comes here): the title, the scrolled part starts, part 0 with PG 1 (Teamplay follows); returns t7 = 0x6B0000 as the title does | v5.4 · 2026-10-16 |
-| 000EC6A4-000EC737 | 37 | TSADD: Team Spawns item (as the builder's, 0xFD1E4): modes that can have teams, not Assault | v5.3 · 2026-10-16 |
-| 000EF324-000EF377 | 21 | OPSEC: code | v5.67 · 2026-10-23 |
-| 000EF830-000EF877 | 18 | OPPUT: leaf: a0 = id: the item of A with it (if any) goes next in B (OPPUTI); uses t7-t9, a0 | v5.3 · 2026-10-16 |
-| 000EFEA0-000EFED7 | 14 | OPINA: leaf: v0 = 1 when a0 is one of A's items; uses t7-t9 | v5.3 · 2026-10-16 |
-| 000EFED8-000EFF0F | 14 | OPPUTI: leaf: a0 = A index: next in B; uses t7-t9 | v5.3 · 2026-10-16 |
-| 000F0084-000F00B7 | 13 | OPMARG: the Advanced items' text margins and item flags, as the title set them | v5.3 · 2026-10-16 |
-| 000F03AC-000F03D3 | 10 | OPFIRST: leaf: v0 = the first item of the scrolled part (0 = none) | v5.3 · 2026-10-16 |
-| 000F04B0-000F04D3 | 9 | PTPC: j at 0xFD17C (was j 0xFBD10, sub.py's Teamplay step): no Teamplay in the colour part | v5.3 · 2026-10-16 (approx.) |
-| 000F04D4-000F04F7 | 9 | PCOL: jal at 0xFD23C (was jal 0xFBD80, sub.py's colour count): colours only in the colour part | v5.3 · 2026-10-16 |
-| 000F05EC-000F05FF | 5 | OPHL1: code | v5.3 · 2026-10-16 |
-| 000F06B8-000F06C7 | 4 | OPHL3: code | v5.3 · 2026-10-16 |
-| 000F07D0-000F07DB | 3 | OPHL2: code | v5.3 · 2026-10-16 |
-| 000F07DC-000F07E7 | 3 | OPHLAB: code | v5.107 · 2026-10-29 |
-| 000F0920-000F0927 | 2 | NTL: folder links (j at 0xFBE58 in sub.py's ZA 'after', was mtc1 zero,$f12; its delay slot mtc1 zero,$f13 kept): none: every Advanced Settings item is on one page (OPT), so no divider and no Team / Spawn Settings links | v5.3 · 2026-10-16 (approx.) |
-| 000FB3A4-000FB3BF | 7 | VERT: code | v5.107 · 2026-10-29 |
+| 000E8B64-000E8C5B | 62 | OPEND: the scrolled part's height: with 15 options or fewer, all of it (never scrolls); with more, its rows up to and including the 15th option (every item's height counted; options: text items (types 4, 7, 8) without flag 4); | v5.18 · 2026-10-17 |
+| 000E95CC-000E96AF | 57 | OPT: j at 0xFD2DC (was lui a0,0x64; 0xFD2E0 lw a0,0x3674(a0) is now a nop): end of a part: the next part (back to the builder's item part at 0xFD158), or the end of the page | v5.3 · 2026-10-16 |
+| 000EC21C-000EC2B7 | 39 | SRADD: Spawn Rule item (not in Assault) | v5.3 · 2026-10-16 |
+| 000EC6EC-000EC783 | 38 | OPHD: jal at 0xFD150 (was jal 0xFDC80, the title; delay slot daddu s2 kept; only the first part comes here): the title, the scrolled part starts, part 0 with PG 1 (Teamplay follows); returns t7 = 0x6B0000 as the title does | v5.4 · 2026-10-16 |
+| 000EC944-000EC9D7 | 37 | TSADD: Team Spawns item (as the builder's, 0xFD1E4): modes that can have teams, not Assault | v5.3 · 2026-10-16 |
+| 000EF5C4-000EF617 | 21 | OPSEC: code | v5.67 · 2026-10-23 |
+| 000EFAD0-000EFB17 | 18 | OPPUT: leaf: a0 = id: the item of A with it (if any) goes next in B (OPPUTI); uses t7-t9, a0 | v5.3 · 2026-10-16 |
+| 000F0140-000F0177 | 14 | OPINA: leaf: v0 = 1 when a0 is one of A's items; uses t7-t9 | v5.3 · 2026-10-16 |
+| 000F0178-000F01AF | 14 | OPPUTI: leaf: a0 = A index: next in B; uses t7-t9 | v5.3 · 2026-10-16 |
+| 000F0324-000F0357 | 13 | OPMARG: the Advanced items' text margins and item flags, as the title set them | v5.3 · 2026-10-16 |
+| 000F064C-000F0673 | 10 | OPFIRST: leaf: v0 = the first item of the scrolled part (0 = none) | v5.3 · 2026-10-16 |
+| 000F0750-000F0773 | 9 | PTPC: j at 0xFD17C (was j 0xFBD10, sub.py's Teamplay step): no Teamplay in the colour part | v5.3 · 2026-10-16 (approx.) |
+| 000F0774-000F0797 | 9 | PCOL: jal at 0xFD23C (was jal 0xFBD80, sub.py's colour count): colours only in the colour part | v5.3 · 2026-10-16 |
+| 000F088C-000F089F | 5 | OPHL1: code | v5.3 · 2026-10-16 |
+| 000F0958-000F0967 | 4 | OPHL3: code | v5.3 · 2026-10-16 |
+| 000F0A70-000F0A7B | 3 | OPHL2: code | v5.3 · 2026-10-16 |
+| 000F0A7C-000F0A87 | 3 | OPHLAB: code | v5.109 · 2026-10-31 |
+| 000F0BC0-000F0BC7 | 2 | NTL: folder links (j at 0xFBE58 in sub.py's ZA 'after', was mtc1 zero,$f12; its delay slot mtc1 zero,$f13 kept): none: every Advanced Settings item is on one page (OPT), so no divider and no Team / Spawn Settings links | v5.3 · 2026-10-16 (approx.) |
+| 000FB3A4-000FB3BF | 7 | VERT: code | v5.109 · 2026-10-31 |

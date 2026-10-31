@@ -30,7 +30,7 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 0013E578 | 0C04F22E | 0C03BB5D | jal 0x13c8b8 | jal 0xeed74 | Zones: when time runs out, held zones score once more before the match ends (the last 15-second scoring tick landed after the end, so the final 15 seconds never counted). Host only on LAN (the player scores on the results screen are refreshed too) | v5.3 · 2026-10-16 |
+| 0013E578 | 0C04F22E | 0C03BC05 | jal 0x13c8b8 | jal 0xef014 | Zones: when time runs out, held zones score once more before the match ends (the last 15-second scoring tick landed after the end, so the final 15 seconds never counted). Host only on LAN (the player scores on the results screen are refreshed too) | v5.3 · 2026-10-16 |
 | 0013DDCC | 000E7900 | 0C03EEF4 | sll t7,t6,4 | jal 0xfbbd0 | Zones: "Zone Scoring Interval" (Advanced Settings, 10/15/20 Seconds, default 15). The host scores on its setting and sends it to patched players (spare team-list byte); players without the patch still get the right scores from the host | v5.89 · 2026-10-27 |
 | 0013DDD0 | 01EE7823 | 00000000 | subu t7,t7,t6 | nop | Zones: "Zone Scoring Interval" (Advanced Settings, 10/15/20 Seconds, default 15). The host scores on its setting and sends it to patched players (spare team-list byte); players without the patch still get the right scores from the host | v5.89 · 2026-10-27 |
 | 0013A910 | 000E7C00 | 00000000 | sll t7,t6,16 | nop | Hook: new[0x13A910]=NOP | v5.40 · 2026-10-19 |
@@ -52,6 +52,11 @@ NTSC address first; the PAL address follows where it differs.
 | 0043BAE8 | 25EFE500 | 25EFE500 | addiu t7,t7,-6912 | addiu t7,t7,-6912 | Hook: v5.107 test builds' Bots row hooks, taken out | v5.107 · 2026-10-29 |
 | 0046DA4C / PAL 0046DAEC | 0C053A3C | 0C053A3C | jal 0x14e8f0 | jal 0x14e8f0 | Hook: (Return to Lobby removed on PS2: the original words back) | v5.68 · 2026-10-23 |
 | 0046ECF8 / PAL 0046ED98 | 0C13D554 | 0C13D554 | jal 0x4f5550 | jal 0x4f5550 | Hook: (Return to Lobby removed on PS2: the original words back) | v5.68 · 2026-10-23 |
+| 00471858 / PAL 004718F8 | 14400004 | 00000000 | bne v0,zero,0x47186c | nop | Hook: all picked yet: count every local player | v5.109 · 2026-10-31 |
+| 004718F8 / PAL 00471998 | 14400004 | 00000000 | bne v0,zero,0x47190c | nop | Hook: the menu tick: one pick per local player (no copying player 1's) | v5.109 · 2026-10-31 |
+| 004719F0 / PAL 00471A90 | 104000AD | 100000AD | beq v0,zero,0x471ca8 | beq zero,zero,0x471ca8 | Hook: confirm: just this player (LAN's way) | v5.109 · 2026-10-31 |
+| 00471DAC / PAL 00471E4C | 10400020 | 10000020 | beq v0,zero,0x471e30 | beq zero,zero,0x471e30 | Hook: back out: just this player | v5.109 · 2026-10-31 |
+| 004722D0 / PAL 00472370 | 14400004 | 00000000 | bne v0,zero,0x4722e4 | nop | Hook: the table drawing: every local player's column | v5.109 · 2026-10-31 |
 | 0047759C / PAL 0047763C | 0C13D554 | 0C13D554 | jal 0x4f5550 | jal 0x4f5550 | Hook: (Return to Lobby removed on PS2: the original words back) | v5.68 · 2026-10-23 |
 | 004F8960 / PAL 004F8A08 | 15600012 | 15600012 | bne t3,zero,0x4f89ac | bne t3,zero,0x4f89ac | Hook: new[0x4F8960]=0x15600012; new[0x4F8984]=0x3C0F0075; new[0x4F8988]=0x25EF3C24 | v5.3 · 2026-10-16 |
 | 004F8984 / PAL 004F8A2C | 3C0F0075 | 3C0F0075 | lui t7,0x75 | lui t7,0x75 | Hook: new[0x4F8960]=0x15600012; new[0x4F8984]=0x3C0F0075; new[0x4F8988]=0x25EF3C24 | v5.3 · 2026-10-16 |

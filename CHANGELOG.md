@@ -2,6 +2,21 @@
 
 Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so times are approximate and small fixes inside a day are folded together. From 14 Oct on, every delivered build adds an entry here. Versions: v<major>.<minor>, shown in-game on the Advanced Settings title.
 
+## v5.109 · 2026-10-31 · Green zones no longer turn white for other players; team rows show the team's lives again; players who joined mid-match keep their controls
+
+*v5.109 · ZoneColoursTeamLivesControls* · Xbox, PS2 NTSC, PS2 PAL
+
+- Zones on LAN (PS2 and Xbox): each time a player spawns, the host sends that player's console a message with every zone's owner, and it only has room for four values per zone and for 14 zones. A zone held by green came out as unclaimed (white) on that console, even though the host still showed it as green. The host now sends the capture of each zone the message can't carry right after it, so every console shows the right team again, including consoles without the patch.
+- Scores page in Elimination / Vampire with Teamplay and lives (PS2 and Xbox): a team's row showed one player's lives again instead of the team's lives left. With the patch it shows the team's total again (for example a team of 3 with 10 lives each shows 30).
+- Players who joined mid-match (PS2 and Xbox): on the first match after a console started, a player who joined mid-match could have blank controller settings. They stood still on their own console and slid without animating on the others. A player with no controller settings now gets another player's.
+- Manage Players (Xbox): with 15 or more players the list ran past the bottom of its box onto the button help. The list is now shorter, so it stays inside the box.
+
+## v5.108 · 2026-10-30 · Online, players sharing a console can pick different teams
+
+*v5.108 · OnlineSplitScreenTeams* · Xbox, PS2 NTSC, PS2 PAL
+
+- Team Select online (PS2 and Xbox): every player on a split-screen console was put on the first player's team, and confirming or backing out did it for all of them. Each player now picks their own team, the same way as on LAN. Each console still sends its own players' teams as before, so consoles without the patch are unaffected.
+
 ## v5.107 · 2026-10-30 · Menus with the Advanced Settings link fit the screen again; King of the Hill's move message once on LAN; PS2 MapMaker maps allow as many bots as on Xbox
 
 *v5.107 · MenuFramesMapMakerBots* · Xbox, PS2 NTSC, PS2 PAL
@@ -952,7 +967,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 *v5.3 · Showdown-Dash-Unpatched* · Xbox, PS2 NTSC, PS2 PAL
 
 - A console without the patch shows a player who has no lives left as a time made from the score the host sends (kills read as seconds, e.g. 0:-3.0). In a Showdown match the LAN host now sends 0 for those players, which that game shows as "--". The order is still the host's ranking (by kills).
-- A patched LAN player's game no longer takes the score from that sync for Showdown: the score text counts that player's kills itself (countkills), so patched consoles still show the kills for everyone, out or not.
+- A patched LAN player's game no longer takes the score from that sync for Showdown: the score text counts that player's kills itself (kill count routine), so patched consoles still show the kills for everyone, out or not.
 - Host-decided: only the host's own Showdown setting changes what is sent; nothing changes outside Showdown.
 - Tests (Xbox, PS2 NTSC and PAL): the sync sends 0 only for a Showdown player with no lives left (host / offline, Elimination and Vampire, lives on), the score text's own kill count on a LAN player's game in a Showdown match, registers kept.
 
@@ -1294,7 +1309,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 *v3.13 · Start-Wait-1* · Xbox, PS2 NTSC, PS2 PAL
 
 - At the start of a match the host waits for every console to load, then tells everyone to start their 3-2-1 countdown. The game gave up waiting after 5 seconds, so a console that loads more slowly (an original Xbox reading the disc, a real PS2) started its countdown late, while fast-loading consoles (Xbox Series, emulators with fast loading) were already moving.
-- The host now waits up to 15 seconds (Xbox readystart 0x35BED0, PS2 0x4F88C0). It points the check at the mod's own 15.0 instead of changing the game's 5.0, which other code may use. Only the host's game decides this, so it works with players on the original disc.
+- The host now waits up to 15 seconds (Xbox ready-start routine 0x35BED0, PS2 0x4F88C0). It points the check at the mod's own 15.0 instead of changing the game's 5.0, which other code may use. Only the host's game decides this, so it works with players on the original disc.
 - If a console never finishes loading, the match starts without it after 15 seconds instead of 5.
 - Not changed: each console still counts its own 3-2-1. An emulator running below full speed counts more slowly in real time, and the host can shorten other consoles' countdowns but cannot hold them back.
 
@@ -1372,7 +1387,7 @@ Entries before 14 Oct 2026 were rebuilt from the dates of the working files, so 
 *v3.4 · R1* · Xbox, PS2 NTSC, PS2 PAL
 
 - No game changes. Added this register: every byte (Xbox) and word (PS2) that differs from the original files, with the original code, the code that replaced it and what it is for.
-- Project folder kept on Jake's PC (Desktop\TimeSplitters\TSFP Mod Project) with the sources, build scripts, tests, original files and this register.
+- Project folder kept on Jake's PC (Desktop\TimeSplitters\TSFP Mod Project) with the files, build scripts, tests, original files and this register.
 
 ## v3.3 · 2026-10-13 · King of the Hill: zones settle for unpatched players
 

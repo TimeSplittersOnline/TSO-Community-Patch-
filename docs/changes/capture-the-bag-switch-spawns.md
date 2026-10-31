@@ -12,7 +12,7 @@
 
 | Address | Size | Where | Purpose | Since |
 |---|---|---|---|---|
-| 008CC1E7 | 71 bytes | xbreadfail_sp | esi = setup, edx = a spawn point's number, [esp+4] = the other team's flag, [esp+8] = own: eax = its place among the own team's usable points (counted as XSWSCAN counts the other's), -1 if it isn't one of them; keeps esi/edi/ebx/ebp | v5.106 · 2026-10-29 |
+| 008CC2C6 | 71 bytes | xbreadfail_sp | esi = setup, edx = a spawn point's number, [esp+4] = the other team's flag, [esp+8] = own: eax = its place among the own team's usable points (counted as XSWSCAN counts the other's), -1 if it isn't one of them; keeps esi/edi/ebx/ebp | v5.106 · 2026-10-29 |
 | 008E43F4 | 61 bytes | xbreadfail_sp | eax = 1 when Switch Spawns applies to the match being played (Capture the Bag; offline / LAN host: the setting; LAN player: the host's, byte 74 bit 2 under its 0xC0 marker); keeps ecx/edx | v5.89 · 2026-10-27 |
 | 008E4431 | 31 bytes | xbreadfail_sp | spawn point picker's team spawn points (call at 0x6cc7e, was mov 0x84(%ecx),%ecx; ecx = the chr being spawned; then the pad flag bit team + 1 is required; teams 1-4, Red 1, Blue 2): ecx = its team, Red and Blue swapped with Switch Spawns; keeps the others | v5.7 · 2026-10-16 |
 | 008E4450 | 17 bytes | xbreadfail_sp | a spawn point already chosen (start spawn point routine's callers: the host's pick for a player at 0xd183d, a game placing its own player at 0xd5a59; was call start spawn point routine 0xcfb40, [esp+4] = the player): with Switch Spawns, a pick at the player's own team's spawn points goes to one of the other team's. Covers the spawns spawn point picker's team swap (XSWTM) does not see, e.g. the first spawn of a match (fixed start points); a pick already at the other team's is kept. eax = the pad index; keeps ebx/esi/edi/ebp | v5.6 · 2026-10-16 |
@@ -28,18 +28,18 @@ NTSC address first; the PAL address follows where it differs.
 
 | Address | Original | New | Original (instruction) | New (instruction) | Purpose | Since |
 |---|---|---|---|---|---|---|
-| 00144898 | 8EEF0084 | 0C03AA47 | lw t7,132(s7) | jal 0xea91c | Hook: team spawn points: Switch Spawns swaps Red / Blue (the team load in the delay slot; SWTM adds the 1) | v5.3 · 2026-10-16 |
+| 00144898 | 8EEF0084 | 0C03AAEF | lw t7,132(s7) | jal 0xeabbc | Hook: team spawn points: Switch Spawns swaps Red / Blue (the team load in the delay slot; SWTM adds the 1) | v5.3 · 2026-10-16 |
 | 0014489C | 25EF0001 | 8EEF0084 | addiu t7,t7,1 | lw t7,132(s7) | Hook: team spawn points: Switch Spawns swaps Red / Blue (the team load in the delay slot; SWTM adds the 1) | v5.3 · 2026-10-16 |
-| 001C83E8 | 0C072058 | 0C038E02 | jal 0x1c8160 | jal 0xe3808 | Hook: spawn picks: Switch Spawns moves own-base picks (the first spawn) | v5.6 · 2026-10-16 |
-| 001CC378 | 0C072058 | 0C038E02 | jal 0x1c8160 | jal 0xe3808 | Hook: spawn picks: Switch Spawns moves own-base picks (the first spawn) | v5.6 · 2026-10-16 |
+| 001C83E8 | 0C072058 | 0C038E04 | jal 0x1c8160 | jal 0xe3810 | Hook: spawn picks: Switch Spawns moves own-base picks (the first spawn) | v5.6 · 2026-10-16 |
+| 001CC378 | 0C072058 | 0C038E04 | jal 0x1c8160 | jal 0xe3810 | Hook: spawn picks: Switch Spawns moves own-base picks (the first spawn) | v5.6 · 2026-10-16 |
 
 ## PS2: added code (memory the game never uses)
 
 | Addresses | Words | Purpose | Since |
 |---|---|---|---|
-| 000E3808-000E3A2B | 137 | SWSP: jal at 0x1C83E8 (a game placing its own player) and 0x1CC378 (the host's pick for a player) in place of jal start spawn point routine 0x1C8160 (a0 = the player): v0 = its pick, or with Switch Spawns (Teamplay, team spawn points on, | v5.106 · 2026-10-29 |
-| 000EA91C-000EA9DB | 48 | SWTM: jal at 0x144898 in spawn point picker's team spawn points (was lw t7,132(s7) / addiu t7,t7,1; the load is kept in the delay slot, s7 = the chr being spawned; then the pad flag bit team + 1 is required; teams 1-4, Red 1, Blue 2): t7 = its team + 1, Red and | v5.89 · 2026-10-27 |
-| 000EBC68-000EBD07 | 40 | SWSCAN: s4 = setup (pads +36, +40 of them; number +4, flags +8), s5 = the other team's flag, s2 = own, a1 = k (-1: count): v0 = the k-th usable spawn point of the other team (entry), or their number | v5.6 · 2026-10-16 |
-| 000ED7F8-000ED873 | 31 | SWITEM: Capture the Bag menu: Switch Spawns | v5.3 · 2026-10-16 |
-| 000EF59C-000EF5E7 | 19 | SWRA: a0 = page, a1 = 0 refresh / 1 apply: Switch Spawns value | v5.3 · 2026-10-16 |
-| 000F0758-000F0767 | 4 | LSWI: text | v5.3 · 2026-10-16 |
+| 000E3810-000E3A33 | 137 | SWSP: jal at 0x1C83E8 (a game placing its own player) and 0x1CC378 (the host's pick for a player) in place of jal start spawn point routine 0x1C8160 (a0 = the player): v0 = its pick, or with Switch Spawns (Teamplay, team spawn points on, | v5.106 · 2026-10-29 |
+| 000EABBC-000EAC7B | 48 | SWTM: jal at 0x144898 in spawn point picker's team spawn points (was lw t7,132(s7) / addiu t7,t7,1; the load is kept in the delay slot, s7 = the chr being spawned; then the pad flag bit team + 1 is required; teams 1-4, Red 1, Blue 2): t7 = its team + 1, Red and | v5.89 · 2026-10-27 |
+| 000EBF08-000EBFA7 | 40 | SWSCAN: s4 = setup (pads +36, +40 of them; number +4, flags +8), s5 = the other team's flag, s2 = own, a1 = k (-1: count): v0 = the k-th usable spawn point of the other team (entry), or their number | v5.6 · 2026-10-16 |
+| 000EDA98-000EDB13 | 31 | SWITEM: Capture the Bag menu: Switch Spawns | v5.3 · 2026-10-16 |
+| 000EF83C-000EF887 | 19 | SWRA: a0 = page, a1 = 0 refresh / 1 apply: Switch Spawns value | v5.3 · 2026-10-16 |
+| 000F09F8-000F0A07 | 4 | LSWI: text | v5.3 · 2026-10-16 |
